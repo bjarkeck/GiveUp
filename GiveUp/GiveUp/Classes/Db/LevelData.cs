@@ -13,6 +13,7 @@ namespace GiveUp.Classes.Db
         public string LevelName { get; set; }
         public float Gravity { get; set; }
 
+
         /// <summary>
         /// Så ved alle top levels er parentLevel = null;
         /// </summary>
