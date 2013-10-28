@@ -26,6 +26,7 @@ namespace GiveUp
         {
             //Hej jakobs
             //Klar dig selv på skulderen
+            //I SHALL!!!!!
             graphics = new GraphicsDeviceManager(this);
             Content.RootDirectory = "Content";
         }
