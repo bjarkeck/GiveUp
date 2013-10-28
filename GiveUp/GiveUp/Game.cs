@@ -24,8 +24,7 @@ namespace GiveUp
         public Game1()
             : base()
         {
-
-            //HEJ
+            //Hej jakobs
             graphics = new GraphicsDeviceManager(this);
             Content.RootDirectory = "Content";
         }
