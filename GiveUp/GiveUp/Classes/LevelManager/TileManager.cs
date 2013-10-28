@@ -52,7 +52,7 @@ namespace GiveUp.Classes.LevelManager
             //Clear old map:
             Tiles.Clear();
             CurrentLevel = txtPath;
-            StreamReader file = new StreamReader(txtPath);
+            StreamReader file = new StreamReader("../../../" + txtPath);
             string[] levelLines = file.ReadToEnd().Split(new string[] { Environment.NewLine }, StringSplitOptions.None);
 
             GridWidth = levelLines.Max(line => line.Length);

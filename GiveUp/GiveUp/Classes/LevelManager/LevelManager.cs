@@ -8,20 +8,25 @@ using System.Text;
 
 namespace GiveUp.Classes.LevelManager
 {
-    public class LevelManager
+    public class LevelManagerr
     {
-        private TileManager tileManager;
-        public LevelManager(ContentManager content)
+        public TileManager TileManager;
+        public LevelManagerr(ContentManager content)
         {
-            tileManager = new TileManager(content, 32, 32);
-            tileManager.AddBackground("Images/Bgs/bg1");
-            tileManager.AddTileType('G', "Images/Tiles/ground", CollisionType.Full);
-            tileManager.AddTileType('^', "Images/Obstacles/thorns", CollisionType.PerPixelCollision);
+            TileManager = new TileManager(content, 32, 32);
+            TileManager.AddBackground("Images/Bgs/bg1");
+            TileManager.AddTileType('G', "Images/Tiles/ground", CollisionType.Full);
+            TileManager.AddTileType('^', "Images/Obstacles/thorns", CollisionType.PerPixelCollision);
         }
 
         public void Draw(SpriteBatch spriteBatch)
         {
+            TileManager.Draw(spriteBatch);
+        }
 
+        public void LoadLevel(string p)
+        {
+            TileManager.LoadLevel(p);
         }
     }
 }

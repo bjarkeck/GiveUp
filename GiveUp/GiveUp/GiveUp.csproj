@@ -35,8 +35,10 @@
     <ApplicationIcon>System\Icon.ico</ApplicationIcon>
   </PropertyGroup>
   <ItemGroup>
+    <Compile Include="Classes\Core\BaseScreen.cs" />
     <Compile Include="Classes\Core\CollisionTypes.cs" />
     <Compile Include="Classes\Core\HandleCollision.cs" />
+    <Compile Include="Classes\Core\ScreenManager.cs" />
     <Compile Include="Classes\Core\Sprite.cs" />
     <Compile Include="Classes\Db\DataContext.cs" />
     <Compile Include="Classes\Db\LevelData.cs" />
@@ -44,6 +46,8 @@
     <Compile Include="Classes\LevelManager\LevelManager.cs" />
     <Compile Include="Classes\LevelManager\Tile.cs" />
     <Compile Include="Classes\LevelManager\TileManager.cs" />
+    <Compile Include="Classes\Screens\GameScreen.cs" />
+    <Compile Include="Classes\Screens\MenuScreen.cs" />
     <Compile Include="Game.cs" />
     <Compile Include="System\Migrations\Configuration.cs" />
     <Compile Include="System\Program.cs" />
@@ -81,12 +85,24 @@
     <Content Include="Content\Images\Bgs\bg1.png">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Content>
-    <Content Include="Content\Images\Bgs\ground.png" />
-    <Content Include="Content\Images\Tiles\ground.png" />
-    <Content Include="Content\Images\Tiles\leftHill.png" />
-    <Content Include="Content\Images\Tiles\rightHill.png" />
-    <Content Include="Content\Images\Obstacles\thorns.png" />
-    <Content Include="Content\Levels\TempTestLevel.txt" />
+    <Content Include="Content\Images\Bgs\ground.png">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Content\Images\Tiles\ground.png">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Content\Images\Tiles\leftHill.png">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Content\Images\Tiles\rightHill.png">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Content\Images\Obstacles\thorns.png">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Content\Levels\TempTestLevel.txt">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
     <Content Include="System\GiveUpDatabase.sdf">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Content>
