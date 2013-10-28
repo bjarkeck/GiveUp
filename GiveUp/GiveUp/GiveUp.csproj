@@ -32,14 +32,30 @@
     <WarningLevel>4</WarningLevel>
   </PropertyGroup>
   <PropertyGroup>
-    <ApplicationIcon>Icon.ico</ApplicationIcon>
+    <ApplicationIcon>System\Icon.ico</ApplicationIcon>
   </PropertyGroup>
   <ItemGroup>
-    <Compile Include="Game1.cs" />
-    <Compile Include="Program.cs" />
+    <Compile Include="Classes\Core\CollisionTypes.cs" />
+    <Compile Include="Classes\Core\HandleCollision.cs" />
+    <Compile Include="Classes\Core\Sprite.cs" />
+    <Compile Include="Classes\Db\DataContext.cs" />
+    <Compile Include="Classes\Db\LevelData.cs" />
+    <Compile Include="Classes\Db\TileData.cs" />
+    <Compile Include="Classes\LevelManager\LevelManager.cs" />
+    <Compile Include="Classes\LevelManager\Tile.cs" />
+    <Compile Include="Classes\LevelManager\TileManager.cs" />
+    <Compile Include="Game.cs" />
+    <Compile Include="System\Migrations\Configuration.cs" />
+    <Compile Include="System\Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>
+    <Reference Include="EntityFramework">
+      <HintPath>..\packages\EntityFramework.6.0.1\lib\net40\EntityFramework.dll</HintPath>
+    </Reference>
+    <Reference Include="EntityFramework.SqlServer">
+      <HintPath>..\packages\EntityFramework.6.0.1\lib\net40\EntityFramework.SqlServer.dll</HintPath>
+    </Reference>
     <Reference Include="OpenTK">
       <HintPath>$(MSBuildExtensionsPath)\..\MonoGame\v3.0\Assemblies\WindowsGL\OpenTK.dll</HintPath>
     </Reference>
@@ -49,6 +65,8 @@
     <Reference Include="Lidgren.Network">
       <HintPath>$(MSBuildExtensionsPath)\..\MonoGame\v3.0\Assemblies\WindowsGL\Lidgren.Network.dll</HintPath>
     </Reference>
+    <Reference Include="System.ComponentModel.DataAnnotations" />
+    <Reference Include="System.Data" />
     <Reference Include="Tao.Sdl">
       <HintPath>$(MSBuildExtensionsPath)\..\MonoGame\v3.0\Assemblies\WindowsGL\Tao.Sdl.dll</HintPath>
     </Reference>
@@ -57,13 +75,29 @@
   </ItemGroup>
   <ItemGroup>
     <Content Include="..\..\..\..\..\..\..\Program Files %28x86%29\MonoGame\v3.0\Assemblies\WindowsGL\SDL.dll">
-      <Link>SDL.dll</Link>
+      <Link>MonoGame\SDL.dll</Link>
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Content>
-    <Content Include="Icon.ico" />
+    <Content Include="Content\Images\Bgs\bg1.png">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Content\Images\Bgs\ground.png" />
+    <Content Include="Content\Images\Tiles\ground.png" />
+    <Content Include="Content\Images\Tiles\leftHill.png" />
+    <Content Include="Content\Images\Tiles\rightHill.png" />
+    <Content Include="Content\Images\Obstacles\thorns.png" />
+    <Content Include="Content\Levels\TempTestLevel.txt" />
+    <Content Include="System\GiveUpDatabase.sdf">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="System\Icon.ico" />
   </ItemGroup>
   <ItemGroup>
-    <Folder Include="Content\" />
+    <Folder Include="Classes\Obstacles\" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="App.config" />
+    <None Include="packages.config" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
