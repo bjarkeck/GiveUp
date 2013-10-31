@@ -18,8 +18,8 @@ namespace GiveUp.Classes.Core
 
         }
 
-        public Vector2 velocity;
-        public float acceleration;
+        public Vector2 Velocity;
+        public float Acceleration;
 
         
 
