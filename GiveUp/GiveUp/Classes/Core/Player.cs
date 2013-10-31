@@ -8,5 +8,6 @@ namespace GiveUp.Classes.Core
     class Player
     {
         //HEJ DU PURUP
+        //HEJEJEJ
     }
 }
