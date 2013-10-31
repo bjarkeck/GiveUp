@@ -9,9 +9,9 @@ namespace GiveUp.Classes.Core
 {
     public class Sprite
     {
-        private Texture2D texture;
+        public Texture2D texture;
         public Rectangle Rectangle;
-        public Vector2 Position;
+        public Vector2 Position = Vector2.Zero;
         public CollisionType CollisionType;
         public bool Visible = true;
 
