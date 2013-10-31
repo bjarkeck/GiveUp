@@ -26,6 +26,7 @@ namespace GiveUp
         {
             //kkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkk
             //HEJ PURUP
+            //HEJ BØSSE!
             graphics = new GraphicsDeviceManager(this);
             Content.RootDirectory = "Content";
         }
