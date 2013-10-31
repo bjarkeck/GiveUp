@@ -7,5 +7,6 @@ namespace GiveUp.Classes.Core
 {
     class Player
     {
+        //Jakob er bøsse
     }
 }
