@@ -37,6 +37,7 @@
   <ItemGroup>
     <Compile Include="Classes\Core\Actor.cs" />
     <Compile Include="Classes\Core\BaseScreen.cs" />
+    <Compile Include="Classes\Core\CollisionHelper.cs" />
     <Compile Include="Classes\Core\CollisionTypes.cs" />
     <Compile Include="Classes\Core\HandleCollision.cs" />
     <Compile Include="Classes\Core\Player.cs" />

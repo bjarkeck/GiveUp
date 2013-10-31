@@ -1,5 +1,6 @@
 ﻿using GiveUp.Classes.Core;
 using GiveUp.Classes.LevelManager;
+using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Content;
 using Microsoft.Xna.Framework.Graphics;
 using System;
@@ -17,6 +18,11 @@ namespace GiveUp.Classes.Screens
         public GameScreen()
         {
 
+        }
+
+        public override void Update(GameTime gameTime)
+        {
+            //TODO actor / levels / collision / (update alt bevægelse)
         }
 
         public override void LoadContent()
