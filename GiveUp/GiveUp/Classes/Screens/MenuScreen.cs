@@ -11,10 +11,7 @@ namespace GiveUp.Classes.Screens
     {
         public override void Update(Microsoft.Xna.Framework.GameTime gameTime)
         {
-            if (Keyboard.GetState().IsKeyDown(Keys.A))
-            {
                 ScreenManager.Current.LoadScreen(new GameScreen());
-            }
         }
     }
 }
