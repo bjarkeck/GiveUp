@@ -9,7 +9,7 @@ namespace GiveUp.Classes.Core
 {
     public class Sprite
     {
-        public Texture2D texture;
+        public Texture2D Texture;
         public Rectangle Rectangle;
         public Vector2 Position = Vector2.Zero;
         public CollisionType CollisionType;
@@ -17,15 +17,20 @@ namespace GiveUp.Classes.Core
 
         public Sprite(Texture2D texture, Vector2 position, CollisionType collisionType)
         {
-            this.texture = texture;
+            this.Texture = texture;
             this.Rectangle = new Rectangle((int)position.X, (int)position.Y, texture.Width, texture.Height);
             this.CollisionType = collisionType;
+        }
+
+        public Sprite()
+        {
+            // TODO: Complete member initialization
         }
 
         public virtual void Draw(SpriteBatch spriteBatch)
         {
             if (Visible)
-                spriteBatch.Draw(texture, Rectangle, Color.White);
+                spriteBatch.Draw(Texture, Position, Color.White);
         }
     }
 }

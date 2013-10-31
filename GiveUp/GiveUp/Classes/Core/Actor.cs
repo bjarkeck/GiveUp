@@ -18,6 +18,11 @@ namespace GiveUp.Classes.Core
 
         }
 
+        public Actor()
+        {
+            // TODO: Complete member initialization
+        }
+
         public Vector2 Velocity;
         public float Acceleration;
 

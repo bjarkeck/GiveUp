@@ -57,7 +57,6 @@ namespace GiveUp
         protected override void Draw(GameTime gameTime)
         {
             GraphicsDevice.Clear(Color.CornflowerBlue);
-
             spriteBatch.Begin();
             Game1.ScreenManager.Draw(spriteBatch);
             spriteBatch.End();

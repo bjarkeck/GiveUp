@@ -13,29 +13,33 @@ namespace GiveUp.Classes.Screens
 {
     public class GameScreen : BaseScreen
     {
-        LevelManagerr levelManager;
+        //LevelManagerr levelManager;
+        Player player;
 
         public GameScreen()
         {
-
+            player = new Player();
         }
 
         public override void Update(GameTime gameTime)
         {
             //TODO actor / levels / collision / (update alt bevægelse)
+            player.Update(gameTime);
         }
 
         public override void LoadContent()
         {
-            levelManager = new LevelManagerr(Content);
-            levelManager.LoadLevel(Path.Combine(Content.RootDirectory, "levels/TempTestlevel.txt"));
+            //levelManager = new LevelManagerr(Content);
+            //levelManager.LoadLevel(Path.Combine(Content.RootDirectory, "levels/Level 1 /Level 1.1.txt"));
+            player.LoadContent(Content);
 
             base.LoadContent();
         }
 
         public override void Draw(SpriteBatch spriteBatch)
         {
-            levelManager.Draw(spriteBatch);
+            //levelManager.Draw(spriteBatch);
+            player.Draw(spriteBatch);
         }
     }
 }
