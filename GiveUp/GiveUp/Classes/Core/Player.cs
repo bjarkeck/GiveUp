@@ -5,8 +5,10 @@ using System.Text;
 
 namespace GiveUp.Classes.Core
 {
-    class Player
+    class Player : Actor
     {
-
+        public Player()
+        {
+        }
     }
 }
