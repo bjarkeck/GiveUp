@@ -81,7 +81,7 @@ namespace GiveUp.Classes.LevelManager
         {
             if (backgroundTexture != null)
             {
-                spriteBatch.Draw(backgroundTexture, Vector2.Zero, Color.White);
+                spriteBatch.Draw(backgroundTexture,Vector2.Zero,new Rectangle(0,0,1280,960),Color.White);
             }
             foreach (Tile tile in Tiles)
             {
