@@ -22,7 +22,7 @@ namespace GiveUp.Classes.Core
             this.CollisionType = collisionType;
         }
 
-        public void Draw(SpriteBatch spriteBatch)
+        public virtual void Draw(SpriteBatch spriteBatch)
         {
             if (Visible)
                 spriteBatch.Draw(texture, Rectangle, Color.White);
