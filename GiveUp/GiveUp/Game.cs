@@ -25,6 +25,7 @@ namespace GiveUp
             : base()
         {
             //kkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkk
+            //HEJ PURUP
             graphics = new GraphicsDeviceManager(this);
             Content.RootDirectory = "Content";
         }
