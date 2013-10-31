@@ -38,6 +38,7 @@
     <Compile Include="Classes\Core\BaseScreen.cs" />
     <Compile Include="Classes\Core\CollisionTypes.cs" />
     <Compile Include="Classes\Core\HandleCollision.cs" />
+    <Compile Include="Classes\Core\Player.cs" />
     <Compile Include="Classes\Core\ScreenManager.cs" />
     <Compile Include="Classes\Core\Sprite.cs" />
     <Compile Include="Classes\Db\DataContext.cs" />
