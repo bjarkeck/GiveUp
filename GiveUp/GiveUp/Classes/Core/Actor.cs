@@ -27,6 +27,7 @@ namespace GiveUp.Classes.Core
             // TODO: Complete member initialization
         }
 
+
         public virtual void Update(GameTime gameTime)
         {
             //TODO: Handle Collisiion

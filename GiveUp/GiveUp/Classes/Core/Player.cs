@@ -22,7 +22,7 @@ namespace GiveUp.Classes.Core
         public Player()
         {
             this.Acceleration = 1.0f;
-            this.Position = new Vector2(0, 500);
+            this.Position = new Vector2(200, 500);
             this.startJumpSpeed = -4f;
             this.gravity = 0.05f;
 
@@ -45,20 +45,13 @@ namespace GiveUp.Classes.Core
 
         public void Jump()
         {
-            //Første gang er grounded true, men has Double jumped false
             if (this.isGrounded || this.canDoubleJump)
             {
-                //Sp sætter vi canDoubleJump til at være isGrounded, som er true.
                 canDoubleJump = isGrounded;
-                //sp sætter vi isGrounded til at være false.
                 this.isGrounded = false;
 
                 this.Velocity.Y = this.startJumpSpeed;
-
-                Console.WriteLine("asd");
             }
-            //Anden gang den går igennem er isGrounded false, men canDoubleJump er nu true,
-            //og tredje gang, er de begge false
         }
 
         public void Movement(GameTime gameTime)
@@ -66,9 +59,9 @@ namespace GiveUp.Classes.Core
 
             KeyboardState keyState = Keyboard.GetState();
             if (keyState.IsKeyDown(Keys.A))
-                this.Velocity.X += this.Acceleration * -1;
+                this.Velocity.X += this.Acceleration * -1 * gameTime.ElapsedGameTime.Milliseconds;
             if (keyState.IsKeyDown(Keys.D))
-                this.Velocity.X += this.Acceleration;
+                this.Velocity.X += this.Acceleration * gameTime.ElapsedGameTime.Milliseconds;
 
             if (inputHelper.IsNewPress(Keys.Space))
                 this.Jump();
@@ -78,7 +71,7 @@ namespace GiveUp.Classes.Core
                 Velocity.Y += gravity;
             }
 
-            Position += Velocity;
+            this.Position += this.Velocity;
         }
     }
 }
