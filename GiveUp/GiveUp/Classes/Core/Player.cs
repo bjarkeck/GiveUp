@@ -12,14 +12,19 @@ namespace GiveUp.Classes.Core
     class Player : Actor
     {
 
-        public int health;
+        private bool isGrounded = true;
+        private bool canDoubleJump = false;
+        private float startJumpSpeed;
+        private float gravity;
+        private int health;
+        private InputHelper inputHelper = new InputHelper();
 
         public Player()
         {
-            this.Acceleration = 5.0f;
+            this.Acceleration = 1.0f;
             this.Position = new Vector2(0, 500);
-            this.StartJumpSpeed = -4f;
-            this.Gravity = 0.05f;
+            this.startJumpSpeed = -4f;
+            this.gravity = 0.05f;
 
             health = 1;
 
@@ -32,46 +37,48 @@ namespace GiveUp.Classes.Core
 
         public override void Update(GameTime gameTime)
         {
-            base.Update(gameTime);
+            inputHelper.Update();
+
             Movement(gameTime);
+            base.Update(gameTime);
         }
 
         public void Jump()
         {
-            if (this.IsJumping == false)
+            //Første gang er grounded true, men has Double jumped false
+            if (this.isGrounded || this.canDoubleJump)
             {
-                this.Velocity.Y = this.StartJumpSpeed;
-                this.IsJumping = true;
-            }
-        }
+                //Sp sætter vi canDoubleJump til at være isGrounded, som er true.
+                canDoubleJump = isGrounded;
+                //sp sætter vi isGrounded til at være false.
+                this.isGrounded = false;
 
-        public void DoubleJump()
-        {
-            if (this.IsJumping == true && this.isDoubleJump == false)
-            {
-                this.Velocity.Y = this.StartJumpSpeed;
-                this.isDoubleJump = true;
+                this.Velocity.Y = this.startJumpSpeed;
+
+                Console.WriteLine("asd");
             }
+            //Anden gang den går igennem er isGrounded false, men canDoubleJump er nu true,
+            //og tredje gang, er de begge false
         }
 
         public void Movement(GameTime gameTime)
         {
+
             KeyboardState keyState = Keyboard.GetState();
             if (keyState.IsKeyDown(Keys.A))
                 this.Velocity.X += this.Acceleration * -1;
             if (keyState.IsKeyDown(Keys.D))
                 this.Velocity.X += this.Acceleration;
-            if (keyState.IsKeyDown(Keys.Space))
+
+            if (inputHelper.IsNewPress(Keys.Space))
                 this.Jump();
-            
-            //Double Jump
-            if (keyState.IsKeyDown(Keys.Space))
-                this.DoubleJump();
-            
+
+            if (!isGrounded)
+            {
+                Velocity.Y += gravity;
+            }
+
             Position += Velocity;
         }
-
-        
-
     }
 }

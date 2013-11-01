@@ -5,7 +5,11 @@ using System.Text;
 
 namespace GiveUp.Classes.Core
 {
-    class CollisionHelper
+    public class CollisionHelper
     {
+
+
+
+
     }
 }

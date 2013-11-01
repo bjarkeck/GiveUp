@@ -14,10 +14,6 @@ namespace GiveUp.Classes.Core
     {
         public Vector2 Velocity;
         public float Acceleration;
-        public float StartJumpSpeed;
-        public float Gravity;
-        public bool IsJumping;
-        public bool isDoubleJump;
 
         
         public Actor(Texture2D texture, Vector2 position, CollisionType collisionType)
@@ -31,21 +27,9 @@ namespace GiveUp.Classes.Core
             // TODO: Complete member initialization
         }
 
-        public virtual void Movement()
-        {
-            if (this.IsJumping)
-                this.Velocity.Y += this.Gravity;
-            else
-                this.Velocity.Y = 0;
-
-            this.Position += this.Velocity;
-        }
-
         public virtual void Update(GameTime gameTime)
         {
             //TODO: Handle Collisiion
-            this.Velocity.X = 0;
-            this.Movement();
         }
 
         
