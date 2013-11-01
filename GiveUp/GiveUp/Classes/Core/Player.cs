@@ -12,13 +12,17 @@ namespace GiveUp.Classes.Core
     class Player : Actor
     {
 
-        public float startJumpSpeed;
         public int health;
 
         public Player()
         {
             this.Acceleration = 5.0f;
-            this.Position = new Vector2(0, 82);
+            this.Position = new Vector2(0, 500);
+            this.StartJumpSpeed = -4f;
+            this.Gravity = 0.05f;
+
+            health = 1;
+
         }
 
         public void LoadContent(ContentManager content)
@@ -32,23 +36,42 @@ namespace GiveUp.Classes.Core
             Movement(gameTime);
         }
 
+        public void Jump()
+        {
+            if (this.IsJumping == false)
+            {
+                this.Velocity.Y = this.StartJumpSpeed;
+                this.IsJumping = true;
+            }
+        }
+
+        public void DoubleJump()
+        {
+            if (this.IsJumping == true && this.isDoubleJump == false)
+            {
+                this.Velocity.Y = this.StartJumpSpeed;
+                this.isDoubleJump = true;
+            }
+        }
+
         public void Movement(GameTime gameTime)
         {
             KeyboardState keyState = Keyboard.GetState();
             if (keyState.IsKeyDown(Keys.A))
-                Velocity.X += Acceleration * -1 * gameTime.ElapsedGameTime.Milliseconds;
+                this.Velocity.X += this.Acceleration * -1;
             if (keyState.IsKeyDown(Keys.D))
-                Velocity.X += Acceleration;
+                this.Velocity.X += this.Acceleration;
             if (keyState.IsKeyDown(Keys.Space))
-                Jump();
-
+                this.Jump();
+            
+            //Double Jump
+            if (keyState.IsKeyDown(Keys.Space))
+                this.DoubleJump();
+            
             Position += Velocity;
         }
 
-        public void Jump()
-        {
-
-        }
+        
 
     }
 }

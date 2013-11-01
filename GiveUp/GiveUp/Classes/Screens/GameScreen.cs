@@ -13,7 +13,7 @@ namespace GiveUp.Classes.Screens
 {
     public class GameScreen : BaseScreen
     {
-        //LevelManagerr levelManager;
+        LevelManagerr levelManager;
         Player player;
 
         public GameScreen()
@@ -29,8 +29,8 @@ namespace GiveUp.Classes.Screens
 
         public override void LoadContent()
         {
-            //levelManager = new LevelManagerr(Content);
-            //levelManager.LoadLevel(Path.Combine(Content.RootDirectory, "levels/Level 1 /Level 1.1.txt"));
+            levelManager = new LevelManagerr(Content);
+            levelManager.LoadLevel(Path.Combine(Content.RootDirectory, "levels/Level 1 /Level 1.1.txt"));
             player.LoadContent(Content);
 
             base.LoadContent();
@@ -38,7 +38,7 @@ namespace GiveUp.Classes.Screens
 
         public override void Draw(SpriteBatch spriteBatch)
         {
-            //levelManager.Draw(spriteBatch);
+            levelManager.Draw(spriteBatch);
             player.Draw(spriteBatch);
         }
     }
