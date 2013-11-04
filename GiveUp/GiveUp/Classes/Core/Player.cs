@@ -31,6 +31,8 @@ namespace GiveUp.Classes.Core
         private float friction;
         private InputHelper inputHelper = new InputHelper();
 
+        KeyboardState oldState;
+
         public Player()
         {
             this.Acceleration = 0.1f;
@@ -68,18 +70,22 @@ namespace GiveUp.Classes.Core
 
         public void Movement(GameTime gameTime)
         {
-
+            oldState = Keyboard.GetState();
             KeyboardState keyState = Keyboard.GetState();
             if (keyState.IsKeyDown(Keys.A))
+            {
                 this.Velocity.X += this.Acceleration * -1 * gameTime.ElapsedGameTime.Milliseconds;
+            }
             if (keyState.IsKeyDown(Keys.D))
+            {
                 this.Velocity.X += this.Acceleration * gameTime.ElapsedGameTime.Milliseconds;
+            }
 
             if (inputHelper.IsNewPress(Keys.Space))
                 this.Jump();
 
 
-            Velocity.Y += gravity;
+                Velocity.Y += gravity;
 
 
             if (Math.Abs(Velocity.X) < friction)
