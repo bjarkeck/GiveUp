@@ -22,6 +22,7 @@ namespace GiveUp.Classes.Screens
 
         public override void LoadContent()
         {
+
             LevelManager = new LevelManagerr(Content);
             LevelManager.LoadLevel(Path.Combine(Content.RootDirectory, "levels/Level 1 /Level 1.1.txt"));
 

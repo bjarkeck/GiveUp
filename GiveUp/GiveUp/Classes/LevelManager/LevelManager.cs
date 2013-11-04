@@ -12,6 +12,7 @@ namespace GiveUp.Classes.LevelManager
     public class LevelManagerr
     {
         public TileManager TileManager;
+        public List<Actor> Actors { get; set; }
         public LevelManagerr(ContentManager content)
         {
             TileManager = new TileManager(content, 32, 32);
@@ -20,8 +21,9 @@ namespace GiveUp.Classes.LevelManager
             TileManager.AddTileType('^', "Images/Obstacles/thorns", CollisionType.PerPixelCollision);
             TileManager.AddTileType('D', "Images/Tiles/door", CollisionType.PerPixelCollision);
             TileManager.AddTileType('A', "Images/Tiles/activation", CollisionType.PerPixelCollision);
+            Actors = new List<Actor>();
+
         }
-        public List<Actor> Actors { get; set; }
 
         public void Draw(SpriteBatch spriteBatch)
         {
