@@ -30,7 +30,7 @@ namespace GiveUp.Classes.Screens
         public override void LoadContent()
         {
             levelManager = new LevelManagerr(Content);
-            levelManager.LoadLevel(Path.Combine(Content.RootDirectory, "levels/Level 1 /Level 1.1.txt"));
+            levelManager.LoadLevel(Path.Combine(Content.RootDirectory, "levels/Level 1 /Level 1.4.txt"));
             player.LoadContent(Content);
 
             base.LoadContent();
