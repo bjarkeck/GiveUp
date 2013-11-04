@@ -17,6 +17,8 @@ namespace GiveUp.Classes.Core
         private float startJumpSpeed;
         private float gravity;
         private int health;
+        private float maxSpeed;
+        private float friction;
         private InputHelper inputHelper = new InputHelper();
 
         KeyboardState oldState;
@@ -27,6 +29,8 @@ namespace GiveUp.Classes.Core
             this.Position = new Vector2(200, 500);
             this.startJumpSpeed = -4f;
             this.gravity = 0.05f;
+            this.maxSpeed = 7.2f;
+            this.friction = 0.2f;
 
             health = 1;
 
@@ -76,6 +80,13 @@ namespace GiveUp.Classes.Core
             {
                 Velocity.Y += gravity;
             }
+
+
+            if (Math.Abs(Velocity.X) < friction)
+                Velocity.X = 0;
+            else
+                Velocity.X += friction * (Velocity.X > 0 ? -1f : 1f);
+            Velocity.X = MathHelper.Clamp(Velocity.X, maxSpeed * -1, maxSpeed);
 
             this.Position += this.Velocity;
         }
