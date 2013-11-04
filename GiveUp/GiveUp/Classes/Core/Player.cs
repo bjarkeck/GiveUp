@@ -19,9 +19,11 @@ namespace GiveUp.Classes.Core
         private int health;
         private InputHelper inputHelper = new InputHelper();
 
+        KeyboardState oldState;
+
         public Player()
         {
-            this.Acceleration = 1.0f;
+            this.Acceleration = 0.5f;
             this.Position = new Vector2(200, 500);
             this.startJumpSpeed = -4f;
             this.gravity = 0.05f;
@@ -56,12 +58,16 @@ namespace GiveUp.Classes.Core
 
         public void Movement(GameTime gameTime)
         {
-
+            oldState = Keyboard.GetState();
             KeyboardState keyState = Keyboard.GetState();
             if (keyState.IsKeyDown(Keys.A))
+            {
                 this.Velocity.X += this.Acceleration * -1 * gameTime.ElapsedGameTime.Milliseconds;
+            }
             if (keyState.IsKeyDown(Keys.D))
+            {
                 this.Velocity.X += this.Acceleration * gameTime.ElapsedGameTime.Milliseconds;
+            }
 
             if (inputHelper.IsNewPress(Keys.Space))
                 this.Jump();
