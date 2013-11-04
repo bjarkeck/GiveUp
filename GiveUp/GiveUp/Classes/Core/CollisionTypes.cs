@@ -14,6 +14,7 @@ namespace GiveUp.Classes.Core
         GooBoth,
         PerPixelCollision,
         Water,
-        Moveable
+        Moveable,
+        None
     }
 }

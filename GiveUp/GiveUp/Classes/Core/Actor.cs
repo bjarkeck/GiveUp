@@ -4,6 +4,8 @@ using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
+using GiveUp.Classes.Screens;
+using GiveUp.Classes.LevelManager;
 
 namespace GiveUp.Classes.Core
 {
@@ -14,25 +16,30 @@ namespace GiveUp.Classes.Core
     {
         public Vector2 Velocity;
         public float Acceleration;
+        public CollisionType CurrentCollision { get; set; }
+        public CollisionDirection CollisionDirection { get; set; }
 
         
-        public Actor(Texture2D texture, Vector2 position, CollisionType collisionType)
-            :base(texture,position,collisionType)
+        public Actor(Texture2D texture, CollisionType collisionType)
+            :base(texture,collisionType)
         {
-
+            ((GameScreen)ScreenManager.Current.CurrentScreen).LevelManager.Actors.Add(this);
         }
 
         public Actor()
         {
-            // TODO: Complete member initialization
+             ((GameScreen)ScreenManager.Current.CurrentScreen).LevelManager.Actors.Add(this);
         }
+
 
         public virtual void Update(GameTime gameTime)
         {
-            //TODO: Handle Collisiion
+            Rectangle.X = (int)Position.X;
+            Rectangle.Y = (int)Position.Y;
+
         }
 
-        
+
 
     }
 

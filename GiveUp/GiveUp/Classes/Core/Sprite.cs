@@ -9,16 +9,26 @@ namespace GiveUp.Classes.Core
 {
     public class Sprite
     {
-        public Texture2D Texture;
+        private Texture2D texture;
+
+        public Texture2D Texture
+        {
+            get { return texture; }
+            set
+            {
+                this.Rectangle = new Rectangle(0, 0, value.Width, value.Height);
+                texture = value;
+            }
+        }
+
         public Rectangle Rectangle;
         public Vector2 Position = Vector2.Zero;
         public CollisionType CollisionType;
         public bool Visible = true;
 
-        public Sprite(Texture2D texture, Vector2 position, CollisionType collisionType)
+        public Sprite(Texture2D texture, CollisionType collisionType)
         {
             this.Texture = texture;
-            this.Rectangle = new Rectangle((int)position.X, (int)position.Y, texture.Width, texture.Height);
             this.CollisionType = collisionType;
         }
 

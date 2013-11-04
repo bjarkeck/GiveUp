@@ -8,14 +8,15 @@ namespace GiveUp.Classes.Core
 {
     public static class HandleCollision
     {
+
         private static bool isBelowOf(this Rectangle player, Rectangle box, Vector2 velocity)
         {
             return velocity.Y < 0 &&
                     player.Top - velocity.Y + 1.1f > box.Bottom &&
                     player.Intersects(
                     new Rectangle(
-                        box.X + Convert.ToInt32(velocity.X < 0 ? velocity.X : 0),
-                        box.Y + Convert.ToInt32(velocity.Y < 0 ? velocity.Y : 0),
+                        box.X + (int)Math.Ceiling(velocity.X < 0 ? velocity.X : 0),
+                        box.Y + (int)Math.Ceiling(velocity.Y < 0 ? velocity.Y : 0),
                         box.Width + (int)Math.Abs(velocity.X),
                         box.Height + (int)Math.Abs(velocity.Y)
                     ));
@@ -26,22 +27,36 @@ namespace GiveUp.Classes.Core
                     player.Left - velocity.X + 1 >= box.Right &&
                     player.Intersects(
                         new Rectangle(
-                            box.X + Convert.ToInt32(velocity.X < 0 ? velocity.X : 0),
-                            box.Y + Convert.ToInt32(velocity.Y < 0 ? velocity.Y : 0),
+                            box.X + (int)Math.Ceiling(velocity.X < 0 ? velocity.X : 0),
+                            box.Y + (int)Math.Ceiling(velocity.Y < 0 ? velocity.Y : 0),
                             box.Width + (int)Math.Abs(velocity.X),
                             box.Height + (int)Math.Abs(velocity.Y)
                         )
                     );
         }
 
+        public static bool IsLeftOf(this Rectangle player, Rectangle box, Vector2 velocity)
+        {
+            return
+                    velocity.X > 0 &&
+                    player.Right - velocity.X - 1 <= box.Left &&
+                    player.Intersects(
+                        new Rectangle(
+                            box.X + (int)Math.Ceiling(velocity.X < 0 ? velocity.X : 0),
+                            box.Y + (int)Math.Ceiling(velocity.Y < 0 ? velocity.Y : 0),
+                            box.Width + (int)Math.Abs(velocity.X),
+                            box.Height + (int)Math.Abs(velocity.Y)
+                        )
+                    );
+        }
         public static bool IsOnTopOf(this Rectangle player, Rectangle box, Vector2 velocity)
         {
             return velocity.Y > 0 &&
                     player.Bottom - velocity.Y - 1.1f < box.Top &&
                     player.Intersects(
                         new Rectangle(
-                            box.X + Convert.ToInt32(velocity.X < 0 ? velocity.X : 0),
-                            box.Y - 1 + Convert.ToInt32(velocity.Y < 0 ? velocity.Y : 0),
+                            box.X + (int)Math.Ceiling(velocity.X < 0 ? velocity.X : 0),
+                            box.Y - 1 + (int)Math.Ceiling(velocity.Y < 0 ? velocity.Y : 0),
                             box.Width + (int)Math.Abs(velocity.X),
                             box.Height + (int)Math.Abs(velocity.Y)
                         ));
@@ -58,20 +73,6 @@ namespace GiveUp.Classes.Core
                 return false;
 
             return isBelowOf(player, box, velocity);
-        }
-        public static bool IsLeftOf(this Rectangle player, Rectangle box, Vector2 velocity)
-        {
-            return
-                    velocity.X > 0 &&
-                    player.Right - velocity.X - 1 <= box.Left &&
-                    player.Intersects(
-                        new Rectangle(
-                            box.X + Convert.ToInt32(velocity.X < 0 ? velocity.X : 0),
-                            box.Y + Convert.ToInt32(velocity.Y < 0 ? velocity.Y : 0),
-                            box.Width + (int)Math.Abs(velocity.X),
-                            box.Height + (int)Math.Abs(velocity.Y)
-                        )
-                    );
         }
 
         public static bool IsOnTopOf(ref Rectangle player, Rectangle box, ref Vector2 velocity, ref  Vector2 playerPosition, bool positionBoxes = true)
