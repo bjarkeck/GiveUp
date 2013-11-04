@@ -45,20 +45,12 @@ namespace GiveUp.Classes.Core
 
         public void Jump()
         {
-            //Første gang er grounded true, men has Double jumped false
             if (this.isGrounded || this.canDoubleJump)
             {
-                //Sp sætter vi canDoubleJump til at være isGrounded, som er true.
                 canDoubleJump = isGrounded;
-                //sp sætter vi isGrounded til at være false.
                 this.isGrounded = false;
-
                 this.Velocity.Y = this.startJumpSpeed;
-
-                Console.WriteLine("asd");
             }
-            //Anden gang den går igennem er isGrounded false, men canDoubleJump er nu true,
-            //og tredje gang, er de begge false
         }
 
         public void Movement(GameTime gameTime)
