@@ -23,19 +23,8 @@ namespace GiveUp.Classes.Core
 
         public Rectangle Rectangle;
         public Vector2 Position = Vector2.Zero;
-        public CollisionType CollisionType;
         public bool Visible = true;
 
-        public Sprite(Texture2D texture, CollisionType collisionType)
-        {
-            this.Texture = texture;
-            this.CollisionType = collisionType;
-        }
-
-        public Sprite()
-        {
-            // TODO: Complete member initialization
-        }
 
         public virtual void Draw(SpriteBatch spriteBatch)
         {

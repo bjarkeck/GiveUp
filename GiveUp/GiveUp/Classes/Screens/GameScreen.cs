@@ -18,21 +18,21 @@ namespace GiveUp.Classes.Screens
 
         public GameScreen()
         {
+            player = new Player();
+            LevelManager = new LevelManagerr(player);
         }
 
         public override void LoadContent()
         {
 
             LevelManager = new LevelManagerr(Content);
-            LevelManager.LoadLevel(Path.Combine(Content.RootDirectory, "levels/Level 1 /Level 1.4.txt"));
+            LevelManager.LoadLevel(Path.Combine(Content.RootDirectory, "levels/Level 1 /Level 1.1.txt"));
 
             player = new Player();
             Vector2 startPosition = LevelManager.TileManager.UnassignedTiles['s'].First();
             player.Position = startPosition;
 
             player.LoadContent(Content);
-
-            base.LoadContent();
         }
 
         public override void Update(GameTime gameTime)
