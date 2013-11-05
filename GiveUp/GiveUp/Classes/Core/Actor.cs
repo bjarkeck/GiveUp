@@ -16,21 +16,7 @@ namespace GiveUp.Classes.Core
     {
         public Vector2 Velocity;
         public float Acceleration;
-        public CollisionType CurrentCollision { get; set; }
-        public CollisionDirection CollisionDirection { get; set; }
-
         
-        public Actor(Texture2D texture, CollisionType collisionType)
-            :base(texture,collisionType)
-        {
-            ((GameScreen)ScreenManager.Current.CurrentScreen).LevelManager.Actor = (this);
-        }
-
-        public Actor()
-        {
-             ((GameScreen)ScreenManager.Current.CurrentScreen).LevelManager.Actor = (this);
-        }
-
 
         public virtual void Update(GameTime gameTime)
         {

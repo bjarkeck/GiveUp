@@ -19,7 +19,7 @@ namespace GiveUp.Classes.Core
             }
         }
         public BaseScreen CurrentScreen;
-        ContentManager Content;
+        public ContentManager Content;
 
         public ScreenManager(ContentManager content)
         {

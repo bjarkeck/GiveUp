@@ -37,9 +37,8 @@
   <ItemGroup>
     <Compile Include="Classes\Core\Actor.cs" />
     <Compile Include="Classes\Core\BaseScreen.cs" />
-    <Compile Include="Classes\Core\CollisionDirection.cs" />
     <Compile Include="Classes\Core\CollisionHelper.cs" />
-    <Compile Include="Classes\Core\CollisionTypes.cs" />
+    <Compile Include="Classes\Core\GameObject.cs" />
     <Compile Include="Classes\Core\HandleCollision.cs" />
     <Compile Include="Classes\Core\IGameObject.cs" />
     <Compile Include="Classes\Core\KeyboardHelper.cs" />
@@ -50,9 +49,9 @@
     <Compile Include="Classes\Db\LevelData.cs" />
     <Compile Include="Classes\Db\TileData.cs" />
     <Compile Include="Classes\GameObjects\Finish.cs" />
+    <Compile Include="Classes\GameObjects\Tiles\BoxTile.cs" />
     <Compile Include="Classes\LevelManager\LevelManager.cs" />
-    <Compile Include="Classes\LevelManager\Tile.cs" />
-    <Compile Include="Classes\LevelManager\TileManager.cs" />
+    <Compile Include="Classes\LevelManager\GridManager.cs" />
     <Compile Include="Classes\Screens\GameScreen.cs" />
     <Compile Include="Classes\Screens\MenuScreen.cs" />
     <Compile Include="Game.cs" />
