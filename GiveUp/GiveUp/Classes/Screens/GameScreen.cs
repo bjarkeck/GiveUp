@@ -15,6 +15,7 @@ namespace GiveUp.Classes.Screens
     {
         public LevelManagerr LevelManager;
         Player player;
+        Texture2D doorTexture;
 
         public GameScreen()
         {
@@ -22,7 +23,6 @@ namespace GiveUp.Classes.Screens
 
         public override void LoadContent()
         {
-
             LevelManager = new LevelManagerr(Content);
             LevelManager.LoadLevel(Path.Combine(Content.RootDirectory, "levels/Level 1 /Level 1.1.txt"));
 
@@ -46,6 +46,14 @@ namespace GiveUp.Classes.Screens
         {
             LevelManager.Draw(spriteBatch);
             player.Draw(spriteBatch);
+        }
+
+        public void nextLevel()
+        {
+            
+            {
+
+            }
         }
     }
 }
