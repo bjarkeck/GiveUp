@@ -1,4 +1,5 @@
 ﻿using GiveUp.Classes.Core;
+using GiveUp.Classes.Screens;
 using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Content;
 using Microsoft.Xna.Framework.Graphics;
@@ -32,7 +33,7 @@ using System.Text;
         {
             if (rectangle.Intersects(Player.Rectangle))
             {
-                Player.Jump();
+                ((GameScreen)ScreenManager.Current.CurrentScreen).LevelManager.StartNextLevel();
             }
         }
 

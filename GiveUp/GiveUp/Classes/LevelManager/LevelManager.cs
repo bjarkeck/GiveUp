@@ -53,7 +53,12 @@ namespace GiveUp.Classes.LevelManager
             foreach (FileInfo file in dir.GetFiles().OrderBy(x => x.Name))
                 Levels.Add(file.OpenText().ReadToEnd());
 
-            loadLevel(Levels[subLevel]);
+            startSubLevel(subLevel);
+        }
+
+        private void startSubLevel(int subLevel)
+        {
+            loadLevel(Levels[subLevel - 1]);
         }
 
         private void loadLevel(string p)
@@ -88,7 +93,8 @@ namespace GiveUp.Classes.LevelManager
 
         public void StartNextLevel()
         {
-            StartLevel(CurrentLevel, CurrentSubLevel + 1);
+            CurrentSubLevel= CurrentSubLevel+ 1;
+            changeLevel = true;
         }
 
         public void Update(GameTime gameTime)
@@ -102,7 +108,15 @@ namespace GiveUp.Classes.LevelManager
             {
                 obj.CollisionLogic();
             }
+
+            if (changeLevel)
+            {
+                startSubLevel(CurrentSubLevel);
+                changeLevel = false;
+            }
         }
 
+
+        public bool changeLevel { get; set; }
     }
 }
