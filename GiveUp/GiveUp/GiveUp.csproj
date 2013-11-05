@@ -49,6 +49,7 @@
     <Compile Include="Classes\Db\LevelData.cs" />
     <Compile Include="Classes\Db\TileData.cs" />
     <Compile Include="Classes\GameObjects\Finish.cs" />
+    <Compile Include="Classes\GameObjects\Obstacles\Spike.cs" />
     <Compile Include="Classes\GameObjects\Tiles\BoxTile.cs" />
     <Compile Include="Classes\LevelManager\LevelManager.cs" />
     <Compile Include="Classes\LevelManager\GridManager.cs" />
@@ -127,9 +128,7 @@
     </Content>
     <Content Include="System\Icon.ico" />
   </ItemGroup>
-  <ItemGroup>
-    <Folder Include="Classes\Obstacles\" />
-  </ItemGroup>
+  <ItemGroup />
   <ItemGroup>
     <None Include="App.config" />
     <None Include="packages.config" />
