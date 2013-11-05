@@ -15,7 +15,7 @@ namespace GiveUp.Classes.LevelManager
     {
         public int CurrentLevel = 1;
         public int CurrentSubLevel = 1;
-        List<string> Levels = new List<string>();  
+        List<string> Levels = new List<string>();
         public GridManager GridManager;
         List<IGameObject> GameObjects = new List<IGameObject>();
         public Player Player;
@@ -94,7 +94,10 @@ namespace GiveUp.Classes.LevelManager
 
         public void StartNextLevel()
         {
-            CurrentSubLevel= CurrentSubLevel+ 1;
+            if (Levels.Count() > CurrentSubLevel )
+            {
+                CurrentSubLevel = CurrentSubLevel + 1;
+            }
             changeLevel = true;
         }
 

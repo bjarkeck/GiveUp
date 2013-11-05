@@ -22,7 +22,7 @@ namespace GiveUp.Classes.Core
         public float Gravity;
         public float MaxSpeed;
         public float Friction;
-        private InputHelper inputHelper = new InputHelper();
+        public InputHelper InputHelper = new InputHelper();
 
         public Player()
         {
@@ -41,7 +41,7 @@ namespace GiveUp.Classes.Core
 
         public override void Update(GameTime gameTime)
         {
-            inputHelper.Update();
+            InputHelper.Update();
             Movement(gameTime);
             
             base.Update(gameTime);
@@ -74,7 +74,7 @@ namespace GiveUp.Classes.Core
                 this.Velocity.X += this.Acceleration * gameTime.ElapsedGameTime.Milliseconds;
             }
 
-            if (inputHelper.IsNewPress(Keys.Space))
+            if (InputHelper.IsNewPress(Keys.Space))
                 this.Jump();
 
 
