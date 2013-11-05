@@ -12,26 +12,27 @@ namespace GiveUp.Classes.LevelManager
 {
     public class LevelManagerr
     {
-        public TileManager TileManager;
+        public GridManager GridManager;
         List<IGameObject> GameObjects = new List<IGameObject>();
-        public Actor Actor;
-        public ContentManager Content { get; set; }
-        public LevelManagerr(ContentManager content)
+        public Player Player;
+        public ContentManager Content
         {
-            Content = content;
-            TileManager = new TileManager(content, 32, 32);
-            TileManager.AddBackground("Images/Bgs/bg1");
-            TileManager.AddTileType('g', "Images/Tiles/ground", CollisionType.FullTop);
-            TileManager.AddTileType('G', "Images/Tiles/ground", CollisionType.Full);
-            TileManager.AddTileType('^', "Images/Obstacles/thorns", CollisionType.PerPixelCollision);
-            TileManager.AddTileType('A', "Images/Tiles/activation", CollisionType.PerPixelCollision);
+            get
+            {
+                return ScreenManager.Current.Content;
+            }
+        }
+        public LevelManagerr(Player player)
+        {
+            this.Player = player;
+            GridManager = new GridManager(Content, 32, 32);
+            GridManager.AddBackground("Images/Bgs/bg1");
 
         }
 
-
         public void Draw(SpriteBatch spriteBatch)
         {
-            TileManager.Draw(spriteBatch);
+            GridManager.Draw(spriteBatch);
             foreach (IGameObject item in GameObjects)
             {
                 item.Draw(spriteBatch);
@@ -40,9 +41,11 @@ namespace GiveUp.Classes.LevelManager
 
         public void LoadLevel(string p)
         {
-            TileManager.LoadLevel(p);
+            GameObjects.Clear();
 
-            foreach (var unassigendTile in TileManager.UnassignedTiles)
+            GridManager.LoadLevel(p);
+
+            foreach (var unassigendTile in GridManager.UnassignedTiles)
             {
                 var gameObject = Assembly.GetExecutingAssembly()
                     .GetTypes()
@@ -60,7 +63,7 @@ namespace GiveUp.Classes.LevelManager
                         IGameObject obj = (IGameObject)gameObject.Select(x => Activator.CreateInstance(x)).First();
                         GameObjects.Add(obj);
                         obj.Initialize(Content, position);
-                        obj.Player = (Player)Actor;
+                        obj.Player = Player;
                     }
                 }
             }
@@ -68,47 +71,14 @@ namespace GiveUp.Classes.LevelManager
 
         public void Update(GameTime gameTime)
         {
-
             foreach (IGameObject item in GameObjects)
             {
                 item.Update(gameTime);
             }
 
-            Actor.CollisionDirection = CollisionDirection.None;
-            Actor.CurrentCollision = CollisionType.None;
-
-            foreach (Tile tile in TileManager.Tiles)
+            foreach (IGameObject obj in GameObjects)
             {
-                if (tile.CollisionType == CollisionType.Full || tile.CollisionType == CollisionType.FullTop)
-                {
-                    if (HandleCollision.IsOnTopOf(ref Actor.Rectangle, tile.Rectangle, ref Actor.Velocity, ref Actor.Position))
-                    {
-                        Actor.CollisionDirection = CollisionDirection.Top;
-                        Actor.CurrentCollision = tile.CollisionType;
-                    }
-
-                    if (HandleCollision.IsRightOf(ref Actor.Rectangle, tile.Rectangle, ref Actor.Velocity, ref Actor.Position))
-                    {
-                        Actor.CollisionDirection = CollisionDirection.Left;
-                        Actor.CurrentCollision = tile.CollisionType;
-                    }
-                    if (HandleCollision.IsLeftOf(ref Actor.Rectangle, tile.Rectangle, ref Actor.Velocity, ref Actor.Position))
-                    {
-                        Actor.CollisionDirection = CollisionDirection.Right;
-                        Actor.CurrentCollision = tile.CollisionType;
-
-                    }
-                    if (HandleCollision.IsBelowOf(ref Actor.Rectangle, tile.Rectangle, ref Actor.Velocity, ref Actor.Position))
-                    {
-                        Actor.CollisionDirection = CollisionDirection.Bottom;
-                        Actor.CurrentCollision = tile.CollisionType;
-                    }
-                }
-                foreach (IGameObject obj in GameObjects)
-                {
-                    obj.CollisionLogic();
-                }
-
+                obj.CollisionLogic();
             }
         }
 

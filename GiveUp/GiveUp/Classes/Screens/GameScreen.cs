@@ -15,26 +15,18 @@ namespace GiveUp.Classes.Screens
     {
         public LevelManagerr LevelManager;
         Player player;
-        Texture2D doorTexture;
 
         public GameScreen()
         {
+            player = new Player();
+            LevelManager = new LevelManagerr(player);
         }
 
         public override void LoadContent()
         {
-            LevelManager = new LevelManagerr(Content);
             LevelManager.LoadLevel(Path.Combine(Content.RootDirectory, "levels/Level 1 /Level 1.1.txt"));
-
-            player = new Player();
-            Vector2 startPosition = LevelManager.TileManager.UnassignedTiles['S'].First();
-            player.Position = startPosition;
-
+            player.Position = LevelManager.GridManager.UnassignedTiles['S'].First();
             player.LoadContent(Content);
-
-
-
-            base.LoadContent();
         }
 
         public override void Update(GameTime gameTime)
@@ -48,14 +40,6 @@ namespace GiveUp.Classes.Screens
         {
             LevelManager.Draw(spriteBatch);
             player.Draw(spriteBatch);
-        }
-
-        public void nextLevel()
-        {
-            
-            {
-
-            }
         }
     }
 }
