@@ -56,6 +56,7 @@ namespace GiveUp.Classes.Core
             inputHelper.Update();
 
             Movement(gameTime);
+            
             base.Update(gameTime);
         }
 
