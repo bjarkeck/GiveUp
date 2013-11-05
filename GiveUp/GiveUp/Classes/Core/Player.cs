@@ -27,12 +27,11 @@ namespace GiveUp.Classes.Core
         public Player()
         {
             this.Acceleration = 0.2f;
-            this.Position = new Vector2(200, 500);
+            this.Position = Vector2.Zero;
             this.StartJumpSpeed = -12f;
             this.Gravity = 0.55f;
             this.MaxSpeed = 5.2f;
             this.Friction = 0.9f;
-
         }
 
         public void LoadContent(ContentManager content)
@@ -43,7 +42,6 @@ namespace GiveUp.Classes.Core
         public override void Update(GameTime gameTime)
         {
             inputHelper.Update();
-
             Movement(gameTime);
             base.Update(gameTime);
         }
