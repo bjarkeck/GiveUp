@@ -23,7 +23,7 @@
 -G----G------GGG----GGG-----------------
 -G----G------GGG----GGG-----------------
 -G----G------GGG----GGG-----------------
--G-s----------------GGG-----------------
+-G-S----------------GGG-----------------
 -G------------------GGG---------------D-
 GGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGAGGGGG
 GGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGG

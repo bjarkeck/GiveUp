@@ -24,7 +24,7 @@ namespace GiveUp.Classes.Screens
         public override void LoadContent()
         {
             LevelManager = new LevelManagerr(Content);
-            LevelManager.LoadLevel(Path.Combine(Content.RootDirectory, "levels/Level 1 /Level 1.5.txt"));
+            LevelManager.LoadLevel(Path.Combine(Content.RootDirectory, "levels/Level 1 /Level 1.1.txt"));
 
             player = new Player();
             Vector2 startPosition = LevelManager.TileManager.UnassignedTiles['S'].First();
