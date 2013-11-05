@@ -48,6 +48,11 @@ namespace GiveUp.Classes.Core
             base.Update(gameTime);
         }
 
+        public void Die()
+        {
+            this.Position = new Vector2(200, 200);
+        }
+
         public void Jump()
         {
             if (this.CanJump || this.CanDoubleJump)
