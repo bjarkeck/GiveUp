@@ -103,7 +103,7 @@ namespace GiveUp.Classes.Core
             if (positionBoxes && rtn)
             {
                 velocity.X = 0;
-                playerPosition.X = box.Left - player.Width;
+                playerPosition.X = (int)Math.Ceiling((double)(box.Left - player.Width));
                 player.X = (int)playerPosition.X;
             }
             return rtn;

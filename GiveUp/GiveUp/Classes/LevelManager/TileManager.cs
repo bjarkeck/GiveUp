@@ -75,6 +75,7 @@ namespace GiveUp.Classes.LevelManager
                         UnassignedTiles.Add(key, new Vector2(x * TileWidth, y * TileHeight));
                 }
             }
+
         }
 
         public void Draw(SpriteBatch spriteBatch)

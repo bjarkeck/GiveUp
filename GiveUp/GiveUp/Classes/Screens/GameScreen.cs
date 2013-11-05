@@ -24,13 +24,15 @@ namespace GiveUp.Classes.Screens
         {
 
             LevelManager = new LevelManagerr(Content);
-            LevelManager.LoadLevel(Path.Combine(Content.RootDirectory, "levels/Level 1 /Level 1.1.txt"));
+            LevelManager.LoadLevel(Path.Combine(Content.RootDirectory, "levels/Level 1 /Level 1.5.txt"));
 
             player = new Player();
             Vector2 startPosition = LevelManager.TileManager.UnassignedTiles['s'].First();
             player.Position = startPosition;
 
             player.LoadContent(Content);
+
+
 
             base.LoadContent();
         }
