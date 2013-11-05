@@ -19,7 +19,7 @@ namespace GiveUp.Classes.LevelManager
             TileManager.AddBackground("Images/Bgs/bg1");
             TileManager.AddTileType('G', "Images/Tiles/ground", CollisionType.Full);
             TileManager.AddTileType('^', "Images/Obstacles/thorns", CollisionType.PerPixelCollision);
-            TileManager.AddTileType('D', "Images/Tiles/door", CollisionType.PerPixelCollision);
+            TileManager.AddTileType('D', "Images/Tiles/door", CollisionType.None);
             TileManager.AddTileType('A', "Images/Tiles/activation", CollisionType.PerPixelCollision);
             Actors = new List<Actor>();
 
