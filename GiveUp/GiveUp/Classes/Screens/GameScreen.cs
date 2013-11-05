@@ -27,7 +27,7 @@ namespace GiveUp.Classes.Screens
             LevelManager.LoadLevel(Path.Combine(Content.RootDirectory, "levels/Level 1 /Level 1.1.txt"));
 
             player = new Player();
-            Vector2 startPosition = LevelManager.TileManager.UnassignedTiles['s'].First();
+            Vector2 startPosition = LevelManager.TileManager.UnassignedTiles['S'].First();
             player.Position = startPosition;
 
             player.LoadContent(Content);
