@@ -8,6 +8,7 @@ namespace GiveUp.Classes.Core
     public enum CollisionType
     {
         Full,
+        FullTop,
         Passable,
         GooLeft,
         GooRight,
@@ -15,6 +16,6 @@ namespace GiveUp.Classes.Core
         PerPixelCollision,
         Water,
         Moveable,
-        None
+        None,
     }
 }

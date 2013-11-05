@@ -41,6 +41,7 @@
     <Compile Include="Classes\Core\CollisionHelper.cs" />
     <Compile Include="Classes\Core\CollisionTypes.cs" />
     <Compile Include="Classes\Core\HandleCollision.cs" />
+    <Compile Include="Classes\Core\IGameObject.cs" />
     <Compile Include="Classes\Core\KeyboardHelper.cs" />
     <Compile Include="Classes\Core\Player.cs" />
     <Compile Include="Classes\Core\ScreenManager.cs" />

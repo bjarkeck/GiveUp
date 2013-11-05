@@ -33,7 +33,7 @@ namespace GiveUp.Classes.Core
 
         public Player()
         {
-            this.Acceleration = 0.1f;
+            this.Acceleration = 0.2f;
             this.Position = new Vector2(200, 500);
             this.startJumpSpeed = -12f;
             this.gravity = 0.55f;
@@ -81,8 +81,12 @@ namespace GiveUp.Classes.Core
             if (inputHelper.IsNewPress(Keys.Space))
                 this.Jump();
 
+            if ((CollisionDirection == Core.CollisionDirection.Right || CollisionDirection == Core.CollisionDirection.Left) && CurrentCollision == Core.CollisionType.FullTop)
+            {
+                Velocity.Y -= 0.1f;
+            }
 
-                Velocity.Y += gravity;
+            Velocity.Y += gravity;
 
 
             if (Math.Abs(Velocity.X) < friction)
