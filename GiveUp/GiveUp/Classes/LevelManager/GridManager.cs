@@ -13,47 +13,34 @@ using GiveUp.Classes.Core;
 
 namespace GiveUp.Classes.LevelManager
 {
-    public class TileManager
+    public class GridManager
     {
         #region Properties and fields
         private ContentManager content;
-        private Dictionary<char, Tuple<string, CollisionType>> tileTypes = new Dictionary<char, Tuple<string, CollisionType>>();
-        private Dictionary<char, Texture2D> tileTextures = new Dictionary<char, Texture2D>();
         public Texture2D backgroundTexture;
 
-        public string CurrentLevel = "";
         public int GridWidth { get; private set; }
         public int GridHeight { get; private set; }
         private readonly int TileWidth;
         private readonly int TileHeight;
         public int LevelHeight { get { return GridHeight * TileHeight; } }
         public int LevelWidth { get { return GridWidth * TileWidth; } }
-        public List<Tile> Tiles = new List<Tile>();
         /// <summary>
         /// Start position, slut position, Obsticles osv...
         /// </summary>
         public UnAssignedCharecters<char, Vector2> UnassignedTiles = new UnAssignedCharecters<char, Vector2>();
         #endregion
 
-        public TileManager(ContentManager Content, int tileWidth, int tileHeight)
+        public GridManager(ContentManager Content, int tileWidth, int tileHeight)
         {
             TileWidth = tileWidth;
             TileHeight = tileHeight;
             content = Content;
         }
-
-        public void AddTileType(char charecter, string texture, CollisionType collisionType)
+        public void LoadLevel(string levelData)
         {
-            tileTypes.Add(charecter, new Tuple<string, CollisionType>(texture, collisionType));
-        }
-
-        public void LoadLevel(string txtPath)
-        {
-            //Clear old map:
-            Tiles.Clear();
-            CurrentLevel = txtPath;
-            StreamReader file = new StreamReader("../../../" + txtPath);
-            string[] levelLines = file.ReadToEnd().Split(new string[] { Environment.NewLine }, StringSplitOptions.None);
+            UnassignedTiles.Clear();
+            string[] levelLines = levelData.Split(new string[] { Environment.NewLine }, StringSplitOptions.None);
 
             GridWidth = levelLines.Max(line => line.Length);
             GridHeight = levelLines.Count();
@@ -63,18 +50,10 @@ namespace GiveUp.Classes.LevelManager
                 for (int x = 0; x < levelLines[y].Length; x++)
                 {
                     char key = levelLines[y][x];
-
-                    //Load Texture if needed
-                    if (tileTextures.ContainsKey(key) == false && tileTypes.ContainsKey(key))
-                        tileTextures.Add(key, content.Load<Texture2D>(tileTypes[key].Item1));
-
-                    //Hvis typen findes, add tile!
-                    if (tileTypes.ContainsKey(key))
-                        Tiles.Add(new Tile(tileTextures[key], new Rectangle(x * TileWidth, y * TileHeight, TileWidth, TileHeight), tileTypes[key].Item2));
-                    else
-                        UnassignedTiles.Add(key, new Vector2(x * TileWidth, y * TileHeight));
+                    UnassignedTiles.Add(key, new Vector2(x * TileWidth, y * TileHeight));
                 }
             }
+
         }
 
         public void Draw(SpriteBatch spriteBatch)
@@ -82,10 +61,6 @@ namespace GiveUp.Classes.LevelManager
             if (backgroundTexture != null)
             {
                 spriteBatch.Draw(backgroundTexture,Vector2.Zero,new Rectangle(0,0,1280,960),Color.White);
-            }
-            foreach (Tile tile in Tiles)
-            {
-                tile.Draw(spriteBatch);
             }
         }
 

@@ -18,6 +18,8 @@ namespace GiveUp.Classes.Screens
 
         public GameScreen()
         {
+            player = new Player();
+            LevelManager = new LevelManagerr(player);
         }
 
         public override void LoadContent()
@@ -31,8 +33,6 @@ namespace GiveUp.Classes.Screens
             player.Position = startPosition;
 
             player.LoadContent(Content);
-
-            base.LoadContent();
         }
 
         public override void Update(GameTime gameTime)

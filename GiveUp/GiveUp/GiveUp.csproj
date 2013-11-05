@@ -37,10 +37,10 @@
   <ItemGroup>
     <Compile Include="Classes\Core\Actor.cs" />
     <Compile Include="Classes\Core\BaseScreen.cs" />
-    <Compile Include="Classes\Core\CollisionDirection.cs" />
     <Compile Include="Classes\Core\CollisionHelper.cs" />
-    <Compile Include="Classes\Core\CollisionTypes.cs" />
+    <Compile Include="Classes\Core\GameObject.cs" />
     <Compile Include="Classes\Core\HandleCollision.cs" />
+    <Compile Include="Classes\Core\IGameObject.cs" />
     <Compile Include="Classes\Core\KeyboardHelper.cs" />
     <Compile Include="Classes\Core\Player.cs" />
     <Compile Include="Classes\Core\ScreenManager.cs" />
@@ -48,9 +48,11 @@
     <Compile Include="Classes\Db\DataContext.cs" />
     <Compile Include="Classes\Db\LevelData.cs" />
     <Compile Include="Classes\Db\TileData.cs" />
+    <Compile Include="Classes\GameObjects\Finish.cs" />
+    <Compile Include="Classes\GameObjects\Obstacles\Spike.cs" />
+    <Compile Include="Classes\GameObjects\Tiles\BoxTile.cs" />
     <Compile Include="Classes\LevelManager\LevelManager.cs" />
-    <Compile Include="Classes\LevelManager\Tile.cs" />
-    <Compile Include="Classes\LevelManager\TileManager.cs" />
+    <Compile Include="Classes\LevelManager\GridManager.cs" />
     <Compile Include="Classes\Screens\GameScreen.cs" />
     <Compile Include="Classes\Screens\MenuScreen.cs" />
     <Compile Include="Game.cs" />
@@ -111,14 +113,14 @@
     <Content Include="Content\Images\Tiles\rightHill.png">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Content>
-    <Content Include="Content\Images\Obstacles\thorns.png">
+    <Content Include="Content\Images\Obstacles\Spike.png">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Content>
-    <Content Include="Content\Levels\Level 1\Level 1.5.txt" />
-    <Content Include="Content\Levels\Level 1\Level 1.4.txt" />
-    <Content Include="Content\Levels\Level 1\Level 1.3.txt" />
-    <Content Include="Content\Levels\Level 1\Level 1.1.txt" />
-    <Content Include="Content\Levels\Level 1\Level 1.2.txt">
+    <Content Include="Content\Levels\1\5.txt" />
+    <Content Include="Content\Levels\1\4.txt" />
+    <Content Include="Content\Levels\1\3.txt" />
+    <Content Include="Content\Levels\1\1.txt" />
+    <Content Include="Content\Levels\1\2.txt">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Content>
     <Content Include="System\GiveUpDatabase.sdf">
@@ -126,9 +128,7 @@
     </Content>
     <Content Include="System\Icon.ico" />
   </ItemGroup>
-  <ItemGroup>
-    <Folder Include="Classes\Obstacles\" />
-  </ItemGroup>
+  <ItemGroup />
   <ItemGroup>
     <None Include="App.config" />
     <None Include="packages.config" />

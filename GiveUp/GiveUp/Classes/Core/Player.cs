@@ -9,40 +9,29 @@ using System.Text;
 
 namespace GiveUp.Classes.Core
 {
-    class Player : Actor
+    public class Player : Actor
     {
 
-        private bool isGrounded
-        {
-            get
-            {
-                return CollisionDirection == CollisionDirection.Top;
-            }
-        }
-        private bool canDoubleJump = false;
-        private float startJumpSpeed;
+        public bool CanJump = true;
+        public bool CanDoubleJump = false;
+        public float StartJumpSpeed;
 
         /// <summary>
         /// Must be called in up date allways!
         /// </summary>
-        private float gravity;
-        private int health;
-        private float maxSpeed;
-        private float friction;
+        public float Gravity;
+        public float MaxSpeed;
+        public float Friction;
         private InputHelper inputHelper = new InputHelper();
-
-        KeyboardState oldState;
 
         public Player()
         {
-            this.Acceleration = 0.1f;
+            this.Acceleration = 0.2f;
             this.Position = new Vector2(200, 500);
-            this.startJumpSpeed = -12f;
-            this.gravity = 0.55f;
-            this.maxSpeed = 5.2f;
-            this.friction = 0.9f;
-
-            health = 1;
+            this.StartJumpSpeed = -12f;
+            this.Gravity = 0.55f;
+            this.MaxSpeed = 5.2f;
+            this.Friction = 0.9f;
 
         }
 
@@ -60,18 +49,23 @@ namespace GiveUp.Classes.Core
             base.Update(gameTime);
         }
 
+        public void Die()
+        {
+            this.Position = new Vector2(200, 200);
+        }
+
         public void Jump()
         {
-            if (this.isGrounded || this.canDoubleJump)
+            if (this.CanJump || this.CanDoubleJump)
             {
-                canDoubleJump = isGrounded;
-                this.Velocity.Y = this.startJumpSpeed;
+                CanDoubleJump = CanJump;
+                CanJump = false;
+                this.Velocity.Y = this.StartJumpSpeed;
             }
         }
 
         public void Movement(GameTime gameTime)
         {
-            oldState = Keyboard.GetState();
             KeyboardState keyState = Keyboard.GetState();
             if (keyState.IsKeyDown(Keys.A))
             {
@@ -86,15 +80,15 @@ namespace GiveUp.Classes.Core
                 this.Jump();
 
 
-                Velocity.Y += gravity;
+            Velocity.Y += Gravity;
 
 
-            if (Math.Abs(Velocity.X) < friction)
+            if (Math.Abs(Velocity.X) < Friction)
                 Velocity.X = 0;
             else
-                Velocity.X += friction * (Velocity.X > 0 ? -1f : 1f);
+                Velocity.X += Friction * (Velocity.X > 0 ? -1f : 1f);
 
-            Velocity.X = MathHelper.Clamp(Velocity.X, maxSpeed * -1, maxSpeed);
+            Velocity.X = MathHelper.Clamp(Velocity.X, MaxSpeed * -1, MaxSpeed);
 
             this.Position += this.Velocity;
         }

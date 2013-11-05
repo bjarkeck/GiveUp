@@ -4,67 +4,120 @@ using Microsoft.Xna.Framework.Content;
 using Microsoft.Xna.Framework.Graphics;
 using System;
 using System.Collections.Generic;
+using System.IO;
 using System.Linq;
+using System.Reflection;
 using System.Text;
 
 namespace GiveUp.Classes.LevelManager
 {
     public class LevelManagerr
     {
-        public TileManager TileManager;
-        public List<Actor> Actors { get; set; }
-        public LevelManagerr(ContentManager content)
+        public int CurrentLevel = 1;
+        public int CurrentSubLevel = 1;
+        List<string> Levels = new List<string>();  
+        public GridManager GridManager;
+        List<IGameObject> GameObjects = new List<IGameObject>();
+        public Player Player;
+
+        public ContentManager Content
         {
-            TileManager = new TileManager(content, 32, 32);
-            TileManager.AddBackground("Images/Bgs/bg1");
-            TileManager.AddTileType('G', "Images/Tiles/ground", CollisionType.Full);
-            TileManager.AddTileType('^', "Images/Obstacles/thorns", CollisionType.PerPixelCollision);
-            TileManager.AddTileType('D', "Images/Tiles/door", CollisionType.PerPixelCollision);
-            TileManager.AddTileType('A', "Images/Tiles/activation", CollisionType.PerPixelCollision);
-            Actors = new List<Actor>();
+            get
+            {
+                return ScreenManager.Current.Content;
+            }
+        }
+
+        public LevelManagerr(Player player)
+        {
+            this.Player = player;
+            GridManager = new GridManager(Content, 32, 32);
+            GridManager.AddBackground("Images/Bgs/bg1");
 
         }
 
         public void Draw(SpriteBatch spriteBatch)
         {
-            TileManager.Draw(spriteBatch);
+            GridManager.Draw(spriteBatch);
+            foreach (IGameObject item in GameObjects)
+            {
+                item.Draw(spriteBatch);
+            }
         }
 
-        public void LoadLevel(string p)
+        public void StartLevel(int level, int subLevel = 1)
         {
-            TileManager.LoadLevel(p);
+            CurrentSubLevel = subLevel;
+            CurrentLevel = level;
+            DirectoryInfo dir = new DirectoryInfo("../../../Content/Levels/" + level);
+            foreach (FileInfo file in dir.GetFiles().OrderBy(x => x.Name))
+                Levels.Add(file.OpenText().ReadToEnd());
+
+            startSubLevel(subLevel);
+        }
+
+        private void startSubLevel(int subLevel)
+        {
+            loadLevel(Levels[subLevel - 1]);
+            Player.Position = GridManager.UnassignedTiles['S'].First();
+        }
+
+        private void loadLevel(string p)
+        {
+            GameObjects.Clear();
+
+            GridManager.LoadLevel(p);
+
+            foreach (var unassigendTile in GridManager.UnassignedTiles)
+            {
+                var gameObject = Assembly.GetExecutingAssembly()
+                    .GetTypes()
+                    .Where(x => x.GetInterfaces()
+                        .Contains(
+                            typeof(IGameObject)) &&
+                            x.GetConstructor(Type.EmptyTypes) != null &&
+                            x.GetField("TileChar") != null &&
+                            (char)x.GetField("TileChar").GetValue(null) == unassigendTile.Key);
+
+                foreach (Vector2 position in unassigendTile.Value)
+                {
+                    if (gameObject != null && gameObject.Count() > 0)
+                    {
+                        IGameObject obj = (IGameObject)gameObject.Select(x => Activator.CreateInstance(x)).First();
+                        GameObjects.Add(obj);
+                        obj.Initialize(Content, position);
+                        obj.Player = Player;
+                    }
+                }
+            }
+        }
+
+        public void StartNextLevel()
+        {
+            CurrentSubLevel= CurrentSubLevel+ 1;
+            changeLevel = true;
         }
 
         public void Update(GameTime gameTime)
         {
-
-            foreach (Actor actor in Actors)
+            foreach (IGameObject item in GameObjects)
             {
-                actor.CollisionDirection = CollisionDirection.None;
-                actor.CurrentCollision = CollisionType.None;
+                item.Update(gameTime);
             }
-            foreach (Tile tile in TileManager.Tiles)
+
+            foreach (IGameObject obj in GameObjects)
             {
-                foreach (Actor actor in Actors)
-                {
+                obj.CollisionLogic();
+            }
 
-                    if (HandleCollision.IsOnTopOf(ref actor.Rectangle, tile.Rectangle, ref actor.Velocity, ref actor.Position))
-                    {
-                        actor.CollisionDirection = CollisionDirection.Top;
-                        actor.CollisionType = CollisionType.Full;
-                    }
-
-                    if (HandleCollision.IsRightOf(ref actor.Rectangle, tile.Rectangle, ref actor.Velocity, ref actor.Position))
-                        actor.CollisionDirection = CollisionDirection.Left;
-
-                    if (HandleCollision.IsLeftOf(ref actor.Rectangle, tile.Rectangle, ref actor.Velocity, ref actor.Position))
-                        actor.CollisionDirection = CollisionDirection.Right;
-
-                    if (HandleCollision.IsBelowOf(ref actor.Rectangle, tile.Rectangle, ref actor.Velocity, ref actor.Position))
-                        actor.CollisionDirection = CollisionDirection.Bottom;
-
-                }
+            if (changeLevel)
+            {
+                startSubLevel(CurrentSubLevel);
+                changeLevel = false;
             }
         }
+
+
+        public bool changeLevel { get; set; }
     }
 }
