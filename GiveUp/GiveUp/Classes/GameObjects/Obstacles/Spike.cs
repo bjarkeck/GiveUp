@@ -14,13 +14,13 @@ namespace GiveUp.Classes.GameObjects.Obstacles
         public Vector2 Position { get; set; }
         public Rectangle rectangle;
 
-        public const char TileChar = 'k';
+        public const char TileChar = '^';
 
         public void Initialize(ContentManager content, Vector2 position)
         {
             Position = position;
             texture = content.Load<Texture2D>("Images/Obstacles/Spike");
-            rectangle = new Rectangle((int)position.X, (int)position.Y, texture.Width, texture.Height);
+            rectangle = new Rectangle((int)position.X, (int)position.Y + 28, texture.Width, texture.Height);
         }
 
         public void CollisionLogic()
@@ -33,7 +33,7 @@ namespace GiveUp.Classes.GameObjects.Obstacles
 
         public void Draw(SpriteBatch spriteBatch)
         {
-            spriteBatch.Draw(texture, Position, Color.White);
+            spriteBatch.Draw(texture, new Vector2(Position.X, Position.Y + 23), Color.White);
         }
     }
 }
