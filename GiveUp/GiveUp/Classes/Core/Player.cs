@@ -83,7 +83,10 @@ namespace GiveUp.Classes.Core
 
             if ((CollisionDirection == Core.CollisionDirection.Right || CollisionDirection == Core.CollisionDirection.Left) && CurrentCollision == Core.CollisionType.FullTop)
             {
-                Velocity.Y -= 0.1f;
+                if (Velocity.Y > 0)
+                {
+                    Velocity.Y -= 0.4f;
+                }
             }
 
             Velocity.Y += gravity;

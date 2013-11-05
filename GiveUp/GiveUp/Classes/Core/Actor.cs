@@ -23,12 +23,12 @@ namespace GiveUp.Classes.Core
         public Actor(Texture2D texture, CollisionType collisionType)
             :base(texture,collisionType)
         {
-            ((GameScreen)ScreenManager.Current.CurrentScreen).LevelManager.Actors.Add(this);
+            ((GameScreen)ScreenManager.Current.CurrentScreen).LevelManager.Actor = (this);
         }
 
         public Actor()
         {
-             ((GameScreen)ScreenManager.Current.CurrentScreen).LevelManager.Actors.Add(this);
+             ((GameScreen)ScreenManager.Current.CurrentScreen).LevelManager.Actor = (this);
         }
 
 
