@@ -4,6 +4,7 @@ using Microsoft.Xna.Framework.Content;
 using Microsoft.Xna.Framework.Graphics;
 using System;
 using System.Collections.Generic;
+using System.IO;
 using System.Linq;
 using System.Reflection;
 using System.Text;
@@ -12,9 +13,13 @@ namespace GiveUp.Classes.LevelManager
 {
     public class LevelManagerr
     {
+        public int CurrentLevel = 1;
+        public int CurrentSubLevel = 1;
+        List<string> Levels = new List<string>();  
         public GridManager GridManager;
         List<IGameObject> GameObjects = new List<IGameObject>();
         public Player Player;
+
         public ContentManager Content
         {
             get
@@ -22,6 +27,7 @@ namespace GiveUp.Classes.LevelManager
                 return ScreenManager.Current.Content;
             }
         }
+
         public LevelManagerr(Player player)
         {
             this.Player = player;
@@ -39,7 +45,18 @@ namespace GiveUp.Classes.LevelManager
             }
         }
 
-        public void LoadLevel(string p)
+        public void StartLevel(int level, int subLevel = 1)
+        {
+            CurrentSubLevel = subLevel;
+            CurrentLevel = level;
+            DirectoryInfo dir = new DirectoryInfo("../../../Content/Levels/" + level);
+            foreach (FileInfo file in dir.GetFiles().OrderBy(x => x.Name))
+                Levels.Add(file.OpenText().ReadToEnd());
+
+            loadLevel(Levels[subLevel]);
+        }
+
+        private void loadLevel(string p)
         {
             GameObjects.Clear();
 
@@ -67,6 +84,11 @@ namespace GiveUp.Classes.LevelManager
                     }
                 }
             }
+        }
+
+        public void StartNextLevel()
+        {
+            StartLevel(CurrentLevel, CurrentSubLevel + 1);
         }
 
         public void Update(GameTime gameTime)

@@ -32,7 +32,7 @@ using System.Text;
         {
             if (rectangle.Intersects(Player.Rectangle))
             {
-                
+                Player.Jump();
             }
         }
 

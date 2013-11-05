@@ -19,7 +19,6 @@ namespace GiveUp.Classes.LevelManager
         private ContentManager content;
         public Texture2D backgroundTexture;
 
-        public string CurrentLevel = "";
         public int GridWidth { get; private set; }
         public int GridHeight { get; private set; }
         private readonly int TileWidth;
@@ -38,12 +37,9 @@ namespace GiveUp.Classes.LevelManager
             TileHeight = tileHeight;
             content = Content;
         }
-        public void LoadLevel(string txtPath)
+        public void LoadLevel(string levelData)
         {
-            //Clear old map:
-            CurrentLevel = txtPath;
-            StreamReader file = new StreamReader("../../../" + txtPath);
-            string[] levelLines = file.ReadToEnd().Split(new string[] { Environment.NewLine }, StringSplitOptions.None);
+            string[] levelLines = levelData.Split(new string[] { Environment.NewLine }, StringSplitOptions.None);
 
             GridWidth = levelLines.Max(line => line.Length);
             GridHeight = levelLines.Count();

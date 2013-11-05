@@ -24,7 +24,7 @@ namespace GiveUp.Classes.Screens
 
         public override void LoadContent()
         {
-            LevelManager.LoadLevel(Path.Combine(Content.RootDirectory, "levels/Level 1 /Level 1.1.txt"));
+            LevelManager.StartLevel(1,1);
             player.Position = LevelManager.GridManager.UnassignedTiles['S'].First();
             player.LoadContent(Content);
         }
