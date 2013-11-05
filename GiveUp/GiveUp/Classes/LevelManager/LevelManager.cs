@@ -59,6 +59,7 @@ namespace GiveUp.Classes.LevelManager
         private void startSubLevel(int subLevel)
         {
             loadLevel(Levels[subLevel - 1]);
+            Player.Position = GridManager.UnassignedTiles['S'].First();
         }
 
         private void loadLevel(string p)

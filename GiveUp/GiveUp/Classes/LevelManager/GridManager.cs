@@ -39,6 +39,7 @@ namespace GiveUp.Classes.LevelManager
         }
         public void LoadLevel(string levelData)
         {
+            UnassignedTiles.Clear();
             string[] levelLines = levelData.Split(new string[] { Environment.NewLine }, StringSplitOptions.None);
 
             GridWidth = levelLines.Max(line => line.Length);

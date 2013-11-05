@@ -25,7 +25,6 @@ namespace GiveUp.Classes.Screens
         public override void LoadContent()
         {
             LevelManager.StartLevel(1,1);
-            player.Position = LevelManager.GridManager.UnassignedTiles['S'].First();
             player.LoadContent(Content);
         }
 
