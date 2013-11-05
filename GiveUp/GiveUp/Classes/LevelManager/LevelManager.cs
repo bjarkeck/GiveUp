@@ -23,7 +23,7 @@ namespace GiveUp.Classes.LevelManager
             TileManager.AddTileType('g', "Images/Tiles/ground", CollisionType.FullTop);
             TileManager.AddTileType('G', "Images/Tiles/ground", CollisionType.Full);
             TileManager.AddTileType('^', "Images/Obstacles/thorns", CollisionType.PerPixelCollision);
-            TileManager.AddTileType('D', "Images/Tiles/door", CollisionType.PerPixelCollision);
+            TileManager.AddTileType('D', "Images/Tiles/door", CollisionType.Passable);
             TileManager.AddTileType('A', "Images/Tiles/activation", CollisionType.PerPixelCollision);
 
             foreach (var unassigendTile in TileManager.UnassignedTiles)
