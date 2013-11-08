@@ -22,7 +22,6 @@ namespace GiveUp.Classes.Core
         {
             Rectangle.X = (int)Position.X;
             Rectangle.Y = (int)Position.Y;
-
         }
 
 

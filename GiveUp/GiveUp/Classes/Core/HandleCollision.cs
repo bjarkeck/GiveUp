@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using Microsoft.Xna.Framework;
+using Microsoft.Xna.Framework.Graphics;
 
 namespace GiveUp.Classes.Core
 {
@@ -118,6 +119,37 @@ namespace GiveUp.Classes.Core
                 player.Y = (int)playerPosition.Y;
             }
             return rtn;
+        }
+
+        public static bool PerPixesCollision(this Rectangle player, Rectangle box, Texture2D boxTexture)
+        {
+            if (player.Intersects(box))
+            {
+                Color[] imageData = new Color[boxTexture.Width * boxTexture.Height];
+                boxTexture.GetData<Color>(imageData);
+
+                int xStart = player.X < box.X ? 0 : player.X - box.X;
+                int xEnd = player.Right > box.Right ? box.Width : player.Right - box.X;
+                int yStart = player.Y < box.Y ? 0 : player.Y - box.Y;
+                int yEnd = player.Bottom > box.Bottom ? box.Height : player.Bottom - box.Y;
+
+                for (int x = xStart; x < xEnd; x++)
+                {
+                    for (int y = yStart; y < yEnd; y++)
+                    {
+                        if (
+                            imageData[x + y * boxTexture.Width].A > 0
+                            && player.X <= x + box.X && player.Right >= x + box.X
+                            && player.Y <= y + box.Y && player.Bottom >= y + box.Y
+                        )
+                        {
+                            return true;
+                        }
+                    }
+                }
+
+            }
+            return false;
         }
 
     }

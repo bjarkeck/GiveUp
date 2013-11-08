@@ -9,7 +9,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 
-    class Finish : IGameObject
+    class Finish : GameObject, IGameObject
     {
         public Player Player { get; set; }
         public Texture2D texture { get; set; }
@@ -29,7 +29,7 @@ using System.Text;
         {
             if (Player.InputHelper.IsNewPress(Keys.Enter))
             {
-                ((GameScreen)ScreenManager.Current.CurrentScreen).LevelManager.StartNextLevel();
+                this.LevelManager.StartNextLevel();
             }
         }
 
@@ -37,7 +37,7 @@ using System.Text;
         {
             if (rectangle.Intersects(Player.Rectangle))
             {
-                ((GameScreen)ScreenManager.Current.CurrentScreen).LevelManager.StartNextLevel();
+                this.LevelManager.StartNextLevel();
             }
         }
 

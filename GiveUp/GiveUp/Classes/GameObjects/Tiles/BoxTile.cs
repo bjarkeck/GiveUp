@@ -32,6 +32,7 @@ namespace GiveUp.Classes.GameObjects.Tiles
 
             if (HandleCollision.IsRightOf(ref Player.Rectangle, Rectangle, ref Player.Velocity, ref Player.Position))
             {
+
             }
             if (HandleCollision.IsLeftOf(ref Player.Rectangle, Rectangle, ref Player.Velocity, ref Player.Position))
             {

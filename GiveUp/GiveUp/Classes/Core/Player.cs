@@ -36,7 +36,7 @@ namespace GiveUp.Classes.Core
 
         public void LoadContent(ContentManager content)
         {
-            this.Texture = content.Load<Texture2D>("Images/Player/player.png");
+            this.Texture = content.Load<Texture2D>("Images/Player/player");
         }
 
         public override void Update(GameTime gameTime)
@@ -49,7 +49,7 @@ namespace GiveUp.Classes.Core
 
         public void Die()
         {
-            this.Position = new Vector2(200, 200);
+            //Splat
         }
 
         public void Jump()
@@ -65,6 +65,7 @@ namespace GiveUp.Classes.Core
         public void Movement(GameTime gameTime)
         {
             KeyboardState keyState = Keyboard.GetState();
+
             if (keyState.IsKeyDown(Keys.A))
             {
                 this.Velocity.X += this.Acceleration * -1 * gameTime.ElapsedGameTime.Milliseconds;
@@ -76,10 +77,7 @@ namespace GiveUp.Classes.Core
 
             if (InputHelper.IsNewPress(Keys.Space))
                 this.Jump();
-
-
             Velocity.Y += Gravity;
-
 
             if (Math.Abs(Velocity.X) < Friction)
                 Velocity.X = 0;

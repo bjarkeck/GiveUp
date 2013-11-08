@@ -61,6 +61,10 @@ namespace GiveUp.Classes.LevelManager
             loadLevel(Levels[subLevel - 1]);
             Player.Position = GridManager.UnassignedTiles['S'].First();
         }
+        public void RestartLevel()
+        {
+            changeLevel = true;
+        }
 
         private void loadLevel(string p)
         {
@@ -117,6 +121,7 @@ namespace GiveUp.Classes.LevelManager
             {
                 startSubLevel(CurrentSubLevel);
                 changeLevel = false;
+                Player.Position = GridManager.UnassignedTiles['S'].First();
             }
         }
 
