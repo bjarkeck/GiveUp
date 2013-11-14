@@ -17,7 +17,7 @@ namespace GiveUp.Classes.LevelManager
         public int CurrentSubLevel = 1;
         List<string> Levels = new List<string>();
         public GridManager GridManager;
-        List<IGameObject> GameObjects = new List<IGameObject>();
+        public List<IGameObject> GameObjects = new List<IGameObject>();
         public Player Player;
 
         public ContentManager Content
@@ -81,7 +81,12 @@ namespace GiveUp.Classes.LevelManager
                             typeof(IGameObject)) &&
                             x.GetConstructor(Type.EmptyTypes) != null &&
                             x.GetField("TileChar") != null &&
-                            (char)x.GetField("TileChar").GetValue(null) == unassigendTile.Key);
+                            (char)x.GetField("TileChar").GetValue(null) == unassigendTile.Key)
+                            .OrderBy(x => 
+                                x.GetField("LoadOrder") == null ? 
+                                    100 : 
+                                (byte)x.GetField("LoadOrder").GetValue(null)
+                            );
 
                 foreach (Vector2 position in unassigendTile.Value)
                 {

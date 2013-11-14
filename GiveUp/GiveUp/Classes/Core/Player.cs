@@ -15,6 +15,7 @@ namespace GiveUp.Classes.Core
         public bool CanJump = true;
         public bool CanDoubleJump = false;
         public float StartJumpSpeed;
+        public Vector2 PreviousPosition = Vector2.Zero;
 
         /// <summary>
         /// Must be called in up date allways!
@@ -85,6 +86,8 @@ namespace GiveUp.Classes.Core
                 Velocity.X += Friction * (Velocity.X > 0 ? -1f : 1f);
 
             Velocity.X = MathHelper.Clamp(Velocity.X, MaxSpeed * -1, MaxSpeed);
+
+            PreviousPosition = new Vector2(Position.X, Position.Y);
 
             this.Position += this.Velocity;
         }

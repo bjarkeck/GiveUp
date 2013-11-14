@@ -27,7 +27,7 @@ namespace GiveUp
         {
             graphics = new GraphicsDeviceManager(this);
             Content.RootDirectory = "Content";
-            //graphics.IsFullScreen = true;
+            graphics.IsFullScreen = true;
             graphics.PreferredBackBufferHeight = 960;
             graphics.PreferredBackBufferWidth = 1280;
         }
@@ -57,7 +57,7 @@ namespace GiveUp
         protected override void Draw(GameTime gameTime)
         {
             GraphicsDevice.Clear(Color.CornflowerBlue);
-            spriteBatch.Begin();
+            spriteBatch.Begin(SpriteSortMode.Deferred, BlendState.NonPremultiplied);
             Game1.ScreenManager.Draw(spriteBatch);
             spriteBatch.End();
             base.Draw(gameTime);

@@ -121,6 +121,73 @@ namespace GiveUp.Classes.Core
             return rtn;
         }
 
+        public static bool PerPixesCollision(ref Rectangle playerRectangle, Rectangle box, Texture2D boxTexture, ref Vector2 playerVelocity, ref Vector2 playerPosition)
+        {
+            if (playerRectangle.Intersects(box))
+            {
+                Color[] imageData = new Color[boxTexture.Width * boxTexture.Height];
+                boxTexture.GetData<Color>(imageData);
+
+                int xStart = playerRectangle.X < box.X ? 0 : playerRectangle.X - box.X;
+                int xEnd = playerRectangle.Right > box.Right ? box.Width : playerRectangle.Right - box.X;
+                int yStart = playerRectangle.Y < box.Y ? 0 : box.Height - (playerRectangle.Y - box.Y);
+                int yEnd = playerRectangle.Bottom > box.Bottom ? box.Height : playerRectangle.Bottom - box.Y;
+
+                int xCol = playerVelocity.X > 0 ? 0 : xEnd;
+                int yCol = playerVelocity.Y > 0 ? 0 : yEnd;
+
+                bool colFound = false;
+
+                for (int x = xStart; x < xEnd; x++)
+                {
+                    for (int y = yStart; y < yEnd; y++)
+                    {
+                        byte alpha = imageData[x + y * boxTexture.Width].A;
+                        if (
+                            alpha > 0 &&
+                            playerRectangle.Left < x + box.X && 
+                            playerRectangle.Right > x + box.X && 
+                            playerRectangle.Top < y + box.Y && 
+                            playerRectangle.Bottom > y + box.Y
+                            )
+                        {
+                            colFound = true;
+                            if (playerVelocity.X > 0 && xCol == 0)
+                                xCol = x;
+                            if (playerVelocity.X < 0 && xCol != 0)
+                                xCol = x;
+                            if (playerVelocity.Y > 0 && (yCol == 0 || yCol > y))
+                                yCol = y;
+                            if (playerVelocity.Y < 0 && (yCol < y))
+                                yCol = y;
+                        }
+
+                    }
+                }
+
+                if (colFound)
+                {
+
+                    if (playerVelocity.Y < 0)
+                    {
+                        playerPosition.Y = box.Bottom - (box.Height - yCol) + 2;
+                        playerRectangle.Y = box.Bottom - (box.Height - yCol) + 2;
+                    }
+                    else
+                    {
+                        playerPosition.Y = (int)yCol + box.Y - playerRectangle.Height;
+                        playerRectangle.Y = (int)yCol + box.Y - playerRectangle.Height;
+                    }
+
+                    playerVelocity.Y = 0;
+
+                    return true;
+                }
+
+            }
+            return false;
+        }
+
         public static bool PerPixesCollision(this Rectangle player, Rectangle box, Texture2D boxTexture)
         {
             if (player.Intersects(box))
