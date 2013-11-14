@@ -13,15 +13,20 @@ namespace GiveUp.Classes.GameObjects.Obstacles
     class AttachedCannon : GameObject, IGameObject
     {
         public const char TileChar = 'c';
-        private Texture2D texture;
-        private Rectangle rectangle { get; set; }
-        private Direction direction = Direction.Down;
+        Texture2D texture;
+        Texture2D cannonTexture;
+        Rectangle rectangle { get; set; }
+        Vector2 cannonPosition;
+        float minRotation = 20;
+        float maxRotation = 80;
+        float cannonRotation = 10;
 
         public override void Initialize(ContentManager content, Vector2 position)
         {
 
             var boxTile = LevelManager.GameObjects.Where(x => x.GetType().Name == "BoxTile").Select(x => ((BoxTile)x).Position);
-
+            cannonTexture = content.Load<Texture2D>("Images/Obstacles/AttachedCannon/AttatchedCannonCannon");
+            cannonPosition = new Vector2(position.X + 4, position.Y + 15);
             if (boxTile.Any(x => x.X == position.X - 32 && x.Y == position.Y))
             {
                 texture = content.Load<Texture2D>("Images/Obstacles/AttachedCannon/AttatchedCannonBodyR");
@@ -50,10 +55,13 @@ namespace GiveUp.Classes.GameObjects.Obstacles
             this.rectangle = new Rectangle((int)position.X, (int)position.Y, texture.Width, texture.Height);
         }
 
-        private Vector2 intersectPosition = new Vector2();
 
         public override void Update(GameTime gameTime)
         {
+            cannonRotation = (float)Math.Atan2(
+                Convert.ToDouble(Player.Position.X - cannonPosition.X),
+                Convert.ToDouble(Player.Position.Y - cannonPosition.Y)
+            );
             if (HandleCollision.PerPixesCollision(ref Player.Rectangle, rectangle, texture, ref Player.Velocity, ref Player.Position))
             {
                 Player.CanJump = true;
@@ -62,6 +70,8 @@ namespace GiveUp.Classes.GameObjects.Obstacles
 
         public override void Draw(SpriteBatch spriteBatch)
         {
+
+            spriteBatch.Draw(cannonTexture, cannonPosition, null, Color.White, cannonRotation, Vector2.Zero, 1, SpriteEffects.None, 1);
             spriteBatch.Draw(texture, Position, Color.White);
         }
 
