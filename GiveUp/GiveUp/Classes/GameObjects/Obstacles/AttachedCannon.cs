@@ -60,7 +60,7 @@ namespace GiveUp.Classes.GameObjects.Obstacles
             }
             else
             {
-                //Hvis den flyveri luften
+                //Hvis den flyver i luften
                 texture = content.Load<Texture2D>("Images/Obstacles/AttachedCannon/AttatchedCannonBodyL");
             }
 
