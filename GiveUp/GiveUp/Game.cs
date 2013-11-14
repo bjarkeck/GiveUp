@@ -20,13 +20,14 @@ namespace GiveUp
         GraphicsDeviceManager graphics;
         SpriteBatch spriteBatch;
         public static ScreenManager ScreenManager;
-
+       
         public Game1()
             : base()
         {
             graphics = new GraphicsDeviceManager(this);
             Content.RootDirectory = "Content";
-            graphics.IsFullScreen = false;
+            graphics.IsFullScreen = true;
+            graphics.PreferredBackBufferHeight = 960;
             graphics.PreferredBackBufferWidth = 1280;
             graphics.PreferredBackBufferHeight = 860;
             graphics.ApplyChanges();
