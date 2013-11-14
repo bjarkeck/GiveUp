@@ -36,6 +36,7 @@
   </PropertyGroup>
   <ItemGroup>
     <Compile Include="Classes\Core\Actor.cs" />
+    <Compile Include="Classes\Core\AnimationSprite.cs" />
     <Compile Include="Classes\Core\BaseScreen.cs" />
     <Compile Include="Classes\Core\Direction.cs" />
     <Compile Include="Classes\Core\GameLogic.cs" />

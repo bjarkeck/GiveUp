@@ -18,15 +18,17 @@ namespace GiveUp
     public class Game1 : Game
     {
         GraphicsDeviceManager graphics;
+
         SpriteBatch spriteBatch;
+
         public static ScreenManager ScreenManager;
        
+
         public Game1()
             : base()
         {
             graphics = new GraphicsDeviceManager(this);
             Content.RootDirectory = "Content";
-            graphics.IsFullScreen = true;
             graphics.PreferredBackBufferHeight = 960;
             graphics.PreferredBackBufferWidth = 1280;
             graphics.PreferredBackBufferHeight = 860;
@@ -48,12 +50,14 @@ namespace GiveUp
         {
             Game1.ScreenManager.UnloadContent();
         }
+
         protected override void Update(GameTime gameTime)
         {
             Game1.ScreenManager.Update(gameTime);
 
             base.Update(gameTime);
         }
+
         protected override void Draw(GameTime gameTime)
         {
             GraphicsDevice.Clear(Color.Black);
@@ -62,5 +66,6 @@ namespace GiveUp
             spriteBatch.End();
             base.Draw(gameTime);
         }
+
     }
 }
