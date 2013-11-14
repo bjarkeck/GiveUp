@@ -21,7 +21,7 @@ using System.Text;
         public void Initialize(ContentManager content, Vector2 position)
         {
             Position = position;
-            texture = content.Load<Texture2D>("Images/Tiles/door.png");
+            texture = content.Load<Texture2D>("Images/Tiles/OpenDoor.png");
             rectangle = new Rectangle((int)position.X, (int)position.Y, texture.Width, texture.Height);
         }
 
