@@ -81,7 +81,7 @@ namespace GiveUp.Classes.GameObjects.Obstacles
 
             if (rotation < minRotation || rotation > maxRotation)
                 cannonRotation = rotation;
-            
+
             if (HandleCollision.PerPixesCollision(ref Player.Rectangle, rectangle, texture, ref Player.Velocity, ref Player.Position))
             {
                 Player.CanJump = true;
@@ -92,7 +92,7 @@ namespace GiveUp.Classes.GameObjects.Obstacles
         {
 
             spriteBatch.Draw(cannonTexture, cannonPosition, null, Color.White, cannonRotation, Vector2.Zero, 1, SpriteEffects.None, 1);
-            spriteBatch.Draw(texture, Position, Color.White);
+            spriteBatch.Draw(texture, Position, new Color(90,150,250));
         }
 
 

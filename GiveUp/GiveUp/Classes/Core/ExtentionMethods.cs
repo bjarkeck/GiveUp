@@ -7,11 +7,13 @@ using System.Text;
 
 namespace GiveUp.Classes.Core
 {
-    public static class ExtentionMethods
+    public static class GameLogic
     {
         public static Vector2 Origin(this Texture2D texture)
         {
             return new Vector2(texture.Width / 2, texture.Height / 2);
         }
+
+
     }
 }
