@@ -54,8 +54,6 @@ namespace GiveUp.Classes.GameObjects.Obstacles
 
         public override void Update(GameTime gameTime)
         {
-
-
             if (HandleCollision.PerPixesCollision(ref Player.Rectangle, rectangle, texture, ref Player.Velocity, ref Player.Position))
             {
                 Player.CanJump = true;
@@ -66,7 +64,6 @@ namespace GiveUp.Classes.GameObjects.Obstacles
         {
             spriteBatch.Draw(texture, Position, Color.White);
         }
-
 
     }
 }
