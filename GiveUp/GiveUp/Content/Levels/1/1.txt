@@ -23,7 +23,7 @@ G-------------GGGG-------------------------------G
 G-------------GGGG-------------------------------G
 G-------------GGGG-------------------------------G
 G-----S-------GGGG-------------------------------G
-G-B------c----GGGG-----D------^^^^^^^^^----------G
+G-------------GGGG-----D----------B--------------G
 GGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGG
 GGGGGGGGGGGGGGGGGGDGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGG
 GGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGG

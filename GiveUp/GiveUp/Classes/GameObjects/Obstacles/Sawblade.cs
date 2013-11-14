@@ -12,44 +12,56 @@ namespace GiveUp.Classes.GameObjects.Obstacles
 {
     class Sawblade : GameObject, IGameObject
     {
-        public Texture2D texture { get; set; }
-        public Rectangle rectangle;
-        public float rotation = 0.5f;
-        public float speed = 2.5f;
-
         public const char TileChar = 'B';
         public const byte LoadOrder = 0;
 
+        Texture2D texture { get; set; }
+        float rotation = 0.5f;
+        float speed = 2.5f;
+        int leftBounderie;
+        int direction = 1;
+        int range = 64;
+        int rightBounderie;
+
         public override void Initialize(ContentManager content, Vector2 position)
         {
-            Position = new Vector2(position.X, position.Y + 30);
+            leftBounderie = (int)position.X - range;
+            rightBounderie = (int)position.X + range;
+            Position = new Vector2(position.X, position.Y + 16);
             texture = content.Load<Texture2D>("Images/Obstacles/sawblade");
-            rectangle = new Rectangle((int)Position.X, (int)Position.Y, texture.Width, texture.Height);
+            Rectangle = new Rectangle((int)Position.X, (int)Position.Y, texture.Width, texture.Height);
         }
 
-        public override void CollisionLogic()
-        {
-            if (Player.Rectangle.PerPixesCollision(rectangle, texture))
-            {
-                this.LevelManager.RestartLevel();
-            }
-        }
+       
 
         public void Movement()
         {
-            
+            if (Position.X < leftBounderie)
+                direction += 1;
+            if (Position.X > rightBounderie)
+                direction *= -1;
+
+            Position = new Vector2(Position.X + speed * direction, Position.Y);
         }
 
         public override void Update(GameTime gameTime)
         {
-            rotation += 0.2f;
+            rotation += 0.4f * direction;
+            Movement();
+
+            if (Player.Rectangle.PerPixesCollision(Rectangle,texture))
+            {
+                LevelManager.RestartLevel();
+            }
+
+
             base.Update(gameTime);
         }
 
         public override void Draw(SpriteBatch spriteBatch)
         {
-            //spriteBatch.Draw(texture, Position, Color.White);
-            spriteBatch.Draw(texture, Position, null, Color.White, rotation, texture.Origin(), 1, SpriteEffects.None, 1);
+           //spriteBatch.Draw(texture, Position, Color.White);
+            spriteBatch.Draw(texture, new Vector2(Position.X + 16,Position.Y + 16), null, Color.White, rotation, texture.Origin(), 1, SpriteEffects.None, 0);
         }
     }
 }

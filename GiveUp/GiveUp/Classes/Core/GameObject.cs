@@ -11,7 +11,21 @@ using System.Text;
 
     public class GameObject
     {
-        public Vector2 Position { get; set; }
+        public Rectangle Rectangle;
+        private Vector2 position;
+        public Vector2 Position
+        {
+            get
+            {
+                return position;
+            }
+            set
+            {
+                Rectangle.X = (int)value.X;
+                Rectangle.Y = (int)value.Y;
+                position = value;
+            }
+        }
 
         public Player Player { get; set; }
 
