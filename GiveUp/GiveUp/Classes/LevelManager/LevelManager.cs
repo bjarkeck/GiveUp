@@ -81,12 +81,7 @@ namespace GiveUp.Classes.LevelManager
                             typeof(IGameObject)) &&
                             x.GetConstructor(Type.EmptyTypes) != null &&
                             x.GetField("TileChar") != null &&
-                            (char)x.GetField("TileChar").GetValue(null) == unassigendTile.Key)
-                            .OrderBy(x => 
-                                x.GetField("LoadOrder") == null ? 
-                                    100 : 
-                                (byte)x.GetField("LoadOrder").GetValue(null)
-                            );
+                            (char)x.GetField("TileChar").GetValue(null) == unassigendTile.Key);
 
                 foreach (Vector2 position in unassigendTile.Value)
                 {
@@ -99,6 +94,13 @@ namespace GiveUp.Classes.LevelManager
                     }
                 }
             }
+
+            GameObjects = GameObjects
+                            .OrderBy(x =>
+                                x.GetType().GetField("LoadOrder") == null ?
+                                    100 :
+                                (byte)x.GetType().GetField("LoadOrder").GetValue(null)
+                                ).ToList();
         }
 
         public void StartNextLevel()
