@@ -39,7 +39,6 @@
     <Compile Include="Classes\Core\AnimationSprite.cs" />
     <Compile Include="Classes\Core\BaseScreen.cs" />
     <Compile Include="Classes\Core\Direction.cs" />
-    <Compile Include="Classes\Core\GameLogic.cs" />
     <Compile Include="Classes\Core\GameObject.cs" />
     <Compile Include="Classes\Core\HandleCollision.cs" />
     <Compile Include="Classes\Core\IGameObject.cs" />
