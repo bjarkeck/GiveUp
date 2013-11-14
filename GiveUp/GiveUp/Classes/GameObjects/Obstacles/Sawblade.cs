@@ -15,12 +15,14 @@ namespace GiveUp.Classes.GameObjects.Obstacles
         public Texture2D texture { get; set; }
         public Rectangle rectangle;
         public float rotation = 0.5f;
+        public float speed = 2.5f;
 
         public const char TileChar = 'B';
+        public const byte LoadOrder = 0;
 
         public override void Initialize(ContentManager content, Vector2 position)
         {
-            Position = new Vector2(position.X, position.Y + 16);
+            Position = new Vector2(position.X, position.Y + 30);
             texture = content.Load<Texture2D>("Images/Obstacles/sawblade");
             rectangle = new Rectangle((int)Position.X, (int)Position.Y, texture.Width, texture.Height);
         }
@@ -33,6 +35,11 @@ namespace GiveUp.Classes.GameObjects.Obstacles
             }
         }
 
+        public void Movement()
+        {
+            
+        }
+
         public override void Update(GameTime gameTime)
         {
             rotation += 0.2f;
@@ -42,7 +49,7 @@ namespace GiveUp.Classes.GameObjects.Obstacles
         public override void Draw(SpriteBatch spriteBatch)
         {
             //spriteBatch.Draw(texture, Position, Color.White);
-            spriteBatch.Draw(texture, Position, null, Color.White, rotation, Vector2.Zero, 1, SpriteEffects.None, 1);
+            spriteBatch.Draw(texture, Position, null, Color.White, rotation, texture.Origin(), 1, SpriteEffects.None, 1);
         }
     }
 }
