@@ -22,13 +22,17 @@ namespace GiveUp
         SpriteBatch spriteBatch;
 
         public static ScreenManager ScreenManager;
+       
 
-        public Game1() : base()
+        public Game1()
+            : base()
         {
             graphics = new GraphicsDeviceManager(this);
             Content.RootDirectory = "Content";
             graphics.PreferredBackBufferHeight = 960;
             graphics.PreferredBackBufferWidth = 1280;
+            graphics.PreferredBackBufferHeight = 860;
+            graphics.ApplyChanges();
         }
 
         protected override void Initialize()
@@ -56,7 +60,7 @@ namespace GiveUp
 
         protected override void Draw(GameTime gameTime)
         {
-            GraphicsDevice.Clear(Color.CornflowerBlue);
+            GraphicsDevice.Clear(Color.Black);
             spriteBatch.Begin(SpriteSortMode.Deferred, BlendState.NonPremultiplied);
             Game1.ScreenManager.Draw(spriteBatch);
             spriteBatch.End();
