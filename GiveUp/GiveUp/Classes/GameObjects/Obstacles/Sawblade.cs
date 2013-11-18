@@ -54,7 +54,6 @@ namespace GiveUp.Classes.GameObjects.Obstacles
                 LevelManager.RestartLevel();
             }
 
-
             base.Update(gameTime);
         }
 
