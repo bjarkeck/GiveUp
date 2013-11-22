@@ -11,7 +11,7 @@ namespace GiveUp.Classes.Screens
     {
         public override void Update(Microsoft.Xna.Framework.GameTime gameTime)
         {
-                ScreenManager.Current.LoadScreen(new GameScreen());
+            ScreenManager.Current.LoadScreen(new GameScreen());
         }
     }
 }
