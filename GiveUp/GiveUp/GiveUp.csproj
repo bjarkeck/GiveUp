@@ -39,6 +39,7 @@
     <Compile Include="Classes\Core\AnimationSprite.cs" />
     <Compile Include="Classes\Core\BaseScreen.cs" />
     <Compile Include="Classes\Core\Direction.cs" />
+    <Compile Include="Classes\GameObjects\Obstacles\Drag.cs" />
     <Compile Include="Classes\Core\GameLogic.cs" />
     <Compile Include="Classes\Core\GameObject.cs" />
     <Compile Include="Classes\Core\HandleCollision.cs" />
@@ -53,6 +54,7 @@
     <Compile Include="Classes\GameObjects\Finish.cs" />
     <Compile Include="Classes\GameObjects\Obstacles\Cannon\AttachedCannon.cs" />
     <Compile Include="Classes\GameObjects\Obstacles\Cannon\CannonBullets.cs" />
+    <Compile Include="Classes\GameObjects\Obstacles\ReverseControls.cs" />
     <Compile Include="Classes\GameObjects\Obstacles\Sawblade.cs" />
     <Compile Include="Classes\GameObjects\Obstacles\Spike.cs" />
     <Compile Include="Classes\GameObjects\Tiles\BoxTile.cs" />
