@@ -51,7 +51,8 @@
     <Compile Include="Classes\Db\LevelData.cs" />
     <Compile Include="Classes\Db\TileData.cs" />
     <Compile Include="Classes\GameObjects\Finish.cs" />
-    <Compile Include="Classes\GameObjects\Obstacles\AttachedCannon.cs" />
+    <Compile Include="Classes\GameObjects\Obstacles\Cannon\AttachedCannon.cs" />
+    <Compile Include="Classes\GameObjects\Obstacles\Cannon\CannonBullets.cs" />
     <Compile Include="Classes\GameObjects\Obstacles\Sawblade.cs" />
     <Compile Include="Classes\GameObjects\Obstacles\Spike.cs" />
     <Compile Include="Classes\GameObjects\Tiles\BoxTile.cs" />
@@ -114,6 +115,7 @@
     <Content Include="Content\Images\Obstacles\AttachedCannon\AttatchedCannonCannon.png">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Content>
+    <Content Include="Content\Images\Obstacles\AttachedCannon\bullet.png" />
     <Content Include="Content\Images\Obstacles\sawblade.png">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Content>
@@ -160,6 +162,9 @@
   <ItemGroup>
     <None Include="App.config" />
     <None Include="packages.config" />
+  </ItemGroup>
+  <ItemGroup>
+    <Folder Include="Classes\Obstacles\" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
