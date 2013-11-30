@@ -117,7 +117,9 @@
     <Content Include="Content\Images\Obstacles\AttachedCannon\AttatchedCannonCannon.png">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Content>
-    <Content Include="Content\Images\Obstacles\AttachedCannon\bullet.png" />
+    <Content Include="Content\Images\Obstacles\AttachedCannon\bullet.png">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
     <Content Include="Content\Images\Obstacles\sawblade.png">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Content>
