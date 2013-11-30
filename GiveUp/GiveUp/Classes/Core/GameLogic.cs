@@ -47,6 +47,7 @@ namespace GiveUp.Classes.Core
         /// <param name="target">Fx Player.Rectangle</param>
         public static bool IsLineOfSight(float distance, Vector2 startPos, Rectangle target)
         {
+
             //Check hvis afstandne mellem startPos og target er længere end distance. og retuner false hvis den er...
             //Ligesom AngleRadian og AngleDegree, må du gerne lave en Distance Extention method ogs også...
             //Hvis du ikke kender til extention methods så google det lige, de er guld vær :)
@@ -69,7 +70,7 @@ namespace GiveUp.Classes.Core
             double rotationToTarget = startPos.AngleRadian(target.Origin());
 
             //Ud fra rotationen laver vi en velecity som vores check bullet skal flyve med.
-            Vector2 bulletVelocity = new Vector2((float)Math.Cos(rotationToTarget), (float)Math.Sin(rotationToTarget));
+            Vector2 bulletVelocity = new Vector2((float)Math.Cos(rotationToTarget) * 10, (float)Math.Sin(rotationToTarget) * 10);
 
             //Mens at vores checkbullet ikke kollidere med target, får vi kuglen til at flyve
             while (bulletRectangle.Intersects(target) == false)
