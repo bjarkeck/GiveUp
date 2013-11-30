@@ -1,21 +1,21 @@
 ﻿GGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGG
 G----------------------------------------------------------G
 G----------------------------------------------------------G
-G-----------cGcGcGcGcGcGcGcGcGcGcGcGcGcGcGcGcGcGcG---------G
-G-----------cGcGcGcGcGcGcGcGcGcGcGcGcGcGcGcGcGcGcG---------G
-G-----------cGcGcGcGcGcGcGcGcGcGcGcGcGcGcGcGcGcGcG---------G
-G-----------cGcGcGcGcGcGcGcGcGcGcGcGcGcGcGcGcGcGcG---------G
-G-----------cGcGcGcGcGcGcGcGcGcGcGcGcGcGcGcGcGcGcG---------G
-G-----------cGcGcGcGcGcGcGcGcGcGcGcGcGcGcGcGcGcGcG---------G
-G-----------cGcGcGcGcGcGcGcGcGcGcGcGcGcGcGcGcGcGcG---------G
-G-----------cGcGcGcGcGcGcGcGcGcGcGcGcGcGcGcGcGcGcG---------G
-G-----------cGcGcGcGcGcGcGcGcGcGcGcGcGcGcGcGcGcGcG---------G
-G-----------cGcGcGcGcGcGcGcGcGcGcGcGcGcGcGcGcGcGcG---------G
-G-----------cGcGcGcGcGcGcGcGcGcGcGcGcGcGcGcGcGcGcG---------G
-G-----------cGcGcGcGcGcGcGcGcGcGcGcGcGcGcGcGcGcGcG---------G
-G-----------cGcGcGcGcGcGcGcGcGcGcGcGcGcGcGcGcGcGcG---------G
-G-----------cGcGcGcGcGcGcGcGcGcGcGcGcGcGcGcGcGcGcG---------G
-G-----------cGcGcGcGcGcGcGcGcGcGcGcGcGcGcGcGcGcGcG---------G
+G--------------------										G
+G--------------------										G
+G--------------------										G
+G--------------------										G
+G--------------------										G
+G--------------------										G
+G--------------------										G
+G--------------------										G
+G--------------------										G
+G--------------------										G
+G--------------------										G
+G--------------------										G
+G--------------------										G
+G--------------------										G
+G--------------------										G
 G----------------------------------------------------------G
 G-------------GGGG-----------------------------------------G
 G--------------c-------------------------------------------G
@@ -23,12 +23,12 @@ G----------------------------------------------------------G
 G----------------------------------------------------------G
 G----------------------------------------------------------G
 G--------------c-------------------------------------------G
-G------------cGGGGc----------------------------------------G
-G---------G--cGGGGc----------------------------------------G
-G---------G--cGGGGc----------------------------------------G
-G---------G--cGGGGc----------------------------------------G
-G-----S---G--cGGGGc----------------------------------------G
-G------------cGGGGc---B--^^^^--B--^^^^--B--^^^^--------D---G
+G------------cGcGcG----------------------------------------G
+G---------G--cGcGcG----------------------------------------G
+G---------G--cGcGcG----------------------------------------G
+G---------G--cGcGcG----------------------------------------G
+G-----S---G--cGcGcG----------------------------------------G
+G------------cGcGcG---B--^^^^--B--^^^^--B--^^^^--------D---G
 GGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGG
 GGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGG
 GGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGG

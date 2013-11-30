@@ -67,22 +67,21 @@ namespace GiveUp.Classes.Core
             double rotationToTarget = startPos.AngleRadian(target.Origin());
 
             //Ud fra rotationen laver vi en velecity som vores check bullet skal flyve med.
-            Vector2 bulletVelocity = new Vector2((float)Math.Cos(rotationToTarget), (float)Math.Sin(rotationToTarget));
+            Vector2 bulletVelocity = new Vector2((float)Math.Cos(rotationToTarget) * 10, (float)Math.Sin(rotationToTarget) * 10);
 
             //Mens at vores checkbullet ikke kollidere med target, får vi kuglen til at flyve
             while (bulletRectangle.Intersects(target) == false)
             {
+                //Hvis kuglen intersekter med nogle tiles, så retuner false.
                 foreach (var item in tiles)
-            {
+                {
                     if (bulletRectangle.Intersects(item))
                         return false;
                 }
-                //hvis kuglen intersekter med nogle tiles, så retuner false.
-
+                
                 bulletPosition += bulletVelocity;
                 bulletRectangle.X = (int)bulletPosition.X;
                 bulletRectangle.Y = (int)bulletPosition.Y;
-                //Tilføje kuglens velocity til kuglens position;
             }
 
             //Hvis den kom igennem loopet betyder det at kuglen har ramt spilleren, og så skal der retuneres true.

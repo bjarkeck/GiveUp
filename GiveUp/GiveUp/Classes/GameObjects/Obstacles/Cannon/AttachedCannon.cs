@@ -17,10 +17,12 @@ namespace GiveUp.Classes.GameObjects.Obstacles
         Texture2D texture;
         Texture2D cannonTexture;
         Rectangle rectangle { get; set; }
-        Vector2 cannonPosition;
+        public Vector2 cannonPosition;
         float minRotation = 1.3033f;
         float maxRotation = 4.96f;
         float cannonRotation = 10;
+
+        //CannonBullets instance = new CannonBullets();
 
         public override void Initialize(ContentManager content, Vector2 position)
         {
@@ -75,7 +77,7 @@ namespace GiveUp.Classes.GameObjects.Obstacles
 
         public override void Update(GameTime gameTime)
         {
-            if (GameLogic.IsLineOfSight(200, cannonPosition, Player.Rectangle))
+            if (GameLogic.IsLineOfSight(500, cannonPosition, Player.Rectangle))
             {
                 float rotation = (float)Math.Atan2(
                     Convert.ToDouble(cannonPosition.Y - (Player.Position.Y + Player.Texture.Origin().Y))
@@ -84,6 +86,8 @@ namespace GiveUp.Classes.GameObjects.Obstacles
                     ) + 3.1416f;
                 if (rotation < minRotation || rotation > maxRotation)
                     cannonRotation = rotation;
+
+                //instance.Shoot();
             }
 
             if (HandleCollision.PerPixesCollision(ref Player.Rectangle, rectangle, texture, ref Player.Velocity, ref Player.Position))
