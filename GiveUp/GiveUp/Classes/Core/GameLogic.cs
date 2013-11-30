@@ -38,7 +38,6 @@ namespace GiveUp.Classes.Core
             return (float)Math.Sqrt(Math.Pow(Math.Abs(startPos.Y - target.Y), 2) + Math.Pow(Math.Abs(startPos.X - target.X), 2));
         }
 
-
         /// <summary>
         /// Check line of sight.
         /// </summary>
@@ -53,8 +52,7 @@ namespace GiveUp.Classes.Core
             //Hvis du ikke kender til extention methods så google det lige, de er guld vær :)
             if (startPos.Distance(target.Origin()) > distance)
                 return false;
-
-            //Få alle tiles: Jep den linje er lang den linje.
+           
             List<Rectangle> tiles = ((GameScreen)(ScreenManager.Current.CurrentScreen))
                                         .LevelManager
                                         .GameObjects
@@ -76,7 +74,7 @@ namespace GiveUp.Classes.Core
             while (bulletRectangle.Intersects(target) == false)
             {
                 foreach (var item in tiles)
-                {
+            {
                     if (bulletRectangle.Intersects(item))
                         return false;
                 }
@@ -88,7 +86,7 @@ namespace GiveUp.Classes.Core
                 //Tilføje kuglens velocity til kuglens position;
             }
 
-            //Hvis den kom igennem loopet betyder det at kuglen har rampt spilleren, og så skal der retuneres true.
+            //Hvis den kom igennem loopet betyder det at kuglen har ramt spilleren, og så skal der retuneres true.
             return true;
         }
     }

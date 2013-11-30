@@ -98,11 +98,5 @@ namespace GiveUp.Classes.GameObjects.Obstacles
             spriteBatch.Draw(cannonTexture, cannonPosition, null, Color.White, cannonRotation, Vector2.Zero, 1, SpriteEffects.None, 1);
             spriteBatch.Draw(texture, Position, new Color(90, 150, 250));
         }
-
-        public void Shoot()
-        {
-
-        }
-
     }
 }
