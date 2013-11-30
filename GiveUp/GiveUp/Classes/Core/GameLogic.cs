@@ -46,18 +46,22 @@ namespace GiveUp.Classes.Core
         /// <param name="target">Fx Player.Rectangle</param>
         public static bool IsLineOfSight(float distance, Vector2 startPos, Rectangle target)
         {
+            //Check hvis afstandne mellem startPos og target er længere end distance. og retuner false hvis den er...
+            //Ligesom AngleRadian og AngleDegree, må du gerne lave en Distance Extention method ogs også...
+            //Hvis du ikke kender til extention methods så google det lige, de er guld vær :)
             if (startPos.Distance(target.Origin()) > distance)
                 return false;
-
+           
             List<Rectangle> tiles = ((GameScreen)(ScreenManager.Current.CurrentScreen))
                                         .LevelManager
                                         .GameObjects
                                         .Where(x => x.GetType().Name == "BoxTile")
                                         .Select(x => ((BoxTile)x).Rectangle).ToList();
 
-            //Vores fake bullet vi skyder afsted.
-            Vector2 bulletpPosition = new Vector2(startPos.X, startPos.Y);
-            Rectangle bulletRectangle = new Rectangle((int)startPos.X, (int)startPos.Y, 2, 2)
+            //Vores fake bullet vi skydder afsted.
+            Vector2 bulletPosition = new Vector2(startPos.X, startPos.Y);
+            Rectangle bulletRectangle = new Rectangle((int)startPos.X, (int)startPos.Y, 2, 2);
+
 
             //Få rotationen mellem startPos og target
             double rotationToTarget = startPos.AngleRadian(target.Origin());
@@ -68,9 +72,16 @@ namespace GiveUp.Classes.Core
             //Mens at vores checkbullet ikke kollidere med target, får vi kuglen til at flyve
             while (bulletRectangle.Intersects(target) == false)
             {
-                checkBullet.X += (int)bulletVelocity.X;
-                checkBullet.Y += (int)bulletVelocity.Y;
+                foreach (var item in tiles)
+            {
+                    if (bulletRectangle.Intersects(item))
+                        return false;
+                }
                 //hvis kuglen intersekter med nogle tiles, så retuner false.
+
+                bulletPosition += bulletVelocity;
+                bulletRectangle.X = (int)bulletPosition.X;
+                bulletRectangle.Y = (int)bulletPosition.Y;
                 //Tilføje kuglens velocity til kuglens position;
             }
 

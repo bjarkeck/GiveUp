@@ -4,24 +4,19 @@ using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
-using GiveUp.Classes.Screens;
-using GiveUp.Classes.LevelManager;
 
 namespace GiveUp.Classes.Core
 {
-    public class Actor : Sprite
+    public class SpriteAnimation : Sprite
     {
-        public Vector2 Velocity;
-        public float Acceleration;
-
-
         public virtual void Update(GameTime gameTime)
         {
-            Rectangle.X = (int)Position.X;
-            Rectangle.Y = (int)Position.Y;
+            
         }
 
-
-
+        public override void Draw(SpriteBatch spriteBatch)
+        {
+            base.Draw(spriteBatch);
+        }
     }
 }
