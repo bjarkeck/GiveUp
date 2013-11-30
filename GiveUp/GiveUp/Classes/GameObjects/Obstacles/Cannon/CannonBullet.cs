@@ -10,15 +10,15 @@ namespace GiveUp.Classes.GameObjects.Obstacles.Cannon
 {
     //CannonBullets skal være i ental (CannonBullet) da en klasse representere 1 bullet
                           //wtf?^^ væk med den
-    class CannonBullets : AttachedCannon
+    class CannonBullet : AttachedCannon
     {
         Texture2D texture { get; set; }
         Rectangle rectangle;
         
-        List<CannonBullets> cannonBullets = new List<CannonBullets>();
+        List<CannonBullet> cannonBullets = new List<CannonBullet>();
 
         //en velocity har x og y - velocitty skal være vector2
-        float velocity = 10;
+        Vector2 velocity;
 
         //is visivle? Enten findes de eller også så findes de ikke :p
         bool isVisible = false;
@@ -49,9 +49,9 @@ namespace GiveUp.Classes.GameObjects.Obstacles.Cannon
 
         public void UpdateBullets()
         {
-            foreach (CannonBullets bullet in cannonBullets)
+            foreach (CannonBullet bullet in cannonBullets)
             {
-                //bullet.Position += bullet.velocity;
+                bullet.Position += bullet.velocity;
                 if (Vector2.Distance(bullet.Position, Player.Position) > 1000)
                 {
                     bullet.isVisible = false;
@@ -70,7 +70,7 @@ namespace GiveUp.Classes.GameObjects.Obstacles.Cannon
         //Well som sagt, det er et skud.. så bare fjerne den her metode.
         public void Shoot()
         {
-            CannonBullets newBullet = new CannonBullets();
+            CannonBullet newBullet = new CannonBullet();
             newBullet.Position = cannonPosition;
             newBullet.isVisible = true;
         }
@@ -79,7 +79,7 @@ namespace GiveUp.Classes.GameObjects.Obstacles.Cannon
         public override void Draw(SpriteBatch spriteBatch)
         {
             spriteBatch.Begin();
-            foreach (CannonBullets bullet in cannonBullets)
+            foreach (CannonBullet bullet in cannonBullets)
                 bullet.Draw(spriteBatch);
             spriteBatch.End();
         }

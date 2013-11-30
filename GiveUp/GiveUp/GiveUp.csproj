@@ -51,7 +51,7 @@
     <Compile Include="Classes\Db\TileData.cs" />
     <Compile Include="Classes\GameObjects\Finish.cs" />
     <Compile Include="Classes\GameObjects\Obstacles\Cannon\AttachedCannon.cs" />
-    <Compile Include="Classes\GameObjects\Obstacles\Cannon\CannonBullets.cs" />
+    <Compile Include="Classes\GameObjects\Obstacles\Cannon\CannonBullet.cs" />
     <Compile Include="Classes\GameObjects\Obstacles\ReverseControls.cs" />
     <Compile Include="Classes\GameObjects\Obstacles\Sawblade.cs" />
     <Compile Include="Classes\GameObjects\Obstacles\Spike.cs" />
