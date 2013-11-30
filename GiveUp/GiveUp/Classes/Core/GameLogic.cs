@@ -46,6 +46,7 @@ namespace GiveUp.Classes.Core
         /// <param name="target">Fx Player.Rectangle</param>
         public static bool IsLineOfSight(float distance, Vector2 startPos, Rectangle target)
         {
+
             //Check hvis afstandne mellem startPos og target er længere end distance. og retuner false hvis den er...
             //Ligesom AngleRadian og AngleDegree, må du gerne lave en Distance Extention method ogs også...
             //Hvis du ikke kender til extention methods så google det lige, de er guld vær :)
@@ -74,11 +75,11 @@ namespace GiveUp.Classes.Core
             {
                 //Hvis kuglen intersekter med nogle tiles, så retuner false.
                 foreach (var item in tiles)
-                {
+            {
                     if (bulletRectangle.Intersects(item))
                         return false;
                 }
-                
+
                 bulletPosition += bulletVelocity;
                 bulletRectangle.X = (int)bulletPosition.X;
                 bulletRectangle.Y = (int)bulletPosition.Y;

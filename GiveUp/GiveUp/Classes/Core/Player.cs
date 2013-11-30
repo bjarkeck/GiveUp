@@ -9,21 +9,24 @@ using System.Text;
 
 namespace GiveUp.Classes.Core
 {
-    public class Player : Actor
+    public class Player
     {
+
+        public Vector2 Position = Vector2.Zero;
+        public Vector2 Velocity;
+        public float Acceleration;
+        public Rectangle Rectangle;
 
         public bool CanJump = true;
         public bool CanDoubleJump = false;
         public float StartJumpSpeed;
-        public Vector2 PreviousPosition = Vector2.Zero;
 
-        /// <summary>
-        /// Must be called in up date allways!
-        /// </summary>
         public float Gravity;
         public float MaxSpeed;
         public float Friction;
         public InputHelper InputHelper = new InputHelper();
+
+        SpriteAnimation animation;
 
         public Player()
         {
@@ -37,15 +40,22 @@ namespace GiveUp.Classes.Core
 
         public void LoadContent(ContentManager content)
         {
-            this.Texture = content.Load<Texture2D>("Images/Player/player");
+            animation = new SpriteAnimation(content.Load<Texture2D>("Images/Player/playerAnimation"), Position, 23, 30, 50);
+            animation.AddRow("stand", 0, 1);
+            animation.AddRow("run", 1, 8);
+        }
+        public void Draw(SpriteBatch spriteBatch)
+        {
+            animation.Draw(spriteBatch);
         }
 
-        public override void Update(GameTime gameTime)
+        public void Update(GameTime gameTime)
         {
+            animation.AnimationSpeed = 200 - Math.Abs(Velocity.X*30);
             InputHelper.Update();
             Movement(gameTime);
-
-            base.Update(gameTime);
+            animation.Update(gameTime, Position);
+            Rectangle = animation.Rectangle;
         }
 
         public void Die()
@@ -87,9 +97,22 @@ namespace GiveUp.Classes.Core
 
             Velocity.X = MathHelper.Clamp(Velocity.X, MaxSpeed * -1, MaxSpeed);
 
-            PreviousPosition = new Vector2(Position.X, Position.Y);
-
             this.Position += this.Velocity;
+
+            if (Velocity.X > 0)
+                animation.FlipImage = false;
+            else if (Velocity.X < 0)
+                animation.FlipImage = true;
+
+            if (Velocity.X == 0)
+            {
+                animation.PlayAnimation("stand");
+            }
+            else
+            {
+                animation.PlayAnimation("run");
+            }
+
         }
     }
 }

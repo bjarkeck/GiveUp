@@ -31,11 +31,14 @@ namespace GiveUp.Classes.GameObjects.Obstacles
             var boxTile = LevelManager.GameObjects.Where(x => x.GetType().Name == "BoxTile").Select(x => ((BoxTile)x).Position);
             cannonTexture = content.Load<Texture2D>("Images/Obstacles/AttachedCannon/AttatchedCannonCannon");
 
-            if (boxTile.Any(x => x.X == position.X - 32 && x.Y == position.Y))
+            if (boxTile.Any(x => x.X == position.X && x.Y == position.Y + 32))
             {
-                texture = content.Load<Texture2D>("Images/Obstacles/AttachedCannon/AttatchedCannonBodyR");
-                cannonPosition = new Vector2(position.X + 4, position.Y + 15);
+                texture = content.Load<Texture2D>("Images/Obstacles/AttachedCannon/AttatchedCannonBodyT");
+                position.Y += 32 - texture.Height;
 
+                cannonPosition = new Vector2(position.X + 16, position.Y + 7);
+                maxRotation -= 1.5707f;
+                minRotation -= 1.5707f;
             }
             else if (boxTile.Any(x => x.X == position.X && x.Y == position.Y - 32))
             {
@@ -44,14 +47,11 @@ namespace GiveUp.Classes.GameObjects.Obstacles
                 maxRotation += 1.5707f;
                 minRotation += 1.5707f;
             }
-            else if (boxTile.Any(x => x.X == position.X && x.Y == position.Y + 32))
+            else if (boxTile.Any(x => x.X == position.X - 32 && x.Y == position.Y))
             {
-                texture = content.Load<Texture2D>("Images/Obstacles/AttachedCannon/AttatchedCannonBodyT");
-                position.Y += 32 - texture.Height;
+                texture = content.Load<Texture2D>("Images/Obstacles/AttachedCannon/AttatchedCannonBodyR");
+                cannonPosition = new Vector2(position.X + 4, position.Y + 15);
 
-                cannonPosition = new Vector2(position.X + 16, position.Y + 7);
-                maxRotation -= 1.5707f;
-                minRotation -= 1.5707f;
             }
             else if (boxTile.Any(x => x.X == position.X + 32 && x.Y == position.Y))
             {
@@ -77,12 +77,12 @@ namespace GiveUp.Classes.GameObjects.Obstacles
 
         public override void Update(GameTime gameTime)
         {
-            if (GameLogic.IsLineOfSight(500, cannonPosition, Player.Rectangle))
+            if (GameLogic.IsLineOfSight(10200, cannonPosition, Player.Rectangle))
             {
                 float rotation = (float)Math.Atan2(
-                    Convert.ToDouble(cannonPosition.Y - (Player.Position.Y + Player.Texture.Origin().Y))
+                    Convert.ToDouble(cannonPosition.Y - (Player.Rectangle.Origin().Y))
                     ,
-                    Convert.ToDouble(cannonPosition.X - (Player.Position.X + Player.Texture.Origin().X))
+                    Convert.ToDouble(cannonPosition.X - (Player.Rectangle.Origin().X))
                     ) + 3.1416f;
                 if (rotation < minRotation || rotation > maxRotation)
                     cannonRotation = rotation;
