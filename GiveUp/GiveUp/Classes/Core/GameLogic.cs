@@ -1,4 +1,5 @@
 ﻿using GiveUp.Classes.Core;
+using GiveUp.Classes.GameObjects.Tiles;
 using GiveUp.Classes.LevelManager;
 using GiveUp.Classes.Screens;
 using Microsoft.Xna.Framework;
@@ -17,6 +18,10 @@ namespace GiveUp.Classes.Core
         {
             return new Vector2(texture.Width / 2, texture.Height / 2);
         }
+        public static Vector2 Origin(this Rectangle rect)
+        {
+            return new Vector2(rect.Width / 2 + rect.X, rect.Height / 2 + rect.Y);
+        }
 
         public static double AngleDegree(this Vector2 startPos, Vector2 target)
         {
@@ -27,18 +32,50 @@ namespace GiveUp.Classes.Core
         {
             return Math.Atan2(target.Y - startPos.Y, target.X - startPos.X);
         }
-        
-        public static bool IsLOS(float AngleDistance, float PositionDistance, Vector2 startPos, Vector2 target, float AngleB)
+
+
+
+        /// <summary>
+        /// Check line of sight.
+        /// </summary>
+        /// <param name="distance">Sight range</param>
+        /// <param name="startPos"></param>
+        /// <param name="target">Fx Player.Rectangle</param>
+        public static bool IsLineOfSight(float distance, Vector2 startPos, Rectangle target)
         {
-            float AngleBetween = (float)AngleDegree(startPos, target);
-            
-            if ((AngleBetween <= (AngleB + (AngleDistance / 2f / 100f))) && (AngleB >= (AngleB - (AngleDistance / 2f / 100f))) && (Vector2.Distance(startPos, target) <= PositionDistance))
+            //Check hvis afstandne mellem startPos og target er længere end distance. og retuner false hvis den er...
+                //Ligesom AngleRadian og AngleDegree, må du gerne lave en Distance Extention method ogs også...
+                //Hvis du ikke kender til extention methods så google det lige, de er guld vær :)
+           
+            //Få alle tiles: Jep den linje er lang den linje.
+            List<Rectangle> tiles = ((GameScreen)(ScreenManager.Current.CurrentScreen))
+                                        .LevelManager
+                                        .GameObjects
+                                        .Where(x => x.GetType().Name == "BoxTile")
+                                        .Select(x => ((BoxTile)x).Rectangle).ToList();
+
+            //Vores fake bullet vi skydder afsted.
+            Rectangle checkBullet = new Rectangle((int)startPos.X - 1, (int)startPos.Y - 1, 2, 2);
+
+            //Få rotationen mellem startPos og target
+            double rotationToTarget = startPos.AngleRadian(target.Origin());
+
+            //Ud fra rotationen laver vi en velecity som vores check bullet skal flyve med.
+            Vector2 bulletVelocity = new Vector2((float)Math.Cos(rotationToTarget), (float)Math.Sin(rotationToTarget));
+
+            //Mens at vores checkbullet ikke kollidere med target, får vi kuglen til at flyve
+            while (checkBullet.Intersects(target) == false)
             {
-                return true;
+                //hvis kuglen intersekter med nogle tiles, så retuner false.
+
+                //Tilføje kuglens velocity til kuglens position;
             }
-            else return false;
+
+            //Hvis den kom igennem loopet betyder det at kuglen har rampt spilleren, og så skal der retuneres true.
+            return true;
 
         }
     }
 }
+
 

@@ -15,6 +15,7 @@ namespace GiveUp.Classes.Screens
     {
         public LevelManagerr LevelManager;
         Player player;
+        SpriteFont font;
 
         public GameScreen()
         {
@@ -26,6 +27,7 @@ namespace GiveUp.Classes.Screens
         {
             LevelManager.StartLevel(1, 1);
             player.LoadContent(Content);
+            font = Content.Load<SpriteFont>("Fonts/font");
         }
 
         public override void Update(GameTime gameTime)
@@ -34,11 +36,12 @@ namespace GiveUp.Classes.Screens
             LevelManager.Update(gameTime);
         }
 
-
         public override void Draw(SpriteBatch spriteBatch)
         {
             LevelManager.Draw(spriteBatch);
             player.Draw(spriteBatch);
+            spriteBatch.DrawString(font, "test", new Vector2(200, 200), Color.Black);
         }
+
     }
 }
