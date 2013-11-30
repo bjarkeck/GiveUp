@@ -23,7 +23,6 @@ namespace GiveUp.Classes.Core
         public float Gravity;
         public float MaxSpeed;
         public float Friction;
-        public float Angle = 10f;
         public InputHelper InputHelper = new InputHelper();
 
         public Player()
@@ -45,7 +44,7 @@ namespace GiveUp.Classes.Core
         {
             InputHelper.Update();
             Movement(gameTime);
-            
+
             base.Update(gameTime);
         }
 

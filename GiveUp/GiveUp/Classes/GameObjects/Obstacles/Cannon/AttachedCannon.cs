@@ -22,11 +22,10 @@ namespace GiveUp.Classes.GameObjects.Obstacles
         float maxRotation = 4.96f;
         float cannonRotation = 10;
 
-        List<CannonBullets> cannonBullets = new List<CannonBullets>();
-
         public override void Initialize(ContentManager content, Vector2 position)
         {
 
+            List<Rectangle> boxTilesboxTiles = LevelManager.GameObjects.Where(x => x.GetType().Name == "BoxTile").Select(x => ((BoxTile)x).Rectangle).ToList();
             var boxTile = LevelManager.GameObjects.Where(x => x.GetType().Name == "BoxTile").Select(x => ((BoxTile)x).Position);
             cannonTexture = content.Load<Texture2D>("Images/Obstacles/AttachedCannon/AttatchedCannonCannon");
 
@@ -76,36 +75,17 @@ namespace GiveUp.Classes.GameObjects.Obstacles
 
         public override void Update(GameTime gameTime)
         {
-            if (GameLogic.IsLOS(90, 200, cannonPosition, Player.Position, Player.Angle))
+            if (GameLogic.IsLineOfSight(200, cannonPosition, Player.Rectangle))
             {
                 float rotation = (float)Math.Atan2(
                     Convert.ToDouble(cannonPosition.Y - (Player.Position.Y + Player.Texture.Origin().Y))
                     ,
                     Convert.ToDouble(cannonPosition.X - (Player.Position.X + Player.Texture.Origin().X))
                     ) + 3.1416f;
-
-
                 if (rotation < minRotation || rotation > maxRotation)
                     cannonRotation = rotation;
-
-                foreach (CannonBullets bullet in cannonBullets)
-                {
-                    bullet.Position += bullet.velocity;
-                    if (Vector2.Distance(bullet.Position, Player.Position) > 100)
-                    {
-                        bullet.isVisible = false;
-                    }
-                }
-                for (int i = 0; i < cannonBullets.Count; i++)
-                {
-                    if (!cannonBullets[i].isVisible)
-                    {
-                        cannonBullets.RemoveAt(i);
-                        i--;
-                    }
-                }
             }
-            
+
             if (HandleCollision.PerPixesCollision(ref Player.Rectangle, rectangle, texture, ref Player.Velocity, ref Player.Position))
             {
                 Player.CanJump = true;
@@ -116,13 +96,7 @@ namespace GiveUp.Classes.GameObjects.Obstacles
         {
 
             spriteBatch.Draw(cannonTexture, cannonPosition, null, Color.White, cannonRotation, Vector2.Zero, 1, SpriteEffects.None, 1);
-            spriteBatch.Draw(texture, Position, new Color(90,150,250));
+            spriteBatch.Draw(texture, Position, new Color(90, 150, 250));
         }
-
-        public void Shoot()
-        {
-            
-        }
-
     }
 }

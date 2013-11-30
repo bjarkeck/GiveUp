@@ -9,6 +9,7 @@ using System.Text;
 
 public interface IGameObject
 {
+
     Player Player { get; set; }
 
     void Initialize(ContentManager content, Vector2 position);
@@ -18,4 +19,5 @@ public interface IGameObject
     void Update(GameTime gameTime);
 
     void Draw(SpriteBatch spriteBatch);
+
 }

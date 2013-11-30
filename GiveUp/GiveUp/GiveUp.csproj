@@ -39,6 +39,7 @@
     <Compile Include="Classes\Core\AnimationSprite.cs" />
     <Compile Include="Classes\Core\BaseScreen.cs" />
     <Compile Include="Classes\Core\Direction.cs" />
+    <Compile Include="Classes\Core\SpriteAnimation.cs" />
     <Compile Include="Classes\GameObjects\Obstacles\Drag.cs" />
     <Compile Include="Classes\Core\GameLogic.cs" />
     <Compile Include="Classes\Core\GameObject.cs" />
@@ -117,10 +118,13 @@
     <Content Include="Content\Images\Obstacles\AttachedCannon\AttatchedCannonCannon.png">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Content>
-    <Content Include="Content\Images\Obstacles\AttachedCannon\bullet.png" />
+    <Content Include="Content\Images\Obstacles\AttachedCannon\bullet.png">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
     <Content Include="Content\Images\Obstacles\sawblade.png">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Content>
+    <Content Include="Content\Images\Player\playerAnimation.png" />
     <Content Include="Content\Images\Player\player.png">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Content>
@@ -163,6 +167,9 @@
   </ItemGroup>
   <ItemGroup>
     <None Include="App.config" />
+    <None Include="Content\Fonts\font.xnb">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </None>
     <None Include="packages.config" />
   </ItemGroup>
   <ItemGroup>
