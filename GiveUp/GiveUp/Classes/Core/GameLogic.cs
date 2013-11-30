@@ -33,6 +33,10 @@ namespace GiveUp.Classes.Core
             return Math.Atan2(target.Y - startPos.Y, target.X - startPos.X);
         }
 
+        public static float Distance(this Vector2 startPos, Vector2 target)
+        {
+            return (float)Math.Sqrt(Math.Pow(Math.Abs(startPos.Y - target.Y), 2) + Math.Pow(Math.Abs(startPos.X - target.X), 2));
+        }
 
 
         /// <summary>
@@ -44,9 +48,11 @@ namespace GiveUp.Classes.Core
         public static bool IsLineOfSight(float distance, Vector2 startPos, Rectangle target)
         {
             //Check hvis afstandne mellem startPos og target er længere end distance. og retuner false hvis den er...
-                //Ligesom AngleRadian og AngleDegree, må du gerne lave en Distance Extention method ogs også...
-                //Hvis du ikke kender til extention methods så google det lige, de er guld vær :)
-           
+            //Ligesom AngleRadian og AngleDegree, må du gerne lave en Distance Extention method ogs også...
+            //Hvis du ikke kender til extention methods så google det lige, de er guld vær :)
+            if (startPos.Distance(target.Origin()) > distance)
+                return false;
+
             //Få alle tiles: Jep den linje er lang den linje.
             List<Rectangle> tiles = ((GameScreen)(ScreenManager.Current.CurrentScreen))
                                         .LevelManager
@@ -55,7 +61,9 @@ namespace GiveUp.Classes.Core
                                         .Select(x => ((BoxTile)x).Rectangle).ToList();
 
             //Vores fake bullet vi skydder afsted.
-            Rectangle checkBullet = new Rectangle((int)startPos.X - 1, (int)startPos.Y - 1, 2, 2);
+            Vector2 bulletPosition = new Vector2(startPos.X, startPos.Y);
+            Rectangle bulletRectangle = new Rectangle((int)startPos.X, (int)startPos.Y, 2, 2);
+
 
             //Få rotationen mellem startPos og target
             double rotationToTarget = startPos.AngleRadian(target.Origin());
@@ -64,16 +72,23 @@ namespace GiveUp.Classes.Core
             Vector2 bulletVelocity = new Vector2((float)Math.Cos(rotationToTarget), (float)Math.Sin(rotationToTarget));
 
             //Mens at vores checkbullet ikke kollidere med target, får vi kuglen til at flyve
-            while (checkBullet.Intersects(target) == false)
+            while (bulletRectangle.Intersects(target) == false)
             {
+                foreach (var item in tiles)
+                {
+                    if (bulletRectangle.Intersects(item))
+                        return false;
+                }
                 //hvis kuglen intersekter med nogle tiles, så retuner false.
 
+                bulletPosition += bulletVelocity;
+                bulletRectangle.X = (int)bulletPosition.X;
+                bulletRectangle.Y = (int)bulletPosition.Y;
                 //Tilføje kuglens velocity til kuglens position;
             }
 
             //Hvis den kom igennem loopet betyder det at kuglen har rampt spilleren, og så skal der retuneres true.
             return true;
-
         }
     }
 }
