@@ -22,21 +22,39 @@ namespace GiveUp.Classes.GameObjects.Tiles
         {
             this.Position = position;
             this.texture = content.Load<Texture2D>("Images/Tiles/ground");
-            this.Rectangle = new Rectangle((int)position.X,(int)position.Y,texture.Width,texture.Height);
+            this.Rectangle = new Rectangle((int)position.X, (int)position.Y, texture.Width, texture.Height);
         }
 
         public override void CollisionLogic()
         {
             if (HandleCollision.IsOnTopOf(ref Player.Rectangle, Rectangle, ref Player.Velocity, ref Player.Position))
                 Player.CanJump = true;
-            HandleCollision.IsRightOf(ref Player.Rectangle, Rectangle, ref Player.Velocity, ref Player.Position);
-            HandleCollision.IsLeftOf(ref Player.Rectangle, Rectangle, ref Player.Velocity, ref Player.Position);
+            if (HandleCollision.IsRightOf(ref Player.Rectangle, Rectangle, ref Player.Velocity, ref Player.Position))
+            {
+                if (Player.Velocity.Y > 0.1f)
+                {
+                    Player.Velocity.Y = Player.Velocity.Y / 2;
+                    Player.Animation.PlayAnimation("slide");
+                    Player.CanJump = true;
+                    Player.CanDoubleJump = false;
+                }
+            }
+            if (HandleCollision.IsLeftOf(ref Player.Rectangle, Rectangle, ref Player.Velocity, ref Player.Position))
+            {
+                if (Player.Velocity.Y > 0.1f)
+                {
+                    Player.Animation.PlayAnimation("slide");
+                    Player.Velocity.Y = Player.Velocity.Y / 2;
+                    Player.CanJump = true;
+                    Player.CanDoubleJump = false;
+                }
+            }
             HandleCollision.IsBelowOf(ref Player.Rectangle, Rectangle, ref Player.Velocity, ref Player.Position);
         }
 
         public override void Draw(SpriteBatch spriteBatch)
         {
-            spriteBatch.Draw(texture, Rectangle, Color.White);
+            spriteBatch.Draw(texture, Rectangle, Color.Gray);
         }
 
 

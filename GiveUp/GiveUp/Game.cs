@@ -28,9 +28,9 @@ namespace GiveUp
         {
             graphics = new GraphicsDeviceManager(this);
             Content.RootDirectory = "Content";
-            graphics.IsFullScreen = false;
-            graphics.PreferredBackBufferHeight = 960;
-            graphics.PreferredBackBufferWidth = 1280;
+            graphics.IsFullScreen = true;
+            //graphics.PreferredBackBufferHeight = 960;
+            //graphics.PreferredBackBufferWidth = 1280;
             //graphics.PreferredBackBufferHeight = 860;
             //graphics.ApplyChanges();
         }
