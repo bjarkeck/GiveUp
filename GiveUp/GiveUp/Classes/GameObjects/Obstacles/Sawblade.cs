@@ -32,8 +32,6 @@ namespace GiveUp.Classes.GameObjects.Obstacles
             Rectangle = new Rectangle((int)Position.X, (int)Position.Y, texture.Width, texture.Height);
         }
 
-       
-
         public void Movement()
         {
             if (Position.X < leftBounderie)

@@ -73,17 +73,16 @@ namespace GiveUp.Classes.Core
             //Mens at vores checkbullet ikke kollidere med target, får vi kuglen til at flyve
             while (bulletRectangle.Intersects(target) == false)
             {
+                //Hvis kuglen intersekter med nogle tiles, så retuner false.
                 foreach (var item in tiles)
             {
                     if (bulletRectangle.Intersects(item))
                         return false;
                 }
-                //hvis kuglen intersekter med nogle tiles, så retuner false.
 
                 bulletPosition += bulletVelocity;
                 bulletRectangle.X = (int)bulletPosition.X;
                 bulletRectangle.Y = (int)bulletPosition.Y;
-                //Tilføje kuglens velocity til kuglens position;
             }
 
             //Hvis den kom igennem loopet betyder det at kuglen har ramt spilleren, og så skal der retuneres true.

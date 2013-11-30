@@ -8,16 +8,14 @@ using System.Text;
 
 namespace GiveUp.Classes.GameObjects.Obstacles.Cannon
 {
-    class CannonBullets : GameObject, IGameObject
+    class CannonBullets : AttachedCannon
     {
         Texture2D texture { get; set; }
-        public Rectangle rectangle;
+        Rectangle rectangle;
         
         List<CannonBullets> cannonBullets = new List<CannonBullets>();
-        int speed = 10;
-        public Vector2 velocity;
-
-        public bool isVisible = false;
+        float velocity = 10;
+        bool isVisible = false;
 
         public override void Initialize(ContentManager content, Vector2 position)
         {
@@ -27,10 +25,10 @@ namespace GiveUp.Classes.GameObjects.Obstacles.Cannon
 
         public override void Update(GameTime gameTime)
         {
-            /*foreach (CannonBullets bullet in cannonBullets)
+            foreach (CannonBullets bullet in cannonBullets)
             {
-                bullet.Position += bullet.velocity;
-                if (Vector2.Distance(bullet.Position, Player.Position) > 100)
+                //bullet.position += bullet.velocity;
+                if (Vector2.Distance(bullet.Position, Player.Position) > 1000)
                 {
                     bullet.isVisible = false;
                 }
@@ -42,17 +40,20 @@ namespace GiveUp.Classes.GameObjects.Obstacles.Cannon
                     cannonBullets.RemoveAt(i);
                     i--;
                 }
-            }*/
+            }
         }
 
         public void Shoot()
         {
-            speed = 10;
+            CannonBullets newBullet = new CannonBullets();
+            newBullet.Position = cannonPosition;
+            newBullet.isVisible = true;
         }
 
         public override void Draw(SpriteBatch spriteBatch)
         {
-            spriteBatch.Draw(texture, Position, Color.White);
+            foreach (CannonBullets bullet in cannonBullets)
+                bullet.Draw(spriteBatch);
         }
     }
 }
