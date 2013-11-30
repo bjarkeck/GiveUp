@@ -8,7 +8,7 @@ using System.Text;
 
 namespace GiveUp.Classes.GameObjects.Obstacles.Cannon
 {
-    class CannonBullets : AttachedCannon
+    class CannonBullets : GameObject, IGameObject
     {
         Texture2D texture { get; set; }
         Rectangle rectangle;
@@ -25,9 +25,15 @@ namespace GiveUp.Classes.GameObjects.Obstacles.Cannon
 
         public override void Update(GameTime gameTime)
         {
+            UpdateBullets();
+            base.Update(gameTime);
+        }
+
+        public void UpdateBullets()
+        {
             foreach (CannonBullets bullet in cannonBullets)
             {
-                //bullet.position += bullet.velocity;
+                //bullet.Position += bullet.velocity;
                 if (Vector2.Distance(bullet.Position, Player.Position) > 1000)
                 {
                     bullet.isVisible = false;
@@ -52,8 +58,12 @@ namespace GiveUp.Classes.GameObjects.Obstacles.Cannon
 
         public override void Draw(SpriteBatch spriteBatch)
         {
+            spriteBatch.Begin();
             foreach (CannonBullets bullet in cannonBullets)
                 bullet.Draw(spriteBatch);
+            spriteBatch.End();
         }
+
+        public Vector2 cannonPosition { get; set; }
     }
 }

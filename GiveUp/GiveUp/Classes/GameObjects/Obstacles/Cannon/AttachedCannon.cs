@@ -22,7 +22,7 @@ namespace GiveUp.Classes.GameObjects.Obstacles
         float maxRotation = 4.96f;
         float cannonRotation = 10;
 
-        //CannonBullets instance = new CannonBullets();
+        CannonBullets instance = new CannonBullets();
 
         public override void Initialize(ContentManager content, Vector2 position)
         {
@@ -87,7 +87,7 @@ namespace GiveUp.Classes.GameObjects.Obstacles
                 if (rotation < minRotation || rotation > maxRotation)
                     cannonRotation = rotation;
 
-                //instance.Shoot();
+                instance.Shoot();
             }
 
             if (HandleCollision.PerPixesCollision(ref Player.Rectangle, rectangle, texture, ref Player.Velocity, ref Player.Position))
