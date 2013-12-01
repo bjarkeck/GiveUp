@@ -23,6 +23,7 @@ namespace GiveUp.Classes.GameObjects.Obstacles
         float maxRotation = 4.96f;
         float cannonRotation = 10;
 
+        //Da dette er en liste skal den navngivest i flertal... fx "bullets"
         List<CannonBullet> newBullet = new List<CannonBullet>();
         bool isVisible;
         
@@ -95,9 +96,14 @@ namespace GiveUp.Classes.GameObjects.Obstacles
                 if (rotation < minRotation || rotation > maxRotation)
                     cannonRotation = rotation;
 
+                //Den skal ikke ligge inde i line of sight if-setningen.. Her skal vi bare oprette en new bullet. fx:
+                //newBullet.Add(new CannonBullet(bulletTexture, Position, rotation, 10));
+                //og igen, en liste af bullet skal ikke kaldes for newBullet... xD
+
+                //Og denne foreach sætning, skal opdatere alle bullets, og den skal ligge uden for ifsætningen
                 foreach (CannonBullet bullet in newBullet)
                 {
-                    //Do something
+                    //Do something - and that something is update the bullets.
                 }
             }
 
@@ -112,9 +118,11 @@ namespace GiveUp.Classes.GameObjects.Obstacles
 
             spriteBatch.Draw(cannonTexture, cannonPosition, null, Color.White, cannonRotation, Vector2.Zero, 1, SpriteEffects.None, 1);
             spriteBatch.Draw(texture, Position, new Color(90, 150, 250));
-            //foreach (CannonBullet bullet in newBullet)
-            //{
-                spriteBatch.Draw(bulletTexture, new Vector2(200, 200), Color.White);
+
+
+            foreach (CannonBullet bullet in newBullet)
+            {
+                spriteBatch.Draw(bulletTexture, cannonPosition, Color.White);
                 isVisible = true;
             //}        
         }
