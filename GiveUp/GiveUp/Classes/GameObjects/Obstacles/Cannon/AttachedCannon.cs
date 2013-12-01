@@ -112,11 +112,11 @@ namespace GiveUp.Classes.GameObjects.Obstacles
 
             spriteBatch.Draw(cannonTexture, cannonPosition, null, Color.White, cannonRotation, Vector2.Zero, 1, SpriteEffects.None, 1);
             spriteBatch.Draw(texture, Position, new Color(90, 150, 250));
-            foreach (CannonBullet bullet in newBullet)
-            {
-                spriteBatch.Draw(bulletTexture, cannonPosition, Color.White);
+            //foreach (CannonBullet bullet in newBullet)
+            //{
+                spriteBatch.Draw(bulletTexture, new Vector2(200, 200), Color.White);
                 isVisible = true;
-            }        
+            //}        
         }
     }
 }
