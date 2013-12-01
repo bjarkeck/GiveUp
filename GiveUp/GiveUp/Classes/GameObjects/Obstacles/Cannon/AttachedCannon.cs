@@ -15,12 +15,17 @@ namespace GiveUp.Classes.GameObjects.Obstacles
     {
         public const char TileChar = 'c';
         Texture2D texture;
+        Texture2D bulletTexture;
         Texture2D cannonTexture;
         Rectangle rectangle { get; set; }
         public Vector2 cannonPosition;
         float minRotation = 1.3033f;
         float maxRotation = 4.96f;
         float cannonRotation = 10;
+
+        List<CannonBullet> newBullet = new List<CannonBullet>();
+        bool isVisible;
+        
 
         public override void Initialize(ContentManager content, Vector2 position)
         {
@@ -72,6 +77,11 @@ namespace GiveUp.Classes.GameObjects.Obstacles
             this.rectangle = new Rectangle((int)position.X, (int)position.Y, texture.Width, texture.Height);
         }
 
+        public void LoadContent(ContentManager content, Vector2 position)
+        {
+            bulletTexture = content.Load<Texture2D>("Image/Obstacles/AttachedCannon/bullet");
+            position = cannonPosition;
+        }
 
         public override void Update(GameTime gameTime)
         {
@@ -84,6 +94,11 @@ namespace GiveUp.Classes.GameObjects.Obstacles
                     ) + 3.1416f;
                 if (rotation < minRotation || rotation > maxRotation)
                     cannonRotation = rotation;
+
+                foreach (CannonBullet bullet in newBullet)
+                {
+                    //Do something
+                }
             }
 
             if (HandleCollision.PerPixesCollision(ref Player.Rectangle, rectangle, texture, ref Player.Velocity, ref Player.Position))
@@ -97,6 +112,11 @@ namespace GiveUp.Classes.GameObjects.Obstacles
 
             spriteBatch.Draw(cannonTexture, cannonPosition, null, Color.White, cannonRotation, Vector2.Zero, 1, SpriteEffects.None, 1);
             spriteBatch.Draw(texture, Position, new Color(90, 150, 250));
+            foreach (CannonBullet bullet in newBullet)
+            {
+                spriteBatch.Draw(bulletTexture, cannonPosition, Color.White);
+                isVisible = true;
+            }        
         }
     }
 }
