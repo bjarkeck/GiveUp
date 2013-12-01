@@ -8,11 +8,15 @@ using System.Text;
 
 namespace GiveUp.Classes.GameObjects.Obstacles.Cannon
 {
+                         //Nope, den skal ikke nedarve fra noget, alt den har behov for den foræret af AttachedCannon.
     class CannonBullet : GameObject, IGameObject
     {
+        //yeah
         Texture2D texture;
+        //yeah
         Vector2 velocity;
 
+        //yeah
         public CannonBullet(Texture2D texture, Vector2 startPosition, float shootAngle, float bulletSpeed)
         {
             this.texture = texture;
@@ -20,21 +24,22 @@ namespace GiveUp.Classes.GameObjects.Obstacles.Cannon
             this.velocity = new Vector2((float)Math.Cos(shootAngle) * bulletSpeed, (float)Math.Sin(shootAngle) * bulletSpeed);
         }
 
-        //Sidden dette representere 1 bullet, er det enste der skal ske her, er at opdatere kuglens position.
-        //Om den har ramt muren eller ej... vent med det. start med at få den til at skyde.
+        //Så dvs. at Update ikke skal overides, men bare være en normal metode..
         public override void Update(GameTime gameTime)
         {
+            //Og så er der ikke nogen base.Update at kalde, så den linje skal bare slettes.
             base.Update(gameTime);
+
+
+            //Her tilføjer du så velocitien til position som fx:
+            //this.position += velocity
         }
 
 
+        //yeah
         public override void Draw(SpriteBatch spriteBatch)
         {
             spriteBatch.Draw(texture, Position, Color.White);
         }
     }
 }
-
-//Tip:
-//ha en liste af denne class på attachedCannon
-//Og tilføj til listen når dne skal skyde. og husk at foreache igennem liste i både update og draw.
