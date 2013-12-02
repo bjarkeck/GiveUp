@@ -17,19 +17,19 @@ namespace GiveUp.Classes.GameObjects.Obstacles
         Texture2D texture;
         Texture2D bulletTexture;
         Texture2D cannonTexture;
+
         Rectangle rectangle { get; set; }
+
         public Vector2 cannonPosition;
         float minRotation = 1.3033f;
         float maxRotation = 4.96f;
         float cannonRotation = 10;
 
-        //Da dette er en liste skal den navngivest i flertal... fx "bullets"
-        List<CannonBullet> newBullet = new List<CannonBullet>();
-        bool isVisible;
-
-
+        List<CannonBullet> cannonBullets = new List<CannonBullet>();
+        
         public override void Initialize(ContentManager content, Vector2 position)
         {
+            bulletTexture = content.Load<Texture2D>("Images/Obstacles/AttachedCannon/bullet");
 
             List<Rectangle> boxTilesboxTiles = LevelManager.GameObjects.Where(x => x.GetType().Name == "BoxTile").Select(x => ((BoxTile)x).Rectangle).ToList();
             var boxTile = LevelManager.GameObjects.Where(x => x.GetType().Name == "BoxTile").Select(x => ((BoxTile)x).Position);
@@ -78,33 +78,33 @@ namespace GiveUp.Classes.GameObjects.Obstacles
             this.rectangle = new Rectangle((int)position.X, (int)position.Y, texture.Width, texture.Height);
         }
 
-        public void LoadContent(ContentManager content, Vector2 position)
-        {
-            bulletTexture = content.Load<Texture2D>("Image/Obstacles/AttachedCannon/bullet");
-            position = cannonPosition;
-        }
-
         public override void Update(GameTime gameTime)
         {
-            if (GameLogic.IsLineOfSight(10200, cannonPosition, Player.Rectangle))
-            {
                 float rotation = (float)Math.Atan2(
                     Convert.ToDouble(cannonPosition.Y - (Player.Rectangle.Origin().Y))
                     ,
                     Convert.ToDouble(cannonPosition.X - (Player.Rectangle.Origin().X))
                     ) + 3.1416f;
+            
+            if (GameLogic.IsLineOfSight(10200, cannonPosition, Player.Rectangle))
+            {
+                
                 if (rotation < minRotation || rotation > maxRotation)
                     cannonRotation = rotation;
 
-                //Den skal ikke ligge inde i line of sight if-setningen.. Her skal vi bare oprette en new bullet. fx:
-                //newBullet.Add(new CannonBullet(bulletTexture, Position, rotation, 10));
-                //og igen, en liste af bullet skal ikke kaldes for newBullet... xD
+                //Her bruger du også kanonens rotation, som jeg også havde gjordt, dvs der ikke er brug for "bulletRotation"
+                //Ud over det, skydder den rigtig, rigtig hurtig nu, så der skal nok en fireRate på når du har fået det til at virke :p
+                cannonBullets.Add(new CannonBullet(bulletTexture, cannonPosition, rotation, 10));
+            }
 
-                //Og denne foreach sætning, skal opdatere alle bullets, og den skal ligge uden for ifsætningen
-                foreach (CannonBullet bullet in newBullet)
+            //Det er kuglens ansvar at tjekke om kuglen har ramt player, så bare kør et foreachloop hvor du updater alle bullets, mere skal der ikke ske her..
+            //Tjek bullet class for kommentar der..
+            //Så grunden til at kuglerne ikke flytter sig, er fordi at du ikke updater alle bullets..
+            //For lige at gentage mig selv^^
+
+            foreach (var bullet in cannonBullets)
                 {
-                    //Do something - and that something is update the bullets.
-                }
+                bullet.Update(gameTime, Player, LevelManager);
             }
 
             if (HandleCollision.PerPixesCollision(ref Player.Rectangle, rectangle, texture, ref Player.Velocity, ref Player.Position))
@@ -115,17 +115,12 @@ namespace GiveUp.Classes.GameObjects.Obstacles
 
         public override void Draw(SpriteBatch spriteBatch)
         {
-
             spriteBatch.Draw(cannonTexture, cannonPosition, null, Color.White, cannonRotation, Vector2.Zero, 1, SpriteEffects.None, 1);
             spriteBatch.Draw(texture, Position, new Color(90, 150, 250));
 
-
-            foreach (CannonBullet bullet in newBullet)
-            {
-                spriteBatch.Draw(bulletTexture, cannonPosition, Color.White);
-                isVisible = true;
-                //}        
-            }
+            foreach (CannonBullet bullet in cannonBullets)
+                bullet.Draw(spriteBatch);
         }
     }
 }
+
