@@ -1,5 +1,5 @@
 ﻿GGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGG
-G----------------------------------------------------------G
+G---------------------F------------------------------------G
 G----------------------------------------------------------G
 G----------------------------------------------------------G
 G----------------------------------------------------------G
@@ -28,7 +28,7 @@ G----G----G--cGcGcGc---------------------------------------G
 G---------G--cGcGcGc---------------------------------------G
 G---------G--cGcGcGc---------------------------------------G
 G-----S---G--cGcGcGc---------------------------------------G
-G------------cGcGcGc--B--^^^^--B--^^^^--B--^^^^--------D---G
+G------------cGcGcGc-----^^^^--B--^^^^--B--^^^^--------D---G
 GGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGG
 GGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGG
 GGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGG

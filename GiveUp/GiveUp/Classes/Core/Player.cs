@@ -20,6 +20,7 @@ namespace GiveUp.Classes.Core
 
         public bool CanJump = true;
         public bool CanDoubleJump = false;
+        public bool ReverseControls = false;
         public float StartJumpSpeed;
 
         public float Gravity;
@@ -77,13 +78,16 @@ namespace GiveUp.Classes.Core
 
         public void Movement(GameTime gameTime)
         {
+            #region fix!
             KeyboardState keyState = Keyboard.GetState();
+            if (ReverseControls == false)
+            {
 
-            if (keyState.IsKeyDown(Keys.A))
+                if (keyState.IsKeyDown(ReverseControls ? Keys.D : Keys.A))
             {
                 this.Velocity.X += this.Acceleration * -1 * gameTime.ElapsedGameTime.Milliseconds;
             }
-            if (keyState.IsKeyDown(Keys.D))
+                if (keyState.IsKeyDown(ReverseControls ? Keys.A : Keys.D))
             {
                 this.Velocity.X += this.Acceleration * gameTime.ElapsedGameTime.Milliseconds;
             }
@@ -119,7 +123,9 @@ namespace GiveUp.Classes.Core
             {
                 Animation.PlayAnimation("jump");
             }
-
+            }
+            
         }
+#endregion
     }
 }

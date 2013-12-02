@@ -26,7 +26,7 @@ namespace GiveUp.Classes.GameObjects.Obstacles
         //Da dette er en liste skal den navngivest i flertal... fx "bullets"
         List<CannonBullet> newBullet = new List<CannonBullet>();
         bool isVisible;
-        
+
 
         public override void Initialize(ContentManager content, Vector2 position)
         {
@@ -124,7 +124,8 @@ namespace GiveUp.Classes.GameObjects.Obstacles
             {
                 spriteBatch.Draw(bulletTexture, cannonPosition, Color.White);
                 isVisible = true;
-            //}        
+                //}        
+            }
         }
     }
 }
