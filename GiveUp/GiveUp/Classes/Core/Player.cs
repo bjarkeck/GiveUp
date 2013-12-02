@@ -76,6 +76,8 @@ namespace GiveUp.Classes.Core
             }
         }
 
+        public bool RevercedControles = false;
+
         public void Movement(GameTime gameTime)
         {
             KeyboardState keyState = Keyboard.GetState();
