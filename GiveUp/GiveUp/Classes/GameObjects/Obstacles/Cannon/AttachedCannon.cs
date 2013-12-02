@@ -33,7 +33,7 @@ namespace GiveUp.Classes.GameObjects.Obstacles
         float bulletRotation = 0;
 
         List<CannonBullet> cannonBullets = new List<CannonBullet>();
-
+        
         public override void Initialize(ContentManager content, Vector2 position)
         {
             bulletTexture = content.Load<Texture2D>("Images/Obstacles/AttachedCannon/bullet");
@@ -87,13 +87,15 @@ namespace GiveUp.Classes.GameObjects.Obstacles
 
         public override void Update(GameTime gameTime)
         {
-            if (GameLogic.IsLineOfSight(10200, cannonPosition, Player.Rectangle))
-            {
                 float rotation = (float)Math.Atan2(
                     Convert.ToDouble(cannonPosition.Y - (Player.Rectangle.Origin().Y))
                     ,
                     Convert.ToDouble(cannonPosition.X - (Player.Rectangle.Origin().X))
                     ) + 3.1416f;
+            
+            if (GameLogic.IsLineOfSight(10200, cannonPosition, Player.Rectangle))
+            {
+                
                 if (rotation < minRotation || rotation > maxRotation)
                     cannonRotation = rotation;
 
@@ -117,10 +119,12 @@ namespace GiveUp.Classes.GameObjects.Obstacles
             //    bullet.Update(gameTime, Player, LevelManager);
 
             foreach (var bullet in cannonBullets)
-            {
-                if (cannonBulletRectangle.Intersects(Player.Rectangle))
                 {
-                    LevelManager.RestartLevel();
+                
+
+                    if (cannonBulletRectangle.Intersects(Player.Rectangle))
+                {
+                        LevelManager.RestartLevel();
                 }
             }
 

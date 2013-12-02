@@ -87,6 +87,11 @@ namespace GiveUp.Classes.Core
             //Hvis den kom igennem loopet betyder det at kuglen har ramt spilleren, og så skal der retuneres true.
             return true;
         }
+
+        public static bool HasHit(Vector2 startPos, Rectangle target)
+        {
+            return true;
+        }
     }
 }
 
