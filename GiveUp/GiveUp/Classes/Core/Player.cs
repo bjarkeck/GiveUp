@@ -81,18 +81,12 @@ namespace GiveUp.Classes.Core
 
         public void Movement(GameTime gameTime)
         {
-
             KeyboardState keyState = Keyboard.GetState();
-            if (ReverseControls == false)
-            {
 
-                if (keyState.IsKeyDown(ReverseControls ? Keys.D : Keys.A))
-                    this.Velocity.X += this.Acceleration * -1 * gameTime.ElapsedGameTime.Milliseconds;
-
-                if (keyState.IsKeyDown(ReverseControls ? Keys.A : Keys.D))
-                    this.Velocity.X += this.Acceleration * gameTime.ElapsedGameTime.Milliseconds;
-
-            }
+            if (keyState.IsKeyDown(ReverseControls ? Keys.D : Keys.A))
+                this.Velocity.X += this.Acceleration * -1 * gameTime.ElapsedGameTime.Milliseconds;
+            if (keyState.IsKeyDown(ReverseControls ? Keys.A : Keys.D))
+                this.Velocity.X += this.Acceleration * gameTime.ElapsedGameTime.Milliseconds;
             //Jump
             if (InputHelper.IsNewPress(Keys.Space))
                 this.Jump();
@@ -128,4 +122,3 @@ namespace GiveUp.Classes.Core
         }
     }
 }
-            
