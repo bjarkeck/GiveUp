@@ -82,26 +82,31 @@ namespace GiveUp.Classes.GameObjects.Obstacles
 
         public override void Update(GameTime gameTime)
         {
-            if (GameLogic.IsLineOfSight(10200, cannonPosition, Player.Rectangle))
-            {
-                float rotation = (float)Math.Atan2(
+            float rotation = (float)Math.Atan2(
                     Convert.ToDouble(cannonPosition.Y - (Player.Rectangle.Origin().Y))
                     ,
                     Convert.ToDouble(cannonPosition.X - (Player.Rectangle.Origin().X))
                     ) + 3.1416f;
+            
+            if (GameLogic.IsLineOfSight(10200, cannonPosition, Player.Rectangle))
+            {
+                
                 if (rotation < minRotation || rotation > maxRotation)
                     cannonRotation = rotation;
 
                 bulletPosition = new Vector2(cannonPosition.X, cannonPosition.Y);
-                cannonBulletRectangle = new Rectangle((int)bulletPosition.X, (int)bulletPosition.Y, 2, 2);
+                cannonBulletRectangle = new Rectangle((int)bulletPosition.X, (int)bulletPosition.Y, texture.Width, texture.Height);
                 cannonBullets.Add(new CannonBullet(bulletTexture, bulletPosition, rotation, 10));
             }
+            
 
-            foreach (var bullet in cannonBullets)
+            foreach (var item in cannonBullets)
+            {
+                
+
+                if (cannonBulletRectangle.Intersects(Player.Rectangle))
                 {
-                    if (cannonBulletRectangle.Intersects(Player.Rectangle))
-                {
-                        LevelManager.RestartLevel();
+                    LevelManager.RestartLevel();
                 }
             }
 
