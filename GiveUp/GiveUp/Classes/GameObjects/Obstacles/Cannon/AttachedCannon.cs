@@ -15,22 +15,15 @@ namespace GiveUp.Classes.GameObjects.Obstacles
     {
         public const char TileChar = 'c';
         Texture2D texture;
-        //Yeah
         Texture2D bulletTexture;
         Texture2D cannonTexture;
 
-        //Umidlbart kan jeg ikke se nogle grund til denne. læser det fra toppen så kan være jeg får en aaah oplevelse senere^^
-        Rectangle cannonBulletRectangle;
         Rectangle rectangle { get; set; }
 
-        //En bullet position? Det er måske der den bliver fyrret afsted fra?
-        public Vector2 bulletPosition;
         public Vector2 cannonPosition;
         float minRotation = 1.3033f;
         float maxRotation = 4.96f;
         float cannonRotation = 10;
-        //Ikke nødvendigt dat det er den sammme rotation som cannonRotation.
-        float bulletRotation = 0;
 
         List<CannonBullet> cannonBullets = new List<CannonBullet>();
         
@@ -99,15 +92,9 @@ namespace GiveUp.Classes.GameObjects.Obstacles
                 if (rotation < minRotation || rotation > maxRotation)
                     cannonRotation = rotation;
 
-                
-                //Da bulletposition er det samme som cannon position, hvorfor så ikke bare bruger cannonPosition?
-                //Fjern bulletposition.
-                bulletPosition = new Vector2(cannonPosition.X, cannonPosition.Y);
-                cannonBulletRectangle = new Rectangle((int)bulletPosition.X, (int)bulletPosition.Y, 2, 2);
-
                 //Her bruger du også kanonens rotation, som jeg også havde gjordt, dvs der ikke er brug for "bulletRotation"
                 //Ud over det, skydder den rigtig, rigtig hurtig nu, så der skal nok en fireRate på når du har fået det til at virke :p
-                cannonBullets.Add(new CannonBullet(bulletTexture, bulletPosition, rotation, 10));
+                cannonBullets.Add(new CannonBullet(bulletTexture, cannonPosition, rotation, 10));
             }
 
             //Det er kuglens ansvar at tjekke om kuglen har ramt player, så bare kør et foreachloop hvor du updater alle bullets, mere skal der ikke ske her..
@@ -115,17 +102,9 @@ namespace GiveUp.Classes.GameObjects.Obstacles
             //Så grunden til at kuglerne ikke flytter sig, er fordi at du ikke updater alle bullets..
             //For lige at gentage mig selv^^
 
-            //foreach (var bullet in cannonBullets)
-            //    bullet.Update(gameTime, Player, LevelManager);
-
             foreach (var bullet in cannonBullets)
-                {
-                
-
-                    if (cannonBulletRectangle.Intersects(Player.Rectangle))
-                {
-                        LevelManager.RestartLevel();
-                }
+            {
+                bullet.Update(gameTime, Player, LevelManager);
             }
 
             if (HandleCollision.PerPixesCollision(ref Player.Rectangle, rectangle, texture, ref Player.Velocity, ref Player.Position))
@@ -139,12 +118,8 @@ namespace GiveUp.Classes.GameObjects.Obstacles
             spriteBatch.Draw(cannonTexture, cannonPosition, null, Color.White, cannonRotation, Vector2.Zero, 1, SpriteEffects.None, 1);
             spriteBatch.Draw(texture, Position, new Color(90, 150, 250));
 
-
-            //Der behøves du ikke bulletRotation, hvis du gerne vil scale den til 0.5f så gør billedet mindre i stedet..
-            //Men den her draw skal du slet ikke bruge, da det er alle bullets der skal tegnes, og de allerede har en draw metode.
-            //foreach (CannonBullet bullet in cannonBullets)
-            //    bullet.Draw(spriteBatch);
-            spriteBatch.Draw(bulletTexture, bulletPosition, null, Color.White, bulletRotation, Vector2.Zero, 0.5f, SpriteEffects.None, 1);
+            foreach (CannonBullet bullet in cannonBullets)
+                bullet.Draw(spriteBatch);
         }
     }
 }

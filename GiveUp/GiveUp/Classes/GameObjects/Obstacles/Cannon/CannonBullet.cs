@@ -1,4 +1,6 @@
-﻿using Microsoft.Xna.Framework;
+﻿using GiveUp.Classes.Core;
+using GiveUp.Classes.LevelManager;
+using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Content;
 using Microsoft.Xna.Framework.Graphics;
 using System;
@@ -21,19 +23,17 @@ namespace GiveUp.Classes.GameObjects.Obstacles.Cannon
             this.velocity = new Vector2((float)Math.Cos(shootAngle) * bulletSpeed, (float)Math.Sin(shootAngle) * bulletSpeed);
         }
 
-        public void Update(GameTime gameTime)
+        public void Update(GameTime gameTime, Player player, LevelManagerr levelManager)
         {
             this.Position += velocity;
 
-            //Her skal den så tjekke om kuglen intergere med player...
-            //dvs at denne class mangler 2 ting for at være perfekt.
-            //En rectangle til at checke .Intersects.
-            //Den rectangle skal bare have texturens height og width, samt positions x og y.
-
-            //Og så skal den her update funktion også have playeren som en parameter
-            //  public void Update(GameTime gameTime, Player player, LevelManager levelManager)
-            //Såen så vi kan tjekke selve kugles rektangle op imod playeresn
-            //og så skal den også have LevelManager så den kan ænd
+            Rectangle cannonBulletRectangle = new Rectangle((int)Position.X, (int)Position.Y, 2, 2);
+      
+            if (cannonBulletRectangle.Intersects(player.Rectangle))
+            {
+                levelManager.RestartLevel();
+            }
+            
         }
 
         public void Draw(SpriteBatch spriteBatch)
