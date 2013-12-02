@@ -40,9 +40,9 @@ namespace GiveUp.Classes.Core
 
         public void LoadContent(ContentManager content)
         {
-            Animation = new SpriteAnimation(content.Load<Texture2D>("Images/Player/playerAnimation"), Position, 23, 30, 50);
+            Animation = new SpriteAnimation(content.Load<Texture2D>("Images/Player/playerAnimation"), Position, 23, 30, 100);
             Animation.AddRow("stand", 0, 1);
-            Animation.AddRow("run", 1, 8);
+            Animation.AddRow("run", 1, 15);
             Animation.AddRow("jump", 2, 1);
             Animation.AddRow("slide", 3, 1);
         }
@@ -53,7 +53,8 @@ namespace GiveUp.Classes.Core
 
         public void Update(GameTime gameTime)
         {
-            Animation.AnimationSpeed = 200 - Math.Abs(Velocity.X*30);
+            Rectangle = Animation.Rectangle;
+            Animation.AnimationSpeed = 200 - Math.Abs(Velocity.X * 30);
             InputHelper.Update();
             Movement(gameTime);
             Animation.Update(gameTime, Position);
@@ -79,46 +80,44 @@ namespace GiveUp.Classes.Core
         {
             KeyboardState keyState = Keyboard.GetState();
 
+            //move player
             if (keyState.IsKeyDown(Keys.A))
-            {
                 this.Velocity.X += this.Acceleration * -1 * gameTime.ElapsedGameTime.Milliseconds;
-            }
             if (keyState.IsKeyDown(Keys.D))
-            {
                 this.Velocity.X += this.Acceleration * gameTime.ElapsedGameTime.Milliseconds;
-            }
 
+            //Jump
             if (InputHelper.IsNewPress(Keys.Space))
                 this.Jump();
+
+            //Gravity
             Velocity.Y += Gravity;
 
+            //Friction
             if (Math.Abs(Velocity.X) < Friction)
                 Velocity.X = 0;
             else
                 Velocity.X += Friction * (Velocity.X > 0 ? -1f : 1f);
 
+            //Max Speed
             Velocity.X = MathHelper.Clamp(Velocity.X, MaxSpeed * -1, MaxSpeed);
 
+            //Add To Position
             this.Position += this.Velocity;
 
+            //Animation Direction
             if (Velocity.X > 0)
                 Animation.FlipImage = false;
             else if (Velocity.X < 0)
                 Animation.FlipImage = true;
 
+            //Animation state
             if (Velocity.X == 0)
-            {
                 Animation.PlayAnimation("stand");
-            }
             else
-            {
                 Animation.PlayAnimation("run");
-            }
-
             if (CanJump == false || Math.Abs(Velocity.Y) > 1)
-            {
                 Animation.PlayAnimation("jump");
-            }
 
         }
     }

@@ -124,7 +124,7 @@ namespace GiveUp.Classes.GameObjects.Obstacles
             {
                 spriteBatch.Draw(bulletTexture, cannonPosition, Color.White);
                 isVisible = true;
-            //}        
+            }        
         }
     }
 }
