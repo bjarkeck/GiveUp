@@ -11,7 +11,7 @@ namespace GiveUp.Classes.Core
     {
         public int AngleDirection { get; set; }
         public int AngleSpread { get; set; }
-        public int Buffer { get; set; }
+        public int MaxNumberOfParitcles { get; set; }
         public int EmisionSpeed { get; set; }
 
         public float MinParticleSpeed { get; set; }
