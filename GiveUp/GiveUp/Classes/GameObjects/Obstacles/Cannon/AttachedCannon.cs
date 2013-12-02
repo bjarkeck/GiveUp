@@ -115,7 +115,7 @@ namespace GiveUp.Classes.GameObjects.Obstacles
         {
             spriteBatch.Draw(cannonTexture, cannonPosition, null, Color.White, cannonRotation, Vector2.Zero, 1, SpriteEffects.None, 1);
             spriteBatch.Draw(texture, Position, new Color(90, 150, 250));
-      
+            spriteBatch.Draw(bulletTexture, bulletPosition, null, Color.White, bulletRotation, Vector2.Zero, 0.5f, SpriteEffects.None, 1);
         }
     }
 }
