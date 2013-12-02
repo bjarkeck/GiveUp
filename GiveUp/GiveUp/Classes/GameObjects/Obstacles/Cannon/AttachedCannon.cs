@@ -17,19 +17,21 @@ namespace GiveUp.Classes.GameObjects.Obstacles
         Texture2D texture;
         Texture2D bulletTexture;
         Texture2D cannonTexture;
+        Rectangle cannonBulletRectangle;
         Rectangle rectangle { get; set; }
+
+        public Vector2 bulletPosition;
         public Vector2 cannonPosition;
         float minRotation = 1.3033f;
         float maxRotation = 4.96f;
         float cannonRotation = 10;
+        float bulletRotation = 0;
 
-        //Da dette er en liste skal den navngivest i flertal... fx "bullets"
-        List<CannonBullet> newBullet = new List<CannonBullet>();
-        bool isVisible;
-        
+        List<CannonBullet> cannonBullets = new List<CannonBullet>();
 
         public override void Initialize(ContentManager content, Vector2 position)
         {
+            bulletTexture = content.Load<Texture2D>("Images/Obstacles/AttachedCannon/bullet");
 
             List<Rectangle> boxTilesboxTiles = LevelManager.GameObjects.Where(x => x.GetType().Name == "BoxTile").Select(x => ((BoxTile)x).Rectangle).ToList();
             var boxTile = LevelManager.GameObjects.Where(x => x.GetType().Name == "BoxTile").Select(x => ((BoxTile)x).Position);
@@ -78,12 +80,6 @@ namespace GiveUp.Classes.GameObjects.Obstacles
             this.rectangle = new Rectangle((int)position.X, (int)position.Y, texture.Width, texture.Height);
         }
 
-        public void LoadContent(ContentManager content, Vector2 position)
-        {
-            bulletTexture = content.Load<Texture2D>("Image/Obstacles/AttachedCannon/bullet");
-            position = cannonPosition;
-        }
-
         public override void Update(GameTime gameTime)
         {
             if (GameLogic.IsLineOfSight(10200, cannonPosition, Player.Rectangle))
@@ -96,16 +92,18 @@ namespace GiveUp.Classes.GameObjects.Obstacles
                 if (rotation < minRotation || rotation > maxRotation)
                     cannonRotation = rotation;
 
-                //Den skal ikke ligge inde i line of sight if-setningen.. Her skal vi bare oprette en new bullet. fx:
-                //newBullet.Add(new CannonBullet(bulletTexture, Position, rotation, 10));
-                //og igen, en liste af bullet skal ikke kaldes for newBullet... xD
-
-                //Og denne foreach sætning, skal opdatere alle bullets, og den skal ligge uden for ifsætningen
-                foreach (CannonBullet bullet in newBullet)
-                {
-                    //Do something - and that something is update the bullets.
-                }
+                bulletPosition = new Vector2(cannonPosition.X, cannonPosition.Y);
+                cannonBulletRectangle = new Rectangle((int)bulletPosition.X, (int)bulletPosition.Y, 2, 2);
+                cannonBullets.Add(new CannonBullet(bulletTexture, bulletPosition, rotation, 10));
             }
+
+            foreach (var bullet in cannonBullets)
+                {
+                    if (cannonBulletRectangle.Intersects(Player.Rectangle))
+                    {
+                        LevelManager.RestartLevel();
+                    }
+                }
 
             if (HandleCollision.PerPixesCollision(ref Player.Rectangle, rectangle, texture, ref Player.Velocity, ref Player.Position))
             {
@@ -115,16 +113,9 @@ namespace GiveUp.Classes.GameObjects.Obstacles
 
         public override void Draw(SpriteBatch spriteBatch)
         {
-
             spriteBatch.Draw(cannonTexture, cannonPosition, null, Color.White, cannonRotation, Vector2.Zero, 1, SpriteEffects.None, 1);
             spriteBatch.Draw(texture, Position, new Color(90, 150, 250));
-
-
-            foreach (CannonBullet bullet in newBullet)
-            {
-                spriteBatch.Draw(bulletTexture, cannonPosition, Color.White);
-                isVisible = true;
-            //}        
+            spriteBatch.Draw(bulletTexture, bulletPosition, null, Color.White, bulletRotation, Vector2.Zero, 0.5f, SpriteEffects.None, 1);
         }
     }
 }

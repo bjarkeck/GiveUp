@@ -8,15 +8,12 @@ using System.Text;
 
 namespace GiveUp.Classes.GameObjects.Obstacles.Cannon
 {
-                         //Nope, den skal ikke nedarve fra noget, alt den har behov for den foræret af AttachedCannon.
-    class CannonBullet : GameObject, IGameObject
+    class CannonBullet
     {
-        //yeah
         Texture2D texture;
-        //yeah
         Vector2 velocity;
+        Vector2 Position;
 
-        //yeah
         public CannonBullet(Texture2D texture, Vector2 startPosition, float shootAngle, float bulletSpeed)
         {
             this.texture = texture;
@@ -24,20 +21,12 @@ namespace GiveUp.Classes.GameObjects.Obstacles.Cannon
             this.velocity = new Vector2((float)Math.Cos(shootAngle) * bulletSpeed, (float)Math.Sin(shootAngle) * bulletSpeed);
         }
 
-        //Så dvs. at Update ikke skal overides, men bare være en normal metode..
-        public override void Update(GameTime gameTime)
+        public void Update(GameTime gameTime)
         {
-            //Og så er der ikke nogen base.Update at kalde, så den linje skal bare slettes.
-            base.Update(gameTime);
-
-
-            //Her tilføjer du så velocitien til position som fx:
-            //this.position += velocity
+            this.Position += velocity;
         }
 
-
-        //yeah
-        public override void Draw(SpriteBatch spriteBatch)
+        public void Draw(SpriteBatch spriteBatch)
         {
             spriteBatch.Draw(texture, Position, Color.White);
         }
