@@ -63,7 +63,6 @@ namespace GiveUp.Classes.Core
             Vector2 bulletPosition = new Vector2(startPos.X, startPos.Y);
             Rectangle bulletRectangle = new Rectangle((int)startPos.X, (int)startPos.Y, 2, 2);
 
-
             //Få rotationen mellem startPos og target
             double rotationToTarget = startPos.AngleRadian(target.Origin());
 
@@ -75,7 +74,7 @@ namespace GiveUp.Classes.Core
             {
                 //Hvis kuglen intersekter med nogle tiles, så retuner false.
                 foreach (var item in tiles)
-            {
+                {
                     if (bulletRectangle.Intersects(item))
                         return false;
                 }

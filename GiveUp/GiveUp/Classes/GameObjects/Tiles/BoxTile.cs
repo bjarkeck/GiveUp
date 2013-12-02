@@ -54,7 +54,7 @@ namespace GiveUp.Classes.GameObjects.Tiles
 
         public override void Draw(SpriteBatch spriteBatch)
         {
-            spriteBatch.Draw(texture, Rectangle, Color.Gray);
+            spriteBatch.Draw(texture, Rectangle, new Color(68, 68, 68));
         }
 
 
