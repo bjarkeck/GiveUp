@@ -41,12 +41,21 @@ namespace GiveUp.Classes.Core
 
         public Color Color(int life, int currentLife)
         {
-            //Calculate Color..
-            return startColor;
+            float scaleFactor = 1 - (float)currentLife / (float)life;
+
+            return new Color(
+                (byte)(startColor.R + (endColor.R - startColor.R) * scaleFactor),
+                (byte)(startColor.G + (endColor.G - startColor.G) * scaleFactor),
+                (byte)(startColor.B + (endColor.B - startColor.B) * scaleFactor),
+                (byte)(startColor.A + (endColor.A - startColor.A) * scaleFactor)
+            );
+
         }
         public float Scale(int life, int currentLife)
         {
-            return startScale;
+            float scaleFactor = 1 - (float)currentLife / (float)life;
+
+            return startScale + (endScale - startScale) * scaleFactor;
         }
 
         public static ParticleTexture New(Texture2D texture, Color startColor, Color endColor, float startScale = 1, float endScale = 1)
