@@ -24,12 +24,14 @@ namespace GiveUp.Classes.GameObjects.Obstacles
         float minRotation = 1.3033f;
         float maxRotation = 4.96f;
         float cannonRotation = 10;
+        TimeSpan fireRate = TimeSpan.FromMilliseconds(1000);
+        TimeSpan timeElapsed;
 
         List<CannonBullet> cannonBullets = new List<CannonBullet>();
         
         public override void Initialize(ContentManager content, Vector2 position)
         {
-            bulletTexture = content.Load<Texture2D>("Images/Obstacles/AttachedCannon/bullet");
+            bulletTexture = content.Load<Texture2D>("Images/Obstacles/AttachedCannon/bullet1");
 
             List<Rectangle> boxTilesboxTiles = LevelManager.GameObjects.Where(x => x.GetType().Name == "BoxTile").Select(x => ((BoxTile)x).Rectangle).ToList();
             var boxTile = LevelManager.GameObjects.Where(x => x.GetType().Name == "BoxTile").Select(x => ((BoxTile)x).Position);
@@ -80,11 +82,11 @@ namespace GiveUp.Classes.GameObjects.Obstacles
 
         public override void Update(GameTime gameTime)
         {
-                float rotation = (float)Math.Atan2(
-                    Convert.ToDouble(cannonPosition.Y - (Player.Rectangle.Origin().Y))
-                    ,
-                    Convert.ToDouble(cannonPosition.X - (Player.Rectangle.Origin().X))
-                    ) + 3.1416f;
+            float rotation = (float)Math.Atan2(
+                Convert.ToDouble(cannonPosition.Y - (Player.Rectangle.Origin().Y))
+                ,
+                Convert.ToDouble(cannonPosition.X - (Player.Rectangle.Origin().X))
+                ) + 3.1416f;
             
             if (GameLogic.IsLineOfSight(10200, cannonPosition, Player.Rectangle))
             {
@@ -92,18 +94,15 @@ namespace GiveUp.Classes.GameObjects.Obstacles
                 if (rotation < minRotation || rotation > maxRotation)
                     cannonRotation = rotation;
 
-                //Her bruger du også kanonens rotation, som jeg også havde gjordt, dvs der ikke er brug for "bulletRotation"
-                //Ud over det, skydder den rigtig, rigtig hurtig nu, så der skal nok en fireRate på når du har fået det til at virke :p
-                cannonBullets.Add(new CannonBullet(bulletTexture, cannonPosition, rotation, 10));
+                if ((timeElapsed += gameTime.ElapsedGameTime) > fireRate)
+                {
+                    timeElapsed = TimeSpan.Zero;
+                    cannonBullets.Add(new CannonBullet(bulletTexture, cannonPosition, rotation, 10));
+                }
             }
 
-            //Det er kuglens ansvar at tjekke om kuglen har ramt player, så bare kør et foreachloop hvor du updater alle bullets, mere skal der ikke ske her..
-            //Tjek bullet class for kommentar der..
-            //Så grunden til at kuglerne ikke flytter sig, er fordi at du ikke updater alle bullets..
-            //For lige at gentage mig selv^^
-
             foreach (var bullet in cannonBullets)
-                {
+            {
                 bullet.Update(gameTime, Player, LevelManager);
             }
 
