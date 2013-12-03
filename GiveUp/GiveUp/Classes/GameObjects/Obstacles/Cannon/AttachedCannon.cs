@@ -26,7 +26,7 @@ namespace GiveUp.Classes.GameObjects.Obstacles
         TimeSpan timeElapsed;
         List<Rectangle> boxTiles;
         List<CannonBullet> cannonBullets = new List<CannonBullet>();
-
+        
         public override void Initialize(ContentManager content, Vector2 position)
         {
             bulletTexture = content.Load<Texture2D>("Images/Obstacles/AttachedCannon/bullet1");
@@ -77,10 +77,10 @@ namespace GiveUp.Classes.GameObjects.Obstacles
                 ,
                 Convert.ToDouble(cannonPosition.X - (Player.Rectangle.Origin().X))
                 ) + 3.1416f;
-
+            
             if (GameLogic.IsLineOfSight(10200, cannonPosition, Player.Rectangle))
             {
-                cannonRotation = rotation;
+                    cannonRotation = rotation;
 
                 if ((timeElapsed += gameTime.ElapsedGameTime) > fireRate)
                 {
@@ -88,13 +88,18 @@ namespace GiveUp.Classes.GameObjects.Obstacles
                     cannonBullets.Add(new CannonBullet(bulletTexture, cannonPosition, rotation, 10));
                 }
             }
-                                                //.ToList() så vi kan fjerne dem mens vi går igennemListen
-            foreach (CannonBullet bullet in cannonBullets)
+                                                
+            foreach (CannonBullet bullet in cannonBullets.ToList())
             {
                 bullet.Update(gameTime, Player, LevelManager);
-                
-                //Lav collision her...foreach boxTile... dvs at bullets skal have en public Rectangle.
 
+                foreach (Rectangle tile in boxTiles)
+                {
+                    if (bullet.CannonBulletRectangle.Intersects(tile))
+                    {
+                        cannonBullets.Remove(bullet);
+                    }
+                }
             }
 
             if (HandleCollision.PerPixesCollision(ref Player.Rectangle, rectangle, texture, ref Player.Velocity, ref Player.Position))

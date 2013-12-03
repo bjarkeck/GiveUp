@@ -15,6 +15,7 @@ namespace GiveUp.Classes.GameObjects.Obstacles.Cannon
         Texture2D texture;
         Vector2 velocity;
         Vector2 Position;
+        public Rectangle CannonBulletRectangle;
 
         public CannonBullet(Texture2D texture, Vector2 startPosition, float shootAngle, float bulletSpeed)
         {
@@ -27,8 +28,8 @@ namespace GiveUp.Classes.GameObjects.Obstacles.Cannon
         {
             this.Position += velocity;
 
-            Rectangle cannonBulletRectangle = new Rectangle((int)Position.X, (int)Position.Y, 2, 2);      
-            if (cannonBulletRectangle.Intersects(player.Rectangle))
+            CannonBulletRectangle = new Rectangle((int)Position.X, (int)Position.Y, 2, 2);
+            if (CannonBulletRectangle.Intersects(player.Rectangle))
             {
                 //levelManager.RestartLevel();
             }
