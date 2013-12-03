@@ -33,7 +33,7 @@ namespace GiveUp.Classes.GameObjects.Obstacles
         {
             bulletTexture = content.Load<Texture2D>("Images/Obstacles/AttachedCannon/bullet1");
 
-            List<Rectangle> boxTilesboxTiles = LevelManager.GameObjects.Where(x => x.GetType().Name == "BoxTile").Select(x => ((BoxTile)x).Rectangle).ToList();
+            
             var boxTile = LevelManager.GameObjects.Where(x => x.GetType().Name == "BoxTile").Select(x => ((BoxTile)x).Position);
             cannonTexture = content.Load<Texture2D>("Images/Obstacles/AttachedCannon/AttatchedCannonCannon");
 
