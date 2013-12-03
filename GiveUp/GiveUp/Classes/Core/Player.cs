@@ -14,6 +14,7 @@ namespace GiveUp.Classes.Core
 
         public Vector2 Position = Vector2.Zero;
         public Vector2 Velocity;
+        public Vector2 DragVelocity;
         public float Acceleration;
         public Rectangle Rectangle;
         public SpriteAnimation Animation;
@@ -21,10 +22,12 @@ namespace GiveUp.Classes.Core
         public bool CanJump = true;
         public bool CanDoubleJump = false;
         public bool ReverseControls = false;
+        public bool DragActivated = false;
         public float StartJumpSpeed;
 
         public float Gravity;
         public float MaxSpeed;
+        public float MaxDrag;
         public float Friction;
         public InputHelper InputHelper = new InputHelper();
 
@@ -36,6 +39,7 @@ namespace GiveUp.Classes.Core
             this.StartJumpSpeed = -12f;
             this.Gravity = 0.55f;
             this.MaxSpeed = 5.2f;
+            this.MaxDrag = 3.1f;
             this.Friction = 0.9f;
         }
 
@@ -76,12 +80,15 @@ namespace GiveUp.Classes.Core
                 this.Velocity.Y = this.StartJumpSpeed;
             }
         }
-
-        public bool RevercedControles = false;
-
+        
         public void Movement(GameTime gameTime)
         {
             KeyboardState keyState = Keyboard.GetState();
+
+            if (DragActivated == true)
+            {
+                this.DragVelocity.X += this.Acceleration * -1 * gameTime.ElapsedGameTime.Milliseconds;
+            }
 
             if (keyState.IsKeyDown(ReverseControls ? Keys.D : Keys.A))
                 this.Velocity.X += this.Acceleration * -1 * gameTime.ElapsedGameTime.Milliseconds;
@@ -102,6 +109,17 @@ namespace GiveUp.Classes.Core
 
             //Max Speed
             Velocity.X = MathHelper.Clamp(Velocity.X, MaxSpeed * -1, MaxSpeed);
+
+            //Max Drag
+            DragVelocity.X = MathHelper.Clamp(DragVelocity.X, MaxSpeed * -1, MaxSpeed);
+
+            //Drag friction
+            if (Math.Abs(DragVelocity.X) < Friction)
+                DragVelocity.X = 0;
+            else
+                DragVelocity.X += Friction * (DragVelocity.X > 0 ? -1f : 1f);
+            //Add to position (with drag)
+            this.Position += this.DragVelocity;
 
             //Add To Position
             this.Position += this.Velocity;
