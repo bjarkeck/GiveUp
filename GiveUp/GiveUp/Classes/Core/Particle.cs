@@ -9,18 +9,16 @@ namespace GiveUp.Classes.Core
 {
     public class Particle
     {
-        public float Scale { get; set; }
         public double Life { get; set; }
         public Vector2 Velocity;
         public Vector2 Position { get; set; }
-        public Texture2D Texture { get; set; }
-        public ParticleColor Color { get; set; }
+        public ParticleTexture ParticleTexture { get; set; }
         public float Rotation { get; set; }
         public bool Collide = false;
 
         int currentLife;
 
-        public Particle(Vector2 position, Vector2 Velocity, Texture2D texture, ParticleColor color, float rotation, int life, float scale)
+        public Particle(Vector2 position, Vector2 Velocity, ParticleTexture particleTexture, float rotation, int life, float scale)
         {
 
         }
@@ -52,13 +50,13 @@ namespace GiveUp.Classes.Core
         public void Draw(SpriteBatch spriteBatch)
         {
             spriteBatch.Draw(
-                texture: Texture,
+                texture: ParticleTexture.Texture,
                 position: Position,
                 sourceRectangle: null,
-                color: Color.Color((int)Life, currentLife),
+                color: ParticleTexture.Color((int)Life, currentLife),
                 rotation: Rotation,
-                origin: Texture.Origin(),
-                scale: Scale,
+                origin: ParticleTexture.Texture.Origin(),
+                scale: ParticleTexture.Scale((int)Life, currentLife),
                 effect: SpriteEffects.None,
                 depth: 1
             );

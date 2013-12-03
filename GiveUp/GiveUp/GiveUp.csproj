@@ -36,9 +36,10 @@
   </PropertyGroup>
   <ItemGroup>
     <Compile Include="Classes\Core\Particle.cs" />
-    <Compile Include="Classes\Core\ParticleColor.cs" />
+    <Compile Include="Classes\Core\ParticleTexture.cs" />
     <Compile Include="Classes\Core\ParticleEmitter.cs" />
     <Compile Include="Classes\Core\ParticleManager.cs" />
+    <Compile Include="Classes\Core\Range.cs" />
     <Compile Include="Classes\Core\SpriteAnimation.cs" />
     <Compile Include="Classes\Core\BaseScreen.cs" />
     <Compile Include="Classes\Core\Direction.cs" />
