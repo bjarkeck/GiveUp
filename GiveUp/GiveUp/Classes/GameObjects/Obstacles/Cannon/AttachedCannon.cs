@@ -25,7 +25,7 @@ namespace GiveUp.Classes.GameObjects.Obstacles
         float maxRotation = 4.96f;
         float cannonRotation = 10;
         TimeSpan fireRate = TimeSpan.FromMilliseconds(1000);
-        TimeSpan timeElapsed;
+        TimeSpan timeElapsed = 0;
 
         List<CannonBullet> cannonBullets = new List<CannonBullet>();
         
