@@ -21,13 +21,5 @@ namespace GiveUp.Classes.Core
             this.Maximum = singleValue;
         }
 
-        public static Range<T> New(T min, T max)
-        {
-            return new Range<T>(min, max);
-        }
-        public static Range<T> New(T singleValue)
-        {
-            return new Range<T>(singleValue);
-        }
     }
 }

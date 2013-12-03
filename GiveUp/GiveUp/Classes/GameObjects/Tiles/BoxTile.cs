@@ -29,21 +29,23 @@ namespace GiveUp.Classes.GameObjects.Tiles
         {
             if (HandleCollision.IsOnTopOf(ref Player.Rectangle, Rectangle, ref Player.Velocity, ref Player.Position))
                 Player.CanJump = true;
+
             if (HandleCollision.IsRightOf(ref Player.Rectangle, Rectangle, ref Player.Velocity, ref Player.Position))
             {
+                Player.Animation.PlayAnimation("slide");
                 if (Player.Velocity.Y > 0.1f)
                 {
                     Player.Velocity.Y = Player.Velocity.Y / 2;
-                    Player.Animation.PlayAnimation("slide");
                     Player.CanJump = true;
                     Player.CanDoubleJump = false;
                 }
             }
+
             if (HandleCollision.IsLeftOf(ref Player.Rectangle, Rectangle, ref Player.Velocity, ref Player.Position))
             {
+                Player.Animation.PlayAnimation("slide");
                 if (Player.Velocity.Y > 0.1f)
                 {
-                    Player.Animation.PlayAnimation("slide");
                     Player.Velocity.Y = Player.Velocity.Y / 2;
                     Player.CanJump = true;
                     Player.CanDoubleJump = false;
@@ -56,7 +58,6 @@ namespace GiveUp.Classes.GameObjects.Tiles
         {
             spriteBatch.Draw(texture, Rectangle, new Color(68, 68, 68));
         }
-
 
     }
 }

@@ -14,6 +14,12 @@ namespace GiveUp.Classes.Core
 {
     public static class GameLogic
     {
+        public static double NextDouble(this Random rnd, double min, double max)
+        {
+            return rnd.NextDouble() * (max - min) + min;
+        }
+
+
         public static Vector2 Origin(this Texture2D texture)
         {
             return new Vector2(texture.Width / 2, texture.Height / 2);

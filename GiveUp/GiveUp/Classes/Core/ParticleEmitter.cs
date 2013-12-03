@@ -18,14 +18,14 @@ namespace GiveUp.Classes.Core
         public Range<float> RotationSpeed { get; set; }
         public Range<int> ParticleLife { get; set; }
 
-        public Vector2 Friction { get; set; }
         public Vector2 AddedVelocity { get; set; }
         public Vector2 Gravity { get; set; }
 
         public List<ParticleTexture> ParticleTextures { get; set; }
-        public List<Particle> Particles { get; set; }
+        public List<Particle> Particles = new List<Particle>();
 
         double timer;
+        Random r = new Random();
 
         public ParticleEmitter(
             List<ParticleTexture> particleTextures,
@@ -36,7 +36,6 @@ namespace GiveUp.Classes.Core
             int angleSpread,
             int maxNumberOfParitcles,
             int particlesPerSeccond,
-            Vector2 friction,
             Vector2 addedVelocity,
             Vector2 gravity
             )
@@ -49,39 +48,68 @@ namespace GiveUp.Classes.Core
             this.AngleSpread = angleSpread;
             this.MaxNumberOfParitcles = maxNumberOfParitcles;
             this.ParticlesPerSeccond = particlesPerSeccond;
-            this.Friction = friction;
             this.AddedVelocity = addedVelocity;
             this.Gravity = gravity;
 
             timer = 0;
         }
 
-        public void Update(GameTime gameTime)
+        private void AddParticle(Vector2 position)
+        {
+            //Behøves ikke at udregnes hver gang... lav propertie fix.
+            double angleDir = (AngleDirection- 90) * Math.PI / 180;
+            double angleSpread = AngleSpread * Math.PI / 180 / 2;
+            double minAngle = angleDir - angleSpread;
+            double maxAngle = angleDir + angleSpread;
+            
+            double randomAngle = r.NextDouble() * (maxAngle - minAngle) + minAngle;
+            float randomSpeed = (float)r.NextDouble(ParticleSpeed.Minimum, ParticleSpeed.Maximum) / 100f;
+
+            Particle p = new Particle ( 
+                position: new Vector2(position.X,position.Y),
+                velocity: new Vector2((float)Math.Cos(randomAngle) * randomSpeed, (float)Math.Sin(randomAngle) * randomSpeed) + AddedVelocity * 0.2f,
+                particleTexture: ParticleTextures[r.Next(0,ParticleTextures.Count())],
+                rotation: (float)r.NextDouble(RotationSpeed.Minimum, RotationSpeed.Maximum),
+                life: r.Next(ParticleLife.Minimum, ParticleLife.Maximum)
+            );
+
+            Particles.Add(p);
+        }
+
+        public void Update(GameTime gameTime, Vector2 position)
         {
             timer += gameTime.ElapsedGameTime.TotalMilliseconds;
             //AddParticles
-            if (Particles.Count() <  MaxNumberOfParitcles)
+            if (Particles.Count() < MaxNumberOfParitcles)
             {
                 //Add this many:
-                //ParticlesPerSeccond / timer;
+                var ps = 1000f / ParticlesPerSeccond;
+                while (timer > ps)
+                {
+                    timer -= ps;
+                    AddParticle(position);
+                }
             }
 
             //UpdateParticles
             foreach (Particle particle in Particles.ToList())
             {
-                particle.Update(gameTime, Friction, Gravity);
+                particle.Update(gameTime, Gravity);
 
                 //Remove Particles
-                if (particle.Life <= 0)
+                if (particle.CurrentLife <= 0)
                 {
                     Particles.Remove(particle);
                 }
             }
         }
 
+
+
         public void Draw(SpriteBatch spriteBatch)
         {
-
+            foreach (Particle particle in Particles)
+                particle.Draw(spriteBatch);
         }
     }
 }

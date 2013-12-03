@@ -111,10 +111,8 @@ namespace GiveUp.Classes.Core
             //Gravity
             Velocity += Gravity;
 
-
             //Max Speed
             Velocity.X = MathHelper.Clamp(Velocity.X, MaxSpeed * -1, MaxSpeed);
-
 
             //Add To Position
             this.Position += this.Velocity;

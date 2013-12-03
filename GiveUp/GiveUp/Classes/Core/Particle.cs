@@ -9,42 +9,39 @@ namespace GiveUp.Classes.Core
 {
     public class Particle
     {
-        public double Life { get; set; }
+        public int Life { get; set; }
         public Vector2 Velocity;
         public Vector2 Position { get; set; }
         public ParticleTexture ParticleTexture { get; set; }
         public float Rotation { get; set; }
         public bool Collide = false;
 
-        int currentLife;
+        public int CurrentLife;
+        public float CurrentRotation;
 
-        public Particle(Vector2 position, Vector2 Velocity, ParticleTexture particleTexture, float rotation, int life, float scale)
+        public Particle(Vector2 position, Vector2 velocity, ParticleTexture particleTexture, float rotation, int life)
         {
-
+            this.Position = position;
+            this.Velocity = velocity;
+            this.ParticleTexture = particleTexture;
+            this.Rotation = rotation;
+            this.Life = life;
+            CurrentLife = Life;
         }
 
-        public void Update(GameTime gameTime, Vector2 Friction, Vector2 Gravity)
+        public void Update(GameTime gameTime, Vector2 Gravity)
         {
-            //Friction X
-            if (Math.Abs(Velocity.X) < Friction.X)
-                Velocity.X = 0;
-            else
-                Velocity.X += Friction.X * (Velocity.X > 0 ? -1f : 1f);
-
-            //Friction Y
-            if (Math.Abs(Velocity.Y) < Friction.Y)
-                Velocity.Y = 0;
-            else
-                Velocity.Y += Friction.Y * (Velocity.Y > 0 ? -1f : 1f);
-
-            //Velociy
-            Position += Velocity;
+            CurrentRotation += Rotation;
 
             //Gravity
-            Position += Gravity;
+            Velocity += Gravity ;
+
+            //Velociy
+            Position += Velocity ;
+
 
             //Drain Life
-            Life -= gameTime.ElapsedGameTime.TotalMilliseconds;
+            CurrentLife -= (int)gameTime.ElapsedGameTime.TotalMilliseconds;
         }
 
         public void Draw(SpriteBatch spriteBatch)
@@ -53,10 +50,10 @@ namespace GiveUp.Classes.Core
                 texture: ParticleTexture.Texture,
                 position: Position,
                 sourceRectangle: null,
-                color: ParticleTexture.Color((int)Life, currentLife),
-                rotation: Rotation,
+                color: ParticleTexture.Color((int)Life, CurrentLife),
+                rotation: CurrentRotation,
                 origin: ParticleTexture.Texture.Origin(),
-                scale: ParticleTexture.Scale((int)Life, currentLife),
+                scale: ParticleTexture.Scale((int)Life, CurrentLife),
                 effect: SpriteEffects.None,
                 depth: 1
             );
