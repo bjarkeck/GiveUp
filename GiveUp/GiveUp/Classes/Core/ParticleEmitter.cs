@@ -63,7 +63,7 @@ namespace GiveUp.Classes.Core
             if (Particles.Count() <  MaxNumberOfParitcles)
             {
                 //Add this many:
-                ParticlesPerSecond / timer;
+                //ParticlesPerSeccond / timer;
             }
 
             //UpdateParticles

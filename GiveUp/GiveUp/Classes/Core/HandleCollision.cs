@@ -13,7 +13,7 @@ namespace GiveUp.Classes.Core
         private static bool isBelowOf(this Rectangle player, Rectangle box, Vector2 velocity)
         {
             return velocity.Y < 0 &&
-                    player.Top - velocity.Y + 1.1f > box.Bottom &&
+                    player.Top - velocity.Y + 1f > box.Bottom &&
                     player.Intersects(
                     new Rectangle(
                         box.X + (int)Math.Ceiling(velocity.X < 0 ? velocity.X : 0),
@@ -94,7 +94,7 @@ namespace GiveUp.Classes.Core
             {
                 velocity.X = 0;
                 playerPosition.X = box.Right;
-                player.X = (int)playerPosition.X;
+                player.X = (int)playerPosition.X; 
             }
             return rtn;
         }

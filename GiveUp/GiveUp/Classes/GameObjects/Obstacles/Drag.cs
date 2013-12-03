@@ -13,27 +13,15 @@ namespace GiveUp.Classes.Core
     class Drag : GameObject, IGameObject
     {
         public Texture2D texture { get; set; }
-        public Rectangle rectangle;
 
         public const char TileChar = 'Q';
+        public const byte LoadOrder = 3;
 
         public override void Initialize(ContentManager content, Vector2 position)
         {
             Position = new Vector2(position.X, position.Y);
             texture = content.Load<Texture2D>("Images/Obstacles/DragActivationTest");
-            rectangle = new Rectangle((int)Position.X, (int)Position.Y, texture.Width, texture.Height);
-        }
-
-        public override void CollisionLogic()
-        {
-            if (Player.Rectangle.PerPixesCollision(rectangle, texture))
-            {
-                Player.DragActivated = true;
-            }
-            else
-            {
-                Player.ReverseControls = false;
-            }
+            Player.Gravity.X += 0.4f;
         }
 
         public override void Draw(SpriteBatch spriteBatch)

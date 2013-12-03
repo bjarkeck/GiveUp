@@ -89,8 +89,8 @@ namespace GiveUp.Classes.LevelManager
                     {
                         IGameObject obj = (IGameObject)gameObject.Select(x => Activator.CreateInstance(x)).First();
                         GameObjects.Add(obj);
-                        obj.Initialize(Content, position);
                         obj.Player = Player;
+                        obj.Initialize(Content, position);
                     }
                 }
             }

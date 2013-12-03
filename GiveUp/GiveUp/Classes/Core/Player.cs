@@ -11,10 +11,8 @@ namespace GiveUp.Classes.Core
 {
     public class Player
     {
-
         public Vector2 Position = Vector2.Zero;
         public Vector2 Velocity;
-        public Vector2 DragVelocity;
         public float Acceleration;
         public Rectangle Rectangle;
         public SpriteAnimation Animation;
@@ -25,7 +23,7 @@ namespace GiveUp.Classes.Core
         public bool DragActivated = false;
         public float StartJumpSpeed;
 
-        public float Gravity;
+        public Vector2 Gravity;
         public float MaxSpeed;
         public float MaxDrag;
         public float Friction;
@@ -37,7 +35,7 @@ namespace GiveUp.Classes.Core
             this.Acceleration = 0.2f;
             this.Position = Vector2.Zero;
             this.StartJumpSpeed = -12f;
-            this.Gravity = 0.55f;
+            this.Gravity = new Vector2(0, 0.55f);
             this.MaxSpeed = 5.2f;
             this.MaxDrag = 3.1f;
             this.Friction = 0.9f;
@@ -85,21 +83,23 @@ namespace GiveUp.Classes.Core
         {
             KeyboardState keyState = Keyboard.GetState();
 
-            if (DragActivated == true)
-            {
-                this.DragVelocity.X += this.Acceleration * -1 * gameTime.ElapsedGameTime.Milliseconds;
-            }
 
-            if (keyState.IsKeyDown(ReverseControls ? Keys.D : Keys.A))
+            if (keyState.IsKeyDown(ReverseControls ? Keys.D : Keys.A)) {
+                Animation.PlayAnimation("run");
                 this.Velocity.X += this.Acceleration * -1 * gameTime.ElapsedGameTime.Milliseconds;
-            if (keyState.IsKeyDown(ReverseControls ? Keys.A : Keys.D))
+            } else if (keyState.IsKeyDown(ReverseControls ? Keys.A : Keys.D))
+            {
+                Animation.PlayAnimation("run");
                 this.Velocity.X += this.Acceleration * gameTime.ElapsedGameTime.Milliseconds;
+            }
+            else
+            {
+                Animation.PlayAnimation("stand");
+            }
             //Jump
             if (InputHelper.IsNewPress(Keys.Space))
                 this.Jump();
 
-            //Gravity
-            Velocity.Y += Gravity;
 
             //Friction
             if (Math.Abs(Velocity.X) < Friction)
@@ -107,19 +107,14 @@ namespace GiveUp.Classes.Core
             else
                 Velocity.X += Friction * (Velocity.X > 0 ? -1f : 1f);
 
+
+            //Gravity
+            Velocity += Gravity;
+
+
             //Max Speed
             Velocity.X = MathHelper.Clamp(Velocity.X, MaxSpeed * -1, MaxSpeed);
 
-            //Max Drag
-            DragVelocity.X = MathHelper.Clamp(DragVelocity.X, MaxSpeed * -1, MaxSpeed);
-
-            //Drag friction
-            if (Math.Abs(DragVelocity.X) < Friction)
-                DragVelocity.X = 0;
-            else
-                DragVelocity.X += Friction * (DragVelocity.X > 0 ? -1f : 1f);
-            //Add to position (with drag)
-            this.Position += this.DragVelocity;
 
             //Add To Position
             this.Position += this.Velocity;
@@ -131,10 +126,6 @@ namespace GiveUp.Classes.Core
                 Animation.FlipImage = true;
 
             //Animation state
-            if (Velocity.X == 0)
-                Animation.PlayAnimation("stand");
-            else
-                Animation.PlayAnimation("run");
             if (CanJump == false || Math.Abs(Velocity.Y) > 1)
                 Animation.PlayAnimation("jump");
         }
