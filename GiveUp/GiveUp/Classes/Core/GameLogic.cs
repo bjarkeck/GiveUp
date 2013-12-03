@@ -38,6 +38,7 @@ namespace GiveUp.Classes.Core
             return (float)Math.Sqrt(Math.Pow(Math.Abs(startPos.Y - target.Y), 2) + Math.Pow(Math.Abs(startPos.X - target.X), 2));
         }
 
+        public static Random r = new Random();
         /// <summary>
         /// Check line of sight.
         /// </summary>
@@ -67,7 +68,7 @@ namespace GiveUp.Classes.Core
             double rotationToTarget = startPos.AngleRadian(target.Origin());
 
             //Ud fra rotationen laver vi en velecity som vores check bullet skal flyve med.
-            Vector2 bulletVelocity = new Vector2((float)Math.Cos(rotationToTarget) * 10, (float)Math.Sin(rotationToTarget) * 10);
+            Vector2 bulletVelocity = new Vector2((float)Math.Cos(rotationToTarget) * 30, (float)Math.Sin(rotationToTarget) * 30);
 
             //Mens at vores checkbullet ikke kollidere med target, får vi kuglen til at flyve
             while (bulletRectangle.Intersects(target) == false)
