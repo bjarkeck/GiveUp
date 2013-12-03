@@ -27,13 +27,11 @@ namespace GiveUp.Classes.GameObjects.Obstacles.Cannon
         {
             this.Position += velocity;
 
-            Rectangle cannonBulletRectangle = new Rectangle((int)Position.X, (int)Position.Y, 2, 2);
-      
+            Rectangle cannonBulletRectangle = new Rectangle((int)Position.X, (int)Position.Y, 2, 2);      
             if (cannonBulletRectangle.Intersects(player.Rectangle))
             {
                 //levelManager.RestartLevel();
             }
-            
         }
 
         public void Draw(SpriteBatch spriteBatch)
