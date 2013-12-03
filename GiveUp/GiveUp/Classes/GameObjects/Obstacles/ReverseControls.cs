@@ -21,7 +21,7 @@ namespace GiveUp.Classes.GameObjects.Obstacles
         {
             Position = new Vector2(position.X, position.Y);
             texture = content.Load<Texture2D>("Images/Obstacles/ForceFieldTest");
-            rectangle = new Rectangle((int)Position.X, (int)Position.Y, texture.Width, texture.Height);
+            rectangle = new Rectangle((int)Position.X , (int)Position.Y, texture.Width, texture.Height);
         }
 
         public override void CollisionLogic()

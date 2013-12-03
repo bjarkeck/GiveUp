@@ -36,9 +36,10 @@
   </PropertyGroup>
   <ItemGroup>
     <Compile Include="Classes\Core\Particle.cs" />
-    <Compile Include="Classes\Core\ParticleColor.cs" />
+    <Compile Include="Classes\Core\ParticleTexture.cs" />
     <Compile Include="Classes\Core\ParticleEmitter.cs" />
     <Compile Include="Classes\Core\ParticleManager.cs" />
+    <Compile Include="Classes\Core\Range.cs" />
     <Compile Include="Classes\Core\SpriteAnimation.cs" />
     <Compile Include="Classes\Core\BaseScreen.cs" />
     <Compile Include="Classes\Core\Direction.cs" />
@@ -123,7 +124,7 @@
     <Content Include="Content\Images\Obstacles\AttachedCannon\bullet.png">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Content>
-    <Content Include="Content\Images\Obstacles\AttachedCannon\bullet1.png">
+    <Content Include="Content\Images\Obstacles\DragActivationTest.png">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Content>
     <Content Include="Content\Images\Obstacles\ForceFieldTest.png">

@@ -22,7 +22,7 @@
 ------S----------------------------------------------
 -----------------------------------------------------
 -----------------------------------------------------
------------^^^^--------D--------------------------
+--------Q----------------D--------------------------
 GGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGG
 GGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGG
 GGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGG
