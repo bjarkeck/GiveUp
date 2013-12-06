@@ -104,8 +104,6 @@ namespace GiveUp.Classes.Core
             }
         }
 
-
-
         public void Draw(SpriteBatch spriteBatch)
         {
             foreach (Particle particle in Particles)
