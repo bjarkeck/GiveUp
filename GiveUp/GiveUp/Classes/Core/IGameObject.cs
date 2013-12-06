@@ -12,6 +12,7 @@ public interface IGameObject
 
     Player Player { get; set; }
 
+
     void Initialize(ContentManager content, Vector2 position);
 
     void CollisionLogic();

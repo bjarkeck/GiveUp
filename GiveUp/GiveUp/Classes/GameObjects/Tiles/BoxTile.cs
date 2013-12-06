@@ -16,7 +16,22 @@ namespace GiveUp.Classes.GameObjects.Tiles
 
         private Texture2D texture;
         public bool Hide = false;
+
         public Rectangle Rectangle;
+        private Vector2 position;
+        public Vector2 Position
+        {
+            get
+            {
+                return position;
+            }
+            set
+            {
+                Rectangle.X = (int)value.X;
+                Rectangle.Y = (int)value.Y;
+                position = value;
+            }
+        }
 
         public override void Initialize(ContentManager content, Vector2 position)
         {

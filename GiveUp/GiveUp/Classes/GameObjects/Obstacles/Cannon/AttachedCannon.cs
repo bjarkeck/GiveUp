@@ -14,6 +14,23 @@ namespace GiveUp.Classes.GameObjects.Obstacles
     class AttachedCannon : GameObject, IGameObject
     {
         public const char TileChar = 'c';
+
+        public Rectangle Rectangle;
+        private Vector2 position;
+        public Vector2 Position
+        {
+            get
+            {
+                return position;
+            }
+            set
+            {
+                Rectangle.X = (int)value.X;
+                Rectangle.Y = (int)value.Y;
+                position = value;
+            }
+        }
+
         Texture2D texture;
         Texture2D bulletTexture;
         Texture2D cannonTexture;
@@ -30,30 +47,29 @@ namespace GiveUp.Classes.GameObjects.Obstacles
         public override void Initialize(ContentManager content, Vector2 position)
         {
             bulletTexture = content.Load<Texture2D>("Images/Obstacles/AttachedCannon/bullet1");
-
-            boxTiles = LevelManager.GameObjects.Where(x => x.GetType().Name == "BoxTile").Select(x => ((BoxTile)x).Rectangle).ToList();
-            var boxTile = LevelManager.GameObjects.Where(x => x.GetType().Name == "BoxTile").Select(x => ((BoxTile)x).Position);
             cannonTexture = content.Load<Texture2D>("Images/Obstacles/AttachedCannon/AttatchedCannonCannon");
 
-            if (boxTile.Any(x => x.X == position.X && x.Y == position.Y + 32))
+            boxTiles = GetAllGameObjects<BoxTile>().Select(x => x.Rectangle).ToList();
+
+            if (boxTiles.Any(x => x.X == position.X && x.Y == position.Y + 32))
             {
                 texture = content.Load<Texture2D>("Images/Obstacles/AttachedCannon/AttatchedCannonBodyT");
                 position.Y += 32 - texture.Height;
 
                 cannonPosition = new Vector2(position.X + 16, position.Y + 7);
             }
-            else if (boxTile.Any(x => x.X == position.X && x.Y == position.Y - 32))
+            else if (boxTiles.Any(x => x.X == position.X && x.Y == position.Y - 32))
             {
                 texture = content.Load<Texture2D>("Images/Obstacles/AttachedCannon/AttatchedCannonBodyB");
                 cannonPosition = new Vector2(position.X + 16, position.Y);
             }
-            else if (boxTile.Any(x => x.X == position.X - 32 && x.Y == position.Y))
+            else if (boxTiles.Any(x => x.X == position.X - 32 && x.Y == position.Y))
             {
                 texture = content.Load<Texture2D>("Images/Obstacles/AttachedCannon/AttatchedCannonBodyR");
                 cannonPosition = new Vector2(position.X + 4, position.Y + 15);
 
             }
-            else if (boxTile.Any(x => x.X == position.X + 32 && x.Y == position.Y))
+            else if (boxTiles.Any(x => x.X == position.X + 32 && x.Y == position.Y))
             {
                 texture = content.Load<Texture2D>("Images/Obstacles/AttachedCannon/AttatchedCannonBodyL");
                 position.X += 32 - texture.Width;

@@ -11,21 +11,12 @@ using System.Text;
 
     public class GameObject
     {
-        public Rectangle Rectangle;
-        private Vector2 position;
-        public Vector2 Position
+
+        public IEnumerable<T> GetAllGameObjects<T>() where T : IGameObject
         {
-            get
-            {
-                return position;
-            }
-            set
-            {
-                Rectangle.X = (int)value.X;
-                Rectangle.Y = (int)value.Y;
-                position = value;
-            }
+            return LevelManager.GameObjects.Where(x => x.GetType() == typeof(T)).Select(x => ((T)x)).ToList();
         }
+
 
         public Player Player { get; set; }
 
