@@ -12,6 +12,7 @@ namespace GiveUp.Classes.GameObjects.Obstacles
     public class Testicle : GameObject, IGameObject
     {
         ParticleEmitter e1;
+        public Vector2 Position { get; set; }
 
         public const char TileChar = 't';
 
@@ -63,5 +64,6 @@ namespace GiveUp.Classes.GameObjects.Obstacles
         {
             e1.Draw(spriteBatch);
         }
+
     }
 }

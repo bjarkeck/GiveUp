@@ -14,6 +14,8 @@ namespace GiveUp.Classes.GameObjects.Obstacles
     {
         public Texture2D texture { get; set; }
         public Rectangle rectangle;
+        private Vector2 position;
+        public Vector2 Position;
 
         public const char TileChar = '^';
 

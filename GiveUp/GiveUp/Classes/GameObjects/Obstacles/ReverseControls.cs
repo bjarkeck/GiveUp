@@ -13,8 +13,12 @@ namespace GiveUp.Classes.GameObjects.Obstacles
     class ReverseControls : GameObject, IGameObject
     {
         public Texture2D texture { get; set; }
+        public Vector2 Position { get; set; }
         public Rectangle rectangle;
 
+        public Rectangle Rectangle;
+        private Vector2 position;
+        
         public const char TileChar = 'F';
 
         public override void Initialize(ContentManager content, Vector2 position)
@@ -40,5 +44,6 @@ namespace GiveUp.Classes.GameObjects.Obstacles
         {
             spriteBatch.Draw(texture, Position, Color.White);
         }
+
     }
 }

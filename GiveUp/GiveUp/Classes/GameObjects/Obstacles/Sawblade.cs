@@ -15,6 +15,22 @@ namespace GiveUp.Classes.GameObjects.Obstacles
         public const char TileChar = 'B';
         public const byte LoadOrder = 0;
 
+        public Rectangle Rectangle;
+        private Vector2 position;
+        public Vector2 Position
+        {
+            get
+            {
+                return position;
+            }
+            set
+            {
+                Rectangle.X = (int)value.X;
+                Rectangle.Y = (int)value.Y;
+                position = value;
+            }
+        }
+
         Texture2D texture { get; set; }
         float rotation = 0.5f;
         float speed = 2.5f;
