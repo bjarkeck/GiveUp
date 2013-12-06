@@ -18,6 +18,7 @@ namespace GiveUp.Classes.GameObjects.Obstacles
         public bool Hide = false;
         public Rectangle Rectangle;
         public float Friction;
+        private Vector2 Position;
 
         public override void Initialize(ContentManager content, Vector2 position)
         {
@@ -41,24 +42,6 @@ namespace GiveUp.Classes.GameObjects.Obstacles
                 Player.Friction = Friction;
             }
         }
-
-
-        //public override void CollisionLogic()
-        //{
-        //    if (HandleCollision.IsOnTopOf(ref Player.Rectangle, Rectangle, ref Player.Velocity, ref Player.Position))
-
-        //        Player.Animation.PlayAnimation("stand");
-        //    if (Player.Velocity.X > 0.1f)
-        //    {
-        //        Player.Friction = 0;
-        //        Player.CanJump = true;
-        //    }
-        //    else
-        //    {
-        //        Player.Friction = Player.Friction;
-        //    }
-
-        //}
 
         public override void Draw(SpriteBatch spriteBatch)
         {
