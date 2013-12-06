@@ -22,7 +22,7 @@ namespace GiveUp.Classes.GameObjects.Obstacles
 
         public override void Initialize(ContentManager content, Vector2 position)
         {
-            this.Position = position;
+            Position = position;
             Friction = Player.Friction;
             this.texture = content.Load<Texture2D>("Images/Tiles/IceGround");
             this.Rectangle = new Rectangle((int)position.X, (int)position.Y, texture.Width, texture.Height);
