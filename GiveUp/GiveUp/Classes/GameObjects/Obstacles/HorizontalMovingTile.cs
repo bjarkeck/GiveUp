@@ -32,7 +32,6 @@ namespace GiveUp.Classes.GameObjects.Obstacles
         }
 
         Texture2D texture { get; set; }
-        float rotation = 0.5f;
         float speed = 2.5f;
         int leftBounderie;
         int direction = 1;
@@ -60,14 +59,7 @@ namespace GiveUp.Classes.GameObjects.Obstacles
 
         public override void Update(GameTime gameTime)
         {
-            rotation += 0.2f;
             Movement();
-
-            if (Player.Rectangle.PerPixesCollision(Rectangle, texture))
-            {
-                LevelManager.RestartLevel();
-            }
-
             base.Update(gameTime);
         }
 
