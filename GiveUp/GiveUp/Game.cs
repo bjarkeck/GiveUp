@@ -22,7 +22,6 @@ namespace GiveUp
         SpriteBatch spriteBatch;
 
         public static ScreenManager ScreenManager;
-       
 
         public Game1()
             : base()

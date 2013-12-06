@@ -35,10 +35,15 @@
     <ApplicationIcon>System\Icon.ico</ApplicationIcon>
   </PropertyGroup>
   <ItemGroup>
-    <Compile Include="Classes\Core\Actor.cs" />
-    <Compile Include="Classes\Core\AnimationSprite.cs" />
+    <Compile Include="Classes\Core\Particle.cs" />
+    <Compile Include="Classes\Core\ParticleTexture.cs" />
+    <Compile Include="Classes\Core\ParticleEmitter.cs" />
+    <Compile Include="Classes\Core\ParticleManager.cs" />
+    <Compile Include="Classes\Core\Range.cs" />
+    <Compile Include="Classes\Core\SpriteAnimation.cs" />
     <Compile Include="Classes\Core\BaseScreen.cs" />
     <Compile Include="Classes\Core\Direction.cs" />
+    <Compile Include="Classes\GameObjects\Obstacles\Drag.cs" />
     <Compile Include="Classes\Core\GameLogic.cs" />
     <Compile Include="Classes\Core\GameObject.cs" />
     <Compile Include="Classes\Core\HandleCollision.cs" />
@@ -46,14 +51,16 @@
     <Compile Include="Classes\Core\KeyboardHelper.cs" />
     <Compile Include="Classes\Core\Player.cs" />
     <Compile Include="Classes\Core\ScreenManager.cs" />
-    <Compile Include="Classes\Core\Sprite.cs" />
     <Compile Include="Classes\Db\DataContext.cs" />
     <Compile Include="Classes\Db\LevelData.cs" />
     <Compile Include="Classes\Db\TileData.cs" />
     <Compile Include="Classes\GameObjects\Finish.cs" />
-    <Compile Include="Classes\GameObjects\Obstacles\AttachedCannon.cs" />
+    <Compile Include="Classes\GameObjects\Obstacles\Cannon\AttachedCannon.cs" />
+    <Compile Include="Classes\GameObjects\Obstacles\Cannon\CannonBullet.cs" />
+    <Compile Include="Classes\GameObjects\Obstacles\ReverseControls.cs" />
     <Compile Include="Classes\GameObjects\Obstacles\Sawblade.cs" />
     <Compile Include="Classes\GameObjects\Obstacles\Spike.cs" />
+    <Compile Include="Classes\GameObjects\Obstacles\Testicle.cs" />
     <Compile Include="Classes\GameObjects\Tiles\BoxTile.cs" />
     <Compile Include="Classes\LevelManager\LevelManager.cs" />
     <Compile Include="Classes\LevelManager\GridManager.cs" />
@@ -114,7 +121,25 @@
     <Content Include="Content\Images\Obstacles\AttachedCannon\AttatchedCannonCannon.png">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Content>
+    <Content Include="Content\Images\Obstacles\AttachedCannon\bullet.png">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Content\Images\Obstacles\AttachedCannon\bullet1.png">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Content\Images\Obstacles\DragActivationTest.png">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Content\Images\Obstacles\ForceFieldTest.png">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
     <Content Include="Content\Images\Obstacles\sawblade.png">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Content\Images\Particles\moon.png">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Content\Images\Player\playerAnimation.png">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Content>
     <Content Include="Content\Images\Player\player.png">
@@ -159,8 +184,12 @@
   </ItemGroup>
   <ItemGroup>
     <None Include="App.config" />
+    <None Include="Content\Fonts\font.xnb">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </None>
     <None Include="packages.config" />
   </ItemGroup>
+  <ItemGroup />
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
        Other similar extension points exist, see Microsoft.Common.targets.
