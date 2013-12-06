@@ -14,13 +14,15 @@ namespace GiveUp.Classes.GameObjects.Obstacles
     {
         public Texture2D texture { get; set; }
         public Rectangle rectangle;
+        private Vector2 position;
+        public Vector2 Position;
 
         public const char TileChar = '^';
 
         public override void Initialize(ContentManager content, Vector2 position)
         {
             Position = new Vector2(position.X, position.Y + (32-9));
-            texture = content.Load<Texture2D>("Images/Obstacles/Spike");
+            texture = content.Load<Texture2D>("Images/Obstacles/Spikes/SpikeB");
             rectangle = new Rectangle((int)Position.X, (int)Position.Y, texture.Width, texture.Height);
         }
 

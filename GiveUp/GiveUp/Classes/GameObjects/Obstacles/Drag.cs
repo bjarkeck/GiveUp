@@ -16,6 +16,7 @@ namespace GiveUp.Classes.Core
 
         public const char TileChar = 'Q';
         public const byte LoadOrder = 3;
+        public Vector2 Position { get; set; }
 
         public override void Initialize(ContentManager content, Vector2 position)
         {
@@ -28,5 +29,6 @@ namespace GiveUp.Classes.Core
         {
             spriteBatch.Draw(texture, Position, Color.White);
         }
+
     }
 }
