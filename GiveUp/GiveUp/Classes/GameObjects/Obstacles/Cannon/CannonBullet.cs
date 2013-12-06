@@ -20,7 +20,7 @@ namespace GiveUp.Classes.GameObjects.Obstacles.Cannon
         public CannonBullet(Texture2D texture, Vector2 startPosition, float shootAngle, float bulletSpeed)
         {
             this.texture = texture;
-            this.Position = startPosition;
+            this.Position = new Vector2(startPosition.X - 8, startPosition.Y - 8);
             this.velocity = new Vector2((float)Math.Cos(shootAngle) * bulletSpeed, (float)Math.Sin(shootAngle) * bulletSpeed);
         }
 

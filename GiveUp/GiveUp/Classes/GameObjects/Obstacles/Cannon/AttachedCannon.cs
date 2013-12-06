@@ -101,7 +101,7 @@ namespace GiveUp.Classes.GameObjects.Obstacles
                 if ((timeElapsed += gameTime.ElapsedGameTime) > fireRate)
                 {
                     timeElapsed = TimeSpan.Zero;
-                    cannonBullets.Add(new CannonBullet(bulletTexture, cannonPosition, rotation, 10));
+                    cannonBullets.Add(new CannonBullet(bulletTexture, new Vector2(cannonPosition.X + (float)(Math.Cos(cannonRotation) * 15), cannonPosition.Y + ((float)Math.Sin(cannonRotation) * 15)), rotation, 10));
                 }
             }
                                                 
