@@ -28,7 +28,7 @@ G----------------------------------------------------------G
 G----G-----------------------------------------------------G
 G----G---------------------------------------------------- G
 G-----S----------------------------------------------------G
-G---------------- ---D---G
+G-----------------ccccccccccccccccccccccc----------D---G
 GGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGG
 GGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGG
 GGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGG
