@@ -71,10 +71,10 @@ namespace GiveUp
         protected override void Draw(GameTime gameTime)
         {
             GraphicsDevice.Clear(Color.Black);
-
-            spriteBatch.Begin(SpriteSortMode.Deferred, BlendState.AlphaBlend, SamplerState.LinearClamp, DepthStencilState.Default, RasterizerState.CullNone, null, SpriteScale);
+            spriteBatch.Begin(SpriteSortMode.Deferred, BlendState.AlphaBlend, null, null, null, null, SpriteScale);
             Game1.ScreenManager.Draw(spriteBatch);
             spriteBatch.End();
+
             base.Draw(gameTime);
         }
 
