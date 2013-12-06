@@ -35,7 +35,7 @@ namespace GiveUp.Classes.Core
             this.Acceleration = 0.2f;
             this.Position = Vector2.Zero;
             this.StartJumpSpeed = -12f;
-            this.Gravity = new Vector2(-0.55f, 0.55f);
+            this.Gravity = new Vector2(0, 0.55f);
             this.MaxSpeed = 5.2f;
             this.MaxDrag = 3.1f;
             this.Friction = 0.9f;
