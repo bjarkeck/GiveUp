@@ -35,6 +35,10 @@ namespace GiveUp
             graphics.IsFullScreen = true;
             graphics.PreferredBackBufferWidth = GraphicsAdapter.DefaultAdapter.CurrentDisplayMode.Width;
             graphics.PreferredBackBufferHeight = GraphicsAdapter.DefaultAdapter.CurrentDisplayMode.Height;
+            //graphics.PreferredBackBufferWidth = 1024;
+            //graphics.PreferredBackBufferHeight = 768;
+
+
             graphics.ApplyChanges();
 
 
@@ -49,7 +53,7 @@ namespace GiveUp
 
 
             spriteBatch = new SpriteBatch(GraphicsDevice);
-            SpriteScale = Matrix.CreateScale(graphics.GraphicsDevice.Viewport.Width / 1920f, graphics.GraphicsDevice.Viewport.Height / 1080f, 1);
+            SpriteScale = Matrix.CreateScale(graphics.GraphicsDevice.Viewport.Width / 1600f, graphics.GraphicsDevice.Viewport.Height / 900f, 1);
         }
         
         protected override void UnloadContent()
