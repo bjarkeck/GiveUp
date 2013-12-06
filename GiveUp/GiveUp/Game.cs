@@ -28,15 +28,17 @@ namespace GiveUp
         {
             graphics = new GraphicsDeviceManager(this);
             Content.RootDirectory = "Content";
-            graphics.IsFullScreen = true;
-            //graphics.PreferredBackBufferHeight = 960;
-            //graphics.PreferredBackBufferWidth = 1280;
-            //graphics.PreferredBackBufferHeight = 860;
-            //graphics.ApplyChanges();
         }
 
         protected override void Initialize()
         {
+            graphics.IsFullScreen = true;
+            graphics.PreferredBackBufferWidth = GraphicsAdapter.DefaultAdapter.CurrentDisplayMode.Width;
+            graphics.PreferredBackBufferHeight = GraphicsAdapter.DefaultAdapter.CurrentDisplayMode.Height;
+            graphics.ApplyChanges();
+
+
+
             base.Initialize();
         }
 
@@ -44,6 +46,10 @@ namespace GiveUp
         {
             spriteBatch = new SpriteBatch(GraphicsDevice);
             Game1.ScreenManager = new ScreenManager(Content);
+
+
+            spriteBatch = new SpriteBatch(GraphicsDevice);
+            SpriteScale = Matrix.CreateScale(graphics.GraphicsDevice.Viewport.Width / 1920f, graphics.GraphicsDevice.Viewport.Height / 1080f, 1);
         }
         
         protected override void UnloadContent()
@@ -61,11 +67,14 @@ namespace GiveUp
         protected override void Draw(GameTime gameTime)
         {
             GraphicsDevice.Clear(Color.Black);
-            spriteBatch.Begin(SpriteSortMode.Deferred, BlendState.NonPremultiplied);
+
+            spriteBatch.Begin(SpriteSortMode.Deferred, BlendState.AlphaBlend, SamplerState.LinearClamp, DepthStencilState.Default, RasterizerState.CullNone, null, SpriteScale);
             Game1.ScreenManager.Draw(spriteBatch);
             spriteBatch.End();
             base.Draw(gameTime);
         }
 
+
+        public Matrix SpriteScale { get; set; }
     }
 }
