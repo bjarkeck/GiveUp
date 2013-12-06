@@ -45,6 +45,13 @@ namespace GiveUp.Classes.GameObjects.Obstacles
         {
             //her sætter jeg direction til at pege på musen
             e1.AngleDirection = (int)(Player.Rectangle.Origin().AngleDegree(Player.InputHelper.MousePosition)) + 90;
+            float dir = (int)(Player.Rectangle.Origin().AngleRadian(Player.InputHelper.MousePosition));
+
+            if (Player.InputHelper.IsCurPress(MouseButtons.RightButton))
+            {
+                Player.Velocity += new Vector2((float)Math.Cos(dir) , (float)Math.Sin(dir));
+            }
+
 
             //og lægger playerens velocirty til dne.
             e1.AddedVelocity = Player.Velocity;
