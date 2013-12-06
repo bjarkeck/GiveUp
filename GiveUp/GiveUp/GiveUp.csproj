@@ -57,6 +57,7 @@
     <Compile Include="Classes\GameObjects\Finish.cs" />
     <Compile Include="Classes\GameObjects\Obstacles\Cannon\AttachedCannon.cs" />
     <Compile Include="Classes\GameObjects\Obstacles\Cannon\CannonBullet.cs" />
+    <Compile Include="Classes\GameObjects\Obstacles\Ice.cs" />
     <Compile Include="Classes\GameObjects\Obstacles\ReverseControls.cs" />
     <Compile Include="Classes\GameObjects\Obstacles\Sawblade.cs" />
     <Compile Include="Classes\GameObjects\Obstacles\Spike.cs" />
@@ -158,6 +159,9 @@
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Content>
     <Content Include="Content\Images\Tiles\ClosedDoor.png">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Content\Images\Tiles\IceGround.png">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Content>
     <Content Include="Content\Images\Tiles\ground.png">
