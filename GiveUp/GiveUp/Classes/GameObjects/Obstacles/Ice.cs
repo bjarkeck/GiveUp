@@ -43,24 +43,6 @@ namespace GiveUp.Classes.GameObjects.Obstacles
             }
         }
 
-
-        //public override void CollisionLogic()
-        //{
-        //    if (HandleCollision.IsOnTopOf(ref Player.Rectangle, Rectangle, ref Player.Velocity, ref Player.Position))
-
-        //        Player.Animation.PlayAnimation("stand");
-        //    if (Player.Velocity.X > 0.1f)
-        //    {
-        //        Player.Friction = 0;
-        //        Player.CanJump = true;
-        //    }
-        //    else
-        //    {
-        //        Player.Friction = Player.Friction;
-        //    }
-
-        //}
-
         public override void Draw(SpriteBatch spriteBatch)
         {
             spriteBatch.Draw(texture, Rectangle, new Color(68, 68, 68));
