@@ -16,6 +16,7 @@ namespace GiveUp.Classes.GameObjects.Tiles
 
         private Texture2D texture;
         public bool Hide = false;
+        public Direction LastCollisionDirection = Direction.None;
 
         private Vector2 position;
         public Vector2 Position
@@ -40,17 +41,36 @@ namespace GiveUp.Classes.GameObjects.Tiles
 
         public override void CollisionLogic()
         {
+            LastCollisionDirection = Direction.None;
             // TODO Tjek om den virker hver gang
             if (HandleCollision.IsOnTopOf(ref Player.Rectangle, Rectangle, ref Player.Velocity, ref Player.Position))
+            {
+                LastCollisionDirection = Direction.Top;
                 Player.CanJump = true;
+            }
 
             if (HandleCollision.IsRightOf(ref Player.Rectangle, Rectangle, ref Player.Velocity, ref Player.Position))
             {
+                if (Player.Velocity.Y > 0.1f)
+                {
+                    Player.Animation.PlayAnimation("slide");
+                    Player.Velocity.Y = Player.Velocity.Y / 2;
+                    Player.CanJump = false;
+                    Player.CanDoubleJump = false;
+                }
             }
             if (HandleCollision.IsLeftOf(ref Player.Rectangle, Rectangle, ref Player.Velocity, ref Player.Position))
             {
+                if (Player.Velocity.Y > 0.1f)
+                {
+                    Player.Animation.PlayAnimation("slide");
+                    Player.Velocity.Y = Player.Velocity.Y / 2;
+                    Player.CanJump = false;
+                    Player.CanDoubleJump = false;
+                }
             }
-            HandleCollision.IsBelowOf(ref Player.Rectangle, Rectangle, ref Player.Velocity, ref Player.Position);
+            if (HandleCollision.IsBelowOf(ref Player.Rectangle, Rectangle, ref Player.Velocity, ref Player.Position))
+                LastCollisionDirection = Direction.Bottom;
         }
 
         public override void Draw(SpriteBatch spriteBatch)

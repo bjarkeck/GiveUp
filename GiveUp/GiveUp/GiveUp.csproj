@@ -36,6 +36,7 @@
   </PropertyGroup>
   <ItemGroup>
     <Compile Include="Classes\Core\Button.cs" />
+    <Compile Include="Classes\Core\Direction.cs" />
     <Compile Include="Classes\Core\Particle.cs" />
     <Compile Include="Classes\Core\ParticleTexture.cs" />
     <Compile Include="Classes\Core\ParticleEmitter.cs" />
@@ -217,10 +218,7 @@
     <Content Include="Content\Images\Tiles\ClosedDoor.png">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Content>
-    <Content Include="Content\Images\Tiles\gooGroundLeft.png">
-      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
-    </Content>
-    <Content Include="Content\Images\Tiles\gooGroundRight.png">
+    <Content Include="Content\Images\Tiles\Goo.png">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Content>
     <Content Include="Content\Images\Tiles\IceGround.png">
