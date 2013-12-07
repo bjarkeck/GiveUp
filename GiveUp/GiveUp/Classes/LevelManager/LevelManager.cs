@@ -118,11 +118,7 @@ namespace GiveUp.Classes.LevelManager
             foreach (IGameObject item in GameObjects)
             {
                 item.Update(gameTime);
-            }
-            // TODO CollisionLogic - Is it neccesarry?
-            foreach (IGameObject obj in GameObjects)
-            {
-                obj.CollisionLogic();
+                item.CollisionLogic();
             }
 
             if (changeLevel)

@@ -17,7 +17,8 @@ namespace GiveUp.Classes.GameObjects.Obstacles
         public Vector2 Position;
         private float speed;
 
-        public const char TileChar = 'W';
+        public const byte LoadOrder = 51;
+        public const char TileChar = 'K';
 
         // TODO En PushingWalls skal gælde for hele y aksen..
         public override void Initialize(ContentManager content, Vector2 position)
@@ -43,16 +44,14 @@ namespace GiveUp.Classes.GameObjects.Obstacles
             Movement();
         }
 
-        // TODO Fiks Pushing Pushing tile collision
+        // TODO Fiks Pushing tile collision
         public override void CollisionLogic()
         {
-            if (Player.Rectangle.Intersects(Rectangle))
+            if (Player.Rectangle.Intersects(rectangle) || Player.Rectangle.IsRightOf(rectangle, Player.Velocity))
             {
                 Player.Animation.PlayAnimation("stand");
-                if (Player.Position.X < this.Position.X + 28)
-                {
-                    Player.Position.X = this.Position.X + 28 ;
-                }
+                Player.Position.X = rectangle.Right;
+                Player.Velocity.X = 10;
             }
         }
 
