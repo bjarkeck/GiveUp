@@ -10,6 +10,7 @@ namespace GiveUp.Classes.Db
     {
         public int Id { get; set; }
         public int LevelId { get; set; }
+        public int SubLevelId { get; set; }
         public int BestPracticeTime { get; set; }
         public int BestRunTime { get; set; }
         public int PreviousRunTime { get; set; }

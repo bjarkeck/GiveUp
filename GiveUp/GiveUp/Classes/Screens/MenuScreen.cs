@@ -21,6 +21,8 @@ namespace GiveUp.Classes.Screens
         private int startPosition;
         public float ButtonSizeScaleFactor;
         public Type ActiveScreenType;
+        public Rectangle MenuScreenBounderies = new Rectangle(0, 120, 1150, 0);
+
 
         public override void LoadContent()
         {
@@ -42,6 +44,8 @@ namespace GiveUp.Classes.Screens
 
             //Udregn start position:
             startPosition = (int)((1600 - buttonsWidth) / 2f);
+
+            MenuScreenBounderies.X = (int)((1600 - MenuScreenBounderies.Width) / 2f);
 
             int currentXOffset = 0;
             foreach (var item in buttons)
