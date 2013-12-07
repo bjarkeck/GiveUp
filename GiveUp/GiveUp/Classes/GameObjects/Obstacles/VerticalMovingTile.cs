@@ -25,24 +25,23 @@ namespace GiveUp.Classes.GameObjects.Obstacles
             }
             set
             {
-                Rectangle.Y = (int)value.Y;
                 Rectangle.X = (int)value.X;
+                Rectangle.Y = (int)value.Y;
                 position = value;
             }
         }
 
         Texture2D texture { get; set; }
-        float rotation = 0.5f;
         float speed = 2.5f;
-        int leftBounderie;
+        int topBounderie;
         int direction = 1;
         int range = 64;
-        int rightBounderie;
+        int bottomBounderie;
 
         public override void Initialize(ContentManager content, Vector2 position)
         {
-            leftBounderie = (int)position.Y - range;
-            rightBounderie = (int)position.Y + range;
+            topBounderie = (int)position.Y - range;
+            bottomBounderie = (int)position.Y + range;
             Position = new Vector2(position.X, position.Y);
             texture = content.Load<Texture2D>("Images/Tiles/ground");
             Rectangle = new Rectangle((int)Position.X, (int)Position.Y, texture.Width, texture.Height);
@@ -50,12 +49,56 @@ namespace GiveUp.Classes.GameObjects.Obstacles
 
         public void Movement()
         {
-            if (Position.Y < rightBounderie)
-                direction += 1;
-            if (Position.Y > leftBounderie)
+            if (Position.Y > bottomBounderie)
                 direction *= -1;
+            if (Position.Y < topBounderie)
+                direction += 1;
 
-            Position = new Vector2(Position.Y, Position.Y + speed * direction);
+            Position = new Vector2(Position.X, Position.Y + speed * direction);
+        }
+
+        public override void CollisionLogic()
+        {
+            if (HandleCollision.IsOnTopOf(ref Player.Rectangle, Rectangle, ref Player.Velocity, ref Player.Position))
+            {
+                Player.Position.Y += speed * direction;
+                Player.CanJump = true;
+            }
+            else if (HandleCollision.IsRightOf(ref Player.Rectangle, Rectangle, ref Player.Velocity, ref Player.Position))
+            {
+                Player.Animation.PlayAnimation("slide");
+                if (Player.Velocity.Y > 0.1f)
+                {
+                    Player.Velocity.Y = Player.Velocity.Y / 2;
+                    Player.CanJump = true;
+                    Player.CanDoubleJump = false;
+                }
+            }
+            else if (HandleCollision.IsLeftOf(ref Player.Rectangle, Rectangle, ref Player.Velocity, ref Player.Position))
+            {
+                Player.Animation.PlayAnimation("slide");
+                if (Player.Velocity.Y > 0.1f)
+                {
+                    Player.Velocity.Y = Player.Velocity.Y / 2;
+                    Player.CanJump = true;
+                    Player.CanDoubleJump = false;
+                }
+            }
+            else if (HandleCollision.IsBelowOf(ref Player.Rectangle, Rectangle, ref Player.Velocity, ref Player.Position))
+            {
+                Player.Position.Y += speed;
+            }
+            else if (Player.Rectangle.Intersects(Rectangle))
+            {
+                if (Rectangle.Bottom - Player.Rectangle.Top > Player.Rectangle.Bottom - Rectangle.Top)
+                {
+                    Player.Position.Y = Rectangle.Top -1;
+                }
+                else
+                {
+                    Player.Position.Y = Rectangle.Bottom + Player.Rectangle.Height +1;
+                }
+            }
         }
 
         public override void Update(GameTime gameTime)
@@ -67,8 +110,7 @@ namespace GiveUp.Classes.GameObjects.Obstacles
 
         public override void Draw(SpriteBatch spriteBatch)
         {
-            spriteBatch.Draw(texture, Position, Color.White);
-            
+            spriteBatch.Draw(texture, position, Color.White);
         }
     }
 }

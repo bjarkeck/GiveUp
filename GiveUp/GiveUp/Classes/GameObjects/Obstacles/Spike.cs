@@ -58,7 +58,7 @@ namespace GiveUp.Classes.GameObjects.Obstacles
             else
             {
                 //Hvis den flyver i luften
-                texture = content.Load<Texture2D>("Images/Obstacles/AttachedCannon/AttatchedCannonBodyL");
+                texture = content.Load<Texture2D>("Images/Obstacles/Spikes/SpikeT");
             }
 
             this.Position = position;

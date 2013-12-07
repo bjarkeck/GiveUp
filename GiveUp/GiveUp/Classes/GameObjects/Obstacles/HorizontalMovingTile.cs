@@ -32,7 +32,6 @@ namespace GiveUp.Classes.GameObjects.Obstacles
         }
 
         Texture2D texture { get; set; }
-        float rotation = 0.5f;
         float speed = 2.5f;
         int leftBounderie;
         int direction = 1;
@@ -58,16 +57,53 @@ namespace GiveUp.Classes.GameObjects.Obstacles
             Position = new Vector2(Position.X + speed * direction, Position.Y);
         }
 
+        public override void CollisionLogic()
+        {
+            if (HandleCollision.IsOnTopOf(ref Player.Rectangle, Rectangle, ref Player.Velocity, ref Player.Position))
+            {
+                Player.Position.X += speed * direction;
+                Player.CanJump = true;
+            }
+            //else if (HandleCollision.IsRightOf(ref Player.Rectangle, Rectangle, ref Player.Velocity, ref Player.Position))
+            //{
+            //    Player.Animation.PlayAnimation("slide");
+            //    if (Player.Velocity.Y > 0.1f)
+            //    {
+            //        Player.Velocity.Y = Player.Velocity.Y / 2;
+            //        Player.CanJump = true;
+            //        Player.CanDoubleJump = false;
+            //    }
+            //}
+            //else if (HandleCollision.IsLeftOf(ref Player.Rectangle, Rectangle, ref Player.Velocity, ref Player.Position))
+            //{
+            //    Player.Animation.PlayAnimation("slide");
+            //    if (Player.Velocity.Y > 0.1f)
+            //    {
+            //        Player.Velocity.Y = Player.Velocity.Y / 2;
+            //        Player.CanJump = true;
+            //        Player.CanDoubleJump = false;
+            //    }
+            //}
+            //else if (HandleCollision.IsBelowOf(ref Player.Rectangle, Rectangle, ref Player.Velocity, ref Player.Position))
+            //{
+            //    Player.Position.Y += speed;
+            //}
+            //else if (Player.Rectangle.Intersects(Rectangle))
+            //{
+            //    if (Rectangle.Bottom - Player.Rectangle.Top > Player.Rectangle.Bottom - Rectangle.Top)
+            //    {
+            //        Player.Position.Y = Rectangle.Top - 1;
+            //    }
+            //    else
+            //    {
+            //        Player.Position.Y = Rectangle.Bottom + Player.Rectangle.Height + 1;
+            //    }
+            //}
+        }
+
         public override void Update(GameTime gameTime)
         {
-            rotation += 0.2f;
             Movement();
-
-            if (Player.Rectangle.PerPixesCollision(Rectangle, texture))
-            {
-                LevelManager.RestartLevel();
-            }
-
             base.Update(gameTime);
         }
 

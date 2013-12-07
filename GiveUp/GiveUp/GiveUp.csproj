@@ -43,6 +43,7 @@
     <Compile Include="Classes\Core\SpriteAnimation.cs" />
     <Compile Include="Classes\Core\BaseScreen.cs" />
     <Compile Include="Classes\Core\Direction.cs" />
+    <Compile Include="Classes\GameObjects\ButtonActivator.cs" />
     <Compile Include="Classes\GameObjects\Obstacles\Drag.cs" />
     <Compile Include="Classes\Core\GameLogic.cs" />
     <Compile Include="Classes\Core\GameObject.cs" />
@@ -59,6 +60,8 @@
     <Compile Include="Classes\GameObjects\Obstacles\Cannon\CannonBullet.cs" />
     <Compile Include="Classes\GameObjects\Obstacles\HorizontalMovingTile.cs" />
     <Compile Include="Classes\GameObjects\Obstacles\Ice.cs" />
+    <Compile Include="Classes\GameObjects\Obstacles\MovingWall\MovingWall.cs" />
+    <Compile Include="Classes\GameObjects\Obstacles\MovingWall\MovingWallActivationTile.cs" />
     <Compile Include="Classes\GameObjects\Obstacles\ReverseControls.cs" />
     <Compile Include="Classes\GameObjects\Obstacles\Sawblade.cs" />
     <Compile Include="Classes\GameObjects\Obstacles\Spike.cs" />
@@ -154,6 +157,12 @@
     <Content Include="Content\Images\Tiles\activation.png">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Content>
+    <Content Include="Content\Images\Tiles\buttonActivatorLocked.png">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Content\Images\Tiles\buttonActivatorUnlocked.png">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
     <Content Include="Content\Images\Tiles\ClosedDoor.png">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Content>
@@ -183,6 +192,7 @@
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Content>
     <Content Include="Content\Levels\1\6.txt" />
+    <Content Include="Content\Levels\Level Design Chars.txt" />
     <Content Include="System\GiveUpDatabase.sdf">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Content>
