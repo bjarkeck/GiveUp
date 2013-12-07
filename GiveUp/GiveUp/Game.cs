@@ -21,6 +21,8 @@ namespace GiveUp
 
         SpriteBatch spriteBatch;
 
+        public static bool ExitGame = false;
+
         public static ScreenManager ScreenManager;
 
         public Game1()
@@ -32,7 +34,6 @@ namespace GiveUp
             graphics.PreferredBackBufferWidth = GraphicsAdapter.DefaultAdapter.CurrentDisplayMode.Width;
             graphics.PreferredBackBufferHeight = GraphicsAdapter.DefaultAdapter.CurrentDisplayMode.Height;
             graphics.ApplyChanges();
-
 
         }
 
@@ -59,6 +60,11 @@ namespace GiveUp
         {
             Game1.ScreenManager.Update(gameTime);
 
+            if (ExitGame == true)
+            {
+                this.Exit();
+            }
+            
             base.Update(gameTime);
         }
 

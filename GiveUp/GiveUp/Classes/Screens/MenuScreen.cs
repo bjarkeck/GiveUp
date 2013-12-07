@@ -19,7 +19,7 @@ namespace GiveUp.Classes.Screens
         private Texture2D topBarTexture;
         private int buttonsWidth;
         private int startPosition;
-        float buttonSizeScaleFactor;
+        public float ButtonSizeScaleFactor;
         public Type ActiveScreenType;
 
         public override void LoadContent()
@@ -29,13 +29,13 @@ namespace GiveUp.Classes.Screens
             topBarTexture = Content.Load<Texture2D>("Images/Menu/BackGround/btnBarBg");
 
             //Udregn scaleringsfakotr
-            buttonSizeScaleFactor = 74f / topBarTexture.Height;
+            ButtonSizeScaleFactor = 74f / topBarTexture.Height;
 
             //Tilføj knapperC:\Users\Purup\Documents\GitHub\GiveUp\GiveUp\GiveUp\Content\Images\Menu\Buttons\btnExitStatic.png
-            buttons.Add(new Button(Content, "Images/Menu/Buttons/btnPlay", () => { ScreenManager.Current.LoadScreen(new GameScreen()); }, buttonSizeScaleFactor, ActiveScreenType == typeof(MenuPlayScreen)));
-            buttons.Add(new Button(Content, "Images/Menu/Buttons/btnOnline", () => { ScreenManager.Current.LoadScreen(new MenuOnlineScreen()); }, buttonSizeScaleFactor, ActiveScreenType == typeof(MenuOnlineScreen)));
-            buttons.Add(new Button(Content, "Images/Menu/Buttons/btnSettings", () => { ScreenManager.Current.LoadScreen(new MenuSettingsScreen()); }, buttonSizeScaleFactor, ActiveScreenType == typeof(MenuSettingsScreen)));
-            buttons.Add(new Button(Content, "Images/Menu/Buttons/btnExit", () => { ScreenManager.Current.LoadScreen(new MenuExitScreen()); }, buttonSizeScaleFactor, ActiveScreenType == typeof(MenuExitScreen)));
+            buttons.Add(new Button(Content, "Images/Menu/Buttons/btnPlay", () => { ScreenManager.Current.LoadScreen(new GameScreen()); }, ButtonSizeScaleFactor, ActiveScreenType == typeof(MenuPlayScreen)));
+            buttons.Add(new Button(Content, "Images/Menu/Buttons/btnOnline", () => { ScreenManager.Current.LoadScreen(new MenuOnlineScreen()); }, ButtonSizeScaleFactor, ActiveScreenType == typeof(MenuOnlineScreen)));
+            buttons.Add(new Button(Content, "Images/Menu/Buttons/btnSettings", () => { ScreenManager.Current.LoadScreen(new MenuSettingsScreen()); }, ButtonSizeScaleFactor, ActiveScreenType == typeof(MenuSettingsScreen)));
+            buttons.Add(new Button(Content, "Images/Menu/Buttons/btnExit", () => { ScreenManager.Current.LoadScreen(new MenuExitScreen()); }, ButtonSizeScaleFactor, ActiveScreenType == typeof(MenuExitScreen)));
 
             //Udregn alle knappers bredde:
             buttonsWidth = buttons.Sum(x => x.ButtonRectangle.Width);
@@ -67,8 +67,8 @@ namespace GiveUp.Classes.Screens
         public override void Draw(SpriteBatch spriteBatch)
         {
             spriteBatch.Draw(bg, new Rectangle(0, 0, 1600, 900), Color.White);
-            spriteBatch.Draw(topBarTexture, new Rectangle(0, 0, startPosition, (int)(topBarTexture.Height * buttonSizeScaleFactor)), Color.White);
-            spriteBatch.Draw(topBarTexture, new Rectangle(startPosition + buttonsWidth, 0, startPosition, (int)(topBarTexture.Height * buttonSizeScaleFactor)), Color.White);
+            spriteBatch.Draw(topBarTexture, new Rectangle(0, 0, startPosition, (int)(topBarTexture.Height * ButtonSizeScaleFactor)), Color.White);
+            spriteBatch.Draw(topBarTexture, new Rectangle(startPosition + buttonsWidth, 0, startPosition, (int)(topBarTexture.Height * ButtonSizeScaleFactor)), Color.White);
 
             foreach (Button b in buttons)
             {
