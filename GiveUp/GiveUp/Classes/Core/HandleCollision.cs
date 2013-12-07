@@ -9,7 +9,6 @@ namespace GiveUp.Classes.Core
 {
     public static class HandleCollision
     {
-
         private static bool isBelowOf(this Rectangle player, Rectangle box, Vector2 velocity)
         {
             return velocity.Y < 0 &&

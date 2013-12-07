@@ -59,6 +59,7 @@ namespace GiveUp.Classes.GameObjects.Obstacles
 
         public override void CollisionLogic()
         {
+            // TODO Fiks Moveing tile Collision
             if (HandleCollision.IsOnTopOf(ref Player.Rectangle, Rectangle, ref Player.Velocity, ref Player.Position))
             {
                 Player.Position.X += speed * direction;

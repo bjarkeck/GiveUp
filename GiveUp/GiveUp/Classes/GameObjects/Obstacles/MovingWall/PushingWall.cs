@@ -11,15 +11,17 @@ using GiveUp.Classes.GameObjects.Obstacles;
 
 namespace GiveUp.Classes.GameObjects.Obstacles
 {
-    class MovingWall : GameObject, IGameObject
+    class PushingWall : GameObject, IGameObject
     {
         public Texture2D Texture { get; set; }
         public Vector2 Position;
         public Rectangle rectangle;
         private float speed;
 
+        public const byte LoadOrder = 51;
         public const char TileChar = 'K';
 
+        // TODO En PushingWalls skal gælde for hele y aksen..
         public override void Initialize(ContentManager content, Vector2 position)
         {
             speed = 0.5f;
@@ -30,7 +32,8 @@ namespace GiveUp.Classes.GameObjects.Obstacles
 
         public void Movement()
         {
-            if (GetAllGameObjects<MovingWallActivationTile>().First().WallActivated == true)
+            // TODO Hvis der ikke findes en PushingWallActivationTile - Push med det samme.
+            if (GetAllGameObjects<PushingWallActivationTile>().First().WallActivated == true)
             {
                 Position.X += speed;
                 rectangle.X = (int)Position.X;
@@ -42,17 +45,14 @@ namespace GiveUp.Classes.GameObjects.Obstacles
             Movement();
         }
 
-
+        // TODO Fiks Pushing tile collision
         public override void CollisionLogic()
         {
-            if (Player.Rectangle.Intersects(rectangle))
+            if (Player.Rectangle.Intersects(rectangle) || Player.Rectangle.IsRightOf(rectangle, Player.Velocity))
             {
-                //LORT>
                 Player.Animation.PlayAnimation("stand");
-                if (Player.Position.X < this.Position.X + 28)
-                {
-                    Player.Position.X = this.Position.X + 28 ;
-                }
+                Player.Position.X = rectangle.Right;
+                Player.Velocity.X = 10;
             }
         }
 

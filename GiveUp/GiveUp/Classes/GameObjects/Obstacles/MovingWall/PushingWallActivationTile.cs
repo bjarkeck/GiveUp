@@ -10,12 +10,12 @@ using GiveUp.Classes.Screens;
 
 namespace GiveUp.Classes.GameObjects.Obstacles
 {
-    class MovingWallActivationTile : GameObject, IGameObject
+    class PushingWallActivationTile : GameObject, IGameObject
     {
         public Texture2D Texture { get; set; }
         public Vector2 Position { get; set; }
         public Rectangle rectangle;
-        public bool WallActivated = true;
+        public bool WallActivated = false;
 
         public const char TileChar = 'L';
 
@@ -26,17 +26,17 @@ namespace GiveUp.Classes.GameObjects.Obstacles
             rectangle = new Rectangle((int)Position.X, (int)Position.Y, Texture.Width, Texture.Height);
         }
 
-        //public override void CollisionLogic()
-        //{
-        //    if (Player.Rectangle.PerPixesCollision(rectangle, Texture))
-        //    {
-        //        WallActivated = true;
-        //    }
-        //    else
-        //    {
-        //        WallActivated = true;
-        //    }
-        //}
+        public override void CollisionLogic()
+        {
+            if (Player.Rectangle.PerPixesCollision(rectangle, Texture))
+            {
+                WallActivated = true;
+            }
+            else
+            {
+                WallActivated = true;
+            }
+        }
 
         public override void Draw(SpriteBatch spriteBatch)
         {
