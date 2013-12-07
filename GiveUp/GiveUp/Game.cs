@@ -46,7 +46,6 @@ namespace GiveUp
             spriteBatch = new SpriteBatch(GraphicsDevice);
             Game1.ScreenManager = new ScreenManager(Content);
 
-
             spriteBatch = new SpriteBatch(GraphicsDevice);
             SpriteScale = Matrix.CreateScale(GraphicsAdapter.DefaultAdapter.CurrentDisplayMode.Width / 1600f, GraphicsAdapter.DefaultAdapter.CurrentDisplayMode.Height / 900f, 1);
         }
