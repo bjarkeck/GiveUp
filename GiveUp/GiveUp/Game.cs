@@ -28,19 +28,17 @@ namespace GiveUp
         {
             graphics = new GraphicsDeviceManager(this);
             Content.RootDirectory = "Content";
+            graphics.IsFullScreen = true;
+            graphics.PreferredBackBufferWidth = GraphicsAdapter.DefaultAdapter.CurrentDisplayMode.Width;
+            graphics.PreferredBackBufferHeight = GraphicsAdapter.DefaultAdapter.CurrentDisplayMode.Height;
+            graphics.ApplyChanges();
+
+
         }
 
         protected override void Initialize()
         {
-            graphics.IsFullScreen = false;
-            graphics.PreferredBackBufferWidth = GraphicsAdapter.DefaultAdapter.CurrentDisplayMode.Width;
-            graphics.PreferredBackBufferHeight = GraphicsAdapter.DefaultAdapter.CurrentDisplayMode.Height;
-            //graphics.PreferredBackBufferWidth = 1024;
-            //graphics.PreferredBackBufferHeight = 768;
-
-
-            graphics.ApplyChanges();
-
+            
 
 
             base.Initialize();
@@ -53,7 +51,7 @@ namespace GiveUp
 
 
             spriteBatch = new SpriteBatch(GraphicsDevice);
-            SpriteScale = Matrix.CreateScale(graphics.GraphicsDevice.Viewport.Width / 1600f, graphics.GraphicsDevice.Viewport.Height / 900f, 1);
+            SpriteScale = Matrix.CreateScale(GraphicsAdapter.DefaultAdapter.CurrentDisplayMode.Width / 1600f, GraphicsAdapter.DefaultAdapter.CurrentDisplayMode.Height / 900f, 1);
         }
         
         protected override void UnloadContent()

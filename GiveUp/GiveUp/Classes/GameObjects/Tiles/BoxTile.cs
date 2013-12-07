@@ -32,7 +32,6 @@ namespace GiveUp.Classes.GameObjects.Tiles
                 position = value;
             }
         }
-
         public override void Initialize(ContentManager content, Vector2 position)
         {
             this.Position = position;

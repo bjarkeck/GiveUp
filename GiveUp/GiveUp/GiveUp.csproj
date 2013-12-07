@@ -35,6 +35,7 @@
     <ApplicationIcon>System\Icon.ico</ApplicationIcon>
   </PropertyGroup>
   <ItemGroup>
+    <Compile Include="Classes\Core\Button.cs" />
     <Compile Include="Classes\Core\Particle.cs" />
     <Compile Include="Classes\Core\ParticleTexture.cs" />
     <Compile Include="Classes\Core\ParticleEmitter.cs" />
@@ -107,6 +108,12 @@
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Content>
     <Content Include="Content\Images\Bgs\bg1.png">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Content\Images\Menu\BackGround\menuBg.png">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Content\Images\Menu\BackGround\MenuScreen.png">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Content>
     <Content Include="Content\Images\Obstacles\AttachedCannon\AttatchedCannonBodyB.png">
@@ -210,7 +217,9 @@
     </None>
     <None Include="packages.config" />
   </ItemGroup>
-  <ItemGroup />
+  <ItemGroup>
+    <Folder Include="Content\Images\Menu\Buttons\" />
+  </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
        Other similar extension points exist, see Microsoft.Common.targets.
