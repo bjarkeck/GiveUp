@@ -26,7 +26,7 @@ namespace GiveUp.Classes.Screens
             testTexture = Content.Load<Texture2D>("Images/Tiles/IceGround");
             testRectangle = new Rectangle(0, 0, testTexture.Width, testTexture.Height);
             menuRectangle = new Rectangle(0, 0, 1600, 900);
-            buttons.Add(new Button(Content.Load<Texture2D>("Images/Tiles/ground"), new Vector2(0, 0), new Button.EventHandler(StartGame)));
+            buttons.Add(new Button(Content.Load<Texture2D>("Images/Tiles/ground"), new Vector2(0, 0), StartGame));
             base.LoadContent();
         }
 

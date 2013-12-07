@@ -12,7 +12,7 @@ namespace GiveUp.Classes.Core
     class Button
     {
         public delegate void EventHandler();
-        public event EventHandler OnClick;
+        public EventHandler OnClick;
         private Texture2D texture;
         private Rectangle collisionBox;
 
@@ -21,7 +21,7 @@ namespace GiveUp.Classes.Core
         {
             this.texture = bTexture;
             this.collisionBox = new Rectangle((int)position.X, (int)position.Y, bTexture.Width, bTexture.Height);
-            OnClick += new EventHandler(Click);
+            OnClick += Click;
         }
         
         public void Update(GameTime gt)
