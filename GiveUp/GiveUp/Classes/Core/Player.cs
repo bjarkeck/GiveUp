@@ -84,11 +84,11 @@ namespace GiveUp.Classes.Core
 
             KeyboardState keyState = Keyboard.GetState();
 
-
             if (keyState.IsKeyDown(ReverseControls ? Keys.D : Keys.A)) {
                 Animation.PlayAnimation("run");
                 this.Velocity.X += this.Acceleration * -1 * gameTime.ElapsedGameTime.Milliseconds;
-            } else if (keyState.IsKeyDown(ReverseControls ? Keys.A : Keys.D))
+            }
+            else if (keyState.IsKeyDown(ReverseControls ? Keys.A : Keys.D))
             {
                 Animation.PlayAnimation("run");
                 this.Velocity.X += this.Acceleration * gameTime.ElapsedGameTime.Milliseconds;

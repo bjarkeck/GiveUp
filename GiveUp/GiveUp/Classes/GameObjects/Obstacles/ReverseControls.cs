@@ -12,37 +12,11 @@ namespace GiveUp.Classes.GameObjects.Obstacles
 {
     class ReverseControls : GameObject, IGameObject
     {
-        public Texture2D texture { get; set; }
-        public Vector2 Position { get; set; }
-        public Rectangle rectangle;
-
-        public Rectangle Rectangle;
-        private Vector2 position;
-        
         public const char TileChar = 'F';
 
         public override void Initialize(ContentManager content, Vector2 position)
         {
-            Position = new Vector2(position.X, position.Y);
-            texture = content.Load<Texture2D>("Images/Obstacles/ForceFieldTest");
-            rectangle = new Rectangle((int)Position.X , (int)Position.Y, texture.Width, texture.Height);
-        }
-
-        public override void CollisionLogic()
-        {
-            if (Player.Rectangle.PerPixesCollision(rectangle, texture))
-            {
-                Player.ReverseControls = true;
-            }
-            else
-            {
-                Player.ReverseControls = false;
-            }
-        }
-
-        public override void Draw(SpriteBatch spriteBatch)
-        {
-            spriteBatch.Draw(texture, Position, Color.White);
+            Player.ReverseControls = true;
         }
 
     }
