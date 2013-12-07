@@ -66,6 +66,7 @@ namespace GiveUp.Classes.LevelManager
             changeLevel = true;
         }
 
+        // TODO Fix player reset.
         private void loadLevel(string p)
         {
             GameObjects.Clear();
@@ -118,7 +119,7 @@ namespace GiveUp.Classes.LevelManager
             {
                 item.Update(gameTime);
             }
-
+            // TODO CollisionLogic - Is it neccesarry?
             foreach (IGameObject obj in GameObjects)
             {
                 obj.CollisionLogic();
@@ -131,7 +132,6 @@ namespace GiveUp.Classes.LevelManager
                 Player.Position = GridManager.UnassignedTiles['S'].First();
             }
         }
-
 
         public bool changeLevel { get; set; }
     }

@@ -30,6 +30,7 @@ namespace GiveUp.Classes.GameObjects.Obstacles
 
         public override void CollisionLogic()
         {
+            // TODO Fiks ice friction
             if (HandleCollision.IsOnTopOf(ref Player.Rectangle, Rectangle, ref Player.Velocity, ref Player.Position))
             {
                 Player.Animation.PlayAnimation("stand");

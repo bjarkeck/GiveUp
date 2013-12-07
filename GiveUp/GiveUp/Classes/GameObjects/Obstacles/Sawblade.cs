@@ -50,6 +50,7 @@ namespace GiveUp.Classes.GameObjects.Obstacles
 
         public void Movement()
         {
+            // TODO Fiks Sawblade collision bounderies
             if (Position.X < leftBounderie)
                 direction += 1;
             if (Position.X > rightBounderie)

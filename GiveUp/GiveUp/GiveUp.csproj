@@ -60,8 +60,8 @@
     <Compile Include="Classes\GameObjects\Obstacles\Cannon\CannonBullet.cs" />
     <Compile Include="Classes\GameObjects\Obstacles\HorizontalMovingTile.cs" />
     <Compile Include="Classes\GameObjects\Obstacles\Ice.cs" />
-    <Compile Include="Classes\GameObjects\Obstacles\MovingWall\MovingWall.cs" />
-    <Compile Include="Classes\GameObjects\Obstacles\MovingWall\MovingWallActivationTile.cs" />
+    <Compile Include="Classes\GameObjects\Obstacles\MovingWall\PushingWall.cs" />
+    <Compile Include="Classes\GameObjects\Obstacles\MovingWall\PushingWallActivationTile.cs" />
     <Compile Include="Classes\GameObjects\Obstacles\ReverseControls.cs" />
     <Compile Include="Classes\GameObjects\Obstacles\Sawblade.cs" />
     <Compile Include="Classes\GameObjects\Obstacles\Spike.cs" />
