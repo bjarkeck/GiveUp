@@ -47,10 +47,10 @@ namespace GiveUp.Classes.GameObjects.Obstacles
         // TODO Fiks Pushing tile collision
         public override void CollisionLogic()
         {
-            if (Player.Rectangle.Intersects(rectangle) || Player.Rectangle.IsRightOf(rectangle, Player.Velocity))
+            if (Player.Rectangle.Intersects(Rectangle) || Player.Rectangle.IsRightOf(Rectangle, Player.Velocity))
             {
                 Player.Animation.PlayAnimation("stand");
-                Player.Position.X = rectangle.Right;
+                Player.Position.X = Rectangle.Right;
                 Player.Velocity.X = 10;
             }
         }
