@@ -54,7 +54,7 @@ namespace GiveUp.Classes.GameObjects
                 if (Player.Velocity.Y > 0.1f)
                 {
                     Player.Animation.PlayAnimation("slide");
-                    Player.Velocity.Y = Player.Velocity.Y / 2;
+                    Player.Velocity.Y = 0.8f;
                     Player.CanJump = true;
                     Player.CanDoubleJump = true;
                 }
@@ -65,7 +65,7 @@ namespace GiveUp.Classes.GameObjects
                 if (Player.Velocity.Y > 0.1f)
                 {
                     Player.Animation.PlayAnimation("slide");
-                    Player.Velocity.Y = Player.Velocity.Y / 2;
+                    Player.Velocity.Y = 0.8f;
                     Player.CanJump = true;
                     Player.CanDoubleJump = true;
                 }

@@ -51,9 +51,11 @@ namespace GiveUp.Classes.GameObjects.Tiles
 
             if (HandleCollision.IsRightOf(ref Player.Rectangle, Rectangle, ref Player.Velocity, ref Player.Position))
             {
+                LastCollisionDirection = Direction.Right;
             }
             if (HandleCollision.IsLeftOf(ref Player.Rectangle, Rectangle, ref Player.Velocity, ref Player.Position))
             {
+                LastCollisionDirection = Direction.Left;
             }
             if (HandleCollision.IsBelowOf(ref Player.Rectangle, Rectangle, ref Player.Velocity, ref Player.Position))
                 LastCollisionDirection = Direction.Bottom;
