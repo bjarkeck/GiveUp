@@ -24,7 +24,7 @@ namespace GiveUp.Classes.Core
         public ScreenManager(ContentManager content)
         {
             Content = content;
-            LoadScreen(new MenuScreen());
+            LoadScreen(new MenuPlayScreen());
         }
 
         public void LoadScreen(BaseScreen screen)

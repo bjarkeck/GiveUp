@@ -1,4 +1,5 @@
 ﻿using Microsoft.Xna.Framework;
+using Microsoft.Xna.Framework.Content;
 using Microsoft.Xna.Framework.Graphics;
 using Microsoft.Xna.Framework.Input;
 using System;
@@ -14,28 +15,50 @@ namespace GiveUp.Classes.Core
         public delegate void EventHandler();
         public EventHandler OnClick;
         private Texture2D texture;
-        private Rectangle collisionBox;
+        public Rectangle ButtonRectangle = new Rectangle();
 
+        private Texture2D textureStatic;
+        private Texture2D textureActive;
+        private Texture2D textureHover;
 
-        public Button(Texture2D bTexture, Vector2 position, EventHandler Click)
+        public Button(ContentManager content, string imagePath, EventHandler Click, float buttonSizeScaleFactor, bool active = false)
         {
-            this.texture = bTexture;
-            this.collisionBox = new Rectangle((int)position.X, (int)position.Y, bTexture.Width, bTexture.Height);
+            textureStatic = content.Load<Texture2D>(imagePath + "Static");
+            textureActive = content.Load<Texture2D>(imagePath + "Active");
+            textureHover = content.Load<Texture2D>(imagePath + "Hover");
+
+            ButtonRectangle.Y = 0;
+            ButtonRectangle.Height = (int)(textureStatic.Height * buttonSizeScaleFactor);
+            ButtonRectangle.Width = (int)(textureStatic.Width * buttonSizeScaleFactor);
+
+            this.texture = active ? textureActive : textureStatic;
+            // this.collisionBox = new Rectangle((int)position.X, (int)position.Y, bTexture.Width, bTexture.Height);
             OnClick += Click;
         }
-        
+
         public void Update(GameTime gt)
         {
-            if (collisionBox.Contains(Mouse.GetState().X, Mouse.GetState().Y) && Mouse.GetState().LeftButton == ButtonState.Pressed)
+            if (this.texture != this.textureActive)
             {
-                OnClick.Invoke();
+                if (ButtonRectangle.Contains((int)(Mouse.GetState().X * (1600f / GraphicsAdapter.DefaultAdapter.CurrentDisplayMode.Width)), (int)(Mouse.GetState().Y * (1600f / GraphicsAdapter.DefaultAdapter.CurrentDisplayMode.Width))))
+                {
+                    if (Mouse.GetState().LeftButton == ButtonState.Pressed)
+                    {
+                        OnClick.Invoke();
+                    }
+                    this.texture = textureHover;
+                }
+                else
+                {
+                    this.texture = textureStatic;
+                }
             }
         }
 
         public void Draw(SpriteBatch spriteBatch)
         {
-            spriteBatch.Draw(texture, collisionBox, Color.White);
-            Debug.Print(Mouse.GetState().X + " - " + collisionBox.X);
+            spriteBatch.Draw(texture, ButtonRectangle, Color.White);
+            Debug.Print(Mouse.GetState().X + " - " + ButtonRectangle.X);
         }
     }
 }
