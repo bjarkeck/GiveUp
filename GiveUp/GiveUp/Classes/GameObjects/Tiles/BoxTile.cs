@@ -42,6 +42,7 @@ namespace GiveUp.Classes.GameObjects.Tiles
 
         public override void CollisionLogic()
         {
+            // TODO Fix somethings
             if (HandleCollision.IsOnTopOf(ref Player.Rectangle, Rectangle, ref Player.Velocity, ref Player.Position))
                 Player.CanJump = true;
 
@@ -55,7 +56,6 @@ namespace GiveUp.Classes.GameObjects.Tiles
                     Player.CanDoubleJump = false;
                 }
             }
-
             if (HandleCollision.IsLeftOf(ref Player.Rectangle, Rectangle, ref Player.Velocity, ref Player.Position))
             {
                 Player.Animation.PlayAnimation("slide");
