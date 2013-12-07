@@ -50,7 +50,7 @@ namespace GiveUp.Classes.GameObjects.Tiles
                 {
                     Player.Animation.PlayAnimation("slide");
                     Player.Velocity.Y = Player.Velocity.Y / 2;
-                    Player.CanJump = true;
+                    Player.CanJump = false;
                     Player.CanDoubleJump = false;
                 }
             }
@@ -60,7 +60,7 @@ namespace GiveUp.Classes.GameObjects.Tiles
                 {
                     Player.Animation.PlayAnimation("slide");
                     Player.Velocity.Y = Player.Velocity.Y / 2;
-                    Player.CanJump = true;
+                    Player.CanJump = false;
                     Player.CanDoubleJump = false;
                 }
             }
