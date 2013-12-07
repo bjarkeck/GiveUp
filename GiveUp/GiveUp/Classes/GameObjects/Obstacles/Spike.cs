@@ -14,8 +14,6 @@ namespace GiveUp.Classes.GameObjects.Obstacles
     class Spike : GameObject, IGameObject
     {
         public Texture2D texture { get; set; }
-        public Rectangle rectangle;
-        private Vector2 position;
         public Vector2 Position;
 
         List<Rectangle> boxTiles;
@@ -62,13 +60,13 @@ namespace GiveUp.Classes.GameObjects.Obstacles
             }
 
             this.Position = position;
-            this.rectangle = new Rectangle((int)position.X, (int)position.Y, texture.Width, texture.Height);
+            this.Rectangle = new Rectangle((int)position.X, (int)position.Y, texture.Width, texture.Height);
         }
         
 
         public override void CollisionLogic()
         {
-            if (Player.Rectangle.PerPixesCollision(rectangle, texture))
+            if (Player.Rectangle.PerPixesCollision(Rectangle, texture))
             {
                 this.LevelManager.RestartLevel();
             }

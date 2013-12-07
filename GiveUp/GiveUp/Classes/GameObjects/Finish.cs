@@ -16,7 +16,6 @@ using System.Text;
         public Texture2D closedDoor { get; set; }
         public Texture2D openDoor { get; set; }
         public Vector2 Position { get; set; }
-        public Rectangle rectangle;
         public const byte LoadOrder = 0;
 
         public const char TileChar = 'D';
@@ -27,7 +26,7 @@ using System.Text;
             Position = position;
             closedDoor = content.Load<Texture2D>("Images/Tiles/ClosedDoor");
             openDoor = content.Load<Texture2D>("Images/Tiles/OpenDoor");
-            rectangle = new Rectangle((int)position.X, (int)position.Y, closedDoor.Width, closedDoor.Height);
+            Rectangle = new Rectangle((int)position.X, (int)position.Y, closedDoor.Width, closedDoor.Height);
 
             buttonActivators = GetAllGameObjects<ButtonActivator>().ToList();
         }
@@ -48,7 +47,7 @@ using System.Text;
 
         public void CollisionLogic()
         {
-            if (Player.Rectangle.Intersects(rectangle))
+            if (Player.Rectangle.Intersects(Rectangle))
             {
                 // Tjekker om alle knapper er tændte
                 if (buttonActivators.Any(x => x.isLocked == false) == false)

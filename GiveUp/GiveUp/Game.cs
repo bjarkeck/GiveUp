@@ -38,7 +38,15 @@ namespace GiveUp
 
         protected override void Initialize()
         {
-            
+            graphics.IsFullScreen = false;
+            graphics.PreferredBackBufferWidth = GraphicsAdapter.DefaultAdapter.CurrentDisplayMode.Width;
+            graphics.PreferredBackBufferHeight = GraphicsAdapter.DefaultAdapter.CurrentDisplayMode.Height;
+            //graphics.PreferredBackBufferWidth = 1024;
+            //graphics.PreferredBackBufferHeight = 768;
+
+
+            graphics.ApplyChanges();
+
 
 
             base.Initialize();

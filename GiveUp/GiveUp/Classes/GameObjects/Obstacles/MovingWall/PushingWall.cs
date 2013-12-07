@@ -15,7 +15,6 @@ namespace GiveUp.Classes.GameObjects.Obstacles
     {
         public Texture2D Texture { get; set; }
         public Vector2 Position;
-        public Rectangle rectangle;
         private float speed;
 
         public const byte LoadOrder = 51;
@@ -27,7 +26,7 @@ namespace GiveUp.Classes.GameObjects.Obstacles
             speed = 0.5f;
             Position = new Vector2(position.X, position.Y);
             Texture = content.Load<Texture2D>("Images/Tiles/ground");
-            rectangle = new Rectangle((int)Position.X, (int)Position.Y, 32, 32);
+            Rectangle = new Rectangle((int)Position.X, (int)Position.Y, 32, 32);
         }
 
         public void Movement()
@@ -36,7 +35,7 @@ namespace GiveUp.Classes.GameObjects.Obstacles
             if (GetAllGameObjects<PushingWallActivationTile>().First().WallActivated == true)
             {
                 Position.X += speed;
-                rectangle.X = (int)Position.X;
+                Rectangle.X = (int)Position.X;
             }
         }
 
@@ -48,17 +47,17 @@ namespace GiveUp.Classes.GameObjects.Obstacles
         // TODO Fiks Pushing tile collision
         public override void CollisionLogic()
         {
-            if (Player.Rectangle.Intersects(rectangle) || Player.Rectangle.IsRightOf(rectangle, Player.Velocity))
+            if (Player.Rectangle.Intersects(Rectangle) || Player.Rectangle.IsRightOf(Rectangle, Player.Velocity))
             {
                 Player.Animation.PlayAnimation("stand");
-                Player.Position.X = rectangle.Right;
+                Player.Position.X = Rectangle.Right;
                 Player.Velocity.X = 10;
             }
         }
 
         public override void Draw(SpriteBatch spriteBatch)
         {
-            spriteBatch.Draw(Texture, rectangle, Color.White);
+            spriteBatch.Draw(Texture, Rectangle, Color.White);
         }
     }
 }
