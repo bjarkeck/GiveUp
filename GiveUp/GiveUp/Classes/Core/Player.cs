@@ -48,6 +48,7 @@ namespace GiveUp.Classes.Core
             Animation.AddRow("run", 1, 15);
             Animation.AddRow("jump", 2, 1);
             Animation.AddRow("slide", 3, 1);
+            Animation.AddRow("push", 4, 1);
         }
         public void Draw(SpriteBatch spriteBatch)
         {

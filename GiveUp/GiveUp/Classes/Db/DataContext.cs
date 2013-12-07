@@ -9,11 +9,30 @@ namespace GiveUp.Classes.Db
     public class DataContext : DbContext
     {
         public DataContext()
-            : base(@"Data Source=C:\Users\b\Desktop\Git\GiveUp\GiveUp\GiveUp\System\GiveUpDatabase.sdf")
+            : base(@"Data Source=ns1.lilac.arvixe.com;Initial Catalog=minji;Persist Security Info=True;User ID=minji;Password=minjiminji")
         {
+
         }
 
-        public DbSet<TileData> TileData { get; set; }
-        public DbSet<LevelData> LevelData { get; set; }
+        public DbSet<User> Users { get; set; }
+        public DbSet<Level> Levels { get; set; }
+
+
+
+        private static DataContext current;
+        public static DataContext Current
+        {
+            get
+            {
+                if (current == null)
+                {
+                    current = new DataContext();
+                }
+                return current;
+
+            }
+
+        }
+
     }
 }

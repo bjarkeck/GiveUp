@@ -25,7 +25,6 @@ namespace GiveUp.Classes.GameObjects.Obstacles
             Position = new Vector2(position.X, position.Y + (32-9));
             texture = content.Load<Texture2D>("Images/Obstacles/Spikes/SpikeB");
 
-
             boxTiles = GetAllGameObjects<BoxTile>().Select(x => x.Rectangle).ToList();
 
             if (boxTiles.Any(x => x.X == position.X && x.Y == position.Y + 32))

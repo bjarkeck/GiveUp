@@ -18,7 +18,7 @@ namespace GiveUp.Classes.GameObjects.Obstacles
         private float speed;
 
         public const byte LoadOrder = 51;
-        public const char TileChar = 'K';
+        public const char TileChar = 'W';
 
         // TODO En PushingWalls skal gælde for hele y aksen..
         public override void Initialize(ContentManager content, Vector2 position)
