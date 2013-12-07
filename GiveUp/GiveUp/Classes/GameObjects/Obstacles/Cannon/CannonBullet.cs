@@ -32,7 +32,7 @@ namespace GiveUp.Classes.GameObjects.Obstacles.Cannon
 
             if (CannonBulletRectangle.Intersects(player.Rectangle))
             {
-                levelManager.RestartLevel();
+                //levelManager.RestartLevel();
             }
         }
 

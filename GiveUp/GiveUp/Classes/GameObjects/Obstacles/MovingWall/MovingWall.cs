@@ -25,7 +25,7 @@ namespace GiveUp.Classes.GameObjects.Obstacles
             speed = 0.5f;
             Position = new Vector2(position.X, position.Y);
             Texture = content.Load<Texture2D>("Images/Tiles/ground");
-            rectangle = new Rectangle((int)Position.X, (int)Position.Y, Texture.Width, Texture.Height);
+            rectangle = new Rectangle((int)Position.X, (int)Position.Y, 32, 32);
         }
 
         public void Movement()
@@ -58,7 +58,7 @@ namespace GiveUp.Classes.GameObjects.Obstacles
 
         public override void Draw(SpriteBatch spriteBatch)
         {
-            spriteBatch.Draw(Texture, Position, Color.White);
+            spriteBatch.Draw(Texture, rectangle, Color.White);
         }
     }
 }
