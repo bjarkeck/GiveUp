@@ -43,7 +43,7 @@ namespace GiveUp.Classes.Core
 
         public void LoadContent(ContentManager content)
         {
-            Animation = new SpriteAnimation(content.Load<Texture2D>("Images/Player/playerAnimation"), Position, 23, 30, 100);
+            Animation = new SpriteAnimation(content.Load<Texture2D>("Images/Player/playerAnimation"), Position, 46, 60, 100);
             Animation.AddRow("stand", 0, 1);
             Animation.AddRow("run", 1, 15);
             Animation.AddRow("jump", 2, 1);
@@ -81,6 +81,7 @@ namespace GiveUp.Classes.Core
         
         public void Movement(GameTime gameTime)
         {
+
             KeyboardState keyState = Keyboard.GetState();
 
             if (keyState.IsKeyDown(ReverseControls ? Keys.D : Keys.A)) {

@@ -12,7 +12,7 @@ namespace GiveUp.Classes.GameObjects.Obstacles
     class Ice : GameObject, IGameObject
     {
         public const char TileChar = 'I';
-        public const byte LoadOrder = 1;
+        public const byte LoadOrder = 0;
 
         private Texture2D texture;
         public bool Hide = false;
@@ -25,7 +25,7 @@ namespace GiveUp.Classes.GameObjects.Obstacles
             Position = position;
             Friction = Player.Friction;
             this.texture = content.Load<Texture2D>("Images/Tiles/IceGround");
-            this.Rectangle = new Rectangle((int)position.X, (int)position.Y, texture.Width, texture.Height);
+            this.Rectangle = new Rectangle((int)position.X, (int)position.Y, 32, 32);
         }
 
         public override void CollisionLogic()
@@ -35,17 +35,12 @@ namespace GiveUp.Classes.GameObjects.Obstacles
                 Player.Animation.PlayAnimation("stand");
                 Player.Friction = 0;
                 Player.CanJump = true;
-                
-            }
-            else
-            {
-                Player.Friction = Friction;
             }
         }
 
         public override void Draw(SpriteBatch spriteBatch)
         {
-            spriteBatch.Draw(texture, Rectangle, new Color(68, 68, 68));
+            spriteBatch.Draw(texture, Rectangle, Color.White);
         }
 
 

@@ -16,7 +16,7 @@ namespace GiveUp.Classes.Core
         {
             get
             {
-                return new Rectangle((int)position.X, (int)position.Y, spriteWidth, spriteHeight);
+                return new Rectangle((int)position.X, (int)position.Y, spriteWidth / 2, spriteHeight / 2);
             }
             set
             {
@@ -85,7 +85,7 @@ namespace GiveUp.Classes.Core
 
         public void Draw(SpriteBatch spriteBatch)
         {
-            spriteBatch.Draw(SpriteSheet, position, currentFrame, Color.White, 0f, Vector2.Zero, 1.0f, (this.FlipImage ? SpriteEffects.FlipHorizontally : SpriteEffects.None), 0);
+            spriteBatch.Draw(SpriteSheet, position, currentFrame, Color.White, 0f, Vector2.Zero, 0.5f, (this.FlipImage ? SpriteEffects.FlipHorizontally : SpriteEffects.None), 0);
 
         }
 
