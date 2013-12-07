@@ -47,9 +47,9 @@ namespace GiveUp.Classes.GameObjects.Tiles
 
             if (HandleCollision.IsRightOf(ref Player.Rectangle, Rectangle, ref Player.Velocity, ref Player.Position))
             {
-                Player.Animation.PlayAnimation("slide");
                 if (Player.Velocity.Y > 0.1f)
                 {
+                    Player.Animation.PlayAnimation("slide");
                     Player.Velocity.Y = Player.Velocity.Y / 2;
                     Player.CanJump = true;
                     Player.CanDoubleJump = false;
@@ -57,9 +57,9 @@ namespace GiveUp.Classes.GameObjects.Tiles
             }
             if (HandleCollision.IsLeftOf(ref Player.Rectangle, Rectangle, ref Player.Velocity, ref Player.Position))
             {
-                Player.Animation.PlayAnimation("slide");
                 if (Player.Velocity.Y > 0.1f)
                 {
+                    Player.Animation.PlayAnimation("slide");
                     Player.Velocity.Y = Player.Velocity.Y / 2;
                     Player.CanJump = true;
                     Player.CanDoubleJump = false;
