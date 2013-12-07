@@ -18,6 +18,7 @@ namespace GiveUp.Classes.GameObjects
         public const char TileChar = 'M';
         public Rectangle visualRectangle;
         public bool flipImage = false;
+        public Direction GooDirection = Direction.None;
 
         public override void Initialize(ContentManager content, Vector2 position)
         {
@@ -30,6 +31,7 @@ namespace GiveUp.Classes.GameObjects
             // Til højre for
             if (boxTiles.Any(x => x.X == position.X - 32 && x.Y == position.Y))
             {
+                GooDirection = Direction.Right;
                 Position = new Vector2(position.X - 7, position.Y);
                 Rectangle.X = (int)Position.X;
                 BoxTilePosition = new Vector2(Position.X - (32-7), Position.Y);
@@ -37,6 +39,7 @@ namespace GiveUp.Classes.GameObjects
             // Til venstre for
             if (boxTiles.Any(x => x.X == position.X + 32 && x.Y == position.Y))
             {
+                GooDirection = Direction.Left;
                 Position = new Vector2(position.X + 32, position.Y);
                 BoxTilePosition = Position;
                 Rectangle.X = (int)Position.X;
@@ -49,7 +52,8 @@ namespace GiveUp.Classes.GameObjects
         {
             var theTileBox = GetAllGameObjects<BoxTile>().FirstOrDefault(x => x.Position == BoxTilePosition);
 
-            if (theTileBox != null && theTileBox.LastCollisionDirection == Direction.Right)
+            
+            if (theTileBox != null && theTileBox.LastCollisionDirection == GooDirection)
             {
                 if (Player.Velocity.Y > 0.1f)
                 {
@@ -59,18 +63,6 @@ namespace GiveUp.Classes.GameObjects
                     Player.CanDoubleJump = true;
                 }
             }
-
-            if (theTileBox != null && theTileBox.LastCollisionDirection == Direction.Left)
-            {
-                if (Player.Velocity.Y > 0.1f)
-                {
-                    Player.Animation.PlayAnimation("slide");
-                    Player.Velocity.Y = 0.8f;
-                    Player.CanJump = true;
-                    Player.CanDoubleJump = true;
-                }
-            }
-            HandleCollision.IsBelowOf(ref Player.Rectangle, Rectangle, ref Player.Velocity, ref Player.Position);
         }
 
         public override void Draw(SpriteBatch spriteBatch)
