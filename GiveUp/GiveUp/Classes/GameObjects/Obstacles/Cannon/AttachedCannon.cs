@@ -39,7 +39,7 @@ namespace GiveUp.Classes.GameObjects.Obstacles
 
         public Vector2 cannonPosition;
         float cannonRotation = 10;
-        TimeSpan fireRate = TimeSpan.FromMilliseconds(1000);
+        TimeSpan fireRate = TimeSpan.FromMilliseconds(0);
         TimeSpan timeElapsed;
         List<Rectangle> boxTiles;
         List<CannonBullet> cannonBullets = new List<CannonBullet>();

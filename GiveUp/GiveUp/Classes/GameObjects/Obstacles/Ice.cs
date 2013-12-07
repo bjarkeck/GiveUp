@@ -12,7 +12,7 @@ namespace GiveUp.Classes.GameObjects.Obstacles
     class Ice : GameObject, IGameObject
     {
         public const char TileChar = 'I';
-        public const byte LoadOrder = 1;
+        public const byte LoadOrder = 0;
 
         private Texture2D texture;
         public bool Hide = false;
@@ -35,11 +35,6 @@ namespace GiveUp.Classes.GameObjects.Obstacles
                 Player.Animation.PlayAnimation("stand");
                 Player.Friction = 0;
                 Player.CanJump = true;
-                
-            }
-            else
-            {
-                Player.Friction = Friction;
             }
         }
 

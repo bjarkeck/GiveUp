@@ -37,7 +37,7 @@ namespace GiveUp.Classes.GameObjects.Tiles
         {
             this.Position = position;
             this.texture = content.Load<Texture2D>("Images/Tiles/ground");
-            this.Rectangle = new Rectangle((int)position.X, (int)position.Y, texture.Width, texture.Height);
+            this.Rectangle = new Rectangle((int)position.X, (int)position.Y, 32, 32);
         }
 
         public override void CollisionLogic()

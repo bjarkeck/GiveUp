@@ -55,7 +55,7 @@ namespace GiveUp.Classes.GameObjects.Obstacles
             if (Position.Y > leftBounderie)
                 direction *= -1;
 
-            Position = new Vector2(Position.Y + speed * direction, Position.X);
+            Position = new Vector2(Position.Y, Position.Y + speed * direction);
         }
 
         public override void Update(GameTime gameTime)

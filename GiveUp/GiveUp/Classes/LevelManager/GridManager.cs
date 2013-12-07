@@ -60,7 +60,7 @@ namespace GiveUp.Classes.LevelManager
         {
             if (backgroundTexture != null)
             {
-                spriteBatch.Draw(backgroundTexture,Vector2.Zero,new Rectangle(0,0,1920,1080),Color.White);
+                spriteBatch.Draw(backgroundTexture, new Vector2(0, 0), new Rectangle(0, 0, 1600, 900), Color.White);
             }
         }
 
