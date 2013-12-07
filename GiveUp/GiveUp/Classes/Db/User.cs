@@ -5,11 +5,9 @@ using System.Text;
 
 namespace GiveUp.Classes.Db
 {
-    public class TileData
+    public class User
     {
         public int Id { get; set; }
-        public int X { get; set; }
-        public int Y { get; set; }
         public char Value { get; set; }
     }
 }

@@ -54,8 +54,8 @@
     <Compile Include="Classes\Core\Player.cs" />
     <Compile Include="Classes\Core\ScreenManager.cs" />
     <Compile Include="Classes\Db\DataContext.cs" />
-    <Compile Include="Classes\Db\LevelData.cs" />
-    <Compile Include="Classes\Db\TileData.cs" />
+    <Compile Include="Classes\Db\Level.cs" />
+    <Compile Include="Classes\Db\User.cs" />
     <Compile Include="Classes\GameObjects\Finish.cs" />
     <Compile Include="Classes\GameObjects\Obstacles\Cannon\AttachedCannon.cs" />
     <Compile Include="Classes\GameObjects\Obstacles\Cannon\CannonBullet.cs" />
@@ -78,7 +78,7 @@
     <Compile Include="Classes\Screens\MenuScreen.cs" />
     <Compile Include="Classes\Screens\MenuSettingsScreen.cs" />
     <Compile Include="Game.cs" />
-    <Compile Include="System\Migrations\Configuration.cs" />
+    <Compile Include="Classes\Db\Migrations\Configuration.cs" />
     <Compile Include="System\Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
@@ -266,7 +266,9 @@
     </None>
     <None Include="packages.config" />
   </ItemGroup>
-  <ItemGroup />
+  <ItemGroup>
+    <Folder Include="Data\" />
+  </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
        Other similar extension points exist, see Microsoft.Common.targets.
