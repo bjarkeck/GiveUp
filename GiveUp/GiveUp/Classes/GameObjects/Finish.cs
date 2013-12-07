@@ -1,4 +1,5 @@
 ﻿using GiveUp.Classes.Core;
+using GiveUp.Classes.GameObjects;
 using GiveUp.Classes.Screens;
 using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Content;
@@ -12,22 +13,33 @@ using System.Text;
     class Finish : GameObject, IGameObject
     {
         public Player Player { get; set; }
-        public Texture2D texture { get; set; }
+        public Texture2D closedDoor { get; set; }
+        public Texture2D openDoor { get; set; }
         public Vector2 Position { get; set; }
         public Rectangle rectangle;
         public const byte LoadOrder = 0;
 
         public const char TileChar = 'D';
+        List<ButtonActivator> buttonActivators;
 
         public void Initialize(ContentManager content, Vector2 position)
         {
             Position = position;
-            texture = content.Load<Texture2D>("Images/Tiles/ClosedDoor");
-            rectangle = new Rectangle((int)position.X, (int)position.Y, texture.Width, texture.Height);
+            closedDoor = content.Load<Texture2D>("Images/Tiles/ClosedDoor");
+            openDoor = content.Load<Texture2D>("Images/Tiles/OpenDoor");
+            rectangle = new Rectangle((int)position.X, (int)position.Y, closedDoor.Width, closedDoor.Height);
+
+            buttonActivators = GetAllGameObjects<ButtonActivator>().ToList();
         }
 
         public void Update(GameTime gameTime)
         {
+            // Sætter døren til at være åben
+            if (buttonActivators.Any(x => x.isLocked == false) == false)
+            {
+                closedDoor = openDoor;
+            }
+
             if (Player.InputHelper.IsNewPress(Keys.Enter))
             {
                 this.LevelManager.StartNextLevel();
@@ -36,14 +48,18 @@ using System.Text;
 
         public void CollisionLogic()
         {
-            if (Player.Rectangle.IsOnTopOf(rectangle, Player.Velocity))
+            if (Player.Rectangle.Intersects(rectangle))
             {
-                this.LevelManager.StartNextLevel();
+                // Tjekker om alle knapper er tændte
+                if (buttonActivators.Any(x => x.isLocked == false) == false)
+                {
+                    this.LevelManager.StartNextLevel();
+                }
             }
         }
 
         public void Draw(SpriteBatch spriteBatch)
         {
-            spriteBatch.Draw(texture, Position, Color.White);
+            spriteBatch.Draw(closedDoor, Position, Color.White);
         }
     }
