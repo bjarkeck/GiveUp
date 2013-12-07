@@ -1,0 +1,11 @@
+G = Ground tile
+C = Cannon
+S = Start Position of player
+B = Sawblade
+^ = Spikes
+D = Door (finish point)
+L = MovingWallActivationTile
+K = MovingWall
+H = Horizontal Moving Tiles
+V = Vertical Moving Tiles
+I = Ice
