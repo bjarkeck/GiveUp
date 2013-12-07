@@ -62,7 +62,8 @@ namespace GiveUp.Classes.GameObjects.Obstacles
             // TODO Fiks Moveing tile Collision
             if (HandleCollision.IsOnTopOf(ref Player.Rectangle, Rectangle, ref Player.Velocity, ref Player.Position))
             {
-                Player.Position.Y += speed * direction;
+                Player.Position.Y = Position.Y - Player.Rectangle.Height + (speed*direction);
+
                 Player.CanJump = true;
             }
             else if (HandleCollision.IsRightOf(ref Player.Rectangle, Rectangle, ref Player.Velocity, ref Player.Position))

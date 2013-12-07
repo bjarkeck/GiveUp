@@ -42,7 +42,6 @@
     <Compile Include="Classes\Core\Range.cs" />
     <Compile Include="Classes\Core\SpriteAnimation.cs" />
     <Compile Include="Classes\Core\BaseScreen.cs" />
-    <Compile Include="Classes\Core\Direction.cs" />
     <Compile Include="Classes\GameObjects\ButtonActivator.cs" />
     <Compile Include="Classes\GameObjects\Obstacles\Drag.cs" />
     <Compile Include="Classes\Core\GameLogic.cs" />
