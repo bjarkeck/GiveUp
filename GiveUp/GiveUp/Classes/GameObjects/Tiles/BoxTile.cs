@@ -17,7 +17,6 @@ namespace GiveUp.Classes.GameObjects.Tiles
         private Texture2D texture;
         public bool Hide = false;
 
-        public Rectangle Rectangle;
         private Vector2 position;
         public Vector2 Position
         {

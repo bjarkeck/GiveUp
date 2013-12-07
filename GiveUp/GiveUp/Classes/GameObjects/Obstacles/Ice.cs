@@ -16,7 +16,6 @@ namespace GiveUp.Classes.GameObjects.Obstacles
 
         private Texture2D texture;
         public bool Hide = false;
-        public Rectangle Rectangle;
         public float Friction;
         private Vector2 Position;
 

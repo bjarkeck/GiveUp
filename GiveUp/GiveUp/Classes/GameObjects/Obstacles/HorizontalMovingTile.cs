@@ -15,7 +15,6 @@ namespace GiveUp.Classes.GameObjects.Obstacles
         public const char TileChar = 'H';
         public const byte LoadOrder = 0;
 
-        public Rectangle Rectangle;
         private Vector2 position;
         public Vector2 Position
         {

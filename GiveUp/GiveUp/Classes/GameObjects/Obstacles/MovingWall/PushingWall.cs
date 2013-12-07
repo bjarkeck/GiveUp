@@ -15,10 +15,9 @@ namespace GiveUp.Classes.GameObjects.Obstacles
     {
         public Texture2D Texture { get; set; }
         public Vector2 Position;
-        public Rectangle rectangle;
         private float speed;
 
-        public const char TileChar = 'K';
+        public const char TileChar = 'W';
 
         // TODO En PushingWalls skal gælde for hele y aksen..
         public override void Initialize(ContentManager content, Vector2 position)
@@ -26,7 +25,7 @@ namespace GiveUp.Classes.GameObjects.Obstacles
             speed = 0.5f;
             Position = new Vector2(position.X, position.Y);
             Texture = content.Load<Texture2D>("Images/Tiles/ground");
-            rectangle = new Rectangle((int)Position.X, (int)Position.Y, 32, 32);
+            Rectangle = new Rectangle((int)Position.X, (int)Position.Y, 32, 32);
         }
 
         public void Movement()
@@ -35,7 +34,7 @@ namespace GiveUp.Classes.GameObjects.Obstacles
             if (GetAllGameObjects<PushingWallActivationTile>().First().WallActivated == true)
             {
                 Position.X += speed;
-                rectangle.X = (int)Position.X;
+                Rectangle.X = (int)Position.X;
             }
         }
 
@@ -47,7 +46,7 @@ namespace GiveUp.Classes.GameObjects.Obstacles
         // TODO Fiks Pushing Pushing tile collision
         public override void CollisionLogic()
         {
-            if (Player.Rectangle.Intersects(rectangle))
+            if (Player.Rectangle.Intersects(Rectangle))
             {
                 Player.Animation.PlayAnimation("stand");
                 if (Player.Position.X < this.Position.X + 28)
@@ -59,7 +58,7 @@ namespace GiveUp.Classes.GameObjects.Obstacles
 
         public override void Draw(SpriteBatch spriteBatch)
         {
-            spriteBatch.Draw(Texture, rectangle, Color.White);
+            spriteBatch.Draw(Texture, Rectangle, Color.White);
         }
     }
 }

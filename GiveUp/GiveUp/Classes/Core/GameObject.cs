@@ -9,40 +9,45 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 
-    public class GameObject
+public class GameObject
+{
+    public Rectangle Rectangle;
+
+    public IEnumerable<T> GetAllGameObjects<T>()
     {
-
-        public IEnumerable<T> GetAllGameObjects<T>() where T : IGameObject
+        if (typeof(T) == typeof(IGameObject) )
         {
-            return LevelManager.GameObjects.Where(x => x.GetType() == typeof(T)).Select(x => ((T)x)).ToList();
+            return LevelManager.GameObjects.Select(c => (T)c).ToList();
         }
+        return LevelManager.GameObjects.Where(x => x.GetType() == typeof(T) || x.GetType().BaseType == typeof(T)).Select(x => ((T)x)).ToList();
+    }
 
 
-        public Player Player { get; set; }
+    public Player Player { get; set; }
 
-        public LevelManagerr LevelManager
+    public LevelManagerr LevelManager
+    {
+        get
         {
-            get
-            {
-                return ((GameScreen)ScreenManager.Current.CurrentScreen).LevelManager;
-            }
-        }
-
-        public virtual void Initialize(ContentManager content, Vector2 position)
-        {
-        }
-
-        public virtual void Update(GameTime gameTime)
-        {
-
-        }
-
-        public virtual void CollisionLogic()
-        {
-
-        }
-
-        public virtual void Draw(SpriteBatch spriteBatch)
-        {
+            return ((GameScreen)ScreenManager.Current.CurrentScreen).LevelManager;
         }
     }
+
+    public virtual void Initialize(ContentManager content, Vector2 position)
+    {
+    }
+
+    public virtual void Update(GameTime gameTime)
+    {
+
+    }
+
+    public virtual void CollisionLogic()
+    {
+
+    }
+
+    public virtual void Draw(SpriteBatch spriteBatch)
+    {
+    }
+}

@@ -15,7 +15,7 @@ namespace GiveUp.Classes.GameObjects
         public Texture2D doorLocked;
         public Texture2D doorUnlocked;
 
-        public const char TileChar = 'B';
+        public const char TileChar = 'K';
         public bool isLocked = false;
 
         public void Initialize(ContentManager content, Vector2 position)

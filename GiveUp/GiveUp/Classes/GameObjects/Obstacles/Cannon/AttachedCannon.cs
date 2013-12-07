@@ -15,7 +15,6 @@ namespace GiveUp.Classes.GameObjects.Obstacles
     {
         public const char TileChar = 'c';
 
-        public Rectangle Rectangle;
         private Vector2 position;
         public Vector2 Position
         {
@@ -34,8 +33,6 @@ namespace GiveUp.Classes.GameObjects.Obstacles
         Texture2D texture;
         Texture2D bulletTexture;
         Texture2D cannonTexture;
-
-        Rectangle rectangle { get; set; }
 
         public Vector2 cannonPosition;
         float cannonRotation = 10;
@@ -83,7 +80,7 @@ namespace GiveUp.Classes.GameObjects.Obstacles
             }
 
             this.Position = position;
-            this.rectangle = new Rectangle((int)position.X, (int)position.Y, texture.Width, texture.Height);
+            this.Rectangle = new Rectangle((int)position.X, (int)position.Y, texture.Width, texture.Height);
         }
 
         public override void Update(GameTime gameTime)
@@ -118,7 +115,7 @@ namespace GiveUp.Classes.GameObjects.Obstacles
                 }
             }
 
-            if (HandleCollision.PerPixesCollision(ref Player.Rectangle, rectangle, texture, ref Player.Velocity, ref Player.Position))
+            if (HandleCollision.PerPixesCollision(ref Player.Rectangle, Rectangle, texture, ref Player.Velocity, ref Player.Position))
             {
                 Player.CanJump = true;
             }
