@@ -92,8 +92,6 @@ namespace GiveUp.Classes.Screens
 
         }
 
-
-
         public override void Draw(SpriteBatch spriteBatch)
         {
             base.Draw(spriteBatch);
