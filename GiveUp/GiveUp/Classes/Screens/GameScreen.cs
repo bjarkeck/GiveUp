@@ -3,6 +3,7 @@ using GiveUp.Classes.LevelManager;
 using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Content;
 using Microsoft.Xna.Framework.Graphics;
+using Microsoft.Xna.Framework.Input;
 using System;
 using System.Collections.Generic;
 using System.IO;
@@ -16,8 +17,10 @@ namespace GiveUp.Classes.Screens
         public LevelManagerr LevelManager;
         Player player;
         SpriteFont font;
+
         int levelId = 1;
         int subLevelId = 1;
+
 
         public GameScreen(bool pricticeRun = false, int levelId = 1, int subLevelId = 1)
         {
@@ -39,6 +42,11 @@ namespace GiveUp.Classes.Screens
         {
             player.Update(gameTime);
             LevelManager.Update(gameTime);
+
+            if (player.InputHelper.IsNewPress(Keys.Escape))
+            {
+                ScreenManager.Current.LoadScreen(new MenuSubLevelScreen(levelId));
+            }
         }
 
         public override void Draw(SpriteBatch spriteBatch)

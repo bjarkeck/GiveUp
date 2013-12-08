@@ -52,7 +52,7 @@ using System.Text;
                 // Tjekker om alle knapper er tændte
                 if (buttonActivators.Any(x => x.isLocked == false) == false)
                 {
-                    this.LevelManager.StartNextLevel();
+                    this.LevelManager.StartNextLevel(true);
                 }
             }
         }

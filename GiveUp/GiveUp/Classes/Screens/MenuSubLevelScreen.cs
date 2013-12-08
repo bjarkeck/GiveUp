@@ -2,6 +2,7 @@
 using GiveUp.Classes.Db;
 using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Graphics;
+using Microsoft.Xna.Framework.Input;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -70,6 +71,11 @@ namespace GiveUp.Classes.Screens
                 if (item.Rectangle.Contains(MouseHelper.Position.ToPoint()))
                 {
                     item.BoxTexture = Content.Load<Texture2D>("Images/Menu/PracticeBoxActive");
+
+                    if (Mouse.GetState().LeftButton == ButtonState.Pressed)
+                    {
+                        ScreenManager.Current.LoadScreen(new GameScreen(true, item.LevelId, item.SubLevelId));
+                    }
                 }
                 else
                 {
@@ -80,6 +86,12 @@ namespace GiveUp.Classes.Screens
             if (startChallengeRectangle.Contains(MouseHelper.Position.ToPoint()))
             {
                 startChallengeButton = Content.Load<Texture2D>("Images/Menu/PlayChallengeActive");
+
+                if (Mouse.GetState().LeftButton == ButtonState.Pressed)
+                {
+                    ScreenManager.Current.LoadScreen(new GameScreen(false, level, 1));
+                }
+
             }
             else
             {

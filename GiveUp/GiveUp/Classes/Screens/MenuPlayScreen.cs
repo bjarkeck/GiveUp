@@ -84,7 +84,7 @@ namespace GiveUp.Classes.Screens
 
                     if (item.Contains(MouseHelper.Position.ToPoint()) && Mouse.GetState().LeftButton == ButtonState.Pressed)                                                                                                                              
                     {
-                        ScreenManager.Current.LoadScreen(new MenuSubLevelScreen(1));
+                        ScreenManager.Current.LoadScreen(new MenuSubLevelScreen((i + 1) / 2));
                     }
                 }
                 i++;
