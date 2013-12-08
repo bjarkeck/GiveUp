@@ -1,6 +1,8 @@
-﻿using GiveUp.Classes.Db;
+﻿using GiveUp.Classes.Core;
+using GiveUp.Classes.Db;
 using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Graphics;
+using Microsoft.Xna.Framework.Input;
 using System;
 using System.Collections.Generic;
 using System.IO;
@@ -24,6 +26,7 @@ namespace GiveUp.Classes.Screens
 
         public override void LoadContent()
         {
+            Content.Unload();
             font = Content.Load<SpriteFont>("Fonts/font");
             base.LoadContent();
 
@@ -38,33 +41,76 @@ namespace GiveUp.Classes.Screens
                 if (startX > MenuScreenBounderies.Width)
                 {
                     startX = 0;
-                    startY += 250;
+                    startY += 246;
                 }
 
                 int level = subLevel.LevelId;
-                
+
                 int numberOfSubLevels = DataContext.Current.Levels.Count(x => x.LevelId == level);
                 int numberOfLevelsUnlockted = DataContext.Current.Levels.Count(x => x.LevelId == level && x.PreviousRunTime > 0);
 
                 test = numberOfLevelsUnlockted + " / " + numberOfSubLevels;
-                
-                levelTextures.Add(Content.Load<Texture2D>("Levels/" + level + "/LevelBoxPassive"));
-                levelRectangles.Add(new Rectangle(startX + MenuScreenBounderies.X, startY + MenuScreenBounderies.Y, 250, 200));
-                startX += 50 + 250;
+
+                levelTextures.Add(Content.Load<Texture2D>("Levels/" + level + "/img"));
+                levelRectangles.Add(new Rectangle(startX + MenuScreenBounderies.X + 2, startY + MenuScreenBounderies.Y + 2, 278, 159));
+
+
+                levelTextures.Add(Content.Load<Texture2D>("Images/Menu/LevelBoxPassive"));
+                levelRectangles.Add(new Rectangle(startX + MenuScreenBounderies.X, startY + MenuScreenBounderies.Y, 282, 202));
+
+                startX += 44 + 282;
             }
 
         }
+
+        public override void Update(GameTime gameTime)
+        {
+            base.Update(gameTime);
+
+
+            int i = 0;
+            foreach (var item in levelRectangles)
+            {
+                if (item.Width == 282)
+                {
+                    if (item.Contains(MouseHelper.Position.ToPoint()))
+                    {
+                        levelTextures[i] = Content.Load<Texture2D>("Images/Menu/LevelBoxActive");
+                    }
+                    else
+                    {
+                        levelTextures[i] = Content.Load<Texture2D>("Images/Menu/LevelBoxPassive");
+                    }
+
+                    if (item.Contains(MouseHelper.Position.ToPoint()) && Mouse.GetState().LeftButton == ButtonState.Pressed)
+                    {
+                        ScreenManager.Current.LoadScreen(new MenuSubLevelScreen(1));
+                    }
+                }
+                i++;
+            }
+
+        }
+
 
 
         public override void Draw(SpriteBatch spriteBatch)
         {
             base.Draw(spriteBatch);
 
-
             int i = 0;
-            foreach (var t in levelTextures)
+            foreach (var t in levelRectangles)
             {
-                spriteBatch.Draw(t, levelRectangles[i], Color.White);
+                if (t.Width != 282)
+                    spriteBatch.Draw(levelTextures[i], t, Color.White);
+                i++;
+            }
+
+            i = 0;
+            foreach (var t in levelRectangles)
+            {
+                if (t.Width == 282)
+                    spriteBatch.Draw(levelTextures[i], t, Color.White);
                 i++;
             }
 

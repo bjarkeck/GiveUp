@@ -21,7 +21,7 @@ namespace GiveUp.Classes.Screens
         private int startPosition;
         public float ButtonSizeScaleFactor;
         public Type ActiveScreenType;
-        public Rectangle MenuScreenBounderies = new Rectangle(0, 120, 1150, 0);
+        public Rectangle MenuScreenBounderies = new Rectangle(0, 120, 1260, 0);
 
 
         public override void LoadContent()
@@ -34,10 +34,10 @@ namespace GiveUp.Classes.Screens
             ButtonSizeScaleFactor = 74f / topBarTexture.Height;
 
             //Tilføj knapperC:\Users\Purup\Documents\GitHub\GiveUp\GiveUp\GiveUp\Content\Images\Menu\Buttons\btnExitStatic.png
-            buttons.Add(new Button(Content, "Images/Menu/Buttons/btnPlay", () => { ScreenManager.Current.LoadScreen(new GameScreen()); }, ButtonSizeScaleFactor, ActiveScreenType == typeof(MenuPlayScreen)));
-            buttons.Add(new Button(Content, "Images/Menu/Buttons/btnOnline", () => { ScreenManager.Current.LoadScreen(new MenuOnlineScreen()); }, ButtonSizeScaleFactor, ActiveScreenType == typeof(MenuOnlineScreen)));
-            buttons.Add(new Button(Content, "Images/Menu/Buttons/btnSettings", () => { ScreenManager.Current.LoadScreen(new MenuSettingsScreen()); }, ButtonSizeScaleFactor, ActiveScreenType == typeof(MenuSettingsScreen)));
-            buttons.Add(new Button(Content, "Images/Menu/Buttons/btnExit", () => { ScreenManager.Current.LoadScreen(new MenuExitScreen()); }, ButtonSizeScaleFactor, ActiveScreenType == typeof(MenuExitScreen)));
+            buttons.Add(new Button(Content, "Images/Menu/Buttons/btnPlay", () => { ScreenManager.Current.LoadScreen(new GameScreen(), false); }, ButtonSizeScaleFactor, ActiveScreenType == typeof(MenuPlayScreen)));
+            buttons.Add(new Button(Content, "Images/Menu/Buttons/btnOnline", () => { ScreenManager.Current.LoadScreen(new MenuOnlineScreen(), false); }, ButtonSizeScaleFactor, ActiveScreenType == typeof(MenuOnlineScreen)));
+            buttons.Add(new Button(Content, "Images/Menu/Buttons/btnSettings", () => { ScreenManager.Current.LoadScreen(new MenuSettingsScreen(), false); }, ButtonSizeScaleFactor, ActiveScreenType == typeof(MenuSettingsScreen)));
+            buttons.Add(new Button(Content, "Images/Menu/Buttons/btnExit", () => { ScreenManager.Current.LoadScreen(new MenuExitScreen(), false); }, ButtonSizeScaleFactor, ActiveScreenType == typeof(MenuExitScreen)));
 
             //Udregn alle knappers bredde:
             buttonsWidth = buttons.Sum(x => x.ButtonRectangle.Width);

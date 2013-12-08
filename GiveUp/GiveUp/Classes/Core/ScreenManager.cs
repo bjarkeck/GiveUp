@@ -18,6 +18,7 @@ namespace GiveUp.Classes.Core
                 return Game1.ScreenManager;
             }
         }
+        private List<BaseScreen> screens = new List<BaseScreen>();
         public BaseScreen CurrentScreen;
         public ContentManager Content;
 
@@ -27,18 +28,41 @@ namespace GiveUp.Classes.Core
             LoadScreen(new MenuPlayScreen());
         }
 
-        public void LoadScreen(BaseScreen screen)
+        public void LoadScreen(BaseScreen screen, bool startNew = true)
         {
-            CurrentScreen = screen;
-            CurrentScreen.LoadContent(Content);
+            BaseScreen screenFromList = screens.FirstOrDefault(x => x.GetType() == screen.GetType());
+            if (startNew == true)
+            {
+                if (screenFromList != null)
+                {
+                    screens.Remove(screenFromList);
+                    screens.Add(screen);
+                }
+                CurrentScreen = screen;
+                CurrentScreen.LoadContent(Content);
+                screens.Add(screen);
+            }
+            else
+            {
+                if (screenFromList != null)
+                {
+                    CurrentScreen = screenFromList;
+                }
+                else
+                {
+                    CurrentScreen = screen;
+                    CurrentScreen.LoadContent(Content);
+                    screens.Add(screen);
+                }
+            }
         }
 
-        public  void UnloadContent()
+        public void UnloadContent()
         {
             CurrentScreen.UnloadContent();
         }
 
-        public  void Update(GameTime gameTime)
+        public void Update(GameTime gameTime)
         {
             CurrentScreen.Update(gameTime);
         }

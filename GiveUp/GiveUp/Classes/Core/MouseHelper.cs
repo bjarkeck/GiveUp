@@ -14,7 +14,7 @@ namespace GiveUp.Classes.Core
         {
             get
             {
-                return new Vector2((Mouse.GetState().X * (1600f / GraphicsAdapter.DefaultAdapter.CurrentDisplayMode.Width)),(Mouse.GetState().Y * (1600f / GraphicsAdapter.DefaultAdapter.CurrentDisplayMode.Height)));
+                return new Vector2((Mouse.GetState().X * (1600f / GraphicsAdapter.DefaultAdapter.CurrentDisplayMode.Width)),(Mouse.GetState().Y * (900f / GraphicsAdapter.DefaultAdapter.CurrentDisplayMode.Height)));
             }
         }
 
