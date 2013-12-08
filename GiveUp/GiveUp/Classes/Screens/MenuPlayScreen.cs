@@ -23,7 +23,6 @@ namespace GiveUp.Classes.Screens
             base.LoadContent();
         }
 
-
         public override void Draw(SpriteBatch spriteBatch)
         {
             base.Draw(spriteBatch);
