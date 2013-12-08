@@ -162,6 +162,24 @@
     <Content Include="Content\Images\Menu\Buttons\btnSettingsStatic.png">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Content>
+    <Content Include="Content\Images\Menu\playChallengeActive.png">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Content\Images\Menu\playChallengePassive.png">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Content\Images\Menu\practiceBoxActive.png">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Content\Images\Menu\practiceBoxLocked.png">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Content\Images\Menu\practiceBoxPassive.png">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Content\Images\Menu\runTime.png">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
     <Content Include="Content\Images\Obstacles\AttachedCannon\AttatchedCannonBodyB.png">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Content>
