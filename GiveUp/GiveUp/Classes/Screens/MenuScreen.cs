@@ -27,7 +27,7 @@ namespace GiveUp.Classes.Screens
 
         public override void LoadContent()
         {
-            DataContext.ReCreateLeveldataForEachUser();
+            //DataContext.ReCreateLeveldataForEachUser();
 
             bg = Content.Load<Texture2D>("Images/Menu/BackGround/menuBg");
 
