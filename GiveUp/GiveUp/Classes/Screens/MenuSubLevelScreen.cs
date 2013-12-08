@@ -98,11 +98,11 @@ namespace GiveUp.Classes.Screens
             {
                 spriteBatch.Draw(item.BoxTexture, item.Rectangle, Color.White);
                 spriteBatch.DrawString(font, "LEVEL " + item.SubLevelId, new Vector2((item.Rectangle.X + 142) - (levelLength.X / 2f), item.Rectangle.Y + 10), Color.White, 0, Vector2.Zero, 0.7f, SpriteEffects.None, 1);
-                spriteBatch.DrawString(font, item.BestPracticeTime.ToString(), new Vector2((item.Rectangle.X + 212), item.Rectangle.Y + 30), Color.White, 0, Vector2.Zero, 0.7f, SpriteEffects.None, 1);
-                spriteBatch.DrawString(font, item.BestRunTime.ToString(), new Vector2((item.Rectangle.X + 212), item.Rectangle.Y + 50), Color.White, 0, Vector2.Zero, 0.7f, SpriteEffects.None, 1);
-                spriteBatch.DrawString(font, item.PreviousRunTime.ToString(), new Vector2((item.Rectangle.X + 212), item.Rectangle.Y + 70), Color.White, 0, Vector2.Zero, 0.7f, SpriteEffects.None, 1);
-                spriteBatch.DrawString(font, item.Deaths.ToString(), new Vector2((item.Rectangle.X + 212), item.Rectangle.Y + 100), Color.White, 0, Vector2.Zero, 0.7f, SpriteEffects.None, 1);
-                spriteBatch.DrawString(font, item.BestRunTime.ToString(), new Vector2((challengeScoreboardRectangle.Right - 30), challengeScoreboardRectangle.Y + 50 + (34 * i)), Color.White, 0, Vector2.Zero, 0.7f, SpriteEffects.None, 1);
+                spriteBatch.DrawString(font, item.BestPracticeTime.ToString(), new Vector2((item.Rectangle.X + 240), item.Rectangle.Y + 43), Color.White, 0, Vector2.Zero, 0.7f, SpriteEffects.None, 1);
+                spriteBatch.DrawString(font, item.BestRunTime.ToString(), new Vector2((item.Rectangle.X + 240), item.Rectangle.Y + 73), Color.White, 0, Vector2.Zero, 0.7f, SpriteEffects.None, 1);
+                spriteBatch.DrawString(font, item.PreviousRunTime.ToString(), new Vector2((item.Rectangle.X + 240), item.Rectangle.Y + 106), Color.White, 0, Vector2.Zero, 0.7f, SpriteEffects.None, 1);
+                spriteBatch.DrawString(font, item.Deaths.ToString(), new Vector2((item.Rectangle.X + 240), item.Rectangle.Y + 136), Color.White, 0, Vector2.Zero, 0.7f, SpriteEffects.None, 1);
+                spriteBatch.DrawString(font, item.BestRunTime.ToString(), new Vector2((challengeScoreboardRectangle.Right - 30), challengeScoreboardRectangle.Y + 51 + ((i > 6 ? 35 : 34) * i)), Color.White, 0, Vector2.Zero, 0.7f, SpriteEffects.None, 1);
                 i++;
             }
 
