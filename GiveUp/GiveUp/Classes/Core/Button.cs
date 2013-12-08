@@ -58,7 +58,6 @@ namespace GiveUp.Classes.Core
         public void Draw(SpriteBatch spriteBatch)
         {
             spriteBatch.Draw(texture, ButtonRectangle, Color.White);
-            Debug.Print(Mouse.GetState().X + " - " + ButtonRectangle.X);
         }
     }
 }

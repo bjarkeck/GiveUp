@@ -58,6 +58,8 @@ namespace GiveUp.Classes.Screens
             base.LoadContent();
         }
 
+        
+
         public override void Update(Microsoft.Xna.Framework.GameTime gameTime)
         {
             foreach (Button b in buttons)
