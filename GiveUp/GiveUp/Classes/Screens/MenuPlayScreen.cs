@@ -113,7 +113,6 @@ namespace GiveUp.Classes.Screens
             }
 
 
-
             spriteBatch.DrawString(font, test, new Vector2(MenuScreenBounderies.X, MenuScreenBounderies.Y - 30), Color.White);
 
         }
