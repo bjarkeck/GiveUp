@@ -36,7 +36,7 @@ namespace GiveUp.Classes.Screens
             int startX = 0;
             int startY = 0;
 
-            foreach (var subLevel in DataContext.Current.Levels.Where(x => x.SubLevelId == 1))
+            foreach (var subLevel in DataContext.Current.Levels.Where(x => x.SubLevelId == 1).OrderBy(x => x.LevelId))
             {
                 if (startX > MenuScreenBounderies.Width)
                 {
@@ -82,7 +82,7 @@ namespace GiveUp.Classes.Screens
                         levelTextures[i] = Content.Load<Texture2D>("Images/Menu/LevelBoxPassive");
                     }
 
-                    if (item.Contains(MouseHelper.Position.ToPoint()) && Mouse.GetState().LeftButton == ButtonState.Pressed)
+                    if (item.Contains(MouseHelper.Position.ToPoint()) && Mouse.GetState().LeftButton == ButtonState.Pressed)                                                                                                                              
                     {
                         ScreenManager.Current.LoadScreen(new MenuSubLevelScreen(1));
                     }
