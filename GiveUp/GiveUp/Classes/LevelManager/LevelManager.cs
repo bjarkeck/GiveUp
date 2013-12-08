@@ -1,4 +1,6 @@
 ﻿using GiveUp.Classes.Core;
+using GiveUp.Classes.Db;
+using GiveUp.Classes.Screens;
 using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Content;
 using Microsoft.Xna.Framework.Graphics;
@@ -19,6 +21,11 @@ namespace GiveUp.Classes.LevelManager
         public GridManager GridManager;
         public List<IGameObject> GameObjects = new List<IGameObject>();
         public Player Player;
+        public int LevelTimer = 0;
+        public int ChallengeTimer = 0;
+        public bool PracticeRun = false;
+        private List<Level> dbLevels;
+
 
         public ContentManager Content
         {
@@ -28,11 +35,13 @@ namespace GiveUp.Classes.LevelManager
             }
         }
 
-        public LevelManagerr(Player player)
+        public LevelManagerr(Player player, bool practiceRun = false)
         {
+            PracticeRun = practiceRun;
             this.Player = player;
             GridManager = new GridManager(Content, 32, 32);
             GridManager.AddBackground("Images/Bgs/bg1");
+
 
         }
 
@@ -47,10 +56,11 @@ namespace GiveUp.Classes.LevelManager
 
         public void StartLevel(int level, int subLevel = 1)
         {
+            dbLevels = DataContext.Current.Levels.Where(x => x.LevelId == level).ToList();
             CurrentSubLevel = subLevel;
             CurrentLevel = level;
             DirectoryInfo dir = new DirectoryInfo("../../../Content/Levels/" + level);
-            foreach (FileInfo file in dir.GetFiles().Where(x => x.Extension.ToLower().Contains("txt")).OrderBy(x => x.Name)) 
+            foreach (FileInfo file in dir.GetFiles().Where(x => x.Extension.ToLower().Contains("txt")).OrderBy(x => x.Name))
                 Levels.Add(file.OpenText().ReadToEnd());
 
             startSubLevel(subLevel);
@@ -58,8 +68,17 @@ namespace GiveUp.Classes.LevelManager
 
         private void startSubLevel(int subLevel)
         {
-            loadLevel(Levels[subLevel - 1]);
-            Player.Position = GridManager.UnassignedTiles['S'].First();
+
+            if (Levels.Count() < CurrentSubLevel)
+            {
+                ScreenManager.Current.LoadScreen(new MenuSubLevelScreen(CurrentLevel), true);
+            }
+            else
+            {
+                loadLevel(Levels[subLevel - 1]);
+                Player.Position = GridManager.UnassignedTiles['S'].First();
+            }
+
         }
         public void RestartLevel()
         {
@@ -69,6 +88,33 @@ namespace GiveUp.Classes.LevelManager
         // TODO Fix player reset.
         private void loadLevel(string p)
         {
+            Level lvl = dbLevels.First(x => x.SubLevelId == CurrentSubLevel);
+            if (PracticeRun)
+            {
+                if (LevelTimer > 0)
+                {
+                    lvl.PreviousRunTime = LevelTimer;
+                    if (lvl.PreviousRunTime < lvl.BestPracticeTime || lvl.BestPracticeTime == 0)
+                    {
+                        lvl.BestPracticeTime = lvl.PreviousRunTime;
+                    }
+                    DataContext.Current.SaveChanges();
+                }
+            }
+            else
+            {
+                if (LevelTimer > 0)
+                {
+                    ChallengeTimer += LevelTimer;
+                    lvl.PreviousRunTime = LevelTimer;
+                    if (lvl.PreviousRunTime < lvl.BestRunTime || lvl.BestRunTime == 0)
+                    {
+                        lvl.BestRunTime = lvl.PreviousRunTime;
+                    }
+                }
+            }
+            LevelTimer = 0;
+
             GameObjects.Clear();
 
             GridManager.LoadLevel(p);
@@ -106,9 +152,19 @@ namespace GiveUp.Classes.LevelManager
 
         public void StartNextLevel()
         {
-            if (Levels.Count() > CurrentSubLevel )
+            if (PracticeRun == false)
             {
-                CurrentSubLevel = CurrentSubLevel + 1;
+                CurrentSubLevel += 1;
+                if (Levels.Count() < CurrentSubLevel)
+                {
+                    ChallengeTimer += LevelTimer;
+                    int bestRunTime = DataContext.Current.Levels.Where(x => x.LevelId == CurrentLevel).Sum(c => c.BestRunTime);
+                    if (bestRunTime == 0 || ChallengeTimer < bestRunTime)
+                    {
+                        DataContext.Current.SaveChanges();
+                    }
+                    ScreenManager.Current.LoadScreen(new MenuSubLevelScreen(CurrentLevel),true);
+                }
             }
             changeLevel = true;
         }
@@ -120,6 +176,8 @@ namespace GiveUp.Classes.LevelManager
                 item.Update(gameTime);
                 item.CollisionLogic();
             }
+
+            LevelTimer += gameTime.ElapsedGameTime.Milliseconds;
 
             if (changeLevel)
             {

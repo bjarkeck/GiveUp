@@ -16,16 +16,21 @@ namespace GiveUp.Classes.Screens
         public LevelManagerr LevelManager;
         Player player;
         SpriteFont font;
+        int levelId = 1;
+        int subLevelId = 1;
 
-        public GameScreen()
+        public GameScreen(bool pricticeRun = false, int levelId = 1, int subLevelId = 1)
         {
+            this.levelId = levelId;
+            this.subLevelId = subLevelId;
+
             player = new Player();
-            LevelManager = new LevelManagerr(player);
+            LevelManager = new LevelManagerr(player, pricticeRun);
         }
 
         public override void LoadContent()
         {
-            LevelManager.StartLevel(1, 1);
+            LevelManager.StartLevel(levelId, subLevelId);
             player.LoadContent(Content);
             font = Content.Load<SpriteFont>("Fonts/font");
         }
