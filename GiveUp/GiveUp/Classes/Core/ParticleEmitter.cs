@@ -57,18 +57,18 @@ namespace GiveUp.Classes.Core
         private void AddParticle(Vector2 position)
         {
             //Behøves ikke at udregnes hver gang... lav propertie fix.
-            double angleDir = (AngleDirection- 90) * Math.PI / 180;
+            double angleDir = (AngleDirection - 90) * Math.PI / 180;
             double angleSpread = AngleSpread * Math.PI / 180 / 2;
             double minAngle = angleDir - angleSpread;
             double maxAngle = angleDir + angleSpread;
-            
+
             double randomAngle = r.NextDouble() * (maxAngle - minAngle) + minAngle;
             float randomSpeed = (float)r.NextDouble(ParticleSpeed.Minimum, ParticleSpeed.Maximum) / 100f;
 
-            Particle p = new Particle ( 
-                position: new Vector2(position.X,position.Y),
+            Particle p = new Particle(
+                position: new Vector2(position.X, position.Y),
                 velocity: new Vector2((float)Math.Cos(randomAngle) * randomSpeed, (float)Math.Sin(randomAngle) * randomSpeed) + AddedVelocity * 0.2f,
-                particleTexture: ParticleTextures[r.Next(0,ParticleTextures.Count())],
+                particleTexture: ParticleTextures[r.Next(0, ParticleTextures.Count())],
                 rotation: (float)r.NextDouble(RotationSpeed.Minimum, RotationSpeed.Maximum),
                 life: r.Next(ParticleLife.Minimum, ParticleLife.Maximum)
             );
@@ -90,6 +90,29 @@ namespace GiveUp.Classes.Core
                     AddParticle(position);
                 }
             }
+
+            UpdateParticles(gameTime);
+        }
+
+        public void Update(GameTime gameTime, Rectangle position)
+        {
+            timer += gameTime.ElapsedGameTime.TotalMilliseconds;
+            //AddParticles
+            if (Particles.Count() < MaxNumberOfParitcles)
+            {
+                //Add this many:
+                var ps = 1000f / ParticlesPerSeccond;
+                while (timer > ps)
+                {
+                    timer -= ps;
+                    AddParticle(new Vector2(r.Next(position.X, position.X + position.Width), r.Next(position.Y, position.Y + position.Height)));
+                }
+            }
+            UpdateParticles(gameTime);
+        }
+
+        public void UpdateParticles(GameTime gameTime)
+        {
 
             //UpdateParticles
             foreach (Particle particle in Particles.ToList())
