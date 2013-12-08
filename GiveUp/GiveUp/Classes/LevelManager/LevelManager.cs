@@ -63,12 +63,12 @@ namespace GiveUp.Classes.LevelManager
 
             if (PracticeRun == false)
             {
-                str = "Challange time:" + (ChallengeTimer);
-                spriteBatch.DrawString(font, str, new Vector2(1600 - 30 - font.MeasureString(str).X, 57), Color.White, 0, Vector2.Zero, 0.7f, SpriteEffects.None, 0);
+                str = "Challange time: " + (ChallengeTimer.ToTime());
+                spriteBatch.DrawString(font, str, new Vector2(1600 - 50 - font.MeasureString(str).X * 0.7f, 57), Color.White, 0, Vector2.Zero, 0.7f, SpriteEffects.None, 0);
             }
 
-            str = "Time: " + LevelTimer;
-            spriteBatch.DrawString(font, str, new Vector2(1600 - 30 - font.MeasureString(str).X, (PracticeRun ? 57 : 70)), Color.White, 0, Vector2.Zero, 0.7f, SpriteEffects.None, 0);
+            str = "Time: " + LevelTimer.ToTime();
+            spriteBatch.DrawString(font, str, new Vector2(1600 - 50 - font.MeasureString(str).X * 0.7f, (PracticeRun ? 57 : 70)), Color.White, 0, Vector2.Zero, 0.7f, SpriteEffects.None, 0);
         }
 
         public void StartLevel(int level, int subLevel = 1)

@@ -73,7 +73,10 @@ namespace GiveUp.Classes.Db
                     current = new DataContext();
                 }
                 return current;
-
+            }
+            set
+            {
+                current = value;
             }
 
         }

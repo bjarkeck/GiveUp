@@ -10,6 +10,14 @@ namespace GiveUp.Classes.Db
 {
     public class Level
     {
+
+
+        public Level()
+        {
+
+        }
+
+
         public int Id { get; set; }
         public int LevelId { get; set; }
         public int SubLevelId { get; set; }
@@ -28,5 +36,38 @@ namespace GiveUp.Classes.Db
 
 
 
+
+        private bool? isUnlocked;
+        [NotMapped]
+        public bool IsUnlocked
+        {
+            get
+            {
+                if (SubLevelId == 1)
+                {
+                    return true;
+                }
+                if (isUnlocked == null)
+                {
+                    isUnlocked = DataContext.Current.Levels.FirstOrDefault(x => x.LevelId == LevelId && x.SubLevelId == SubLevelId - 1).PreviousRunTime > 0;
+                }
+                return isUnlocked == true;
+
+            }
+        }
+
+        private bool? isChallangeComplete;
+        [NotMapped]
+        public bool IsChallangeComplete
+        {
+            get
+            {
+                if (isChallangeComplete == null)
+                {
+                    isChallangeComplete = DataContext.Current.Levels.Any(x => x.LevelId == LevelId && x.BestRunTime == 0) == false;
+                }
+                return isChallangeComplete == true;
+            }
+        }
     }
 }

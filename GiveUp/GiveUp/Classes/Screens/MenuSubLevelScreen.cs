@@ -68,7 +68,7 @@ namespace GiveUp.Classes.Screens
 
             foreach (var item in lvlList)
             {
-                if (item.Rectangle.Contains(MouseHelper.Position.ToPoint()))
+                if (item.Rectangle.Contains(MouseHelper.Position.ToPoint()) && item.IsUnlocked)
                 {
                     item.BoxTexture = Content.Load<Texture2D>("Images/Menu/PracticeBoxActive");
 
@@ -79,7 +79,14 @@ namespace GiveUp.Classes.Screens
                 }
                 else
                 {
-                    item.BoxTexture = Content.Load<Texture2D>("Images/Menu/PracticeBoxPassive");
+                    if (item.IsUnlocked)
+                    {
+                        item.BoxTexture = Content.Load<Texture2D>("Images/Menu/PracticeBoxPassive");
+                    }
+                    else
+                    {
+                        item.BoxTexture = Content.Load<Texture2D>("Images/Menu/PracticeBoxLocked");
+                    }
                 }
             }
 
@@ -91,7 +98,6 @@ namespace GiveUp.Classes.Screens
                 {
                     ScreenManager.Current.LoadScreen(new GameScreen(false, level, 1));
                 }
-
             }
             else
             {
@@ -105,23 +111,37 @@ namespace GiveUp.Classes.Screens
 
             var levelLength = font.MeasureString("LEVEL " + level) * 0.7f;
 
+            bool IsChallangeComplete = lvlList.FirstOrDefault().IsChallangeComplete;
+
+            if (IsChallangeComplete)
+            {
+                spriteBatch.Draw(challengeScoreboard, challengeScoreboardRectangle, Color.White);
+            }
+
+
             int i = 0;
             foreach (var item in lvlList)
             {
                 spriteBatch.Draw(item.BoxTexture, item.Rectangle, Color.White);
-                spriteBatch.DrawString(font, "LEVEL " + item.SubLevelId, new Vector2((item.Rectangle.X + 142) - (levelLength.X / 2f), item.Rectangle.Y + 10), Color.White, 0, Vector2.Zero, 0.7f, SpriteEffects.None, 1);
-                spriteBatch.DrawString(font, item.BestPracticeTime.ToString(), new Vector2((item.Rectangle.X + 240), item.Rectangle.Y + 43), Color.White, 0, Vector2.Zero, 0.7f, SpriteEffects.None, 1);
-                spriteBatch.DrawString(font, item.BestRunTime.ToString(), new Vector2((item.Rectangle.X + 240), item.Rectangle.Y + 73), Color.White, 0, Vector2.Zero, 0.7f, SpriteEffects.None, 1);
-                spriteBatch.DrawString(font, item.PreviousRunTime.ToString(), new Vector2((item.Rectangle.X + 240), item.Rectangle.Y + 106), Color.White, 0, Vector2.Zero, 0.7f, SpriteEffects.None, 1);
-                spriteBatch.DrawString(font, item.Deaths.ToString(), new Vector2((item.Rectangle.X + 240), item.Rectangle.Y + 136), Color.White, 0, Vector2.Zero, 0.7f, SpriteEffects.None, 1);
-                spriteBatch.DrawString(font, item.BestRunTime.ToString(), new Vector2((challengeScoreboardRectangle.Right - 30), challengeScoreboardRectangle.Y + 51 + ((i > 6 ? 35 : 34) * i)), Color.White, 0, Vector2.Zero, 0.7f, SpriteEffects.None, 1);
+                spriteBatch.DrawString(font, "LEVEL " + item.SubLevelId, new Vector2((item.Rectangle.X + 142) - (levelLength.X / 2f), item.Rectangle.Y + 10), (item.IsUnlocked ? Color.White : new Color(Color.White, 40)), 0, Vector2.Zero, 0.7f, SpriteEffects.None, 1);
+
+                if (item.IsUnlocked)
+                {
+                    spriteBatch.DrawString(font, item.BestPracticeTime.ToTime(), new Vector2((item.Rectangle.X + 240 - 55), item.Rectangle.Y + 43), Color.White, 0, Vector2.Zero, 0.7f, SpriteEffects.None, 1);
+                    spriteBatch.DrawString(font, item.BestRunTime.ToTime(), new Vector2((item.Rectangle.X + 240 - 55), item.Rectangle.Y + 73), Color.White, 0, Vector2.Zero, 0.7f, SpriteEffects.None, 1);
+                    spriteBatch.DrawString(font, item.PreviousRunTime.ToTime(), new Vector2((item.Rectangle.X + 240 - 55), item.Rectangle.Y + 106), Color.White, 0, Vector2.Zero, 0.7f, SpriteEffects.None, 1);
+                    spriteBatch.DrawString(font, item.Deaths.ToString(), new Vector2((item.Rectangle.X + 250), item.Rectangle.Y + 141), Color.White, 0, Vector2.Zero, 0.7f, SpriteEffects.None, 1);
+                }
+                if (IsChallangeComplete)
+                {
+                    spriteBatch.DrawString(font, item.BestRunTime.ToTime(), new Vector2((challengeScoreboardRectangle.Right - 30 - 55), challengeScoreboardRectangle.Y + 51 + ((i > 6 ? 35 : 34) * i)), Color.White, 0, Vector2.Zero, 0.7f, SpriteEffects.None, 1);
+                }
                 i++;
             }
 
             spriteBatch.DrawString(font, "CHALLENGE " + level, new Vector2(MenuScreenBounderies.X + 5, MenuScreenBounderies.Y - 40), Color.White);
 
             spriteBatch.Draw(startChallengeButton, startChallengeRectangle, Color.White);
-            spriteBatch.Draw(challengeScoreboard, challengeScoreboardRectangle, Color.White);
             //47
         }
 

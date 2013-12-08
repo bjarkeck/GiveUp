@@ -26,6 +26,8 @@ namespace GiveUp.Classes.Screens
 
         public override void LoadContent()
         {
+
+
             Content.Unload();
             font = Content.Load<SpriteFont>("Fonts/font");
             base.LoadContent();

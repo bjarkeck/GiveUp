@@ -480,7 +480,7 @@
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Content>
     <Content Include="Content\Levels\7\3.txt" />
-    <Content Include="Content\Levels\7\6.txt" />
+    <Content Include="Content\Levels\7\4.txt" />
     <Content Include="Content\Levels\7\img.png">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Content>
