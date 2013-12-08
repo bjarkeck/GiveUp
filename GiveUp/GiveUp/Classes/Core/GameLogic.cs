@@ -14,6 +14,12 @@ namespace GiveUp.Classes.Core
 {
     public static class GameLogic
     {
+        public static string ToTime(this int ms)
+        {
+            return TimeSpan.FromMilliseconds(ms).ToString(@"mm\:ss\:fff");
+
+        }
+
         public static double NextDouble(this Random rnd, double min, double max)
         {
             return rnd.NextDouble() * (max - min) + min;

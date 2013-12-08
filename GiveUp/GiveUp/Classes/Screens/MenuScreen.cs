@@ -27,6 +27,9 @@ namespace GiveUp.Classes.Screens
 
         public override void LoadContent()
         {
+
+
+
             bg = Content.Load<Texture2D>("Images/Menu/BackGround/menuBg");
 
             topBarTexture = Content.Load<Texture2D>("Images/Menu/BackGround/btnBarBg");

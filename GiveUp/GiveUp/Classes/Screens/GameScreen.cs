@@ -24,6 +24,7 @@ namespace GiveUp.Classes.Screens
 
         public GameScreen(bool pricticeRun = false, int levelId = 1, int subLevelId = 1)
         {
+            this.practiceRun = pricticeRun;
             this.levelId = levelId;
             this.subLevelId = subLevelId;
 
@@ -33,7 +34,15 @@ namespace GiveUp.Classes.Screens
 
         public override void LoadContent()
         {
-            LevelManager.StartLevel(levelId, subLevelId);
+            //Det her er åbenbart nødvendigt??
+            if (practiceRun)
+            {
+                LevelManager.StartLevel(levelId, subLevelId);
+            }
+            else
+            {
+                LevelManager.StartLevel(levelId, subLevelId - 1);
+            }
             player.LoadContent(Content);
             font = Content.Load<SpriteFont>("Fonts/font");
         }
@@ -56,5 +65,7 @@ namespace GiveUp.Classes.Screens
             spriteBatch.DrawString(font, "test", new Vector2(200, 200), Color.Black);
         }
 
+
+        public bool practiceRun { get; set; }
     }
 }

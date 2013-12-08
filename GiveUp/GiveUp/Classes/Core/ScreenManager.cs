@@ -1,4 +1,5 @@
-﻿using GiveUp.Classes.Screens;
+﻿using GiveUp.Classes.Db;
+using GiveUp.Classes.Screens;
 using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Content;
 using Microsoft.Xna.Framework.Graphics;
@@ -30,6 +31,9 @@ namespace GiveUp.Classes.Core
 
         public void LoadScreen(BaseScreen screen, bool startNew = true)
         {
+            DataContext.Current.Dispose();
+            DataContext.Current = null;
+
             BaseScreen screenFromList = screens.FirstOrDefault(x => x.GetType() == screen.GetType());
             if (startNew == true)
             {
