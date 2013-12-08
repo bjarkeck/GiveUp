@@ -1,4 +1,5 @@
-﻿using GiveUp.Classes.Db;
+﻿using GiveUp.Classes.Core;
+using GiveUp.Classes.Db;
 using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Graphics;
 using System;
@@ -24,7 +25,6 @@ namespace GiveUp.Classes.Screens
         {
             base.LoadContent();
 
-
             lvlList = DataContext.Current.Levels.Where(x => x.LevelId == level).ToList();
 
             foreach (Level lvl in lvlList)
@@ -35,20 +35,29 @@ namespace GiveUp.Classes.Screens
                     startY += 246;
                 }
 
-                lvl.ImgTexture = Content.Load<Texture2D>("Levels/" + level + "/img");  // + lvl.SubLevelId
-                lvl.Rectangle = new Rectangle(startX + MenuScreenBounderies.X + 2, startY + MenuScreenBounderies.Y + 2, 278, 159);
-
-                lvl.BoxTexture = Content.Load<Texture2D>("Images/Menu/LevelBoxPassive");
+                lvl.BoxTexture = Content.Load<Texture2D>("Images/Menu/PracticeBoxPassive");
                 lvl.Rectangle = new Rectangle(startX + MenuScreenBounderies.X, startY + MenuScreenBounderies.Y, 282, 202);
-
 
                 startX += 44 + 282;
             }
-
-
-
         }
 
+        public override void Update(GameTime gameTime)
+        {
+            base.Update(gameTime);
+
+            foreach (var item in lvlList)
+            {
+                if (item.Rectangle.Contains(MouseHelper.Position.ToPoint()))
+                {
+                    item.BoxTexture = Content.Load<Texture2D>("Images/Menu/PracticeBoxActive");
+                }
+                else
+                {
+                    item.BoxTexture = Content.Load<Texture2D>("Images/Menu/PracticeBoxPassive");
+                }
+            }
+        }
 
         public override void Draw(Microsoft.Xna.Framework.Graphics.SpriteBatch spriteBatch)
         {
@@ -56,14 +65,8 @@ namespace GiveUp.Classes.Screens
 
             foreach (var item in lvlList)
             {
-                spriteBatch.Draw(item.ImgTexture, new Rectangle(item.Rectangle.X + 2, item.Rectangle.Y + 2, 278, 159), Color.White);
                 spriteBatch.Draw(item.BoxTexture, item.Rectangle, Color.White);
-
-
-
             }
-
-
         }
 
 
