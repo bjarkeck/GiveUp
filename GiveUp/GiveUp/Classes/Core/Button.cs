@@ -40,7 +40,7 @@ namespace GiveUp.Classes.Core
         {
             if (this.texture != this.textureActive)
             {
-                if (ButtonRectangle.Contains((int)(Mouse.GetState().X * (1600f / GraphicsAdapter.DefaultAdapter.CurrentDisplayMode.Width)), (int)(Mouse.GetState().Y * (1600f / GraphicsAdapter.DefaultAdapter.CurrentDisplayMode.Width))))
+                if (ButtonRectangle.Contains(MouseHelper.Position.ToPoint()))
                 {
                     if (Mouse.GetState().LeftButton == ButtonState.Pressed)
                     {

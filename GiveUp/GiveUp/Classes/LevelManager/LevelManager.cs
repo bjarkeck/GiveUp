@@ -50,7 +50,7 @@ namespace GiveUp.Classes.LevelManager
             CurrentSubLevel = subLevel;
             CurrentLevel = level;
             DirectoryInfo dir = new DirectoryInfo("../../../Content/Levels/" + level);
-            foreach (FileInfo file in dir.GetFiles().OrderBy(x => x.Name))
+            foreach (FileInfo file in dir.GetFiles().Where(x => x.Extension.ToLower().Contains("txt")).OrderBy(x => x.Name)) 
                 Levels.Add(file.OpenText().ReadToEnd());
 
             startSubLevel(subLevel);

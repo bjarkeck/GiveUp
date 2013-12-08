@@ -34,16 +34,16 @@ namespace GiveUp.Classes.Core
         {
             this.Acceleration = 0.2f;
             this.Position = Vector2.Zero;
-            this.StartJumpSpeed = -12f;
-            this.Gravity = new Vector2(0, 0.55f);
-            this.MaxSpeed = 5.2f;
+            this.StartJumpSpeed = -8f;
+            this.Gravity = new Vector2(0, 0.44f);
+            this.MaxSpeed = 3.2f;
             this.MaxDrag = 3.1f;
             this.Friction = 0.9f;
         }
 
         public void LoadContent(ContentManager content)
         {
-            Animation = new SpriteAnimation(content.Load<Texture2D>("Images/Player/playerAnimation"), Position, 46, 60, 100);
+            Animation = new SpriteAnimation(content.Load<Texture2D>("Images/Player/playerAnimation"), Position, 46, 60, 5);
             Animation.AddRow("stand", 0, 1);
             Animation.AddRow("run", 1, 15);
             Animation.AddRow("jump", 2, 1);
@@ -58,7 +58,7 @@ namespace GiveUp.Classes.Core
         public void Update(GameTime gameTime)
         {
             Rectangle = Animation.Rectangle;
-            Animation.AnimationSpeed = 200 - Math.Abs(Velocity.X * 30);
+            Animation.AnimationSpeed = 150 - Math.Abs(Velocity.X * 30);
             InputHelper.Update();
             Movement(gameTime);
             Animation.Update(gameTime, Position);

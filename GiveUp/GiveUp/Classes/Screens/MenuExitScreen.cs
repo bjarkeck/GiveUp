@@ -27,7 +27,7 @@ namespace GiveUp.Classes.Screens
             btnExit.ButtonRectangle.X = (1600 / 2) - btnExit.ButtonRectangle.Width;
             btnExit.ButtonRectangle.Y = 500;
 
-            btnDontExit = new Button(Content, "Images/Menu/Buttons/btnExit", () => {ScreenManager.Current.LoadScreen(new MenuPlayScreen()); }, ButtonSizeScaleFactor);
+            btnDontExit = new Button(Content, "Images/Menu/Buttons/btnExit", () => {ScreenManager.Current.LoadScreen(new MenuPlayScreen(), false); }, ButtonSizeScaleFactor);
             btnDontExit.ButtonRectangle.X = (1600 / 2);
             btnDontExit.ButtonRectangle.Y = 500;
         }
