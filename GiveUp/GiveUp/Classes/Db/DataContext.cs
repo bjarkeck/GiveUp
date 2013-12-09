@@ -10,10 +10,10 @@ namespace GiveUp.Classes.Db
     public class DataContext : DbContext
     {
         public DataContext()
-            : base(@"Data Source=(LocalDB)\v11.0;AttachDbFilename=" + new DirectoryInfo("../../../Content/Db/").FullName + @"db.mdf" + ";Integrated Security=True;MultipleActiveResultSets=true")
+            : base(@"Data Source=(LocalDB)\v11.0;AttachDbFilename=" + new DirectoryInfo("../../../Content/Db/").FullName + Environment.UserName + @"db.mdf" + ";Integrated Security=True;MultipleActiveResultSets=true")
         {
-            string path = new DirectoryInfo("../../../Content/Db/").FullName + @"db.mdf";
-            base.Database.Connection.ConnectionString = @"Data Source=(LocalDB)\v11.0;AttachDbFilename=" + path + ";Integrated Security=True;MultipleActiveResultSets=true";
+            Database.CreateIfNotExists();
+            this.Configuration.AutoDetectChangesEnabled = true;
         }
 
         [Obsolete("Ik brug den her metode særlig tit!")]
@@ -70,7 +70,6 @@ namespace GiveUp.Classes.Db
                 if (current == null)
                 {
                     current = new DataContext();
-                    current.Database.CreateIfNotExists();
                     if (current.Users.Count() == 0)
                     {
                         User u = new User()
