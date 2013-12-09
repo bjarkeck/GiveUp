@@ -22,7 +22,7 @@ G---------------------MGM---MGM------------------G
 G---------------------MGM---^GM------------------G
 G---------------------MGM---MGM------------------G
 G---------------------------MGM------------------G
-G-S-------------------------MGM------------------G
+G-e-------------------------MGM------------------G
 G--------^---K----BBBB---------MGM-------------D-G
 GGGGGGGGGGGGGGGGGGGGGGGGGGGGGG------GGGGGGGGGGGG
 GGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGG
