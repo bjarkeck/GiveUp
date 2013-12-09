@@ -29,13 +29,7 @@ namespace GiveUp.Classes.GameObjects.Obstacles
 
             List<ParticleTexture> list = new List<ParticleTexture>();
             List<ParticleTexture> list1 = new List<ParticleTexture>();
-
-            list1.Add(new ParticleTexture(content.Load<Texture2D>("Images/Obstacles/sawblade"), new Color(Color.Red, 0.3f), new Color(Color.Yellow, 0.04f), 0.1f, 0f));
-            list1.Add(new ParticleTexture(content.Load<Texture2D>("Images/Obstacles/sawblade"), new Color(Color.Yellow, 0.8f), new Color(Color.Yellow, 0.04f), 0.2f, 0f));
-            list1.Add(new ParticleTexture(content.Load<Texture2D>("Images/Obstacles/sawblade"), new Color(Color.Yellow, 0.8f), new Color(Color.Yellow, 0.04f), 0.2f, 0f));
-            list1.Add(new ParticleTexture(content.Load<Texture2D>("Images/Obstacles/sawblade"), new Color(Color.Yellow, 0.8f), new Color(Color.Yellow, 0.04f), 0.2f, 0f));
-
-            list1.Add(new ParticleTexture(content.Load<Texture2D>("Images/Obstacles/sawblade"), new Color(Color.White, 0.1f), new Color(Color.White, 00f), 0.3f, 0.5f));
+            list1.Add(new ParticleTexture(content.Load<Texture2D>("Images/Obstacles/laserParticle"), new Color(Color.White, 1f), new Color(Color.White, 0.00f), 1f, 0f));
 
             laserBeam = new ParticleEmitter(
                 list1,

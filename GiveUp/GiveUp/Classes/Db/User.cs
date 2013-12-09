@@ -12,6 +12,15 @@ namespace GiveUp.Classes.Db
         public string Password { get; set; }
 
         public virtual ICollection<Level> Levels { get; set; }
+
+        public static User CurrentUser
+        {
+            get
+            {
+                // TODO Set current ved login.
+                return DataContext.Current.Users.First();
+            }
+        }
     
     }
 }
