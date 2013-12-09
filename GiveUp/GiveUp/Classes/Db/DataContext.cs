@@ -10,9 +10,10 @@ namespace GiveUp.Classes.Db
     public class DataContext : DbContext
     {
         public DataContext()
-            : base(@"Data Source=ns1.lilac.arvixe.com;Initial Catalog=minji;Persist Security Info=True;User ID=minji;Password=minjiminji")
+            : base(@"Data Source=(LocalDB)\v11.0;AttachDbFilename=" + new DirectoryInfo("../../../Content/Db/").FullName + @"db.mdf" + ";Integrated Security=True;MultipleActiveResultSets=true")
         {
-
+            string path = new DirectoryInfo("../../../Content/Db/").FullName + @"db.mdf";
+            base.Database.Connection.ConnectionString = @"Data Source=(LocalDB)\v11.0;AttachDbFilename=C:\Users\b\Desktop\Git\GiveUp\GiveUp\GiveUp\Content\Db\db.mdf;Integrated Security=True;MultipleActiveResultSets=true";
         }
 
         [Obsolete("Ik brug den her metode særlig tit!")]
@@ -61,8 +62,6 @@ namespace GiveUp.Classes.Db
         public DbSet<User> Users { get; set; }
         public DbSet<Level> Levels { get; set; }
 
-
-
         private static DataContext current;
         public static DataContext Current
         {
@@ -71,6 +70,17 @@ namespace GiveUp.Classes.Db
                 if (current == null)
                 {
                     current = new DataContext();
+                    if (current.Users.Count() == 0)
+                    {
+                        User u = new User()
+                        {
+                            Password = "test",
+                            Username = "test"
+                        };
+                        current.Users.Add(u);
+                        current.SaveChanges();
+                        DataContext.ReCreateLeveldataForEachUser();
+                    }
                 }
                 return current;
             }

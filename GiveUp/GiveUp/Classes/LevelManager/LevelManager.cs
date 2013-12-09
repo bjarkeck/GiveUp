@@ -59,16 +59,24 @@ namespace GiveUp.Classes.LevelManager
             spriteBatch.DrawString(font, str, new Vector2(50, 57), Color.White, 0, Vector2.Zero, 0.7f, SpriteEffects.None, 0);
 
             str = "Level " + CurrentSubLevel;
-            spriteBatch.DrawString(font, str, new Vector2(50, 70), Color.White, 0, Vector2.Zero, 0.7f, SpriteEffects.None, 0);
+            spriteBatch.DrawString(font, str, new Vector2(50, 73), Color.White, 0, Vector2.Zero, 0.7f, SpriteEffects.None, 0);
 
             if (PracticeRun == false)
             {
                 str = "Challange time: " + (ChallengeTimer.ToTime());
                 spriteBatch.DrawString(font, str, new Vector2(1600 - 50 - font.MeasureString(str).X * 0.7f, 57), Color.White, 0, Vector2.Zero, 0.7f, SpriteEffects.None, 0);
             }
+            else
+            {
+                str = "Previous time: " + dbLevels.First(x => x.SubLevelId == CurrentSubLevel).PreviousRunTime.ToTime();
+                spriteBatch.DrawString(font, str, new Vector2(1600 - 50 - font.MeasureString(str).X * 0.7f, 73), Color.White, 0, Vector2.Zero, 0.7f, SpriteEffects.None, 0);
+
+                str = "Best time: " + dbLevels.First(x => x.SubLevelId == CurrentSubLevel).BestPracticeTime.ToTime();
+                spriteBatch.DrawString(font, str, new Vector2(1600 - 50 - font.MeasureString(str).X * 0.7f, 89), Color.White, 0, Vector2.Zero, 0.7f, SpriteEffects.None, 0);
+            }
 
             str = "Time: " + LevelTimer.ToTime();
-            spriteBatch.DrawString(font, str, new Vector2(1600 - 50 - font.MeasureString(str).X * 0.7f, (PracticeRun ? 57 : 70)), Color.White, 0, Vector2.Zero, 0.7f, SpriteEffects.None, 0);
+            spriteBatch.DrawString(font, str, new Vector2(1600 - 50 - font.MeasureString(str).X * 0.7f, (PracticeRun ? 57 : 73)), Color.White, 0, Vector2.Zero, 0.7f, SpriteEffects.None, 0);
         }
 
         public void StartLevel(int level, int subLevel = 1)

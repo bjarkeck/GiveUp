@@ -10,6 +10,7 @@ using Microsoft.Xna.Framework.GamerServices;
 using GiveUp.Classes.LevelManager;
 using System.IO;
 using GiveUp.Classes.Core;
+using GiveUp.Classes.Db;
 #endregion
 
 namespace GiveUp
@@ -54,6 +55,24 @@ namespace GiveUp
         protected override void UnloadContent()
         {
             Game1.ScreenManager.UnloadContent();
+            try
+            {
+                DataContext.Current.Dispose();
+            }
+            catch (Exception)
+            {
+            }
+        }
+        protected override void OnExiting(object sender, EventArgs args)
+        {
+            try
+            {
+                DataContext.Current.Dispose();
+            }
+            catch (Exception)
+            {
+            }
+            base.OnExiting(sender, args);
         }
 
         protected override void Update(GameTime gameTime)
