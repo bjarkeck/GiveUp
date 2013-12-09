@@ -70,6 +70,7 @@ namespace GiveUp.Classes.Db
                 if (current == null)
                 {
                     current = new DataContext();
+                    current.Database.CreateIfNotExists();
                     if (current.Users.Count() == 0)
                     {
                         User u = new User()
