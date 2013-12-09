@@ -26,7 +26,7 @@ namespace GiveUp.Classes.GameObjects.Obstacles
         bool showBeam = false;
         bool showWarning = false;
         int timeBeforeBeem = 4000;
-        int timeBeamDuration = 600;
+        int timeBeamDuration = 200;
         int timeBeforeWarning = 3000;
         int timer;
 
@@ -80,13 +80,13 @@ namespace GiveUp.Classes.GameObjects.Obstacles
         private void addParticles(ContentManager content)
         {
             List<ParticleTexture> laserList = new List<ParticleTexture>();
-            laserList.Add(new ParticleTexture(content.Load<Texture2D>("Images/Particles/beamParticle" + ((dir == Direction.Top || dir == Direction.Bottom) ? "Vertical" : "Horisontal")), new Color(Color.Red, 0.9f), new Color(Color.Yellow, 0f), 0.3f, 0.0f));
-            laserList.Add(new ParticleTexture(content.Load<Texture2D>("Images/Particles/beamParticle" + ((dir == Direction.Top || dir == Direction.Bottom) ? "Vertical" : "Horisontal")), new Color(Color.Red, 0.2f), new Color(Color.Red, 0f), 0.4f, 0.0f));
+            laserList.Add(new ParticleTexture(content.Load<Texture2D>("Images/Particles/beamParticle" + ((dir == Direction.Top || dir == Direction.Bottom) ? "Vertical" : "Horisontal")), new Color(Color.Navy, 0.7f), new Color(Color.OldLace, 0f), 0.2f, 0.2f));
+            laserList.Add(new ParticleTexture(content.Load<Texture2D>("Images/Particles/beamParticle" + ((dir == Direction.Top || dir == Direction.Bottom) ? "Vertical" : "Horisontal")), new Color(Color.OldLace, 0.2f), new Color(Color.Navy, 0f), 0.2f, 0.2f));
             laserBeam = new ParticleEmitter(
                 laserList,
                 new Range<float>(4),
                 new Range<float>(0, 0),
-                new Range<int>(300, 800),
+                new Range<int>(timeBeamDuration - (timeBeamDuration/20), timeBeamDuration),
                 (dir == Direction.Top || dir == Direction.Bottom) ? 0 : 90,
                 360,
                 10 * (int)range,
@@ -101,7 +101,7 @@ namespace GiveUp.Classes.GameObjects.Obstacles
                 warningList,
                 new Range<float>(4),
                 new Range<float>(0, 0),
-                new Range<int>(500, 1800),
+                new Range<int>(timeBeforeBeem - timeBeforeWarning, timeBeforeBeem - timeBeforeWarning),
                 (dir == Direction.Top || dir == Direction.Bottom) ? 0 : 90,
                 3,
                 10 * (int)range,
