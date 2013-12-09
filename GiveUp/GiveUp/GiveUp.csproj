@@ -76,6 +76,8 @@
     <Compile Include="Classes\GameObjects\Finish.cs" />
     <Compile Include="Classes\GameObjects\Obstacles\Cannon\AttachedCannon.cs" />
     <Compile Include="Classes\GameObjects\Obstacles\Cannon\CannonBullet.cs" />
+    <Compile Include="Classes\GameObjects\Obstacles\HeetSeeking\HeetSeekingBullet.cs" />
+    <Compile Include="Classes\GameObjects\Obstacles\HeetSeeking\HeatSeeking.cs" />
     <Compile Include="Classes\GameObjects\Obstacles\HorizontalMovingTile.cs" />
     <Compile Include="Classes\GameObjects\Obstacles\Ice.cs" />
     <Compile Include="Classes\GameObjects\Obstacles\InvisibleTile.cs" />
@@ -215,6 +217,15 @@
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Content>
     <Content Include="Content\Images\Obstacles\AttachedCannon\bullet1.png">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Content\Images\Obstacles\HeatSeeking\body.png">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Content\Images\Obstacles\HeatSeeking\cannon.png">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Content\Images\Obstacles\HeatSeeking\missile.png">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Content>
     <Content Include="Content\Images\Obstacles\laserParticle.png">
