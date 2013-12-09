@@ -14,89 +14,156 @@ namespace GiveUp.Classes.GameObjects.Obstacles
     public class Laser : GameObject, IGameObject
     {
         Texture2D texture;
-        List<Rectangle> boxTiles;
-        Random r = new Random();
-
-
+        Random r = GameLogic.r;
         ParticleEmitter laserBeam;
-        ParticleEmitter smoke;
+        ParticleEmitter warningBeam;
+        double cannonDirection;
+        Vector2 cannonPosition;
+        private SpriteEffects spriteEffect;
+        float rotation = 0;
+        Direction dir = Direction.None;
+        float range = 0;
+        bool showBeam = false;
+        bool showWarning = false;
+        int timeBeforeBeem = 4000;
+        int timeBeamDuration = 600;
+        int timeBeforeWarning = 3000;
+        int timer;
 
         public const char TileChar = 'l';
 
-
         public override void Initialize(ContentManager content, Vector2 position)
         {
+            this.texture = content.Load<Texture2D>("Images/Obstacles/HeatSeeking/body");
 
-            List<ParticleTexture> list = new List<ParticleTexture>();
-            List<ParticleTexture> list1 = new List<ParticleTexture>();
-            list1.Add(new ParticleTexture(content.Load<Texture2D>("Images/Obstacles/laserParticle"), new Color(Color.White, 1f), new Color(Color.White, 0.00f), 1f, 0f));
+            timer = r.Next(0, timeBeforeWarning - 300);
 
+            if (GetAllGameObjects<BoxTile>().Any(x => x.Rectangle.X == position.X - 32 && x.Rectangle.Y == position.Y))
+            {
+                this.Rectangle = new Rectangle((int)position.X - 6, (int)position.Y, 19, 32);
+                this.cannonPosition = new Vector2(Rectangle.X + 17 - 6 + 6, Rectangle.Y + 15);
+                this.cannonDirection = Vector2.Zero.AngleRadian(new Vector2(1, 0));
+                dir = Direction.Right;
+                GameLogic.IsLineOfSight(1900, cannonPosition, new Rectangle(Rectangle.X + 1600, Rectangle.Y, 32, 32), out range, 5);
+            }
+            else if (GetAllGameObjects<BoxTile>().Any(x => x.Rectangle.X == position.X + 32 && x.Rectangle.Y == position.Y))
+            {
+                this.Rectangle = new Rectangle((int)position.X + 32 - 13 , (int)position.Y, 19, 32);
+                spriteEffect = SpriteEffects.FlipHorizontally;
+                this.cannonPosition = new Vector2(Rectangle.X - 4 + 6 - 6, Rectangle.Y + 15);
+                this.cannonDirection = Vector2.Zero.AngleRadian(new Vector2(-1, 0));
+                dir = Direction.Left;
+                GameLogic.IsLineOfSight(1900, cannonPosition, new Rectangle(Rectangle.X - 1600, Rectangle.Y, 32, 32), out range, 5);
+            }
+            else if (GetAllGameObjects<BoxTile>().Any(x => x.Rectangle.X == position.X && x.Rectangle.Y == position.Y + 32))
+            {
+                this.Rectangle = new Rectangle((int)position.X, (int)position.Y + 6 + 32, 19, 32);
+                this.cannonPosition = new Vector2(Rectangle.X + 15, Rectangle.Y - 11 - 6);
+                this.cannonDirection = Vector2.Zero.AngleRadian(new Vector2(0, -1));
+                rotation = (float)cannonDirection;
+                dir = Direction.Top;
+                GameLogic.IsLineOfSight(1900, cannonPosition, new Rectangle(Rectangle.X, Rectangle.Y - 900, 32, 32), out range, 5);
+            }
+            else if (GetAllGameObjects<BoxTile>().Any(x => x.Rectangle.X == position.X && x.Rectangle.Y == position.Y - 32))
+            {
+                this.Rectangle = new Rectangle((int)position.X + 32, (int)position.Y - 6, 19, 32);
+                this.cannonPosition = new Vector2(Rectangle.X - 17, Rectangle.Y + 6 + 6);
+                this.cannonDirection = Vector2.Zero.AngleRadian(new Vector2(0, 1));
+                rotation = (float)cannonDirection;
+                dir = Direction.Bottom;
+                GameLogic.IsLineOfSight(1900, cannonPosition, new Rectangle(Rectangle.X, Rectangle.Y + 900, 32, 32), out range, 5);
+            }
+            range -= 15;
+            addParticles(content);
+        }
+
+        private void addParticles(ContentManager content)
+        {
+            List<ParticleTexture> laserList = new List<ParticleTexture>();
+            laserList.Add(new ParticleTexture(content.Load<Texture2D>("Images/Particles/beamParticle" + ((dir == Direction.Top || dir == Direction.Bottom) ? "Vertical" : "Horisontal")), new Color(Color.Red, 0.9f), new Color(Color.Yellow, 0f), 0.3f, 0.0f));
+            laserList.Add(new ParticleTexture(content.Load<Texture2D>("Images/Particles/beamParticle" + ((dir == Direction.Top || dir == Direction.Bottom) ? "Vertical" : "Horisontal")), new Color(Color.Red, 0.2f), new Color(Color.Red, 0f), 0.4f, 0.0f));
             laserBeam = new ParticleEmitter(
-                list1,
-                new Range<float>(1, 2),
-                new Range<float>(-1, 1),
-                new Range<int>(300, 500),
-                0,
+                laserList,
+                new Range<float>(4),
+                new Range<float>(0, 0),
+                new Range<int>(300, 800),
+                (dir == Direction.Top || dir == Direction.Bottom) ? 0 : 90,
                 360,
-                11000,
-                10000,
+                10 * (int)range,
+                (int)range / 5,
                 Vector2.Zero,
                 Vector2.Zero);
 
-            smoke = new ParticleEmitter(
-                list1,
-                new Range<float>(1, 2),
-                new Range<float>(-1, 1),
-                new Range<int>(300, 500),
-                0,
-                360,
-                11000,
-                10000,
+            List<ParticleTexture> warningList = new List<ParticleTexture>();
+            warningList.Add(new ParticleTexture(content.Load<Texture2D>("Images/Particles/beamParticle" + ((dir == Direction.Top || dir == Direction.Bottom) ? "Vertical" : "Horisontal")), new Color(Color.White, 0.03f), new Color(Color.White, 0f), 0.3f, 0.1f));
+
+            warningBeam = new ParticleEmitter(
+                warningList,
+                new Range<float>(4),
+                new Range<float>(0, 0),
+                new Range<int>(500, 1800),
+                (dir == Direction.Top || dir == Direction.Bottom) ? 0 : 90,
+                3,
+                10 * (int)range,
+                (int)range / 10,
                 Vector2.Zero,
                 Vector2.Zero);
 
-
-            boxTiles = GetAllGameObjects<BoxTile>().Select(x => x.Rectangle).ToList();
-            if (boxTiles.Any(x => x.X == position.X && x.Y == position.Y + 32))
-            {
-                texture = content.Load<Texture2D>("Images/Obstacles/AttachedCannon/AttatchedCannonBodyT");
-                position.Y += 32 - texture.Height;
-            }
-            else if (boxTiles.Any(x => x.X == position.X && x.Y == position.Y - 32))
-            {
-                texture = content.Load<Texture2D>("Images/Obstacles/AttachedCannon/AttatchedCannonBodyB");
-            }
-            else if (boxTiles.Any(x => x.X == position.X - 32 && x.Y == position.Y))
-            {
-                texture = content.Load<Texture2D>("Images/Obstacles/AttachedCannon/AttatchedCannonBodyR");
-
-            }
-            else if (boxTiles.Any(x => x.X == position.X + 32 && x.Y == position.Y))
-            {
-                texture = content.Load<Texture2D>("Images/Obstacles/AttachedCannon/AttatchedCannonBodyL");
-                position.X += 32 - texture.Width;
-            }
-            else
-            {
-                //Hvis den flyver i luften
-                texture = content.Load<Texture2D>("Images/Obstacles/AttachedCannon/AttatchedCannonBodyL");
-            }
-            this.Rectangle = new Rectangle((int)position.X, (int)position.Y, texture.Width, texture.Height);
         }
 
         public override void Update(GameTime gameTime)
         {
+            switch (dir)
+            {
+                case Direction.Top:
+                    laserBeam.Update(gameTime, new Rectangle((int)cannonPosition.X, (int)cannonPosition.Y - (int)range, 3, (int)range));
+                    warningBeam.Update(gameTime, new Rectangle((int)cannonPosition.X, (int)cannonPosition.Y - (int)range, 3, (int)range));
+                    break;
+                case Direction.Bottom:
+                    laserBeam.Update(gameTime, new Rectangle((int)cannonPosition.X, (int)cannonPosition.Y, 3, (int)range));
+                    warningBeam.Update(gameTime, new Rectangle((int)cannonPosition.X, (int)cannonPosition.Y, 3, (int)range));
+                    break;
+                case Direction.Left:
+                    laserBeam.Update(gameTime, new Rectangle((int)cannonPosition.X - (int)range, (int)cannonPosition.Y, (int)range, 3));
+                    if (showWarning) warningBeam.Update(gameTime, new Rectangle((int)cannonPosition.X - (int)range, (int)cannonPosition.Y, (int)range, 3));
+                    break;
+                case Direction.Right:
+                    laserBeam.Update(gameTime, new Rectangle((int)cannonPosition.X, (int)cannonPosition.Y, (int)range, 3));
+                    warningBeam.Update(gameTime, new Rectangle((int)cannonPosition.X, (int)cannonPosition.Y, (int)range, 3));
+                    break;
+            }
 
-            ;
 
-            laserBeam.Update(gameTime, new Rectangle(Rectangle.X, Rectangle.Y, 400, 3));
+            showWarning = (timer > timeBeforeWarning && timer < timeBeforeBeem);
+            showBeam = (timer > timeBeforeBeem);
+
+            laserBeam.MaxNumberOfParitcles = showBeam ? 10 * (int)range : 0;
+            warningBeam.MaxNumberOfParitcles = showWarning ? 20 * (int)range : 0;
+
+            timer += (int)gameTime.ElapsedGameTime.TotalMilliseconds;
+            if (timer > timeBeforeBeem + timeBeamDuration)
+                timer = 0;
+
+            if (timer > timeBeforeBeem && timer < timeBeforeBeem + timeBeamDuration)
+            {
+                if (GameLogic.IsLineOfSight(range + 50, cannonPosition, Player.Rectangle, (float)cannonDirection))
+                {
+                    LevelManager.RestartLevel();
+                }
+            }
+
+
         }
 
         public override void Draw(SpriteBatch spriteBatch)
         {
+            spriteBatch.Draw(texture, Rectangle, null, Color.Orange, rotation, Vector2.Zero, spriteEffect, 0f);
+        }
 
+        public override void DrawAdditive(SpriteBatch spriteBatch)
+        {
             laserBeam.Draw(spriteBatch);
-            spriteBatch.Draw(texture, Rectangle, new Color(255, 255, 255));
+            warningBeam.Draw(spriteBatch);
         }
 
     }

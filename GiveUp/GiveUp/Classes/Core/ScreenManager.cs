@@ -75,6 +75,11 @@ namespace GiveUp.Classes.Core
         {
             CurrentScreen.Draw(spriteBatch);
         }
+
+        public void DrawAdditive(SpriteBatch spriteBatch)
+        {
+            CurrentScreen.DrawAdditive(spriteBatch);
+        }
     }
 
 }

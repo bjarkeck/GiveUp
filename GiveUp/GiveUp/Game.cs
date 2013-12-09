@@ -32,11 +32,10 @@ namespace GiveUp
         {
             graphics = new GraphicsDeviceManager(this);
             Content.RootDirectory = "Content";
-            graphics.IsFullScreen = false;
+            graphics.IsFullScreen = true;
             graphics.PreferredBackBufferWidth = (int)(GraphicsAdapter.DefaultAdapter.CurrentDisplayMode.Width);
             graphics.PreferredBackBufferHeight = (int)(GraphicsAdapter.DefaultAdapter.CurrentDisplayMode.Height);
             graphics.ApplyChanges();
-
         }
 
         protected override void Initialize()
@@ -93,6 +92,10 @@ namespace GiveUp
             GraphicsDevice.Clear(Color.Black);
             spriteBatch.Begin(SpriteSortMode.Deferred, BlendState.NonPremultiplied, null, null, null, null, SpriteScale);
             Game1.ScreenManager.Draw(spriteBatch);
+            spriteBatch.End();
+
+            spriteBatch.Begin(SpriteSortMode.BackToFront, BlendState.Additive, null, null, null, null, SpriteScale);
+            Game1.ScreenManager.DrawAdditive(spriteBatch);
             spriteBatch.End();
 
             base.Draw(gameTime);

@@ -14,6 +14,7 @@ namespace GiveUp.Classes.Core
 {
     public static class GameLogic
     {
+
         public static string ToTime(this int ms)
         {
             return TimeSpan.FromMilliseconds(ms).ToString(@"mm\:ss\:fff");
@@ -57,15 +58,16 @@ namespace GiveUp.Classes.Core
         /// <param name="distance">Sight range</param>
         /// <param name="startPos"></param>
         /// <param name="target">Fx Player.Rectangle</param>
-        public static bool IsLineOfSight(float distance, Vector2 startPos, Rectangle target)
+        public static bool IsLineOfSight(float distance, Vector2 startPos, Rectangle target, out float distanceToHit, int precition = 20, float? angle = null)
         {
-
+            distanceToHit = distance;
             //Check hvis afstandne mellem startPos og target er længere end distance. og retuner false hvis den er...
             //Ligesom AngleRadian og AngleDegree, må du gerne lave en Distance Extention method ogs også...
             //Hvis du ikke kender til extention methods så google det lige, de er guld vær :)
             if (startPos.Distance(target.Origin()) > distance)
                 return false;
-           
+
+
             List<Rectangle> tiles = ((GameScreen)(ScreenManager.Current.CurrentScreen))
                                         .LevelManager
                                         .GameObjects
@@ -77,10 +79,10 @@ namespace GiveUp.Classes.Core
             Rectangle bulletRectangle = new Rectangle((int)startPos.X, (int)startPos.Y, 2, 2);
 
             //Få rotationen mellem startPos og target
-            double rotationToTarget = startPos.AngleRadian(target.Origin());
+            double rotationToTarget = (angle == null) ? startPos.AngleRadian(target.Origin()) : (float)angle;
 
             //Ud fra rotationen laver vi en velecity som vores check bullet skal flyve med.
-            Vector2 bulletVelocity = new Vector2((float)Math.Cos(rotationToTarget) * 20, (float)Math.Sin(rotationToTarget) * 20);
+            Vector2 bulletVelocity = new Vector2((float)Math.Cos(rotationToTarget) * precition, (float)Math.Sin(rotationToTarget) * precition);
 
             //Mens at vores checkbullet ikke kollidere med target, får vi kuglen til at flyve
             while (bulletRectangle.Intersects(target) == false)
@@ -89,16 +91,38 @@ namespace GiveUp.Classes.Core
                 foreach (var item in tiles)
                 {
                     if (bulletRectangle.Intersects(item))
+                    {
+                        distanceToHit = bulletPosition.Distance(startPos);
                         return false;
+                    }
                 }
 
                 bulletPosition += bulletVelocity;
                 bulletRectangle.X = (int)bulletPosition.X;
                 bulletRectangle.Y = (int)bulletPosition.Y;
             }
+            distanceToHit = bulletPosition.Distance(startPos);
 
             //Hvis den kom igennem loopet betyder det at kuglen har ramt spilleren, og så skal der retuneres true.
             return true;
+        }
+        /// <summary>
+        /// Check line of sight.
+        /// </summary>
+        /// <param name="distance">Sight range</param>
+        /// <param name="startPos"></param>
+        /// <param name="target">Fx Player.Rectangle</param>
+        public static bool IsLineOfSight(float distance, Vector2 startPos, Rectangle target, int precition = 20)
+        {
+            float nothing;
+            return IsLineOfSight(distance, startPos, target, out nothing, precition);
+
+        }
+        public static bool IsLineOfSight(float distance, Vector2 startPos, Rectangle target, float angle, int precition = 20)
+        {
+            float nothing;
+            return IsLineOfSight(distance, startPos, target, out nothing, precition, angle);
+
         }
 
         public static bool HasHit(Vector2 startPos, Rectangle target)
