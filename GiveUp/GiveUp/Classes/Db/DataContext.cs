@@ -13,7 +13,7 @@ namespace GiveUp.Classes.Db
             : base(@"Data Source=(LocalDB)\v11.0;AttachDbFilename=" + new DirectoryInfo("../../../Content/Db/").FullName + @"db.mdf" + ";Integrated Security=True;MultipleActiveResultSets=true")
         {
             string path = new DirectoryInfo("../../../Content/Db/").FullName + @"db.mdf";
-            base.Database.Connection.ConnectionString = @"Data Source=(LocalDB)\v11.0;AttachDbFilename=C:\Users\b\Desktop\Git\GiveUp\GiveUp\GiveUp\Content\Db\db.mdf;Integrated Security=True;MultipleActiveResultSets=true";
+            base.Database.Connection.ConnectionString = @"Data Source=(LocalDB)\v11.0;AttachDbFilename="+path+";Integrated Security=True;MultipleActiveResultSets=true";
         }
 
         [Obsolete("Ik brug den her metode særlig tit!")]
