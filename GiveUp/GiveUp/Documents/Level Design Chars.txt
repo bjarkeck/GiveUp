@@ -9,3 +9,5 @@ K = MovingWall
 H = Horizontal Moving Tiles
 V = Vertical Moving Tiles
 I = Ice
+e = HeatSeeking (Missiles)
+l = Laser (Verticle and Horisontal beam);

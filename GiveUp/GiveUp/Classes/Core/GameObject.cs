@@ -47,6 +47,10 @@ public class GameObject
 
     }
 
+    public virtual void DrawAdditive(SpriteBatch spriteBatch)
+    {
+
+    }
     public virtual void Draw(SpriteBatch spriteBatch)
     {
     }

@@ -41,5 +41,9 @@ namespace GiveUp.Classes.Core
         {
 
         }
+
+        public virtual void DrawAdditive(SpriteBatch spriteBatch)
+        {
+        }
     }
 }
