@@ -56,14 +56,14 @@ namespace GiveUp.Classes.Core
             particleManager = new ParticleManager();
 
             List<ParticleTexture> l = new List<ParticleTexture>();
-            l.Add(new ParticleTexture(content.Load<Texture2D>("Images/Player/b1"), Color.White, new Color(Color.White, 0), 0.4f, 0.4f));
-            l.Add(new ParticleTexture(content.Load<Texture2D>("Images/Player/b2"), Color.White, new Color(Color.White, 0), 0.4f, 0.4f));
-            l.Add(new ParticleTexture(content.Load<Texture2D>("Images/Player/b3"), Color.White, new Color(Color.White, 0), 0.4f, 0.4f));
-            l.Add(new ParticleTexture(content.Load<Texture2D>("Images/Player/b4"), Color.White, new Color(Color.White, 0), 0.4f, 0.4f));
-            l.Add(new ParticleTexture(content.Load<Texture2D>("Images/Player/b5"), Color.White, new Color(Color.White, 0), 0.4f, 0.4f));
-            l.Add(new ParticleTexture(content.Load<Texture2D>("Images/Player/b6"), Color.White, new Color(Color.White, 0), 0.4f, 0.4f));
-            l.Add(new ParticleTexture(content.Load<Texture2D>("Images/Player/b7"), Color.White, new Color(Color.White, 0), 0.4f, 0.4f));
-            l.Add(new ParticleTexture(content.Load<Texture2D>("Images/Player/b8"), Color.White, new Color(Color.White, 0), 0.4f, 0.4f));
+            l.Add(new ParticleTexture(content.Load<Texture2D>("Images/Player/b1"), Color.White, new Color(Color.White, 0), 0.7f, 0.7f));
+            l.Add(new ParticleTexture(content.Load<Texture2D>("Images/Player/b2"), Color.White, new Color(Color.White, 0), 0.5f, 0.5f));
+            l.Add(new ParticleTexture(content.Load<Texture2D>("Images/Player/b3"), Color.White, new Color(Color.White, 0), 0.6f, 0.6f));
+            l.Add(new ParticleTexture(content.Load<Texture2D>("Images/Player/b4"), Color.White, new Color(Color.White, 0), 0.5f, 0.5f));
+            l.Add(new ParticleTexture(content.Load<Texture2D>("Images/Player/b5"), Color.White, new Color(Color.White, 0), 0.5f, 0.5f));
+            l.Add(new ParticleTexture(content.Load<Texture2D>("Images/Player/b6"), Color.White, new Color(Color.White, 0), 0.6f, 0.6f));
+            l.Add(new ParticleTexture(content.Load<Texture2D>("Images/Player/b7"), Color.White, new Color(Color.White, 0), 0.6f, 0.6f));
+            l.Add(new ParticleTexture(content.Load<Texture2D>("Images/Player/b8"), Color.White, new Color(Color.White, 0), 0.5f, 0.5f));
             particleManager.AddEmitter("BodyParts",
                 new ParticleEmitter(
                     l,
@@ -147,7 +147,7 @@ namespace GiveUp.Classes.Core
             if (particleManager != null)
             {
                 this.diePosition = diePosition;
-                particleManager.ParticleEmitters["BodyParts"].MaxNumberOfParitcles += 8;
+                particleManager.ParticleEmitters["BodyParts"].MaxNumberOfParitcles += 6;
                 particleManager.ParticleEmitters["Blood"].MaxNumberOfParitcles += 100;
             }
         }
