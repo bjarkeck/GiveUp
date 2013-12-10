@@ -1,9 +1,9 @@
 ﻿GGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGG
-G------MGM---------------------------------------G
-GS-----MGM---------------------------------------G
-G------MGM---------------------------------------G
-GGGGGM-MGM---------------------------------------G
-GMKMGM-MGM---------------------------------------G
+G------MGM--B-----B--B-----B---------------------G
+GS-----MGM--B--B--B--B--B--B--B------------------G
+G------MGM--B--B--B--B--B--B--B------------------G
+GGGGGM-MGM--B--B--B--B--B--B--B------------------G
+GMKMGM-MGM-----B--------B-----B------------------G
 GM-MGM-MGM-MGGGGGGGGGGGGGGGGGGGG-----------------G
 GM-MGM-MG--MGGGGGGGGGGGGGGGGGGGG-----------------G
 G--MGM-MG--MGGGGGGGGGGGGGGGGGGGG-----------------G
