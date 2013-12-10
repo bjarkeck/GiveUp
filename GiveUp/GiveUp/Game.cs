@@ -41,7 +41,6 @@ namespace GiveUp
         protected override void Initialize()
         {
             base.Initialize();
-
         }
 
         protected override void LoadContent()
