@@ -31,17 +31,22 @@ namespace GiveUp.Classes.Core
 
         public void Update(GameTime gameTime, Vector2 Gravity)
         {
-            CurrentRotation += Rotation;
 
-            //Gravity
-            Velocity += Gravity ;
+            if (CurrentLife > 0)
+            {
+                CurrentRotation += Rotation;
 
-            //Velociy
-            Position += Velocity ;
+                //Gravity
+                Velocity += Gravity;
+
+                //Velociy
+                Position += Velocity;
 
 
-            //Drain Life
-            CurrentLife -= (int)gameTime.ElapsedGameTime.TotalMilliseconds;
+                //Drain Life
+                CurrentLife -= (int)gameTime.ElapsedGameTime.TotalMilliseconds;
+            }
+
         }
 
         public void Draw(SpriteBatch spriteBatch)

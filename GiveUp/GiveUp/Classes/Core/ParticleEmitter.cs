@@ -24,8 +24,11 @@ namespace GiveUp.Classes.Core
         public List<ParticleTexture> ParticleTextures { get; set; }
         public List<Particle> Particles = new List<Particle>();
 
+        public bool DrawAdditive = true;
+
         double timer;
         Random r = new Random();
+        public bool StickyParticles = false;
 
         public ParticleEmitter(
             List<ParticleTexture> particleTextures,
@@ -84,7 +87,7 @@ namespace GiveUp.Classes.Core
             {
                 //Add this many:
                 var ps = 1000f / ParticlesPerSeccond;
-                while (timer > ps)
+                while (timer > ps && Particles.Count() < MaxNumberOfParitcles)
                 {
                     timer -= ps;
                     AddParticle(position);
@@ -102,7 +105,7 @@ namespace GiveUp.Classes.Core
             {
                 //Add this many:
                 var ps = 1000f / ParticlesPerSeccond;
-                while (timer > ps)
+                while (timer > ps && Particles.Count() < MaxNumberOfParitcles)
                 {
                     timer -= ps;
                     AddParticle(new Vector2(r.Next(position.X, position.X + position.Width), r.Next(position.Y, position.Y + position.Height)));
@@ -120,7 +123,7 @@ namespace GiveUp.Classes.Core
                 particle.Update(gameTime, Gravity);
 
                 //Remove Particles
-                if (particle.CurrentLife <= 0)
+                if (StickyParticles == false && particle.CurrentLife <= 0)
                 {
                     Particles.Remove(particle);
                 }

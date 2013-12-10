@@ -1,8 +1,8 @@
 ﻿GGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGG
 G------MGM---------------------------------------G
-GS-----MGM---------------------------------------G
-G------MGM---------------------------------------G
-GGGGGM-MGM---------------------------------------G
+GS-----MGM--B-----------B-------i----------------G
+G------MGM--B-----B-----B-----B-i----------------G
+GGGGGM-MGM--------B-----------B-i----------------G
 GMKMGM-MGM---------------------------------------G
 GM-MGM-MGM-MGGGGGGGGGGGGGGGGGGGG-----------------G
 GM-MGM-MG--MGGGGGGGGGGGGGGGGGGGG-----------------G
