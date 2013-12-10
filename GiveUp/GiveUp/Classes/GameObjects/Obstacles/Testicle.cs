@@ -52,7 +52,6 @@ namespace GiveUp.Classes.GameObjects.Obstacles
                     r.Next(0, 15) / 100f
                     ));
                 }
-
                 ParticleEmitter e = new ParticleEmitter(
                     l,
                     new Range<float>(0, 40),
