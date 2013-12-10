@@ -33,7 +33,7 @@ namespace GiveUp.Classes.GameObjects.Obstacles
 
         public override void Initialize(ContentManager content, Vector2 position)
         {
-            for (int i = 0; i < 22; i++)
+            for (int i = 0; i < 15; i++)
             {
                 List<ParticleTexture> l = new List<ParticleTexture>();
 
@@ -64,11 +64,8 @@ namespace GiveUp.Classes.GameObjects.Obstacles
                     new Vector2(r.Next(-2, 2) / 100f, r.Next(-2, 2) / 100f),
                     new Vector2(r.Next(-2, 2) / 100f, r.Next(-2, 2) / 100f)
                 );
-
                 Vector2 v = new Vector2(r.Next(50, 1500), r.Next(50, 850));
-
                 var s = new Wooo<ParticleEmitter, Vector2, float, int>(e, v, 1f, 10);
-
                 list.Add(s);
             }
         }

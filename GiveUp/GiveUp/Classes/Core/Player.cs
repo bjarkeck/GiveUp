@@ -1,4 +1,7 @@
-﻿using Microsoft.Xna.Framework;
+﻿using GiveUp.Classes.GameObjects.Tiles;
+using GiveUp.Classes.LevelManager;
+using GiveUp.Classes.Screens;
+using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Content;
 using Microsoft.Xna.Framework.Graphics;
 using Microsoft.Xna.Framework.Input;
@@ -16,7 +19,8 @@ namespace GiveUp.Classes.Core
         public float Acceleration;
         public Rectangle Rectangle;
         public SpriteAnimation Animation;
-
+        private ParticleManager particleManager;
+        private Vector2 diePosition;
         public bool CanJump = true;
         public bool CanDoubleJump = false;
         public bool ReverseControls = false;
@@ -49,10 +53,62 @@ namespace GiveUp.Classes.Core
             Animation.AddRow("jump", 2, 1);
             Animation.AddRow("slide", 3, 1);
             Animation.AddRow("push", 4, 1);
+            particleManager = new ParticleManager();
+
+            List<ParticleTexture> l = new List<ParticleTexture>();
+            l.Add(new ParticleTexture(content.Load<Texture2D>("Images/Player/b1"), Color.White, new Color(Color.White, 0), 0.4f, 0.4f));
+            l.Add(new ParticleTexture(content.Load<Texture2D>("Images/Player/b2"), Color.White, new Color(Color.White, 0), 0.4f, 0.4f));
+            l.Add(new ParticleTexture(content.Load<Texture2D>("Images/Player/b3"), Color.White, new Color(Color.White, 0), 0.4f, 0.4f));
+            l.Add(new ParticleTexture(content.Load<Texture2D>("Images/Player/b4"), Color.White, new Color(Color.White, 0), 0.4f, 0.4f));
+            l.Add(new ParticleTexture(content.Load<Texture2D>("Images/Player/b5"), Color.White, new Color(Color.White, 0), 0.4f, 0.4f));
+            l.Add(new ParticleTexture(content.Load<Texture2D>("Images/Player/b6"), Color.White, new Color(Color.White, 0), 0.4f, 0.4f));
+            l.Add(new ParticleTexture(content.Load<Texture2D>("Images/Player/b7"), Color.White, new Color(Color.White, 0), 0.4f, 0.4f));
+            l.Add(new ParticleTexture(content.Load<Texture2D>("Images/Player/b8"), Color.White, new Color(Color.White, 0), 0.4f, 0.4f));
+            particleManager.AddEmitter("BodyParts",
+                new ParticleEmitter(
+                    l,
+                    new Range<float>(50, 100),
+                    new Range<float>(-0.003f, -0.003f),
+                    new Range<int>(1100),
+                    0,
+                    100,
+                    0,
+                    1000,
+                    Velocity * -1,
+                    Gravity / 6
+                )
+            );
+
+            List<ParticleTexture> blood = new List<ParticleTexture>();
+            blood.Add(new ParticleTexture(content.Load<Texture2D>("Images/Particles/blood1"), new Color(Color.Red, 1f), new Color(Color.Red, 0.1f), 0.2f, 0.4f));
+            blood.Add(new ParticleTexture(content.Load<Texture2D>("Images/Particles/blood2"), new Color(Color.Red, 1f), new Color(Color.Red, 0.2f), 0.2f, 0.3f));
+            blood.Add(new ParticleTexture(content.Load<Texture2D>("Images/Particles/blood3"), new Color(Color.Red, 1f), new Color(Color.Red, 0.1f), 0.2f, 0.2f));
+            blood.Add(new ParticleTexture(content.Load<Texture2D>("Images/Particles/blood4"), new Color(Color.Red, 1f), new Color(Color.Red, 0.2f), 0.2f, 0.3f));
+            particleManager.AddEmitter("Blood",
+                new ParticleEmitter(
+                    blood,
+                    new Range<float>(100, 200),
+                    new Range<float>(-0.003f, -0.003f),
+                    new Range<int>(0, 500),
+                    0,
+                    100,
+                    0,
+                    10000,
+                    Velocity * -1,
+                    Gravity / 8
+                ) { DrawAdditive = false, StickyParticles = true }
+            );
+
         }
         public void Draw(SpriteBatch spriteBatch)
         {
             Animation.Draw(spriteBatch);
+            particleManager.Draw(spriteBatch);
+        }
+
+        public void DrawAdditive(SpriteBatch spriteBatch)
+        {
+            particleManager.DrawAdditive(spriteBatch);
         }
 
         public void Update(GameTime gameTime)
@@ -63,11 +119,37 @@ namespace GiveUp.Classes.Core
             Movement(gameTime);
             Animation.Update(gameTime, Position);
             Rectangle = Animation.Rectangle;
+            particleManager.Update(gameTime, new Rectangle((int)diePosition.X + 5, (int)diePosition.Y + 5, Rectangle.Width - 10, Rectangle.Height - 10));
+            particleManager.ParticleEmitters["BodyParts"].AddedVelocity = Velocity * -1;
+            particleManager.ParticleEmitters["Blood"].AddedVelocity = Velocity * -1;
+            particleManager.ParticleEmitters["BodyParts"].MaxNumberOfParitcles = 0;
+
+            LevelManagerr l = ((GameScreen)ScreenManager.Current.CurrentScreen).LevelManager;
+            var tiles = l.GameObjects.Where(x => x.GetType() == typeof(BoxTile));
+            foreach (var item in particleManager.ParticleEmitters["BodyParts"].Particles)
+            {
+                foreach (var t in tiles)
+                {
+                    if (((BoxTile)t).Rectangle.Contains(item.Position.ToPoint()))
+                    {
+                        item.Velocity.Y *= -1 / 1.2f;
+                        if (item.Velocity.X > 0)
+                            item.Velocity.X -= 0.3f;
+                        if (item.Velocity.X < 0)
+                            item.Velocity.X += 0.3f;
+                    }
+                }
+            }
         }
 
-        public void Die()
+        public void Die(Vector2 diePosition)
         {
-            //Splat
+            if (particleManager != null)
+            {
+                this.diePosition = diePosition;
+                particleManager.ParticleEmitters["BodyParts"].MaxNumberOfParitcles += 8;
+                particleManager.ParticleEmitters["Blood"].MaxNumberOfParitcles += 100;
+            }
         }
 
         public void Jump()
@@ -79,13 +161,14 @@ namespace GiveUp.Classes.Core
                 this.Velocity.Y = this.StartJumpSpeed;
             }
         }
-        
+
         public void Movement(GameTime gameTime)
         {
 
             KeyboardState keyState = Keyboard.GetState();
 
-            if (keyState.IsKeyDown(ReverseControls ? Keys.D : Keys.A)) {
+            if (keyState.IsKeyDown(ReverseControls ? Keys.D : Keys.A))
+            {
                 Animation.PlayAnimation("run");
                 this.Velocity.X += this.Acceleration * -1 * gameTime.ElapsedGameTime.Milliseconds;
             }

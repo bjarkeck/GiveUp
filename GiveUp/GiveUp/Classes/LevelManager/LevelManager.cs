@@ -111,11 +111,10 @@ namespace GiveUp.Classes.LevelManager
                 loadLevel(Levels[subLevel - 1]);
                 Player.Position = GridManager.UnassignedTiles['S'].First();
             }
-
         }
         public void RestartLevel()
         {
-            changeLevel = true;
+            StartNextLevel(false);
         }
 
         // TODO Fix player reset.
@@ -185,10 +184,14 @@ namespace GiveUp.Classes.LevelManager
                     }
                 }
             }
+            else
+            {
+                Player.Die(Player.Position);
+            }
+
             LevelTimer = 0;
 
-
-            if (PracticeRun == false)
+            if (PracticeRun == false && runCompleted)
             {
                 CurrentSubLevel += 1;
                 if (Levels.Count() < CurrentSubLevel)
@@ -201,6 +204,7 @@ namespace GiveUp.Classes.LevelManager
                     ScreenManager.Current.LoadScreen(new MenuSubLevelScreen(CurrentLevel), true);
                 }
             }
+
             changeLevel = true;
         }
 
