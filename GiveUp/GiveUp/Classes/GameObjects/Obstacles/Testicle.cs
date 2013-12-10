@@ -33,7 +33,7 @@ namespace GiveUp.Classes.GameObjects.Obstacles
 
         public override void Initialize(ContentManager content, Vector2 position)
         {
-            for (int i = 0; i < 15; i++)
+            for (int i = 0; i < 22; i++)
             {
                 List<ParticleTexture> l = new List<ParticleTexture>();
 
@@ -55,8 +55,8 @@ namespace GiveUp.Classes.GameObjects.Obstacles
                 ParticleEmitter e = new ParticleEmitter(
                     l,
                     new Range<float>(0, 40),
-                    new Range<float>(-0.2f, 0.2f),
-                    new Range<int>(200, r.Next(200, 2000)),
+                    new Range<float>(-0.02f, 0.02f),
+                    new Range<int>(100, r.Next(200, 900)),
                     r.Next(0, 360),
                     r.Next(0, 360),
                     r.Next(0, 10000),
@@ -67,7 +67,7 @@ namespace GiveUp.Classes.GameObjects.Obstacles
 
                 Vector2 v = new Vector2(r.Next(50, 1500), r.Next(50, 850));
 
-                var s = new Wooo<ParticleEmitter, Vector2, float, int>(e, v, 1f, 5);
+                var s = new Wooo<ParticleEmitter, Vector2, float, int>(e, v, 1f, 10);
 
                 list.Add(s);
             }
@@ -82,20 +82,12 @@ namespace GiveUp.Classes.GameObjects.Obstacles
                 i++;
 
                 float mewRotation = (float)item.Item2.AngleRadian(MouseHelper.Position);
-                item.Item3 = MathHelper.WrapAngle(GameLogic.CurveAngle(item.Item3, mewRotation, 0.03f));
+                item.Item3 = MathHelper.WrapAngle(GameLogic.CurveAngle(item.Item3, mewRotation, 0.06f));
                 Vector2 rotV = new Vector2((float)Math.Cos(item.Item3), (float)Math.Sin(item.Item3));
                 item.Item2 += rotV * item.Item4;
 
-                if (i % 2 == 0)
-                {
-                    int x = r.Next(3, 10);
-                    int y = r.Next(3, 10);
-                    item.Item1.Update(gameTime, new Rectangle((int)item.Item2.X - x / 2, (int)item.Item2.Y - y / 2, x, y));
-                }
-                else
-                {
-                    item.Item1.Update(gameTime, item.Item2);
-                }
+
+                item.Item1.Update(gameTime, item.Item2);
             }
 
         }
