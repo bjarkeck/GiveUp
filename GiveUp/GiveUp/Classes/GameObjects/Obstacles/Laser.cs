@@ -26,7 +26,7 @@ namespace GiveUp.Classes.GameObjects.Obstacles
         bool showBeam = false;
         bool showWarning = false;
         int timeBeforeBeem = 5000;
-        int timeBeamDuration = 400;
+        int timeBeamDuration = 300;
         int timeBeforeWarning = 4000;
         int timer;
 
@@ -84,13 +84,13 @@ namespace GiveUp.Classes.GameObjects.Obstacles
             laserList.Add(new ParticleTexture(content.Load<Texture2D>("Images/Particles/beamParticle" + ((dir == Direction.Top || dir == Direction.Bottom) ? "Vertical" : "Horisontal")), new Color(Color.OldLace, 0.2f), new Color(Color.Navy, 0f), 0.2f, 0.2f));
             laserBeam = new ParticleEmitter(
                 laserList,
-                new Range<float>(4),
+                new Range<float>(4,20),
                 new Range<float>(0, 0),
                 new Range<int>(timeBeamDuration - (timeBeamDuration/20), timeBeamDuration),
                 (dir == Direction.Top || dir == Direction.Bottom) ? 0 : 90,
                 360,
                 10 * (int)range,
-                (int)range / 5,
+                10 * (int)range,
                 Vector2.Zero,
                 Vector2.Zero);
 
@@ -138,7 +138,7 @@ namespace GiveUp.Classes.GameObjects.Obstacles
             showBeam = (timer > timeBeforeBeem);
 
             laserBeam.MaxNumberOfParitcles = showBeam ? 10 * (int)range : 0;
-            warningBeam.MaxNumberOfParitcles = showWarning ? 200 * (int)range : 0;
+            warningBeam.MaxNumberOfParitcles = showWarning ? 20000 : 0;
 
             timer += (int)gameTime.ElapsedGameTime.TotalMilliseconds;
             if (timer > timeBeforeBeem + timeBeamDuration)
