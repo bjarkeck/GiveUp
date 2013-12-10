@@ -47,6 +47,14 @@ namespace GiveUp.Classes.LevelManager
 
         }
 
+
+        public void DrawAdditive(SpriteBatch spriteBatch)
+        {
+
+            foreach (IGameObject item in GameObjects)
+                item.DrawAdditive(spriteBatch);
+        }
+
         public void Draw(SpriteBatch spriteBatch)
         {
             GridManager.Draw(spriteBatch);
@@ -216,5 +224,6 @@ namespace GiveUp.Classes.LevelManager
         }
 
         public bool changeLevel { get; set; }
+
     }
 }

@@ -21,4 +21,6 @@ public interface IGameObject
 
     void Draw(SpriteBatch spriteBatch);
 
+    void DrawAdditive(SpriteBatch spriteBatch);
+
 }

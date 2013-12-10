@@ -66,6 +66,12 @@ namespace GiveUp.Classes.Screens
         }
 
 
+        public override void DrawAdditive(SpriteBatch spriteBatch)
+        {
+            LevelManager.DrawAdditive(spriteBatch);
+        }
+
+
         public bool practiceRun { get; set; }
     }
 }
