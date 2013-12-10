@@ -73,7 +73,7 @@ namespace GiveUp.Classes.Core
                                         .GameObjects
                                         .Where(x => x.GetType().Name == "BoxTile")
                                         .Select(x => ((BoxTile)x).Rectangle).ToList();
-
+            //HEj
             //Vores fake bullet vi skydder afsted.
             Vector2 bulletPosition = new Vector2(startPos.X, startPos.Y);
             Rectangle bulletRectangle = new Rectangle((int)startPos.X, (int)startPos.Y, 2, 2);
