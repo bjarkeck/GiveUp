@@ -25,9 +25,9 @@ namespace GiveUp.Classes.GameObjects.Obstacles
         float range = 0;
         bool showBeam = false;
         bool showWarning = false;
-        int timeBeforeBeem = 3500;
+        int timeBeforeBeem = 5000;
         int timeBeamDuration = 400;
-        int timeBeforeWarning = 3000;
+        int timeBeforeWarning = 4000;
         int timer;
 
         public const char TileChar = 'l';
@@ -101,11 +101,11 @@ namespace GiveUp.Classes.GameObjects.Obstacles
                 warningList,
                 new Range<float>(4),
                 new Range<float>(0, 0),
-                new Range<int>(timeBeforeBeem - timeBeforeWarning, timeBeforeBeem - timeBeforeWarning),
+                new Range<int>((timeBeforeBeem - timeBeforeWarning) / 2, (int)((timeBeforeBeem - timeBeforeWarning)/1.3f)),
                 (dir == Direction.Top || dir == Direction.Bottom) ? 0 : 90,
                 3,
                 10 * (int)range,
-                (int)range / 10,
+                (int)range,
                 Vector2.Zero,
                 Vector2.Zero);
 
@@ -125,7 +125,7 @@ namespace GiveUp.Classes.GameObjects.Obstacles
                     break;
                 case Direction.Left:
                     laserBeam.Update(gameTime, new Rectangle((int)cannonPosition.X - (int)range, (int)cannonPosition.Y, (int)range, 3));
-                    if (showWarning) warningBeam.Update(gameTime, new Rectangle((int)cannonPosition.X - (int)range, (int)cannonPosition.Y, (int)range, 3));
+                    warningBeam.Update(gameTime, new Rectangle((int)cannonPosition.X - (int)range, (int)cannonPosition.Y, (int)range, 3));
                     break;
                 case Direction.Right:
                     laserBeam.Update(gameTime, new Rectangle((int)cannonPosition.X, (int)cannonPosition.Y, (int)range, 3));
@@ -138,7 +138,7 @@ namespace GiveUp.Classes.GameObjects.Obstacles
             showBeam = (timer > timeBeforeBeem);
 
             laserBeam.MaxNumberOfParitcles = showBeam ? 10 * (int)range : 0;
-            warningBeam.MaxNumberOfParitcles = showWarning ? 20 * (int)range : 0;
+            warningBeam.MaxNumberOfParitcles = showWarning ? 200 * (int)range : 0;
 
             timer += (int)gameTime.ElapsedGameTime.TotalMilliseconds;
             if (timer > timeBeforeBeem + timeBeamDuration)
@@ -150,6 +150,10 @@ namespace GiveUp.Classes.GameObjects.Obstacles
                 {
                     LevelManager.RestartLevel();
                 }
+            }
+            else if (timer > timeBeforeWarning)
+            {
+                var test = "ASDA";
             }
 
 
