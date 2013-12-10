@@ -9,60 +9,91 @@ using System.Text;
 
 namespace GiveUp.Classes.GameObjects.Obstacles
 {
+    public class Wooo<T1, T2, T3, T4>
+    {
+        public T1 Item1 { get; set; }
+        public T2 Item2 { get; set; }
+        public T3 Item3 { get; set; }
+        public T4 Item4 { get; set; }
+
+        public Wooo(T1 t1, T2 t2, T3 t3, T4 t4)
+        {
+            this.Item1 = t1;
+            this.Item2 = t2;
+            this.Item3 = t3;
+            this.Item4 = t4;
+        }
+    }
+
     public class Testicle : GameObject, IGameObject
     {
-        ParticleEmitter e1;
-        public Vector2 Position { get; set; }
-
         public const char TileChar = 't';
+        public List<Wooo<ParticleEmitter, Vector2, float, int>> list = new List<Wooo<ParticleEmitter, Vector2, float, int>>();
+        Random r = new Random();
 
         public override void Initialize(ContentManager content, Vector2 position)
         {
-            this.Position = position;
-            List<ParticleTexture> textures1 = new List<ParticleTexture>();
+            for (int i = 0; i < 15; i++)
+            {
+                List<ParticleTexture> l = new List<ParticleTexture>();
 
-            //Her tilføjer hvilke billder vi vil bruge som particle texture.. og definere start farve og slut farve, samt start scale, og slut scale
-            textures1.Add(new ParticleTexture(content.Load<Texture2D>("Images/Obstacles/sawblade"), new Color(Color.Red, (byte)70), Color.Transparent, 0.1f, 0.4f));
-            textures1.Add(new ParticleTexture(content.Load<Texture2D>("Images/Obstacles/sawblade"), new Color(Color.Orange, (byte)10), Color.Transparent, 0.1f, 0.2f));
-            textures1.Add(new ParticleTexture(content.Load<Texture2D>("Images/Obstacles/sawblade"), new Color(Color.Yellow, (byte)10), Color.Transparent, 0.1f, 0.2f));
-            textures1.Add(new ParticleTexture(content.Load<Texture2D>("Images/Obstacles/sawblade"), new Color(Color.Black, (byte)0), new Color(Color.Black, (byte)10), 0.3f, 1f));
+                for (int y = 0; y < 1; y++)
+                {
+                    l.Add(new ParticleTexture(content.Load<Texture2D>("Images/Particles/" + (r.Next(0, 2) == 0 ? "Moon" : "Moon")),
+                    new Color((byte)r.Next(0, 255), (byte)r.Next(0, 255), (byte)r.Next(100, 255), (byte)r.Next(0, 20)),
+                    new Color((byte)r.Next(0, 255), (byte)r.Next(0, 255), (byte)r.Next(100, 255), (byte)r.Next(0, 0)),
+                    r.Next(0, 100) / 100f,
+                    r.Next(0, 100) / 100f
+                    ));
+                    l.Add(new ParticleTexture(content.Load<Texture2D>("Images/Particles/" + (r.Next(0, 2) == 0 ? "smoke_particle" : "smoke_particle")),
+                    new Color((byte)r.Next(0, 255), (byte)r.Next(0, 255), (byte)r.Next(100, 200), (byte)r.Next(0, 80)),
+                    new Color((byte)r.Next(0, 255), (byte)r.Next(0, 255), (byte)r.Next(100, 200), (byte)r.Next(0, 0)),
+                    r.Next(0, 15) / 100f,
+                    r.Next(0, 15) / 100f
+                    ));
+                }
 
-            e1 = new ParticleEmitter(
-                particleTextures: textures1,
-                particleSpeed: new Range<float>(500, 2000),
-                rotationSpeed: new Range<float>(-0.4f, 0.4f),
-                particleLife: new Range<int>(200, 500),
-                angleDirection: 0,
-                angleSpread: 2,
-                maxNumberOfParitcles: 10000,
-                particlesPerSeccond: 15000,
-                addedVelocity: new Vector2(0, 0),
-                gravity: Vector2.Zero
+                ParticleEmitter e = new ParticleEmitter(
+                    l,
+                    new Range<float>(0, 40),
+                    new Range<float>(-0.2f, 0.2f),
+                    new Range<int>(200, r.Next(200, 2000)),
+                    r.Next(0, 360),
+                    r.Next(0, 360),
+                    r.Next(0, 10000),
+                    r.Next(1000, 2000),
+                    new Vector2(r.Next(-2,2) / 100f,r.Next(-2,2) / 100f),
+                    new Vector2(r.Next(-2, 2) / 100f, r.Next(-2, 2) / 100f)
                 );
 
+                Vector2 v = new Vector2(r.Next(50, 1500), r.Next(50, 850));
+
+                var s = new Wooo<ParticleEmitter, Vector2, float, int>(e, v, 1f, 5);
+
+                list.Add(s);
+            }
         }
 
         public override void Update(GameTime gameTime)
         {
-            //her sætter jeg direction til at pege på musen
-            e1.AngleDirection = (int)(Player.Rectangle.Origin().AngleDegree(Player.InputHelper.MousePosition)) + 90;
-            float dir = (int)(Player.Rectangle.Origin().AngleRadian(Player.InputHelper.MousePosition));
-
-            if (Player.InputHelper.IsCurPress(MouseButtons.RightButton))
+            foreach (var item in list)
             {
-                Player.Velocity += new Vector2((float)Math.Cos(dir) , (float)Math.Sin(dir));
+                float mewRotation = (float)item.Item2.AngleRadian(MouseHelper.Position);
+                item.Item3 = MathHelper.WrapAngle(GameLogic.CurveAngle(item.Item3, mewRotation, 0.03f));
+                Vector2 rotV = new Vector2((float)Math.Cos(item.Item3), (float)Math.Sin(item.Item3));
+                item.Item2 += rotV * item.Item4;
+
+                item.Item1.Update(gameTime, item.Item2);
             }
 
-
-            //og lægger playerens velocirty til dne.
-            e1.AddedVelocity = Player.Velocity;
-
-            e1.Update(gameTime, Player.Rectangle.Origin());
         }
 
-        public override void Draw(SpriteBatch spriteBatch)
+        public override void DrawAdditive(SpriteBatch spriteBatch)
         {
-            e1.Draw(spriteBatch);
+            foreach (var item in list)
+            {
+                item.Item1.Draw(spriteBatch);
+            }
         }
 
     }
