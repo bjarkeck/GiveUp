@@ -102,8 +102,8 @@ namespace GiveUp.Classes.Core
         }
         public void Draw(SpriteBatch spriteBatch)
         {
-            Animation.Draw(spriteBatch);
             particleManager.Draw(spriteBatch);
+            Animation.Draw(spriteBatch);
         }
 
         public void DrawAdditive(SpriteBatch spriteBatch)
@@ -137,6 +137,7 @@ namespace GiveUp.Classes.Core
                             item.Velocity.X -= 0.3f;
                         if (item.Velocity.X < 0)
                             item.Velocity.X += 0.3f;
+                        diePosition = item.Position;
                     }
                 }
             }
