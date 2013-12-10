@@ -61,7 +61,7 @@ namespace GiveUp.Classes.GameObjects.Obstacles
                     r.Next(0, 360),
                     r.Next(0, 10000),
                     r.Next(1000, 2000),
-                    new Vector2(r.Next(-2,2) / 100f,r.Next(-2,2) / 100f),
+                    new Vector2(r.Next(-2, 2) / 100f, r.Next(-2, 2) / 100f),
                     new Vector2(r.Next(-2, 2) / 100f, r.Next(-2, 2) / 100f)
                 );
 
@@ -75,14 +75,27 @@ namespace GiveUp.Classes.GameObjects.Obstacles
 
         public override void Update(GameTime gameTime)
         {
+            int i = 0;
+
             foreach (var item in list)
             {
+                i++;
+
                 float mewRotation = (float)item.Item2.AngleRadian(MouseHelper.Position);
                 item.Item3 = MathHelper.WrapAngle(GameLogic.CurveAngle(item.Item3, mewRotation, 0.03f));
                 Vector2 rotV = new Vector2((float)Math.Cos(item.Item3), (float)Math.Sin(item.Item3));
                 item.Item2 += rotV * item.Item4;
 
-                item.Item1.Update(gameTime, item.Item2);
+                if (i % 2 == 0)
+                {
+                    int x = r.Next(3, 10);
+                    int y = r.Next(3, 10);
+                    item.Item1.Update(gameTime, new Rectangle((int)item.Item2.X - x / 2, (int)item.Item2.Y - y / 2, x, y));
+                }
+                else
+                {
+                    item.Item1.Update(gameTime, item.Item2);
+                }
             }
 
         }

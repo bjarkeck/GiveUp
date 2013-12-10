@@ -69,7 +69,7 @@ namespace GiveUp.Classes.Core
                 position: new Vector2(position.X, position.Y),
                 velocity: new Vector2((float)Math.Cos(randomAngle) * randomSpeed, (float)Math.Sin(randomAngle) * randomSpeed) + AddedVelocity * 0.2f,
                 particleTexture: ParticleTextures[r.Next(0, ParticleTextures.Count())],
-                rotation: (float)r.NextDouble(RotationSpeed.Minimum, RotationSpeed.Maximum),
+                rotation: (float)r.NextDouble(RotationSpeed.Minimum, RotationSpeed.Maximum) * 30,
                 life: r.Next(ParticleLife.Minimum, ParticleLife.Maximum)
             );
 
