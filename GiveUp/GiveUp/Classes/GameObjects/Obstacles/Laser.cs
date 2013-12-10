@@ -26,8 +26,8 @@ namespace GiveUp.Classes.GameObjects.Obstacles
         bool showBeam = false;
         bool showWarning = false;
         int timeBeforeBeem = 5000;
-        int timeBeamDuration = 300;
-        int timeBeforeWarning = 4000;
+        int timeBeamDuration = 100;
+        int timeBeforeWarning = 3000;
         int timer;
 
         public const char TileChar = 'l';
@@ -80,13 +80,13 @@ namespace GiveUp.Classes.GameObjects.Obstacles
         private void addParticles(ContentManager content)
         {
             List<ParticleTexture> laserList = new List<ParticleTexture>();
-            laserList.Add(new ParticleTexture(content.Load<Texture2D>("Images/Particles/beamParticle" + ((dir == Direction.Top || dir == Direction.Bottom) ? "Vertical" : "Horisontal")), new Color(Color.Navy, 0.7f), new Color(Color.OldLace, 0f), 0.2f, 0.2f));
-            laserList.Add(new ParticleTexture(content.Load<Texture2D>("Images/Particles/beamParticle" + ((dir == Direction.Top || dir == Direction.Bottom) ? "Vertical" : "Horisontal")), new Color(Color.OldLace, 0.2f), new Color(Color.Navy, 0f), 0.2f, 0.2f));
+            laserList.Add(new ParticleTexture(content.Load<Texture2D>("Images/Particles/beamParticle" + ((dir == Direction.Top || dir == Direction.Bottom) ? "Vertical" : "Horisontal")), new Color(Color.Navy, 0.7f), new Color(Color.OldLace, 0f), 0.1f, 0.2f));
+            laserList.Add(new ParticleTexture(content.Load<Texture2D>("Images/Particles/beamParticle" + ((dir == Direction.Top || dir == Direction.Bottom) ? "Vertical" : "Horisontal")), new Color(Color.OldLace, 0.2f), new Color(Color.Navy, 0f), 0.3f, 0.1f));
             laserBeam = new ParticleEmitter(
                 laserList,
-                new Range<float>(4,20),
+                new Range<float>(4,7),
                 new Range<float>(0, 0),
-                new Range<int>(timeBeamDuration - (timeBeamDuration/20), timeBeamDuration),
+                new Range<int>(0, 400),
                 (dir == Direction.Top || dir == Direction.Bottom) ? 0 : 90,
                 360,
                 10 * (int)range,
@@ -105,7 +105,7 @@ namespace GiveUp.Classes.GameObjects.Obstacles
                 (dir == Direction.Top || dir == Direction.Bottom) ? 0 : 90,
                 3,
                 10 * (int)range,
-                (int)range,
+                (int)range / 8,
                 Vector2.Zero,
                 Vector2.Zero);
 
