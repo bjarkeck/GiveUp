@@ -25,9 +25,9 @@ namespace GiveUp.Classes.GameObjects.Obstacles
         float range = 0;
         bool showBeam = false;
         bool showWarning = false;
-        int timeBeforeBeem = 1000;
-        int timeBeamDuration = 200;
-        int timeBeforeWarning = 500;
+        int timeBeforeBeem = 3500;
+        int timeBeamDuration = 400;
+        int timeBeforeWarning = 3000;
         int timer;
 
         public const char TileChar = 'l';
@@ -36,7 +36,7 @@ namespace GiveUp.Classes.GameObjects.Obstacles
         {
             this.texture = content.Load<Texture2D>("Images/Obstacles/HeatSeeking/body");
 
-            timer = r.Next(0, timeBeforeBeem);
+            timer = r.Next(0, timeBeforeBeem + timeBeamDuration);
 
             if (GetAllGameObjects<BoxTile>().Any(x => x.Rectangle.X == position.X - 32 && x.Rectangle.Y == position.Y))
             {
