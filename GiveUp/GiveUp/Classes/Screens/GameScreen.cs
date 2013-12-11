@@ -41,7 +41,7 @@ namespace GiveUp.Classes.Screens
             }
             else
             {
-                LevelManager.StartLevel(levelId, subLevelId - 1);
+                LevelManager.StartLevel(levelId, subLevelId);
             }
             player.LoadContent(Content);
             font = Content.Load<SpriteFont>("Fonts/font");

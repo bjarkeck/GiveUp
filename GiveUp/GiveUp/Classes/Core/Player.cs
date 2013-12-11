@@ -79,11 +79,11 @@ namespace GiveUp.Classes.Core
                 )
             );
 
-            List<ParticleTexture> blood = new List<ParticleTexture>();
+            List<ParticleTexture> blood = new List<ParticleTexture>();                                                                              //Blod klat størrelse (1 = 100%)
             blood.Add(new ParticleTexture(content.Load<Texture2D>("Images/Particles/blood1"), new Color(Color.Red, 1f), new Color(Color.Red, 0.1f), 0.2f, 0.4f));
             blood.Add(new ParticleTexture(content.Load<Texture2D>("Images/Particles/blood2"), new Color(Color.Red, 1f), new Color(Color.Red, 0.2f), 0.2f, 0.3f));
             blood.Add(new ParticleTexture(content.Load<Texture2D>("Images/Particles/blood3"), new Color(Color.Red, 1f), new Color(Color.Red, 0.1f), 0.2f, 0.2f));
-            blood.Add(new ParticleTexture(content.Load<Texture2D>("Images/Particles/blood4"), new Color(Color.Red, 1f), new Color(Color.Red, 0.2f), 0.2f, 0.3f));
+            blood.Add(new ParticleTexture(content.Load< Texture2D>("Images/Particles/blood4"), new Color(Color.Red, 1f), new Color(Color.Red, 0.2f), 0.2f, 0.3f));
             particleManager.AddEmitter("Blood",
                 new ParticleEmitter(
                     blood,
@@ -91,7 +91,7 @@ namespace GiveUp.Classes.Core
                     new Range<float>(-0.003f, -0.003f),
                     new Range<int>(0, 500),
                     0,
-                    100,
+                    360,
                     0,
                     10000,
                     Velocity * -1,
@@ -137,7 +137,6 @@ namespace GiveUp.Classes.Core
                             item.Velocity.X -= 0.3f;
                         if (item.Velocity.X < 0)
                             item.Velocity.X += 0.3f;
-                        diePosition = item.Position;
                     }
                 }
             }

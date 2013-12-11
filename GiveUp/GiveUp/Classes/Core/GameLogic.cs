@@ -90,6 +90,10 @@ namespace GiveUp.Classes.Core
                 //Hvis kuglen intersekter med nogle tiles, så retuner false.
                 foreach (var item in tiles)
                 {
+                    if (bulletPosition.Distance(startPos) > distance)
+                    {
+                        return false;
+                    }
                     if (bulletRectangle.Intersects(item))
                     {
                         distanceToHit = bulletPosition.Distance(startPos);
