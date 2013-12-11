@@ -83,7 +83,7 @@ namespace GiveUp.Classes.GameObjects.Obstacles
                 }
             }
         }
-
+        
         public override void Draw(SpriteBatch spriteBatch)
         {
             foreach (var x in bullets)
