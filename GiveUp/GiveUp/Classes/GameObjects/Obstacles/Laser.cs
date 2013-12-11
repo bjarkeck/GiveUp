@@ -44,16 +44,16 @@ namespace GiveUp.Classes.GameObjects.Obstacles
                 this.cannonPosition = new Vector2(Rectangle.X + 17 - 6 + 6, Rectangle.Y + 15);
                 this.cannonDirection = Vector2.Zero.AngleRadian(new Vector2(1, 0));
                 dir = Direction.Right;
-                GameLogic.IsLineOfSight(1900, cannonPosition, new Rectangle(Rectangle.X + 1600, Rectangle.Y, 32, 32), out range, 5);
+                GameLogic.IsLineOfSight(cannonPosition, new Vector2(cannonPosition.X + 1600, cannonPosition.Y), ref range);
             }
             else if (GetAllGameObjects<BoxTile>().Any(x => x.Rectangle.X == position.X + 32 && x.Rectangle.Y == position.Y))
             {
-                this.Rectangle = new Rectangle((int)position.X + 32 - 13 , (int)position.Y, 19, 32);
+                this.Rectangle = new Rectangle((int)position.X + 32 - 13, (int)position.Y, 19, 32);
                 spriteEffect = SpriteEffects.FlipHorizontally;
                 this.cannonPosition = new Vector2(Rectangle.X - 4 + 6 - 6, Rectangle.Y + 15);
                 this.cannonDirection = Vector2.Zero.AngleRadian(new Vector2(-1, 0));
                 dir = Direction.Left;
-                GameLogic.IsLineOfSight(1900, cannonPosition, new Rectangle(Rectangle.X - 1600, Rectangle.Y, 32, 32), out range, 5);
+                GameLogic.IsLineOfSight(cannonPosition, new Vector2(cannonPosition.X - 1600, cannonPosition.Y), ref range);
             }
             else if (GetAllGameObjects<BoxTile>().Any(x => x.Rectangle.X == position.X && x.Rectangle.Y == position.Y + 32))
             {
@@ -62,7 +62,7 @@ namespace GiveUp.Classes.GameObjects.Obstacles
                 this.cannonDirection = Vector2.Zero.AngleRadian(new Vector2(0, -1));
                 rotation = (float)cannonDirection;
                 dir = Direction.Top;
-                GameLogic.IsLineOfSight(1900, cannonPosition, new Rectangle(Rectangle.X, Rectangle.Y - 900, 32, 32), out range, 5);
+                GameLogic.IsLineOfSight(cannonPosition, new Vector2(cannonPosition.X, cannonPosition.Y - 900), ref range);
             }
             else if (GetAllGameObjects<BoxTile>().Any(x => x.Rectangle.X == position.X && x.Rectangle.Y == position.Y - 32))
             {
@@ -71,9 +71,14 @@ namespace GiveUp.Classes.GameObjects.Obstacles
                 this.cannonDirection = Vector2.Zero.AngleRadian(new Vector2(0, 1));
                 rotation = (float)cannonDirection;
                 dir = Direction.Bottom;
-                GameLogic.IsLineOfSight(1900, cannonPosition, new Rectangle(Rectangle.X, Rectangle.Y + 900, 32, 32), out range, 5);
+                GameLogic.IsLineOfSight(cannonPosition, new Vector2(cannonPosition.X, cannonPosition.Y + 900), ref range);
             }
+
             range -= 15;
+
+            if (range < 0)
+                range = 1;
+
             addParticles(content);
         }
 
@@ -84,7 +89,7 @@ namespace GiveUp.Classes.GameObjects.Obstacles
             laserList.Add(new ParticleTexture(content.Load<Texture2D>("Images/Particles/beamParticle" + ((dir == Direction.Top || dir == Direction.Bottom) ? "Vertical" : "Horisontal")), new Color(Color.OldLace, 0.2f), new Color(Color.Navy, 0f), 0.3f, 0.1f));
             laserBeam = new ParticleEmitter(
                 laserList,
-                new Range<float>(4,7),
+                new Range<float>(4, 7),
                 new Range<float>(0, 0),
                 new Range<int>(0, 400),
                 (dir == Direction.Top || dir == Direction.Bottom) ? 0 : 90,
@@ -95,17 +100,17 @@ namespace GiveUp.Classes.GameObjects.Obstacles
                 Vector2.Zero);
 
             List<ParticleTexture> warningList = new List<ParticleTexture>();
-            warningList.Add(new ParticleTexture(content.Load<Texture2D>("Images/Particles/beamParticle" + ((dir == Direction.Top || dir == Direction.Bottom) ? "Vertical" : "Horisontal")), new Color(Color.White, 0.03f), new Color(Color.White, 0f), 0.3f, 0.1f));
+            warningList.Add(new ParticleTexture(content.Load<Texture2D>("Images/Particles/beamParticle" + ((dir == Direction.Top || dir == Direction.Bottom) ? "Vertical" : "Horisontal")), new Color(Color.White, 0.02f), new Color(Color.White, 0f), 0.2f, 0.1f));
 
             warningBeam = new ParticleEmitter(
                 warningList,
-                new Range<float>(4),
+                new Range<float>(12),
                 new Range<float>(0, 0),
-                new Range<int>((timeBeforeBeem - timeBeforeWarning) / 2, (int)((timeBeforeBeem - timeBeforeWarning)/1.3f)),
+                new Range<int>(0, 400),
                 (dir == Direction.Top || dir == Direction.Bottom) ? 0 : 90,
                 3,
                 10 * (int)range,
-                (int)range / 8,
+                6 * (int)range,
                 Vector2.Zero,
                 Vector2.Zero);
 
@@ -138,7 +143,7 @@ namespace GiveUp.Classes.GameObjects.Obstacles
             showBeam = (timer > timeBeforeBeem);
 
             laserBeam.MaxNumberOfParitcles = showBeam ? 10 * (int)range : 0;
-            warningBeam.MaxNumberOfParitcles = showWarning ? 20000 : 0;
+            warningBeam.MaxNumberOfParitcles = showWarning ? 10 * (int)range : 0;
 
             timer += (int)gameTime.ElapsedGameTime.TotalMilliseconds;
             if (timer > timeBeforeBeem + timeBeamDuration)
@@ -146,10 +151,10 @@ namespace GiveUp.Classes.GameObjects.Obstacles
 
             if (timer > timeBeforeBeem && timer < timeBeforeBeem + timeBeamDuration)
             {
-                if (GameLogic.IsLineOfSight(range + 50, cannonPosition, Player.Rectangle, (float)cannonDirection))
-                {
-                    LevelManager.RestartLevel();
-                }
+                //if (GameLogic.IsLineOfSight(cannonPosition, Player.Rectangle, (float)cannonDirection))
+                //{
+                //    LevelManager.RestartLevel();
+                //}
             }
             else if (timer > timeBeforeWarning)
             {

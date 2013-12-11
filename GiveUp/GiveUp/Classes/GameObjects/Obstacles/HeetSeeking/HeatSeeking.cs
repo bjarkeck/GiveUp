@@ -63,7 +63,7 @@ namespace GiveUp.Classes.GameObjects.Obstacles
         public override void Update(GameTime gameTime)
         {
 
-            if (bullets.Count() == 0 && GameLogic.IsLineOfSight(1600, cannonPosition, Player.Rectangle))
+            if (bullets.Count() == 0 && GameLogic.IsLineOfSight(cannonPosition, Player.Rectangle.Origin()))
             {
                 bullets.Add(new HeatSeekingBullet(missileTexture, cannonDirection, new Vector2(cannonPosition.X, cannonPosition.Y)));
             }
