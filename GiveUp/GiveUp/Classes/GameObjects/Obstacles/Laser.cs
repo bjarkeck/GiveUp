@@ -25,6 +25,7 @@ namespace GiveUp.Classes.GameObjects.Obstacles
         float range = 0;
         bool showBeam = false;
         bool showWarning = false;
+        Rectangle beamRect;
         int timeBeforeBeem = 5000;
         int timeBeamDuration = 100;
         int timeBeforeWarning = 3000;
@@ -44,6 +45,7 @@ namespace GiveUp.Classes.GameObjects.Obstacles
                 this.cannonPosition = new Vector2(Rectangle.X + 17 - 6 + 6, Rectangle.Y + 15);
                 this.cannonDirection = Vector2.Zero.AngleRadian(new Vector2(1, 0));
                 dir = Direction.Right;
+                beamRect = new Rectangle((int)cannonPosition.X, (int)cannonPosition.Y, (int)cannonPosition.X + 1600, 2);
                 GameLogic.IsLineOfSight(cannonPosition, new Vector2(cannonPosition.X + 1600, cannonPosition.Y), ref range);
             }
             else if (GetAllGameObjects<BoxTile>().Any(x => x.Rectangle.X == position.X + 32 && x.Rectangle.Y == position.Y))
@@ -53,6 +55,7 @@ namespace GiveUp.Classes.GameObjects.Obstacles
                 this.cannonPosition = new Vector2(Rectangle.X - 4 + 6 - 6, Rectangle.Y + 15);
                 this.cannonDirection = Vector2.Zero.AngleRadian(new Vector2(-1, 0));
                 dir = Direction.Left;
+                beamRect = new Rectangle((int)cannonPosition.X - 1600, (int)cannonPosition.Y, 1600, 2);
                 GameLogic.IsLineOfSight(cannonPosition, new Vector2(cannonPosition.X - 1600, cannonPosition.Y), ref range);
             }
             else if (GetAllGameObjects<BoxTile>().Any(x => x.Rectangle.X == position.X && x.Rectangle.Y == position.Y + 32))
@@ -62,6 +65,7 @@ namespace GiveUp.Classes.GameObjects.Obstacles
                 this.cannonDirection = Vector2.Zero.AngleRadian(new Vector2(0, -1));
                 rotation = (float)cannonDirection;
                 dir = Direction.Top;
+                beamRect = new Rectangle((int)cannonPosition.X, (int)cannonPosition.Y - 900, (int)cannonPosition.X, 900);
                 GameLogic.IsLineOfSight(cannonPosition, new Vector2(cannonPosition.X, cannonPosition.Y - 900), ref range);
             }
             else if (GetAllGameObjects<BoxTile>().Any(x => x.Rectangle.X == position.X && x.Rectangle.Y == position.Y - 32))
@@ -71,6 +75,7 @@ namespace GiveUp.Classes.GameObjects.Obstacles
                 this.cannonDirection = Vector2.Zero.AngleRadian(new Vector2(0, 1));
                 rotation = (float)cannonDirection;
                 dir = Direction.Bottom;
+                beamRect = new Rectangle((int)cannonPosition.X, (int)cannonPosition.Y, 2,  900);
                 GameLogic.IsLineOfSight(cannonPosition, new Vector2(cannonPosition.X, cannonPosition.Y + 900), ref range);
             }
 
@@ -151,10 +156,11 @@ namespace GiveUp.Classes.GameObjects.Obstacles
 
             if (timer > timeBeforeBeem && timer < timeBeforeBeem + timeBeamDuration)
             {
-                //if (GameLogic.IsLineOfSight(cannonPosition, Player.Rectangle, (float)cannonDirection))
-                //{
-                //    LevelManager.RestartLevel();
-                //}
+
+                if (Player.Rectangle.Intersects(beamRect))
+                {
+                    LevelManager.RestartLevel();
+                }
             }
             else if (timer > timeBeforeWarning)
             {

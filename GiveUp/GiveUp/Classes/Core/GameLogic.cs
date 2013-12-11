@@ -85,21 +85,24 @@ namespace GiveUp.Classes.Core
             List<BoundingBox> boundingBoxes = new List<BoundingBox>();
 
             //Her konvatere vi alle tiles fra rectangles til boundingboxes (3d, istedet for 2d)
-                foreach (var item in tiles)
-                                        //ToBoundingBox er en ExtentionMethod jeg har lavet... Se den hvis du vil se hvordan man konvatere 2dbox til en flad 3dbox.
+            foreach (var item in tiles)
+                //ToBoundingBox er en ExtentionMethod jeg har lavet... Se den hvis du vil se hvordan man konvatere 2dbox til en flad 3dbox.
                 boundingBoxes.Add(item.ToBoundingBox());
 
             //Når vi bruger ray.Intersects metoden, retunere den distancen hen til den box man chekker, rammen den ikke boxen, returnere den null
             //Rammer den boxen, retunere den distancen hen til den
+
+            bool hitFound = false;
+
             foreach (var item in boundingBoxes)
-                {
+            {
                 //Inde i den metoden foregår magien!
                 //? tegnet, betyder bare at floaten godt må være null (? = nullable)
                 float? distance = ray.Intersects(item);
 
                 //Hvis den har ramt nået, har vi altså fået en distance. og der er nu en box i vejen, for at komme hen til target...
                 if (distance != null)
-                    {
+                {
                     //Men for at tjekke at boksen ikke ligger på den anden sidde af target, tjekker vi lige at der er kortere afstand til boksen den har remt, end target vi prøver at komme hen til.
                     if (distance < distanceToHit)
                     {
@@ -109,10 +112,14 @@ namespace GiveUp.Classes.Core
                         //Og så sørger vi også lige for at distancen altid er positiv.. (Hvis den rammer noget til venstre, er dne minus, til højre plus)
                         distanceToHit = Math.Abs(distanceToHit);
                         //Vi har altså ramt nået.
-                        return false;
+                        hitFound = true;
                     }
                 }
             }
+
+            if (hitFound)
+                return false;
+
             //Vi har ikke ramt noget, target er i LineOfSight
             return true;
         }
