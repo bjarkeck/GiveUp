@@ -42,7 +42,7 @@ namespace GiveUp.Classes.GameObjects.Tiles
         public override void CollisionLogic()
         {
             LastCollisionDirection = Direction.None;
-            // TODO Tjek om den virker hver gang
+
             if (HandleCollision.IsOnTopOf(ref Player.Rectangle, Rectangle, ref Player.Velocity, ref Player.Position))
             {
                 LastCollisionDirection = Direction.Top;

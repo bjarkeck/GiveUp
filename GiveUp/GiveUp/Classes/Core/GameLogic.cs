@@ -116,25 +116,6 @@ namespace GiveUp.Classes.Core
             //Vi har ikke ramt noget, target er i LineOfSight
             return true;
         }
-        /// <summary>
-        /// Check line of sight.
-        /// </summary>
-        /// <param name="distance">Sight range</param>
-        /// <param name="startPos"></param>
-        /// <param name="target">Fx Player.Rectangle</param>
-        public static bool IsLineOfSight(float distance, Vector2 startPos, Rectangle target, int precition = 20)
-        {
-            float nothing;
-            return IsLineOfSight(distance, startPos, target, out nothing, precition);
-        }
-
-        }
-        public static bool IsLineOfSight(float distance, Vector2 startPos, Rectangle target, float angle, int precition = 20)
-        {
-            float nothing;
-            return IsLineOfSight(distance, startPos, target, out nothing, precition, angle);
-        }
-
 
         public static bool IsLineOfSight(Vector2 startPos, Vector2 target)
         {

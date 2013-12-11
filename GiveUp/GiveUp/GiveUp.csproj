@@ -121,8 +121,6 @@
     <Compile Include="Classes\GameObjects\Obstacles\Cannon\CannonBullet.cs" />
     <Compile Include="Classes\GameObjects\Obstacles\HeetSeeking\HeetSeekingBullet.cs" />
     <Compile Include="Classes\GameObjects\Obstacles\HeetSeeking\HeatSeeking.cs" />
-    <Compile Include="Classes\GameObjects\Obstacles\HorizontalMovingTile.cs" />
-    <Compile Include="Classes\GameObjects\Obstacles\Ice.cs" />
     <Compile Include="Classes\GameObjects\Obstacles\InvisibleTile.cs" />
     <Compile Include="Classes\GameObjects\Obstacles\Laser.cs" />
     <Compile Include="Classes\GameObjects\Obstacles\LowGravity.cs" />
@@ -130,7 +128,6 @@
     <Compile Include="Classes\GameObjects\Obstacles\Sawblade.cs" />
     <Compile Include="Classes\GameObjects\Obstacles\Spike.cs" />
     <Compile Include="Classes\GameObjects\Obstacles\Testicle.cs" />
-    <Compile Include="Classes\GameObjects\Obstacles\VerticalMovingTile.cs" />
     <Compile Include="Classes\GameObjects\Tiles\BoxTile.cs" />
     <Compile Include="Classes\LevelManager\LevelManager.cs" />
     <Compile Include="Classes\LevelManager\GridManager.cs" />
@@ -795,10 +792,7 @@
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <PropertyGroup>
     <PostBuildEvent>
-    if not exist "$(TargetDir)x86" md "$(TargetDir)x86"
-    xcopy /s /y "$(SolutionDir)packages\Microsoft.SqlServer.Compact.4.0.8876.1\NativeBinaries\x86\*.*" "$(TargetDir)x86"
-    if not exist "$(TargetDir)amd64" md "$(TargetDir)amd64"
-    xcopy /s /y "$(SolutionDir)packages\Microsoft.SqlServer.Compact.4.0.8876.1\NativeBinaries\amd64\*.*" "$(TargetDir)amd64"</PostBuildEvent>
+    </PostBuildEvent>
   </PropertyGroup>
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
        Other similar extension points exist, see Microsoft.Common.targets.

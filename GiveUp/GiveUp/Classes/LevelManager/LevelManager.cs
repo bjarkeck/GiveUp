@@ -117,10 +117,12 @@ namespace GiveUp.Classes.LevelManager
             StartNextLevel(false);
         }
 
-        // TODO Fix player reset.
         private void loadLevel(string p)
         {
             GameObjects.Clear();
+
+            if (CurrentSubLevel == 1)
+                Player.Velocity = Vector2.Zero;
 
             GridManager.LoadLevel(p);
 
