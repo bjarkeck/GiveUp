@@ -63,7 +63,7 @@ namespace GiveUp.Classes.LevelManager
                 item.Draw(spriteBatch);
             }
 
-            string str = "Challange " + CurrentLevel;
+            string str = "Challenge " + CurrentLevel;
             spriteBatch.DrawString(font, str, new Vector2(50, 57), Color.White, 0, Vector2.Zero, 0.7f, SpriteEffects.None, 0);
 
             str = "Level " + CurrentSubLevel;
@@ -71,7 +71,7 @@ namespace GiveUp.Classes.LevelManager
 
             if (PracticeRun == false)
             {
-                str = "Challange time: " + (ChallengeTimer.ToTime());
+                str = "Challenge time: " + (ChallengeTimer.ToTime());
                 spriteBatch.DrawString(font, str, new Vector2(1600 - 50 - font.MeasureString(str).X * 0.7f, 57), Color.White, 0, Vector2.Zero, 0.7f, SpriteEffects.None, 0);
             }
             else
