@@ -17,7 +17,7 @@ GM--GM-MGM-----------------KGGGGGGGGGGG----------G
 GM--GM-MG--MGGGGGGGGGGGGGGGGGGGG-----------------G
 G--MGM-MG--MGGGGGGGGGGGGGGGGGGGG-----------------G
 G--MGM-MG--MGGGGGGGGGGGGGGGGGGGG-----------------G
-G--MGM-MG--MGGGGGGGGGGGGGGGGGGGG--------GGGGGGGGGG
+G--MGM-MG--MGGGGGGGGGGGGGGGGGGGG-------GGGGGGGGGGG
 G--MGM-MG-------------------GGGG-----------------G
 GM-MGM-MG-------------------GGGG-----------------G
 GM-----MGGGGGGGGGGGGGG------GGGGGGGGGG-----------G
