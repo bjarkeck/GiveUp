@@ -26,7 +26,6 @@ namespace GiveUp.Classes.Core
             return rnd.NextDouble() * (max - min) + min;
         }
 
-
         public static Vector2 Origin(this Texture2D texture)
         {
             return new Vector2(texture.Width / 2, texture.Height / 2);
@@ -58,7 +57,7 @@ namespace GiveUp.Classes.Core
         /// <param name="distance">Sight range</param>
         /// <param name="startPos"></param>
         /// <param name="target">Fx Player.Rectangle</param>
-        public static bool IsLineOfSight(float distance, Vector2 startPos, Rectangle target, out float distanceToHit, int precition = 20, float? angle = null)
+        public static bool IsLineOfSight(float distance, Vector2 startPos, Rectangle target, out float distanceToHit, int precision = 20, float? angle = null)
         {
             distanceToHit = distance;
             //Check hvis afstandne mellem startPos og target er længere end distance. og retuner false hvis den er...
@@ -82,7 +81,7 @@ namespace GiveUp.Classes.Core
             double rotationToTarget = (angle == null) ? startPos.AngleRadian(target.Origin()) : (float)angle;
 
             //Ud fra rotationen laver vi en velecity som vores check bullet skal flyve med.
-            Vector2 bulletVelocity = new Vector2((float)Math.Cos(rotationToTarget) * precition, (float)Math.Sin(rotationToTarget) * precition);
+            Vector2 bulletVelocity = new Vector2((float)Math.Cos(rotationToTarget) * precision, (float)Math.Sin(rotationToTarget) * precision);
 
             //Mens at vores checkbullet ikke kollidere med target, får vi kuglen til at flyve
             while (bulletRectangle.Intersects(target) == false)
@@ -116,12 +115,12 @@ namespace GiveUp.Classes.Core
         /// <param name="distance">Sight range</param>
         /// <param name="startPos"></param>
         /// <param name="target">Fx Player.Rectangle</param>
-        public static bool IsLineOfSight(float distance, Vector2 startPos, Rectangle target, int precition = 20)
+        public static bool IsLineOfSight(float distance, Vector2 startPos, Rectangle target, int precision = 20)
         {
             float nothing;
-            return IsLineOfSight(distance, startPos, target, out nothing, precition);
-
+            return IsLineOfSight(distance, startPos, target, out nothing, precision);
         }
+
         public static bool IsLineOfSight(float distance, Vector2 startPos, Rectangle target, float angle, int precition = 20)
         {
             float nothing;
@@ -133,7 +132,6 @@ namespace GiveUp.Classes.Core
         {
             return true;
         }
-
 
         public static float CurveAngle(float from, float to, float step)
         {
