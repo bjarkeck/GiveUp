@@ -58,7 +58,7 @@ namespace GiveUp.Classes.GameObjects.Obstacles
             else if (boxTiles.Any(x => x.X == position.X && x.Y == position.Y - 32))
             {
                 texture = content.Load<Texture2D>("Images/Obstacles/AttachedCannon/AttatchedCannonBodyB");
-                cannonPosition = new Vector2(position.X + 16, position.Y);
+                cannonPosition = new Vector2(position.X + 16, position.Y + 2);
             }
             else if (boxTiles.Any(x => x.X == position.X - 32 && x.Y == position.Y))
             {
@@ -91,7 +91,7 @@ namespace GiveUp.Classes.GameObjects.Obstacles
                 Convert.ToDouble(cannonPosition.X - (Player.Rectangle.Origin().X))
                 ) + 3.1416f;
             
-            if (GameLogic.IsLineOfSight(10200, cannonPosition, Player.Rectangle, 20))
+            if (GameLogic.IsLineOfSight(cannonPosition, Player.Rectangle.Origin()))
             {
                     cannonRotation = rotation;
 

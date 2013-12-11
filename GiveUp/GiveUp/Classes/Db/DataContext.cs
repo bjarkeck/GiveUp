@@ -4,13 +4,14 @@ using System.Data.Entity;
 using System.IO;
 using System.Linq;
 using System.Text;
+using System.Data.SqlServerCe;
 
 namespace GiveUp.Classes.Db
 {
     public class DataContext : DbContext
     {
         public DataContext()
-            : base(@"Data Source=(LocalDB)\v11.0;AttachDbFilename=" + new DirectoryInfo("./").FullName + Environment.UserName + @"db.mdf" + ";Integrated Security=True;MultipleActiveResultSets=true")
+            : base(@"Data Source=" + new DirectoryInfo("./").FullName + Environment.UserName + @"db.sdf" + "")
         {
             Database.CreateIfNotExists();
             this.Configuration.AutoDetectChangesEnabled = true;

@@ -18,17 +18,14 @@ namespace GiveUp
     
     public class Game1 : Game
     {
-
         GraphicsDeviceManager graphics;
-
         SpriteBatch spriteBatch;
+        Matrix spriteScale { get; set; }
 
         public static bool ExitGame = false;
-
         public static ScreenManager ScreenManager;
 
-        public Game1()
-            : base()
+        public Game1() : base()
         {
             graphics = new GraphicsDeviceManager(this);
             Content.RootDirectory = "Content";
@@ -49,7 +46,7 @@ namespace GiveUp
             Game1.ScreenManager = new ScreenManager(Content);
 
             spriteBatch = new SpriteBatch(GraphicsDevice);
-            SpriteScale = Matrix.CreateScale(GraphicsAdapter.DefaultAdapter.CurrentDisplayMode.Width / 1600f, GraphicsAdapter.DefaultAdapter.CurrentDisplayMode.Height / 900f, 1);
+            spriteScale = Matrix.CreateScale(GraphicsAdapter.DefaultAdapter.CurrentDisplayMode.Width / 1600f, GraphicsAdapter.DefaultAdapter.CurrentDisplayMode.Height / 900f, 1);
         }
         
         protected override void UnloadContent()
@@ -57,6 +54,9 @@ namespace GiveUp
             Game1.ScreenManager.UnloadContent();
             try
             {
+                DataContext.Current.SaveChanges();
+                DataContext.Current.Dispose();
+                DataContext.Current = null;
                 DataContext.Current.Dispose();
             }
             catch (Exception)
@@ -67,6 +67,9 @@ namespace GiveUp
         {
             try
             {
+                DataContext.Current.SaveChanges();
+                DataContext.Current.Dispose();
+                DataContext.Current = null;
                 DataContext.Current.Dispose();
             }
             catch (Exception)
@@ -90,11 +93,11 @@ namespace GiveUp
         protected override void Draw(GameTime gameTime)
         {
             GraphicsDevice.Clear(Color.Black);
-            spriteBatch.Begin(SpriteSortMode.Deferred, BlendState.NonPremultiplied, null, null, null, null, SpriteScale);
+            spriteBatch.Begin(SpriteSortMode.Deferred, BlendState.NonPremultiplied, null, null, null, null, spriteScale);
             Game1.ScreenManager.Draw(spriteBatch);
             spriteBatch.End();
 
-            spriteBatch.Begin(SpriteSortMode.BackToFront, BlendState.Additive, null, null, null, null, SpriteScale);
+            spriteBatch.Begin(SpriteSortMode.BackToFront, BlendState.Additive, null, null, null, null, spriteScale);
             Game1.ScreenManager.DrawAdditive(spriteBatch);
             spriteBatch.End();
 
@@ -102,6 +105,5 @@ namespace GiveUp
         }
 
 
-        public Matrix SpriteScale { get; set; }
     }
 }

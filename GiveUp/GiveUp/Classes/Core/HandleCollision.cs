@@ -93,7 +93,7 @@ namespace GiveUp.Classes.Core
             {
                 velocity.X = 0;
                 playerPosition.X = box.Right;
-                player.X = (int)playerPosition.X; 
+                player.X = (int)playerPosition.X;
             }
             return rtn;
         }
@@ -120,6 +120,15 @@ namespace GiveUp.Classes.Core
             return rtn;
         }
 
+        public static bool IsAroundOf(this Rectangle player, Rectangle box, Vector2 velocity)
+        {
+            return 
+                player.IsOnTopOf(box, velocity) ||
+                player.IsLeftOf(box, velocity) ||
+                player.IsRightOf(box, velocity) ||
+                player.IsBelowOf(box, velocity);
+        }
+
         public static bool PerPixesCollision(ref Rectangle playerRectangle, Rectangle box, Texture2D boxTexture, ref Vector2 playerVelocity, ref Vector2 playerPosition)
         {
             if (playerRectangle.Intersects(box))
@@ -144,9 +153,9 @@ namespace GiveUp.Classes.Core
                         byte alpha = imageData[x + y * boxTexture.Width].A;
                         if (
                             alpha > 0 &&
-                            playerRectangle.Left < x + box.X && 
-                            playerRectangle.Right > x + box.X && 
-                            playerRectangle.Top < y + box.Y && 
+                            playerRectangle.Left < x + box.X &&
+                            playerRectangle.Right > x + box.X &&
+                            playerRectangle.Top < y + box.Y &&
                             playerRectangle.Bottom > y + box.Y
                             )
                         {

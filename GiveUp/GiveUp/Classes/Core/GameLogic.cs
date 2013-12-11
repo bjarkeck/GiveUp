@@ -50,63 +50,70 @@ namespace GiveUp.Classes.Core
             return (float)Math.Sqrt(Math.Pow(Math.Abs(startPos.Y - target.Y), 2) + Math.Pow(Math.Abs(startPos.X - target.X), 2));
         }
 
-        public static Random r = new Random();
-        /// <summary>
-        /// Check line of sight.
-        /// </summary>
-        /// <param name="distance">Sight range</param>
-        /// <param name="startPos"></param>
-        /// <param name="target">Fx Player.Rectangle</param>
-        public static bool IsLineOfSight(float distance, Vector2 startPos, Rectangle target, out float distanceToHit, int precision = 20, float? angle = null)
+        public static BoundingBox ToBoundingBox(this Rectangle item)
         {
-            distanceToHit = distance;
-            //Check hvis afstandne mellem startPos og target er længere end distance. og retuner false hvis den er...
-            //Ligesom AngleRadian og AngleDegree, må du gerne lave en Distance Extention method ogs også...
-            //Hvis du ikke kender til extention methods så google det lige, de er guld vær :)
-            if (startPos.Distance(target.Origin()) > distance)
-                return false;
+            return new BoundingBox(new Vector3(item.X, item.Y, 0), new Vector3(item.X + item.Width, item.Y + item.Height, 0));
+        }
+
+        public static Random r = new Random();
 
 
+
+        public static bool IsLineOfSight(Vector2 startPos, Vector2 target, ref float distanceToHit)
+        {
+            //Distancen fra start til slut...
+            distanceToHit = Math.Abs(startPos.Distance(target));
+
+            //Get all se tiles
             List<Rectangle> tiles = ((GameScreen)(ScreenManager.Current.CurrentScreen))
                                         .LevelManager
                                         .GameObjects
                                         .Where(x => x.GetType().Name == "BoxTile")
                                         .Select(x => ((BoxTile)x).Rectangle).ToList();
-            //HEj
-            //Vores fake bullet vi skydder afsted.
-            Vector2 bulletPosition = new Vector2(startPos.X, startPos.Y);
-            Rectangle bulletRectangle = new Rectangle((int)startPos.X, (int)startPos.Y, 2, 2);
 
-            //Få rotationen mellem startPos og target
-            double rotationToTarget = (angle == null) ? startPos.AngleRadian(target.Origin()) : (float)angle;
+            //Da Ray er en 3D ting, foregår det i Vector3, hvor vi bare sætter z axen til 0;
+            //Tænk på en Ray, som en stråle den har en start position, og en retning...
+            //Så for at lave en Ray, skal vi bruge en start position, og en retning.
+            //Retningen laver vi ved at  lave en vector3, og trække startPos fra target. og normalize den.
+            //Dont ask me why it is like dat.
+            Vector3 v = new Vector3(target, 0) - new Vector3(startPos, 0);
+            v.Normalize();
+            Ray ray = new Ray(new Vector3(startPos.X, startPos.Y, 0), v);
 
-            //Ud fra rotationen laver vi en velecity som vores check bullet skal flyve med.
-            Vector2 bulletVelocity = new Vector2((float)Math.Cos(rotationToTarget) * precision, (float)Math.Sin(rotationToTarget) * precision);
 
-            //Mens at vores checkbullet ikke kollidere med target, får vi kuglen til at flyve
-            while (bulletRectangle.Intersects(target) == false)
-            {
-                //Hvis kuglen intersekter med nogle tiles, så retuner false.
+            //Ray castíng bruger blandt andet bounding boxes... Så u stedet for rectangles, så bruger vi bounding boxes!
+            List<BoundingBox> boundingBoxes = new List<BoundingBox>();
+
+            //Her konvatere vi alle tiles fra rectangles til boundingboxes (3d, istedet for 2d)
                 foreach (var item in tiles)
+                                        //ToBoundingBox er en ExtentionMethod jeg har lavet... Se den hvis du vil se hvordan man konvatere 2dbox til en flad 3dbox.
+                boundingBoxes.Add(item.ToBoundingBox());
+
+            //Når vi bruger ray.Intersects metoden, retunere den distancen hen til den box man chekker, rammen den ikke boxen, returnere den null
+            //Rammer den boxen, retunere den distancen hen til den
+            foreach (var item in boundingBoxes)
                 {
-                    if (bulletPosition.Distance(startPos) > distance)
+                //Inde i den metoden foregår magien!
+                //? tegnet, betyder bare at floaten godt må være null (? = nullable)
+                float? distance = ray.Intersects(item);
+
+                //Hvis den har ramt nået, har vi altså fået en distance. og der er nu en box i vejen, for at komme hen til target...
+                if (distance != null)
                     {
-                        return false;
-                    }
-                    if (bulletRectangle.Intersects(item))
+                    //Men for at tjekke at boksen ikke ligger på den anden sidde af target, tjekker vi lige at der er kortere afstand til boksen den har remt, end target vi prøver at komme hen til.
+                    if (distance < distanceToHit)
                     {
-                        distanceToHit = bulletPosition.Distance(startPos);
+                        //Siden distance er nullale er det lidt fucked, at få den ind i en normal float. da en normal float ikke må være null...
+                        //jeg gjorde såen der: der er sikkert en smartere måde!
+                        distanceToHit = (float)Convert.ToDouble(distance.ToString());
+                        //Og så sørger vi også lige for at distancen altid er positiv.. (Hvis den rammer noget til venstre, er dne minus, til højre plus)
+                        distanceToHit = Math.Abs(distanceToHit);
+                        //Vi har altså ramt nået.
                         return false;
                     }
                 }
-
-                bulletPosition += bulletVelocity;
-                bulletRectangle.X = (int)bulletPosition.X;
-                bulletRectangle.Y = (int)bulletPosition.Y;
             }
-            distanceToHit = bulletPosition.Distance(startPos);
-
-            //Hvis den kom igennem loopet betyder det at kuglen har ramt spilleren, og så skal der retuneres true.
+            //Vi har ikke ramt noget, target er i LineOfSight
             return true;
         }
         /// <summary>
@@ -115,22 +122,22 @@ namespace GiveUp.Classes.Core
         /// <param name="distance">Sight range</param>
         /// <param name="startPos"></param>
         /// <param name="target">Fx Player.Rectangle</param>
-        public static bool IsLineOfSight(float distance, Vector2 startPos, Rectangle target, int precision = 20)
+        public static bool IsLineOfSight(float distance, Vector2 startPos, Rectangle target, int precition = 20)
         {
             float nothing;
-            return IsLineOfSight(distance, startPos, target, out nothing, precision);
-        }
+            return IsLineOfSight(distance, startPos, target, out nothing, precition);
 
+        }
         public static bool IsLineOfSight(float distance, Vector2 startPos, Rectangle target, float angle, int precition = 20)
         {
             float nothing;
             return IsLineOfSight(distance, startPos, target, out nothing, precition, angle);
 
-        }
 
-        public static bool HasHit(Vector2 startPos, Rectangle target)
+        public static bool IsLineOfSight(Vector2 startPos, Vector2 target)
         {
-            return true;
+            float nothing = 0;
+            return IsLineOfSight(startPos, target, ref nothing);
         }
 
         public static float CurveAngle(float from, float to, float step)

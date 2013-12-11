@@ -169,7 +169,6 @@ namespace GiveUp.Classes.LevelManager
                         {
                             lvl.BestPracticeTime = lvl.PreviousRunTime;
                         }
-                        DataContext.Current.SaveChanges();
                     }
                 }
                 else
@@ -177,15 +176,13 @@ namespace GiveUp.Classes.LevelManager
                     if (LevelTimer > 0)
                     {
                         lvl.PreviousRunTime = LevelTimer;
-                        if (lvl.PreviousRunTime < lvl.BestRunTime || lvl.BestRunTime == 0)
-                        {
-                            lvl.BestRunTime = lvl.PreviousRunTime;
-                        }
                     }
                 }
             }
             else
             {
+                Level lvl = dbLevels.First(x => x.SubLevelId == CurrentSubLevel);
+                lvl.Deaths += 1;
                 Player.Die(Player.Position);
             }
 
@@ -199,7 +196,10 @@ namespace GiveUp.Classes.LevelManager
                     int bestRunTime = DataContext.Current.Levels.Where(x => x.LevelId == CurrentLevel).Sum(c => c.BestRunTime);
                     if (bestRunTime == 0 || ChallengeTimer < bestRunTime)
                     {
-                        DataContext.Current.SaveChanges();
+                        foreach (var item in dbLevels)
+                        {
+                            item.BestRunTime = item.PreviousRunTime;
+                        }
                     }
                     ScreenManager.Current.LoadScreen(new MenuSubLevelScreen(CurrentLevel), true);
                 }

@@ -11,7 +11,29 @@ namespace GiveUp.Classes.Core
     {
         public int AngleDirection { get; set; }
         public int AngleSpread { get; set; }
-        public int MaxNumberOfParitcles { get; set; }
+        private int maxNumberOfParticles;
+        public int MaxNumberOfParitcles {
+            get
+            {
+                return maxNumberOfParticles;
+            }
+            set
+            {
+                if (StickyParticles && value > MaxNumberOfParitclesLimit)
+                {
+                    particlesToRemove = value - MaxNumberOfParitclesLimit;
+                    if (particlesToRemove > Particles.Count())
+                        particlesToRemove = Particles.Count();
+
+                    maxNumberOfParticles = MaxNumberOfParitclesLimit;
+                }
+                else
+                {
+                    maxNumberOfParticles = value;
+                }
+            }
+        }
+        public int MaxNumberOfParitclesLimit { get; set; }
         public int ParticlesPerSeccond { get; set; }
 
         public Range<float> ParticleSpeed { get; set; }
@@ -29,6 +51,8 @@ namespace GiveUp.Classes.Core
         double timer;
         Random r = new Random();
         public bool StickyParticles = false;
+        private int particlesToRemove = 0;
+
 
         public ParticleEmitter(
             List<ParticleTexture> particleTextures,
@@ -40,7 +64,10 @@ namespace GiveUp.Classes.Core
             int maxNumberOfParitcles,
             int particlesPerSeccond,
             Vector2 addedVelocity,
-            Vector2 gravity
+            Vector2 gravity,
+            int maxNumberOfParitclesLimit = 4000,
+            bool stickyParticles = false,
+            bool drawAddtitive = true
             )
         {
             this.ParticleTextures = particleTextures;
@@ -53,6 +80,9 @@ namespace GiveUp.Classes.Core
             this.ParticlesPerSeccond = particlesPerSeccond;
             this.AddedVelocity = addedVelocity;
             this.Gravity = gravity;
+            this.MaxNumberOfParitclesLimit = maxNumberOfParitclesLimit;
+            this.StickyParticles = stickyParticles;
+            this.DrawAdditive = drawAddtitive;
 
             timer = 0;
         }
@@ -99,6 +129,7 @@ namespace GiveUp.Classes.Core
 
         public void Update(GameTime gameTime, Rectangle position)
         {
+
             timer = gameTime.ElapsedGameTime.TotalMilliseconds;
             //AddParticles
             if (Particles.Count() < MaxNumberOfParitcles)
@@ -112,6 +143,7 @@ namespace GiveUp.Classes.Core
                 }
             }
             UpdateParticles(gameTime);
+
         }
 
         public void UpdateParticles(GameTime gameTime)
@@ -128,6 +160,15 @@ namespace GiveUp.Classes.Core
                     Particles.Remove(particle);
                 }
             }
+
+            for (int i = 0; i < particlesToRemove - 1; i++)
+            {
+                if (Particles.Count() > i)
+                {
+                    Particles.Remove(Particles[i]);
+                }
+            }
+            particlesToRemove = 0;
         }
 
         public void Draw(SpriteBatch spriteBatch)

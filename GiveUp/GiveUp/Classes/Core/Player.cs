@@ -80,10 +80,10 @@ namespace GiveUp.Classes.Core
             );
 
             List<ParticleTexture> blood = new List<ParticleTexture>();                                                                              //Blod klat størrelse (1 = 100%)
-            blood.Add(new ParticleTexture(content.Load<Texture2D>("Images/Particles/blood1"), new Color(Color.Red, 1f), new Color(Color.Red, 0.1f), 0.2f, 0.4f));
-            blood.Add(new ParticleTexture(content.Load<Texture2D>("Images/Particles/blood2"), new Color(Color.Red, 1f), new Color(Color.Red, 0.2f), 0.2f, 0.3f));
-            blood.Add(new ParticleTexture(content.Load<Texture2D>("Images/Particles/blood3"), new Color(Color.Red, 1f), new Color(Color.Red, 0.1f), 0.2f, 0.2f));
-            blood.Add(new ParticleTexture(content.Load< Texture2D>("Images/Particles/blood4"), new Color(Color.Red, 1f), new Color(Color.Red, 0.2f), 0.2f, 0.3f));
+            blood.Add(new ParticleTexture(content.Load<Texture2D>("Images/Particles/blood1"), new Color(Color.Red, 1f), new Color(Color.Red, 0.1f), 0.4f, 0.5f));
+            blood.Add(new ParticleTexture(content.Load<Texture2D>("Images/Particles/blood2"), new Color(Color.Red, 1f), new Color(Color.Red, 0.4f), 0.2f, 0.2f));
+            blood.Add(new ParticleTexture(content.Load<Texture2D>("Images/Particles/blood3"), new Color(Color.Red, 1f), new Color(Color.Red, 0.1f), 0.2f, 0.3f));
+            blood.Add(new ParticleTexture(content.Load<Texture2D>("Images/Particles/blood4"), new Color(Color.Red, 1f), new Color(Color.Red, 0.2f), 0.2f, 0.3f));
             particleManager.AddEmitter("Blood",
                 new ParticleEmitter(
                     blood,
@@ -91,12 +91,15 @@ namespace GiveUp.Classes.Core
                     new Range<float>(-0.003f, -0.003f),
                     new Range<int>(0, 500),
                     0,
-                    360,
+                    100,
                     0,
                     10000,
-                    Velocity * -1,
-                    Gravity / 8
-                ) { DrawAdditive = false, StickyParticles = true }
+                    Velocity * -1 / 1.3f,
+                    Gravity / 8,
+                    4000,
+                    true,
+                    false
+                )
             );
 
         }
@@ -120,8 +123,9 @@ namespace GiveUp.Classes.Core
             Animation.Update(gameTime, Position);
             Rectangle = Animation.Rectangle;
             particleManager.Update(gameTime, new Rectangle((int)diePosition.X + 5, (int)diePosition.Y + 5, Rectangle.Width - 10, Rectangle.Height - 10));
+
             particleManager.ParticleEmitters["BodyParts"].AddedVelocity = Velocity * -1;
-            particleManager.ParticleEmitters["Blood"].AddedVelocity = Velocity * -1;
+            particleManager.ParticleEmitters["Blood"].AddedVelocity = Velocity * -1 / 1.3f;
             particleManager.ParticleEmitters["BodyParts"].MaxNumberOfParitcles = 0;
 
             LevelManagerr l = ((GameScreen)ScreenManager.Current.CurrentScreen).LevelManager;
