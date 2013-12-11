@@ -126,12 +126,14 @@ namespace GiveUp.Classes.Core
         {
             float nothing;
             return IsLineOfSight(distance, startPos, target, out nothing, precition);
+        }
 
         }
         public static bool IsLineOfSight(float distance, Vector2 startPos, Rectangle target, float angle, int precition = 20)
         {
             float nothing;
             return IsLineOfSight(distance, startPos, target, out nothing, precition, angle);
+        }
 
 
         public static bool IsLineOfSight(Vector2 startPos, Vector2 target)
