@@ -10,7 +10,7 @@ namespace GiveUp.Classes.Db
     public class DataContext : DbContext
     {
         public DataContext()
-            : base(@"Data Source=(LocalDB)\v11.0;AttachDbFilename=" + new DirectoryInfo("../../../Content/Db/").FullName + Environment.UserName + @"db.mdf" + ";Integrated Security=True;MultipleActiveResultSets=true")
+            : base(@"Data Source=(LocalDB)\v11.0;AttachDbFilename=" + new DirectoryInfo("./").FullName + Environment.UserName + @"db.mdf" + ";Integrated Security=True;MultipleActiveResultSets=true")
         {
             Database.CreateIfNotExists();
             this.Configuration.AutoDetectChangesEnabled = true;
@@ -30,7 +30,7 @@ namespace GiveUp.Classes.Db
 
             foreach (User user in db.Users)
             {
-                var levelDir = new DirectoryInfo("../../../Content/Levels/");
+                var levelDir = new DirectoryInfo("./Content/Levels/");
 
                 foreach (DirectoryInfo item in levelDir.GetDirectories())
                 {
