@@ -11,7 +11,7 @@ namespace GiveUp.Classes.Db
     public class DataContext : DbContext
     {
         public DataContext()
-            : base(@"Data Source=" + new DirectoryInfo("./").FullName + Environment.UserName + @"db.sdf" + "")
+            : base(@"Data Source=" + new DirectoryInfo("./").FullName + Environment.UserName + @"danuvirkerdetrb.sdf" + "")
         {
             Database.CreateIfNotExists();
             this.Configuration.AutoDetectChangesEnabled = true;
