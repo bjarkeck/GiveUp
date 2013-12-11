@@ -31,7 +31,6 @@ namespace GiveUp.Classes.Core
 
         public void Update(GameTime gameTime, Vector2 Gravity)
         {
-
             if (CurrentLife > 0)
             {
                 CurrentRotation += Rotation;
@@ -46,7 +45,6 @@ namespace GiveUp.Classes.Core
                 //Drain Life
                 CurrentLife -= (int)gameTime.ElapsedGameTime.TotalMilliseconds;
             }
-
         }
 
         public void Draw(SpriteBatch spriteBatch)

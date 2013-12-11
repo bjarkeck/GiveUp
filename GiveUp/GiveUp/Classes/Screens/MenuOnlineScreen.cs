@@ -1,4 +1,5 @@
 ﻿using GiveUp.Classes.Core;
+using GiveUp.Classes.Db;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -11,6 +12,13 @@ namespace GiveUp.Classes.Screens
         public MenuOnlineScreen()
         {
             this.ActiveScreenType = typeof(MenuOnlineScreen);
+
+            foreach (var item in DataContext.Current.Levels)
+            {
+                item.BestPracticeTime = 50000;
+                item.PreviousRunTime = 50000;
+            }
+            DataContext.Current.SaveChanges();
 
         }
     }

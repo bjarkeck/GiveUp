@@ -41,8 +41,10 @@ namespace GiveUp.Classes.Core
 
         public Color Color(int life, int currentLife)
         {
-            float scaleFactor = 1 - (float)currentLife / (float)life;
+            if (currentLife < 0)
+                return endColor;
 
+            float scaleFactor = 1 - (float)currentLife / (float)life;
             return new Color(
                 (byte)(startColor.R + (endColor.R - startColor.R) * scaleFactor),
                 (byte)(startColor.G + (endColor.G - startColor.G) * scaleFactor),
@@ -53,6 +55,9 @@ namespace GiveUp.Classes.Core
         }
         public float Scale(int life, int currentLife)
         {
+            if (currentLife < 0)
+                return endScale;
+
             float scaleFactor = 1 - (float)currentLife / (float)life;
 
             return startScale + (endScale - startScale) * scaleFactor;

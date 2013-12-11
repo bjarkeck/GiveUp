@@ -91,9 +91,9 @@ namespace GiveUp.Classes.GameObjects.Obstacles
                 Convert.ToDouble(cannonPosition.X - (Player.Rectangle.Origin().X))
                 ) + 3.1416f;
             
-            if (GameLogic.IsLineOfSight(10200, cannonPosition, Player.Rectangle, 50))
+            if (GameLogic.IsLineOfSight(10200, cannonPosition, Player.Rectangle))
             {
-                    cannonRotation = rotation;
+                cannonRotation = rotation;
 
                 if ((timeElapsed += gameTime.ElapsedGameTime) > fireRate)
                 {

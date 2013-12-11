@@ -31,6 +31,7 @@ namespace GiveUp.Classes.Core
 
         public void LoadScreen(BaseScreen screen, bool startNew = true)
         {
+            DataContext.Current.SaveChanges();
             DataContext.Current.Dispose();
             DataContext.Current = null;
 
