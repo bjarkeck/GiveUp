@@ -93,7 +93,7 @@ namespace GiveUp.Classes.GameObjects.Obstacles
             
             if (GameLogic.IsLineOfSight(cannonPosition, Player.Rectangle.Origin()))
             {
-                cannonRotation = rotation;
+                    cannonRotation = rotation;
 
                 if ((timeElapsed += gameTime.ElapsedGameTime) > fireRate)
                 {
