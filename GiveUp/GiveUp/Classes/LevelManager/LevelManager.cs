@@ -26,6 +26,7 @@ namespace GiveUp.Classes.LevelManager
         public bool PracticeRun = false;
         private List<Level> dbLevels;
         private SpriteFont font;
+        private bool firstRun = true;
 
 
         public ContentManager Content
@@ -121,9 +122,13 @@ namespace GiveUp.Classes.LevelManager
         {
             GameObjects.Clear();
 
-            if (CurrentSubLevel == 1)
+            if (firstRun)
+            {
                 Player.Velocity = Vector2.Zero;
-
+                firstRun = false;
+            }
+            Player.CanDoubleJump = true;
+            Player.CanJump = true;
             GridManager.LoadLevel(p);
 
             foreach (var unassigendTile in GridManager.UnassignedTiles)
