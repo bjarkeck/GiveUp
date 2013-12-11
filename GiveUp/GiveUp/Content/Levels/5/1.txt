@@ -10,7 +10,7 @@ G-------------------------------------GG^---lG---G
 G------------------------------------cGG^----GM--G
 G---D---------------------------------GG^---lG---G
 GGGGGGGGGGGGGGGGGGGGGGGGGGGGGM-------cGG^----G--MG
-G-----------l---------------GM--------GG^----G---G
+G---------------------------GM--------GG^----G---G
 G---------------------------GM--------GG^----GM--G
 G---------------------------GM---------------G---G
 G---------------------------GM--B------------G--MG
@@ -20,9 +20,9 @@ GGGGGG---------G--------G---Ge------------------MG
 GGGGGG---------G--------G^--G-------------------MG
 GGGGGG---------G---K----G^--^---^GGGGGGGGGGGGGG-MG
 GGGGGG---------G--------G^------^G--------------MG
-GGGGGGl-------lG--------G^------^G--------------MG
+GGGGGG---------G--------G^------^G--------------MG
 GGGGGG---------G--------G^^^^^^^^G--GGGGGB--MGM-MG
 GGGGGG-------GGG--------GGGGGGGGGG-----MG--BMGM-MG
 GGGGGG-------^^G--------GGGGGGGGGGGGG--MG---MGM-MG
-GGGGGG--l------G^^^^^^^^Gl--K---------------MG-e-G
+GGGGGG---------G^^^^^^^^Gl--K---------------MG-e-G
 GGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGG
