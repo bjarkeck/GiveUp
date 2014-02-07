@@ -15,6 +15,8 @@ using GiveUp.Classes.Db;
 
 namespace GiveUp
 {
+
+    // Bjarke test
     
     public class Game1 : Game
     {
