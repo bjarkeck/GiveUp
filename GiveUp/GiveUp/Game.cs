@@ -40,6 +40,8 @@ namespace GiveUp
             base.Initialize();
         }
 
+        // HEJ
+
         protected override void LoadContent()
         {
             spriteBatch = new SpriteBatch(GraphicsDevice);
