@@ -13,7 +13,7 @@ namespace GiveUp.Classes.Core
         public Vector2 Velocity;
         public Vector2 Position { get; set; }
         public ParticleTexture ParticleTexture { get; set; }
-        public float Rotation { get; set; }
+        public float RotationSpeed { get; set; }
         public bool Collide = false;
 
         public int CurrentLife;
@@ -24,16 +24,20 @@ namespace GiveUp.Classes.Core
             this.Position = position;
             this.Velocity = velocity;
             this.ParticleTexture = particleTexture;
-            this.Rotation = rotation;
+            this.RotationSpeed = rotation;
             this.Life = life;
             CurrentLife = Life;
+
+            if (particleTexture.FixedRotation)
+                this.CurrentRotation = rotation;
         }
 
         public void Update(GameTime gameTime, Vector2 Gravity)
         {
             if (CurrentLife > 0)
             {
-                CurrentRotation += Rotation;
+                if (ParticleTexture.FixedRotation == false)
+                    CurrentRotation += RotationSpeed;
 
                 //Gravity
                 Velocity += Gravity;

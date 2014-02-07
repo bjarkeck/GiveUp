@@ -102,7 +102,7 @@ namespace GiveUp.Classes.Core
                 position: new Vector2(position.X, position.Y),
                 velocity: new Vector2((float)Math.Cos(randomAngle) * randomSpeed, (float)Math.Sin(randomAngle) * randomSpeed) + AddedVelocity * 0.2f,
                 particleTexture: ParticleTextures[r.Next(0, ParticleTextures.Count())],
-                rotation: (float)r.NextDouble(RotationSpeed.Minimum, RotationSpeed.Maximum) * 30,
+                rotation: (float)r.NextDouble(RotationSpeed.Minimum, RotationSpeed.Maximum),
                 life: r.Next(ParticleLife.Minimum, ParticleLife.Maximum)
             );
 
@@ -129,7 +129,6 @@ namespace GiveUp.Classes.Core
 
         public void Update(GameTime gameTime, Rectangle position)
         {
-
             timer = gameTime.ElapsedGameTime.TotalMilliseconds;
             //AddParticles
             if (Particles.Count() < MaxNumberOfParitcles)
@@ -143,7 +142,23 @@ namespace GiveUp.Classes.Core
                 }
             }
             UpdateParticles(gameTime);
-
+        }
+        public void Update(GameTime gameTime, Vector2 position, int distance, float rotation)
+        {
+            timer = gameTime.ElapsedGameTime.TotalMilliseconds;
+            //AddParticles
+            if (Particles.Count() < MaxNumberOfParitcles)
+            {
+                //Add this many:
+                var ps = 1000f / ParticlesPerSeccond;
+                while (timer > ps && Particles.Count() < MaxNumberOfParitcles)
+                {
+                    timer -= ps;
+                    int randomDistance = r.Next(0,Math.Abs(distance));
+                    AddParticle(new Vector2(position.X + (float)Math.Cos(rotation) * randomDistance, position.Y + (float)Math.Sin(rotation) * randomDistance));
+                }
+            }
+            UpdateParticles(gameTime);
         }
 
         public void UpdateParticles(GameTime gameTime)

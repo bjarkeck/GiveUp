@@ -15,11 +15,11 @@ namespace GiveUp.Classes.Core
 
         public float startScale;
         public float endScale;
-
-
         bool singleColor;
 
-        public ParticleTexture(Texture2D texture, Color singleColor, float startScale = 1, float endScale = 1)
+        public bool FixedRotation;
+
+        public ParticleTexture(Texture2D texture, Color singleColor, float startScale = 1, float endScale = 1, bool fixedRotation = false)
         {
             this.Texture = texture;
             this.endColor = singleColor;
@@ -27,9 +27,10 @@ namespace GiveUp.Classes.Core
             this.singleColor = true;
             this.startScale = startScale;
             this.endScale = endScale;
+            this.FixedRotation = fixedRotation;
         }
 
-        public ParticleTexture(Texture2D texture, Color startColor, Color endColor, float startScale = 1, float endScale = 1)
+        public ParticleTexture(Texture2D texture, Color startColor, Color endColor, float startScale = 1, float endScale = 1, bool fixedRotation = false)
         {
             this.Texture = texture;
             this.startColor = startColor;
@@ -37,12 +38,16 @@ namespace GiveUp.Classes.Core
             this.singleColor = false;
             this.startScale = startScale;
             this.endScale = endScale;
+            this.FixedRotation = fixedRotation;
         }
 
         public Color Color(int life, int currentLife)
         {
             if (currentLife < 0)
                 return endColor;
+
+            if (singleColor)
+                return startColor;
 
             float scaleFactor = 1 - (float)currentLife / (float)life;
             return new Color(
@@ -63,13 +68,5 @@ namespace GiveUp.Classes.Core
             return startScale + (endScale - startScale) * scaleFactor;
         }
 
-        public static ParticleTexture New(Texture2D texture, Color startColor, Color endColor, float startScale = 1, float endScale = 1)
-        {
-            return new ParticleTexture(texture, startColor, endColor, startScale, endScale);
-        }
-        public static ParticleTexture New(Texture2D texture, Color singleColor, float startScale = 1, float endScale = 1)
-        {
-            return new ParticleTexture(texture, singleColor, startScale, endScale);
-        }
     }
 }

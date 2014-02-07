@@ -20,6 +20,5 @@ namespace GiveUp.Classes.Core
             this.Minimum = singleValue;
             this.Maximum = singleValue;
         }
-
     }
 }
