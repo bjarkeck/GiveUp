@@ -49,7 +49,7 @@ namespace GiveUp.Classes.Core
         public bool DrawAdditive = true;
 
         double timer;
-        Random r = new Random();
+        static Random r = new Random();
         public bool StickyParticles = false;
         private int particlesToRemove = 0;
 
