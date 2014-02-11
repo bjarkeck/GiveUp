@@ -131,6 +131,8 @@ namespace GiveUp.Classes.LevelManager
             Player.CanJump = true;
             GridManager.LoadLevel(p);
 
+            Dictionary<IGameObject, Vector2> go = new Dictionary<IGameObject, Vector2>();
+
             foreach (var unassigendTile in GridManager.UnassignedTiles)
             {
                 var gameObject = Assembly.GetExecutingAssembly()
@@ -149,7 +151,7 @@ namespace GiveUp.Classes.LevelManager
                         IGameObject obj = (IGameObject)gameObject.Select(x => Activator.CreateInstance(x)).First();
                         GameObjects.Add(obj);
                         obj.Player = Player;
-                        obj.Initialize(Content, position);
+                        go.Add(obj, position);
                     }
                 }
             }
@@ -160,6 +162,11 @@ namespace GiveUp.Classes.LevelManager
                                     100 :
                                 (byte)x.GetType().GetField("LoadOrder").GetValue(null)
                                 ).ToList();
+
+            foreach (IGameObject g in GameObjects)
+            {
+                g.Initialize(Content, go[g]);
+            }
         }
 
         public void StartNextLevel(bool runCompleted = false)

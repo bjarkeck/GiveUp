@@ -16,7 +16,7 @@ using System.Text;
         public Texture2D closedDoor { get; set; }
         public Texture2D openDoor { get; set; }
         public Vector2 Position { get; set; }
-        public const byte LoadOrder = 0;
+        public const byte LoadOrder = 1;
 
         public const char TileChar = 'D';
         List<ButtonActivator> buttonActivators;

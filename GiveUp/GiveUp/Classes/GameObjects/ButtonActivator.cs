@@ -14,6 +14,7 @@ namespace GiveUp.Classes.GameObjects
         public Rectangle rectangle;
         public Texture2D doorLocked;
         public Texture2D doorUnlocked;
+        public const byte LoadOrder = 0;
 
         public const char TileChar = 'K';
         public bool isLocked = false;
