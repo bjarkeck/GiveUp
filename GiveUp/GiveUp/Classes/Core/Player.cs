@@ -19,7 +19,7 @@ namespace GiveUp.Classes.Core
         public float Acceleration;
         public Rectangle Rectangle;
         public SpriteAnimation Animation;
-        private ParticleManager particleManager;
+        public ParticleManager ParticleManager;
         private Vector2 diePosition;
         public bool CanJump = true;
         public bool CanDoubleJump = false;
@@ -53,7 +53,7 @@ namespace GiveUp.Classes.Core
             Animation.AddRow("jump", 2, 1);
             Animation.AddRow("slide", 3, 1);
             Animation.AddRow("push", 4, 1);
-            particleManager = new ParticleManager();
+            ParticleManager = new ParticleManager();
 
             List<ParticleTexture> l = new List<ParticleTexture>();
             l.Add(new ParticleTexture(content.Load<Texture2D>("Images/Player/b1"), Color.White, new Color(Color.White, 0), 0.7f, 0.7f));
@@ -64,7 +64,7 @@ namespace GiveUp.Classes.Core
             l.Add(new ParticleTexture(content.Load<Texture2D>("Images/Player/b6"), Color.White, new Color(Color.White, 0), 0.6f, 0.6f));
             l.Add(new ParticleTexture(content.Load<Texture2D>("Images/Player/b7"), Color.White, new Color(Color.White, 0), 0.6f, 0.6f));
             l.Add(new ParticleTexture(content.Load<Texture2D>("Images/Player/b8"), Color.White, new Color(Color.White, 0), 0.5f, 0.5f));
-            particleManager.AddEmitter("BodyParts",
+            ParticleManager.AddEmitter("BodyParts",
                 new ParticleEmitter(
                     l,
                     new Range<float>(50, 100),
@@ -84,7 +84,7 @@ namespace GiveUp.Classes.Core
             blood.Add(new ParticleTexture(content.Load<Texture2D>("Images/Particles/blood2"), new Color(Color.Red, 1f), new Color(Color.Red, 0.4f), 0.2f, 0.2f));
             blood.Add(new ParticleTexture(content.Load<Texture2D>("Images/Particles/blood3"), new Color(Color.Red, 1f), new Color(Color.Red, 0.1f), 0.2f, 0.3f));
             blood.Add(new ParticleTexture(content.Load<Texture2D>("Images/Particles/blood4"), new Color(Color.Red, 1f), new Color(Color.Red, 0.2f), 0.2f, 0.3f));
-            particleManager.AddEmitter("Blood",
+            ParticleManager.AddEmitter("Blood",
                 new ParticleEmitter(
                     blood,
                     new Range<float>(100, 200),
@@ -105,13 +105,13 @@ namespace GiveUp.Classes.Core
         }
         public void Draw(SpriteBatch spriteBatch)
         {
-            particleManager.Draw(spriteBatch);
+            ParticleManager.Draw(spriteBatch);
             Animation.Draw(spriteBatch);
         }
 
         public void DrawAdditive(SpriteBatch spriteBatch)
         {
-            particleManager.DrawAdditive(spriteBatch);
+            ParticleManager.DrawAdditive(spriteBatch);
         }
 
         public void Update(GameTime gameTime)
@@ -122,15 +122,15 @@ namespace GiveUp.Classes.Core
             Movement(gameTime);
             Animation.Update(gameTime, Position);
             Rectangle = Animation.Rectangle;
-            particleManager.Update(gameTime, new Rectangle((int)diePosition.X + 5, (int)diePosition.Y + 5, Rectangle.Width - 10, Rectangle.Height - 10));
+            ParticleManager.Update(gameTime, new Rectangle((int)diePosition.X + 5, (int)diePosition.Y + 5, Rectangle.Width - 10, Rectangle.Height - 10));
 
-            particleManager.ParticleEmitters["BodyParts"].AddedVelocity = Velocity * -1;
-            particleManager.ParticleEmitters["Blood"].AddedVelocity = Velocity * -1 / 1.3f;
-            particleManager.ParticleEmitters["BodyParts"].MaxNumberOfParitcles = 0;
+            ParticleManager.ParticleEmitters["BodyParts"].AddedVelocity = Velocity * -1;
+            ParticleManager.ParticleEmitters["Blood"].AddedVelocity = Velocity * -1 / 1.3f;
+            ParticleManager.ParticleEmitters["BodyParts"].MaxNumberOfParitcles = 0;
 
             LevelManagerr l = ((GameScreen)ScreenManager.Current.CurrentScreen).LevelManager;
             var tiles = l.GameObjects.Where(x => x.GetType() == typeof(BoxTile));
-            foreach (var item in particleManager.ParticleEmitters["BodyParts"].Particles)
+            foreach (var item in ParticleManager.ParticleEmitters["BodyParts"].Particles)
             {
                 foreach (var t in tiles)
                 {
@@ -148,11 +148,11 @@ namespace GiveUp.Classes.Core
 
         public void Die(Vector2 diePosition)
         {
-            if (particleManager != null)
+            if (ParticleManager != null)
             {
                 this.diePosition = diePosition;
-                particleManager.ParticleEmitters["BodyParts"].MaxNumberOfParitcles += 6;
-                particleManager.ParticleEmitters["Blood"].MaxNumberOfParitcles += 100;
+                ParticleManager.ParticleEmitters["BodyParts"].MaxNumberOfParitcles += 6;
+                ParticleManager.ParticleEmitters["Blood"].MaxNumberOfParitcles += 100;
             }
         }
 

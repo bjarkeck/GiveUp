@@ -60,7 +60,7 @@ namespace GiveUp.Classes.GameObjects
                     Player.Animation.PlayAnimation("slide");
                     Player.Velocity.Y = 0.8f;
                     Player.CanJump = true;
-                    Player.CanDoubleJump = true;
+                    Player.CanDoubleJump = false;
                 }
             }
         }

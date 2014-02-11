@@ -122,8 +122,10 @@
     <Compile Include="Classes\GameObjects\Obstacles\Cannon\CannonBullet.cs" />
     <Compile Include="Classes\GameObjects\Obstacles\HeetSeeking\HeetSeekingBullet.cs" />
     <Compile Include="Classes\GameObjects\Obstacles\HeetSeeking\HeatSeeking.cs" />
+    <Compile Include="Classes\GameObjects\Obstacles\HorizontalMovingTiles.cs" />
     <Compile Include="Classes\GameObjects\Obstacles\InvisibleTile.cs" />
     <Compile Include="Classes\GameObjects\Obstacles\Laser.cs" />
+    <Compile Include="Classes\GameObjects\Obstacles\Lava.cs" />
     <Compile Include="Classes\GameObjects\Obstacles\LowGravity.cs" />
     <Compile Include="Classes\GameObjects\Obstacles\ReverseControls.cs" />
     <Compile Include="Classes\GameObjects\Obstacles\Sawblade.cs" />
@@ -177,10 +179,6 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
-    <Content Include="..\..\..\..\..\..\..\Program Files %28x86%29\MonoGame\v3.0\Assemblies\WindowsGL\SDL.dll">
-      <Link>MonoGame\SDL.dll</Link>
-      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
-    </Content>
     <Content Include="Content\Images\Particles\beamParticleHorisontal.png">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Content>
@@ -384,6 +382,9 @@
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Content>
     <Content Include="Content\Images\Tiles\ground.png">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Content\Images\Tiles\Lava.png">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Content>
     <Content Include="Content\Images\Tiles\leftHill.png">
@@ -750,6 +751,9 @@
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Content>
     <Content Include="Documents\Level Design Chars.txt" />
+    <Content Include="SDL.dll">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
     <Content Include="System\Icon.ico" />
     <Content Include="Documents\To-Do.txt" />
   </ItemGroup>
@@ -767,6 +771,7 @@
   </ItemGroup>
   <ItemGroup>
     <Folder Include="Data\" />
+    <Folder Include="MonoGame\" />
   </ItemGroup>
   <ItemGroup>
     <BootstrapperPackage Include=".NETFramework,Version=v4.5">
