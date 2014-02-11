@@ -751,9 +751,6 @@
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Content>
     <Content Include="Documents\Level Design Chars.txt" />
-    <Content Include="SDL.dll">
-      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
-    </Content>
     <Content Include="System\Icon.ico" />
     <Content Include="Documents\To-Do.txt" />
   </ItemGroup>

@@ -18,6 +18,8 @@ using System.Text;
         public Vector2 Position { get; set; }
         public const byte LoadOrder = 1;
 
+        //Hejsa 1
+
         public const char TileChar = 'D';
         List<ButtonActivator> buttonActivators;
 
