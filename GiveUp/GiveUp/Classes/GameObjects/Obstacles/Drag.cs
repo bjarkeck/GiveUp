@@ -14,6 +14,8 @@ namespace GiveUp.Classes.Core
     {
         public Texture2D texture { get; set; }
 
+        //Hejsa 3
+
         public const char TileChar = 'Q';
         public const byte LoadOrder = 3;
 

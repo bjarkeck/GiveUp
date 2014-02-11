@@ -22,7 +22,6 @@ namespace GiveUp.Classes.Screens
         {
             base.LoadContent();
 
-
             btnExit = new Button(Content, "Images/Menu/Buttons/btnExit", () => { Game1.ExitGame = true; }, ButtonSizeScaleFactor);
             btnExit.ButtonRectangle.X = (1600 / 2) - btnExit.ButtonRectangle.Width;
             btnExit.ButtonRectangle.Y = 500;

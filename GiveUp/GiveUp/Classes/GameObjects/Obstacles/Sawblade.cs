@@ -17,6 +17,8 @@ namespace GiveUp.Classes.GameObjects.Obstacles
         public Vector2 Position;
         Texture2D texture { get; set; }
 
+        //Hejsa 3
+
         float rotation = 0.5f;
         float speed = 2.5f;
         int direction = 1;
