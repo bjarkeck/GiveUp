@@ -54,6 +54,7 @@ namespace GiveUp.Classes.Core
         private int particlesToRemove = 0;
 
 
+
         public ParticleEmitter(
             List<ParticleTexture> particleTextures,
             Range<float> particleSpeed,
@@ -164,6 +165,10 @@ namespace GiveUp.Classes.Core
         public void UpdateParticles(GameTime gameTime)
         {
 
+
+
+
+
             //UpdateParticles
             foreach (Particle particle in Particles.ToList())
             {
@@ -191,5 +196,6 @@ namespace GiveUp.Classes.Core
             foreach (Particle particle in Particles)
                 particle.Draw(spriteBatch);
         }
+
     }
 }

@@ -12,12 +12,11 @@ namespace GiveUp.Classes.GameObjects.Obstacles
     class Lava : GameObject, IGameObject
     {
         public const char TileChar = 'L';
-        public const byte LoadOrder = 0;
+        public const byte LoadOrder = 10;
 
         private Texture2D texture;
         public bool Hide = false;
         public Direction LastCollisionDirection = Direction.None;
-        ParticleEmitter p;
         private Vector2 position;
         public Vector2 Position
         {
@@ -38,45 +37,35 @@ namespace GiveUp.Classes.GameObjects.Obstacles
             this.texture = content.Load<Texture2D>("Images/Tiles/Lava");
             this.Rectangle = new Rectangle((int)position.X, (int)position.Y + 6, 32, 26);
 
-            List<ParticleTexture> textures = new List<ParticleTexture>();
-            textures.Add(new ParticleTexture(content.Load<Texture2D>("Images/Particles/smoke_particle"), new Color(Color.White, 0.4f), new Color(Color.White, 0f), 0.1f, 0.15f));
-            textures.Add(new ParticleTexture(content.Load<Texture2D>("Images/Particles/smoke_particle"), new Color(Color.White, 0.4f), new Color(Color.White, 0), 0f, 0.2f));
-            p = new ParticleEmitter(
-                textures, 
-                new Range<float>(0.1f, 0.2f),
-                new Range<float>(-0.2f, 0.2f),
-                new Range<int>(400, 1000), 
-                0, 120, 200, 70, Vector2.Zero, Vector2.Zero);
 
         }
-        bool plzDie = false;
 
-        public override void Update(GameTime gameTime)
-        {
-            p.Update(gameTime, new Rectangle(Rectangle.X, Rectangle.Y + 4, Rectangle.Width, 3));
-        }
         public override void CollisionLogic()
         {
-          
             if (Player.Rectangle.PerPixesCollision(Rectangle, texture))
             {
                 Player.ParticleManager.ParticleEmitters["BodyParts"].AddedVelocity = Player.Velocity;
                 Player.ParticleManager.ParticleEmitters["Blood"].AddedVelocity = Player.Velocity;
                 Player.ParticleManager.ParticleEmitters["BodyParts"].MaxNumberOfParitcles = 0;
                 LevelManager.RestartLevel();
-             
             }
         }
         float i = 0;
         public override void Draw(SpriteBatch spriteBatch)
         {
-           
-            spriteBatch.Draw(texture, Rectangle, new Rectangle(57-(int)i,0,57, 47), Color.White);
-            i+=0.3333f;
+            spriteBatch.Draw(texture, new Rectangle(Rectangle.X, Rectangle.Y, (int)i, Rectangle.Height), new Rectangle(57 - RealSize(i), 0, 57, 47), Color.White);
+            spriteBatch.Draw(texture, new Rectangle(Rectangle.X + (int)i, Rectangle.Y, Rectangle.Width - (int)i, Rectangle.Height), new Rectangle(0, 0, 57 - RealSize(i), 47), Color.White);
+            i += 0.3333f;
+
+            if (i > Rectangle.Width)
+                i = 0;
         }
-        public override void DrawAdditive(SpriteBatch spriteBatch)
+
+        private int RealSize(float v)
         {
-            p.Draw(spriteBatch);
+            if (v == 0)
+                return 0;
+            return (int)(v / Rectangle.Width * 57f);
         }
 
     }

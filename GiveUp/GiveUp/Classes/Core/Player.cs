@@ -116,6 +116,15 @@ namespace GiveUp.Classes.Core
 
         public void Update(GameTime gameTime)
         {
+
+
+            if (Mouse.GetState().LeftButton == ButtonState.Pressed)
+            {
+                this.Position = MouseHelper.Position;
+                this.Rectangle.X = (int)MouseHelper.Position.X;
+                this.Position.Y = (int)MouseHelper.Position.Y;
+            }
+
             Rectangle = Animation.Rectangle;
             Animation.AnimationSpeed = 150 - Math.Abs(Velocity.X * 30);
             InputHelper.Update();
@@ -144,6 +153,7 @@ namespace GiveUp.Classes.Core
                     }
                 }
             }
+
         }
 
         public void Die(Vector2 diePosition)
