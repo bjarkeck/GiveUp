@@ -65,10 +65,10 @@ namespace GiveUp.Classes.LevelManager
             }
 
             string str = "Challenge " + CurrentLevel;
-            spriteBatch.DrawString(font, str, new Vector2(50, 57), Color.White, 0, Vector2.Zero, 0.7f, SpriteEffects.None, 0);
+            spriteBatch.DrawString(font, str, new Vector2(50, 847), Color.Black, 0, Vector2.Zero, 0.7f, SpriteEffects.None, 0);
 
             str = "Level " + CurrentSubLevel;
-            spriteBatch.DrawString(font, str, new Vector2(50, 73), Color.White, 0, Vector2.Zero, 0.7f, SpriteEffects.None, 0);
+            spriteBatch.DrawString(font, str, new Vector2(50, 863), Color.Black, 0, Vector2.Zero, 0.7f, SpriteEffects.None, 0);
 
             if (PracticeRun == false)
             {

@@ -65,7 +65,7 @@ namespace GiveUp.Classes.GameObjects.Obstacles
                 this.cannonDirection = Vector2.Zero.AngleRadian(new Vector2(0, -1));
                 rotation = (float)cannonDirection;
                 dir = Direction.Top;
-                beamRect = new Rectangle((int)cannonPosition.X, (int)cannonPosition.Y - 900, (int)cannonPosition.X, 900);
+                beamRect = new Rectangle((int)cannonPosition.X, (int)cannonPosition.Y - 900, 2, 900);
                 GameLogic.IsLineOfSight(cannonPosition, new Vector2(cannonPosition.X, cannonPosition.Y - 900), ref range);
             }
             else if (GetAllGameObjects<BoxTile>().Any(x => x.Rectangle.X == position.X && x.Rectangle.Y == position.Y - 32))
