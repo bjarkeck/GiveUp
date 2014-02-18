@@ -302,6 +302,7 @@ namespace GiveUp.Classes.LevelManager
             Levels[CurrentSubLevel - 1] = lvl;
 
 
+<<<<<<< HEAD
 
             try
             {
@@ -311,7 +312,17 @@ namespace GiveUp.Classes.LevelManager
             catch
             {
             }
+=======
+            try
+            {
 
+            File.WriteAllText("./Content/Levels/" + CurrentLevel + "/" + CurrentSubLevel + ".txt", lvl);
+>>>>>>> 889c74bfa7b6f69dc8c2d9f9fbda420952dff561
+
+            }
+            catch (Exception)
+            {
+            }
         }
     }
 }

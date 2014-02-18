@@ -98,7 +98,6 @@ namespace GiveUp
             GraphicsDevice.Clear(Color.Black);
             spriteBatch.Begin(SpriteSortMode.Deferred, BlendState.NonPremultiplied, null, null, null, null, spriteScale);
             Game1.ScreenManager.Draw(spriteBatch);
-            
             spriteBatch.End();
 
             spriteBatch.Begin(SpriteSortMode.BackToFront, BlendState.Additive, null, null, null, null, spriteScale);
