@@ -25,4 +25,4 @@ G----------i---------N----i----------------------G
 G------------------------------------------------G
 G---S---------------------GGG--------------------G
 G-------------------------GGG--------------------G
-GGGGGGGGGGGGGGLLLLLLGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGG
+GGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGG

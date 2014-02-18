@@ -18,11 +18,12 @@ namespace GiveUp.Classes.GameObjects.Obstacles
         public Direction LastCollisionDirection = Direction.None;
         Texture2D texture { get; set; }
 
-        float speed = 2.5f;
+        int speed = 3;
         int direction = 1;
 
         Rectangle movingTileRectangle;
         List<Rectangle> allGameObjects;
+        List<Rectangle> movingTileObjects;
 
         public override void Initialize(ContentManager content, Vector2 position)
         {
@@ -35,7 +36,8 @@ namespace GiveUp.Classes.GameObjects.Obstacles
 
         public override void Update(GameTime gameTime)
         {
-            allGameObjects = GetAllGameObjects<GameObject>().Where(x => x.Equals(this) == false).Select(x => x.Rectangle).ToList();
+            allGameObjects = GetAllGameObjects<GameObject>().Where(x => x.GetType()!=typeof(HorizontalMovingTiles)).Select(x => x.Rectangle).ToList();
+            movingTileObjects = GetAllGameObjects<GameObject>().Where(x => x.GetType() == typeof(HorizontalMovingTiles)).Select(x => x.Rectangle).ToList();
             Position.X += speed * direction;
             Rectangle.X = (int)Position.X;
             //movingTileRectangle.X = (int)Position.X;
@@ -45,19 +47,13 @@ namespace GiveUp.Classes.GameObjects.Obstacles
         public override void CollisionLogic()
         {
             LastCollisionDirection = Direction.None;
-
-            if (HandleCollision.IsOnTopOf(ref Player.Rectangle, Rectangle, ref Player.Velocity, ref Player.Position))
+            bool isOnTopOf = HandleCollision.IsOnTopOf(ref Player.Rectangle, Rectangle, ref Player.Velocity, ref Player.Position);
+            if (isOnTopOf)
             {
                 LastCollisionDirection = Direction.Top;
                 Player.Position.X += (int)(speed * direction);
                 Player.CanJump = true;
-                Console.WriteLine("ja");
             }
-            else
-            {
-                Console.WriteLine("nej");
-            }
-
             if (HandleCollision.IsRightOf(ref Player.Rectangle, Rectangle, ref Player.Velocity, ref Player.Position))
             {
                 LastCollisionDirection = Direction.Right;
@@ -72,6 +68,16 @@ namespace GiveUp.Classes.GameObjects.Obstacles
             if (allGameObjects.Any(x => x.Intersects(Rectangle)))
             {
                 direction *= -1;
+
+                while (movingTileObjects.Any(x => x.X + 32 == Position.X && x.Y == Position.Y) || movingTileObjects.Any(x => x.X - 32 == Position.X && x.Y == Position.Y))
+                {
+                    
+                }
+
+                if (isOnTopOf)
+                {
+                    Player.Position.X += (int)((speed * direction) * 2);
+                }
             }
 
 
