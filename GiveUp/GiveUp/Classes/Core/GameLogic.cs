@@ -14,18 +14,22 @@ namespace GiveUp.Classes.Core
 {
     public static class GameLogic
     {
+        private static Dictionary<Color, Texture2D> textures = new Dictionary<Color, Texture2D>();
+
         public static Texture2D ColorTexture(Color color, SpriteBatch spriteBatch)
         {
-
-            Texture2D t = new Texture2D(spriteBatch.GraphicsDevice, 1, 1);
-            t.SetData(new Color[] { color});
-            return t;
+            if (!textures.ContainsKey(color))
+            {
+                Texture2D t = new Texture2D(spriteBatch.GraphicsDevice, 1, 1);
+                t.SetData(new Color[] { color });
+                textures.Add(color, t);
+            }
+            return textures[color];
         }
 
         public static string ToTime(this int ms)
         {
             return TimeSpan.FromMilliseconds(ms).ToString(@"mm\:ss\:fff");
-
         }
 
         public static double NextDouble(this Random rnd, double min, double max)

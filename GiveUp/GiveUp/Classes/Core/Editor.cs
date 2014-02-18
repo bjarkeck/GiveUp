@@ -38,6 +38,7 @@ namespace GiveUp.Classes.Core
                 obsticles.Add(i, (IGameObject)Activator.CreateInstance(item));
                 obsticles[i].Player = player;
                 obsticles[i].Initialize(content, new Vector2(i * 32, 930));
+                obsticles[i].InitialPosition = new Vector2(i * 32, 930);
                 i++;
             }
 
