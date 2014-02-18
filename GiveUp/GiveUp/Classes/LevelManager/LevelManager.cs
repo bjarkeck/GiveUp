@@ -301,7 +301,16 @@ namespace GiveUp.Classes.LevelManager
 
             Levels[CurrentSubLevel - 1] = lvl;
 
-            File.WriteAllText("./Content/Levels/" + CurrentLevel + "/" + CurrentSubLevel + ".txt", lvl);
+
+
+            try
+            {
+
+                File.WriteAllText("./Content/Levels/" + CurrentLevel + "/" + CurrentSubLevel + ".txt", lvl);
+            }
+            catch
+            {
+            }
 
         }
     }
