@@ -17,13 +17,13 @@ G-------------------------i---B-----i------------G
 G--------------------------GGGGGGGGG-------------G
 G-----------------------------------------------cG
 G-------------------^^---------------------------G
-G----------------GGGGGGGGG-----------------------G
+G-------------K--GGGGGGGGG-----------------------G
 G------------GMB--------------------------------BG
 G------^^----GM-----------------------^^^--------G
 G------GG----GM----------------------MGGGM-------G
 G-----GGG^--^GM----------------------MGGGM-------G
 G----GGGG^--^GM-----------BB---------MGGGM-------G
-G---GGK------------------^^^^------S-MGGGM-----K-G
+G---GGK---------B--------^^^^------S-MGGGM-^^--K-G
 GGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGG
 GGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGG
 GGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGG
