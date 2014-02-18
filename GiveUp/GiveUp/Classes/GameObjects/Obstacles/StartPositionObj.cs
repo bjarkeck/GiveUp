@@ -16,7 +16,7 @@ namespace GiveUp.Classes.GameObjects.Obstacles
         {
             if (Editor.IsEnable)
             {
-                spriteBatch.Draw(GameLogic.ColorTexture(Color.Green * 0.2f, spriteBatch), new Rectangle((int)InitialPosition.X, (int)InitialPosition.Y, 32, 32), Color.White);
+                spriteBatch.Draw(GameLogic.ColorTexture(Color.Green * 0.5f, spriteBatch), new Rectangle((int)InitialPosition.X, (int)InitialPosition.Y, 32, 32), Color.White);
             }
         }
     }

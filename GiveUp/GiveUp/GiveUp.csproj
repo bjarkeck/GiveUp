@@ -128,7 +128,6 @@
     <Compile Include="Classes\GameObjects\Obstacles\Laser.cs" />
     <Compile Include="Classes\GameObjects\Obstacles\Lava.cs" />
     <Compile Include="Classes\GameObjects\Obstacles\LowGravity.cs" />
-    <Compile Include="Classes\GameObjects\Obstacles\ReverseControls.cs" />
     <Compile Include="Classes\GameObjects\Obstacles\Sawblade.cs" />
     <Compile Include="Classes\GameObjects\Obstacles\Spike.cs" />
     <Compile Include="Classes\GameObjects\Obstacles\StartPositionObj.cs" />
