@@ -118,7 +118,7 @@ namespace GiveUp.Classes.Core
         {
 
 
-            if (Mouse.GetState().LeftButton == ButtonState.Pressed)
+            if (Mouse.GetState().RightButton == ButtonState.Pressed)
             {
                 this.Position = MouseHelper.Position;
                 this.Rectangle.X = (int)MouseHelper.Position.X;

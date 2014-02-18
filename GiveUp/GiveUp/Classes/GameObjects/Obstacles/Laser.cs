@@ -75,7 +75,7 @@ namespace GiveUp.Classes.GameObjects.Obstacles
                 this.cannonDirection = Vector2.Zero.AngleRadian(new Vector2(0, 1));
                 rotation = (float)cannonDirection;
                 dir = Direction.Bottom;
-                beamRect = new Rectangle((int)cannonPosition.X, (int)cannonPosition.Y, 2,  900);
+                beamRect = new Rectangle((int)cannonPosition.X, (int)cannonPosition.Y, 2, 900);
                 GameLogic.IsLineOfSight(cannonPosition, new Vector2(cannonPosition.X, cannonPosition.Y + 900), ref range);
             }
 
@@ -173,6 +173,11 @@ namespace GiveUp.Classes.GameObjects.Obstacles
         public override void Draw(SpriteBatch spriteBatch)
         {
             spriteBatch.Draw(texture, Rectangle, null, Color.Orange, rotation, Vector2.Zero, spriteEffect, 0f);
+
+            if (Editor.IsEnable)
+            {
+                spriteBatch.Draw(GameLogic.ColorTexture(Color.Orange * 0.5f, spriteBatch), new Rectangle((int)InitialPosition.X, (int)InitialPosition.Y, 32, 32), Color.White);
+            }
         }
 
         public override void DrawAdditive(SpriteBatch spriteBatch)

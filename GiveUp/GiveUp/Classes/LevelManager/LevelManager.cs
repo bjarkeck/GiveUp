@@ -117,6 +117,8 @@ namespace GiveUp.Classes.LevelManager
         {
             StartNextLevel(false);
         }
+        Dictionary<IGameObject, Vector2> go = new Dictionary<IGameObject, Vector2>();
+
 
         private void loadLevel(string p)
         {
@@ -131,7 +133,6 @@ namespace GiveUp.Classes.LevelManager
             Player.CanJump = true;
             GridManager.LoadLevel(p);
 
-            Dictionary<IGameObject, Vector2> go = new Dictionary<IGameObject, Vector2>();
 
             foreach (var unassigendTile in GridManager.UnassignedTiles)
             {
@@ -151,6 +152,7 @@ namespace GiveUp.Classes.LevelManager
                         IGameObject obj = (IGameObject)gameObject.Select(x => Activator.CreateInstance(x)).First();
                         GameObjects.Add(obj);
                         obj.Player = Player;
+                        obj.InitialPosition = position;
                         go.Add(obj, position);
                     }
                 }
@@ -243,5 +245,62 @@ namespace GiveUp.Classes.LevelManager
 
         public bool changeLevel { get; set; }
 
+        public bool IsOccupied(Vector2 position)
+        {
+            return GameObjects.Any(x => x.InitialPosition.X == position.X && x.InitialPosition.Y == position.Y);
+        }
+
+        internal void AddObsticle(IGameObject gameObject, Vector2 position, bool add)
+        {
+            if (add)
+            {
+                if (!IsOccupied(position))
+                {
+                    IGameObject obj = (IGameObject)Activator.CreateInstance(gameObject.GetType());
+                    GameObjects.Add(obj);
+                    obj.Player = Player;
+                    obj.InitialPosition = position;
+                    obj.Initialize(Content, position);
+                    go.Add(obj, position);
+                }
+            }
+            else
+            {
+                var goo = GameObjects.FirstOrDefault(x => x.InitialPosition.X == position.X && x.InitialPosition.Y == position.Y);
+                if (goo != null)
+                {
+                    GameObjects.Remove(goo);
+                    var goar = go.First(x => x.Value.X == position.X && x.Value.Y == position.Y);
+                    go.Remove(goar.Key);
+                }
+            }
+
+        }
+
+        public void SaveChanges()
+        {
+
+            string lvl = "";
+
+            char[,] lvlData = new char[150, 150];
+
+
+            foreach (var item in GameObjects.OrderBy(x => x.InitialPosition.Y))
+            {
+                lvlData[(int)(item.InitialPosition.X / 32), (int)(item.InitialPosition.Y / 32)] = (char)(item.GetType().GetField("TileChar").GetValue(item));
+            }
+
+            for (int y = 0; y < lvlData.GetLength(1); y++)
+            {
+                for (int x = 0; x < lvlData.GetLength(0); x++)
+                {
+                    lvl += lvlData[x, y] ;
+                }
+                lvl += Environment.NewLine;
+            }
+
+            File.WriteAllText("./Content/Levels/" + CurrentLevel + "/" + CurrentSubLevel + ".txt", lvl);
+
+        }
     }
 }

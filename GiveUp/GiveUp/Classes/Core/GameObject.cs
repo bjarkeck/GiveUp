@@ -12,6 +12,7 @@ using System.Text;
 public class GameObject
 {
     public Rectangle Rectangle;
+    public Vector2 InitialPosition { get; set; }
 
     public IEnumerable<T> GetAllGameObjects<T>()
     {
@@ -54,4 +55,5 @@ public class GameObject
     public virtual void Draw(SpriteBatch spriteBatch)
     {
     }
+
 }

@@ -29,7 +29,6 @@ namespace GiveUp.Classes.GameObjects.Obstacles
             texturess.Add(new ParticleTexture(content.Load<Texture2D>("Images/Particles/beamParticleHorisontal"), new Color(Color.Yellow, 0.4f), new Color(Color.Orange, 0f), 0.2f, 0.1f, true));
             texturess.Add(new ParticleTexture(content.Load<Texture2D>("Images/Particles/beamParticleHorisontal"), new Color(Color.Yellow, 0.4f), new Color(Color.Orange, 0f), 0.02f, 0.02f, true));
 
-
             List<ParticleTexture> textures = new List<ParticleTexture>();
             textures.Add(new ParticleTexture(content.Load<Texture2D>("Images/Particles/smoke_particle"), new Color(Color.Red, 0.4f), new Color(Color.Yellow, 0f), 0.5f, 0.1f, true));
             textures.Add(new ParticleTexture(content.Load<Texture2D>("Images/Particles/smoke_particle"), new Color(Color.Yellow, 0.4f), new Color(Color.Orange, 0f), 0.3f, 0.1f, true));
@@ -103,9 +102,6 @@ namespace GiveUp.Classes.GameObjects.Obstacles
 
 
 
-
-
-
             particleManager.ParticleEmitters["laser"].RotationSpeed = new Range<float>(rotation);
             particleManager.ParticleEmitters["laser"].MaxNumberOfParitcles = (int)tempDistance * 50;
             particleManager.ParticleEmitters["laser"].ParticlesPerSeccond = (int)tempDistance * 20;
@@ -117,6 +113,13 @@ namespace GiveUp.Classes.GameObjects.Obstacles
             particleManager.DrawAdditive(spriteBatch);
         }
 
+        public override void Draw(SpriteBatch spriteBatch)
+        {
+            if (Editor.IsEnable)
+            {
+                spriteBatch.Draw(GameLogic.ColorTexture(Color.Orange * 0.5f, spriteBatch), new Rectangle((int)InitialPosition.X, (int)InitialPosition.Y, 32, 32), Color.White);
+            }
+        }
         public int MyProperty { get; set; }
 
     }

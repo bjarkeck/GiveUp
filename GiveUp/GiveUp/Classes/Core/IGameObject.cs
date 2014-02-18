@@ -12,6 +12,7 @@ public interface IGameObject
 
     Player Player { get; set; }
 
+    Vector2 InitialPosition { get; set; }
 
     void Initialize(ContentManager content, Vector2 position);
 

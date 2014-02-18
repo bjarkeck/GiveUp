@@ -23,7 +23,6 @@ namespace GiveUp
         GraphicsDeviceManager graphics;
         SpriteBatch spriteBatch;
         Matrix spriteScale { get; set; }
-
         public static bool ExitGame = false;
         public static ScreenManager ScreenManager;
 
@@ -50,7 +49,7 @@ namespace GiveUp
             Game1.ScreenManager = new ScreenManager(Content);
 
             spriteBatch = new SpriteBatch(GraphicsDevice);
-            spriteScale = Matrix.CreateScale(GraphicsAdapter.DefaultAdapter.CurrentDisplayMode.Width / 1600f, GraphicsAdapter.DefaultAdapter.CurrentDisplayMode.Height / 900f, 1);
+            spriteScale = Matrix.CreateScale(GraphicsAdapter.DefaultAdapter.CurrentDisplayMode.Width / 1600f, GraphicsAdapter.DefaultAdapter.CurrentDisplayMode.Height / (Editor.IsEnable ? 1000f : 900f), 1);
         }
         
         protected override void UnloadContent()
@@ -90,7 +89,7 @@ namespace GiveUp
             {
                 this.Exit();
             }
-            
+
             base.Update(gameTime);
         }
 
@@ -99,11 +98,13 @@ namespace GiveUp
             GraphicsDevice.Clear(Color.Black);
             spriteBatch.Begin(SpriteSortMode.Deferred, BlendState.NonPremultiplied, null, null, null, null, spriteScale);
             Game1.ScreenManager.Draw(spriteBatch);
+            
             spriteBatch.End();
 
             spriteBatch.Begin(SpriteSortMode.BackToFront, BlendState.Additive, null, null, null, null, spriteScale);
             Game1.ScreenManager.DrawAdditive(spriteBatch);
             spriteBatch.End();
+
 
             base.Draw(gameTime);
         }

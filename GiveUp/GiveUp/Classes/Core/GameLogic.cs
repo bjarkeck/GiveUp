@@ -14,6 +14,13 @@ namespace GiveUp.Classes.Core
 {
     public static class GameLogic
     {
+        public static Texture2D ColorTexture(Color color, SpriteBatch spriteBatch)
+        {
+
+            Texture2D t = new Texture2D(spriteBatch.GraphicsDevice, 1, 1);
+            t.SetData(new Color[] { color});
+            return t;
+        }
 
         public static string ToTime(this int ms)
         {

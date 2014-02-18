@@ -1,4 +1,5 @@
-﻿using Microsoft.Xna.Framework;
+﻿using GiveUp.Classes.Core;
+using Microsoft.Xna.Framework;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -15,6 +16,14 @@ namespace GiveUp.Classes.GameObjects.Obstacles
        {
            this.Rectangle = new Rectangle((int)position.X, (int)position.Y, 32, 32);
 
+       }
+
+       public override void Draw(Microsoft.Xna.Framework.Graphics.SpriteBatch spriteBatch)
+       {
+           if (Editor.IsEnable)
+           {
+               spriteBatch.Draw(GameLogic.ColorTexture(Color.Red * 0.5f, spriteBatch), new Rectangle((int)InitialPosition.X, (int)InitialPosition.Y, 32, 32), Color.White);
+           }
        }
     }
 }

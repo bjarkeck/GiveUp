@@ -83,12 +83,17 @@ namespace GiveUp.Classes.GameObjects.Obstacles
                 }
             }
         }
-        
+
         public override void Draw(SpriteBatch spriteBatch)
         {
             foreach (var x in bullets)
                 x.Draw(spriteBatch);
             spriteBatch.Draw(bodyTexture, Rectangle, null, Color.White, rotation, Vector2.Zero, spriteEffect, 0f);
+
+            if (Editor.IsEnable)
+            {
+                spriteBatch.Draw(GameLogic.ColorTexture(Color.Yellow * 0.5f, spriteBatch), new Rectangle((int)InitialPosition.X, (int)InitialPosition.Y, 32, 32), Color.White);
+            }
         }
 
 

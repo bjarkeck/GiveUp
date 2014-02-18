@@ -96,6 +96,7 @@
   <ItemGroup>
     <Compile Include="Classes\Core\Button.cs" />
     <Compile Include="Classes\Core\Direction.cs" />
+    <Compile Include="Classes\Core\Editor.cs" />
     <Compile Include="Classes\Core\MouseHelper.cs" />
     <Compile Include="Classes\Core\Particle.cs" />
     <Compile Include="Classes\Core\ParticleTexture.cs" />
@@ -107,7 +108,6 @@
     <Compile Include="Classes\GameObjects\ButtonActivator.cs" />
     <Compile Include="Classes\GameObjects\GooTile.cs" />
     <Compile Include="Classes\GameObjects\Obstacles\AimingLaser.cs" />
-    <Compile Include="Classes\GameObjects\Obstacles\Drag.cs" />
     <Compile Include="Classes\Core\GameLogic.cs" />
     <Compile Include="Classes\Core\GameObject.cs" />
     <Compile Include="Classes\Core\HandleCollision.cs" />
@@ -131,6 +131,7 @@
     <Compile Include="Classes\GameObjects\Obstacles\ReverseControls.cs" />
     <Compile Include="Classes\GameObjects\Obstacles\Sawblade.cs" />
     <Compile Include="Classes\GameObjects\Obstacles\Spike.cs" />
+    <Compile Include="Classes\GameObjects\Obstacles\StartPositionObj.cs" />
     <Compile Include="Classes\GameObjects\Obstacles\Testicle.cs" />
     <Compile Include="Classes\GameObjects\Tiles\BoxTile.cs" />
     <Compile Include="Classes\LevelManager\LevelManager.cs" />

@@ -20,6 +20,7 @@ namespace GiveUp.Classes.Screens
 
         int levelId = 1;
         int subLevelId = 1;
+        Editor editor;
 
 
         public GameScreen(bool pricticeRun = false, int levelId = 1, int subLevelId = 1)
@@ -27,7 +28,6 @@ namespace GiveUp.Classes.Screens
             this.practiceRun = pricticeRun;
             this.levelId = levelId;
             this.subLevelId = subLevelId;
-
             player = new Player();
             LevelManager = new LevelManagerr(player, pricticeRun);
         }
@@ -36,15 +36,13 @@ namespace GiveUp.Classes.Screens
         {
             //Det her er åbenbart nødvendigt??
             if (practiceRun)
-            {
                 LevelManager.StartLevel(levelId, subLevelId);
-            }
             else
-            {
                 LevelManager.StartLevel(levelId, subLevelId);
-            }
+
             player.LoadContent(Content);
             font = Content.Load<SpriteFont>("Fonts/font");
+            editor = new Editor(Content);
         }
 
         public override void Update(GameTime gameTime)
@@ -56,6 +54,7 @@ namespace GiveUp.Classes.Screens
             {
                 ScreenManager.Current.LoadScreen(new MenuSubLevelScreen(levelId));
             }
+            editor.Update();
         }
 
         public override void Draw(SpriteBatch spriteBatch)
@@ -63,6 +62,8 @@ namespace GiveUp.Classes.Screens
             LevelManager.Draw(spriteBatch);
             player.Draw(spriteBatch);
             spriteBatch.DrawString(font, "test", new Vector2(200, 200), Color.Black);
+            editor.Draw(spriteBatch);
+            
         }
 
 
