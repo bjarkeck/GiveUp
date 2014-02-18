@@ -299,21 +299,12 @@ namespace GiveUp.Classes.LevelManager
                 lvl += Environment.NewLine;
             }
 
-            Levels[CurrentSubLevel - 1] = lvl;
-
-
+            Levels[CurrentSubLevel] = lvl;
 
             try
             {
-
                 File.WriteAllText("./Content/Levels/" + CurrentLevel + "/" + CurrentSubLevel + ".txt", lvl);
-            }
-            catch
-            {
-            }
-            try
-            {
-            File.WriteAllText("./Content/Levels/" + CurrentLevel + "/" + CurrentSubLevel + ".txt", lvl);
+                File.WriteAllText("../../../Content/Levels/" + CurrentLevel + "/" + CurrentSubLevel + ".txt", lvl);
             }
             catch (Exception)
             {
