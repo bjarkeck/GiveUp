@@ -282,7 +282,7 @@ namespace GiveUp.Classes.LevelManager
 
             string lvl = "";
 
-            char[,] lvlData = new char[150, 150];
+            char[,] lvlData = new char[70, 70];
 
 
             foreach (var item in GameObjects.OrderBy(x => x.InitialPosition.Y))
@@ -294,7 +294,7 @@ namespace GiveUp.Classes.LevelManager
             {
                 for (int x = 0; x < lvlData.GetLength(0); x++)
                 {
-                    lvl += lvlData[x, y] ;
+                    lvl += (lvlData[x, y] == default(char) ? '-' : lvlData[x, y]);
                 }
                 lvl += Environment.NewLine;
             }
@@ -303,8 +303,8 @@ namespace GiveUp.Classes.LevelManager
 
             try
             {
-                File.WriteAllText("./Content/Levels/" + CurrentLevel + "/" + CurrentSubLevel + ".txt", lvl);
-                File.WriteAllText("../../../Content/Levels/" + CurrentLevel + "/" + CurrentSubLevel + ".txt", lvl);
+                File.WriteAllText("./Content/Levels/" + CurrentLevel + "/" + CurrentSubLevel + ".txt", lvl, Encoding.UTF8);
+                File.WriteAllText("../../../Content/Levels/" + CurrentLevel + "/" + CurrentSubLevel + ".txt", lvl, Encoding.UTF8);
             }
             catch (Exception)
             {

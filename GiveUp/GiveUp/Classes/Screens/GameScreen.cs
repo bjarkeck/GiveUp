@@ -20,7 +20,7 @@ namespace GiveUp.Classes.Screens
 
         int levelId = 1;
         int subLevelId = 1;
-        Editor editor;
+        private static Editor editor;
 
 
         public GameScreen(bool pricticeRun = false, int levelId = 1, int subLevelId = 1)
@@ -42,7 +42,9 @@ namespace GiveUp.Classes.Screens
 
             player.LoadContent(Content);
             font = Content.Load<SpriteFont>("Fonts/font");
-            editor = new Editor(Content);
+
+            if (editor == null)
+                editor = new Editor(Content);
         }
 
         public override void Update(GameTime gameTime)
