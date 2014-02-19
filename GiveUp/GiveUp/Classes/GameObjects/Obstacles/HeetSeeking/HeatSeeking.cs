@@ -53,7 +53,7 @@ namespace GiveUp.Classes.GameObjects.Obstacles
             else if (GetAllGameObjects<BoxTile>().Any(x => x.Rectangle.X == position.X && x.Rectangle.Y == position.Y - 32))
             {
                 this.Rectangle = new Rectangle((int)position.X + 32, (int)position.Y - 6, 19, 32);
-                this.cannonPosition = new Vector2(Rectangle.X - 15, Rectangle.Y + 6);
+                this.cannonPosition = new Vector2(Rectangle.X - 15, Rectangle.Y + 8);
                 this.cannonDirection = Vector2.Zero.AngleRadian(new Vector2(0, 1));
                 rotation = (float)cannonDirection;
             }

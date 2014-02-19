@@ -94,14 +94,6 @@ namespace GiveUp.Classes.GameObjects.Obstacles
 
 
 
-
-
-
-
-
-
-
-
             particleManager.ParticleEmitters["laser"].RotationSpeed = new Range<float>(rotation);
             particleManager.ParticleEmitters["laser"].MaxNumberOfParitcles = (int)tempDistance * 50;
             particleManager.ParticleEmitters["laser"].ParticlesPerSeccond = (int)tempDistance * 20;
