@@ -18,33 +18,39 @@ namespace GiveUp.Classes.GameObjects.Obstacles
         public Direction LastCollisionDirection = Direction.None;
         Texture2D texture { get; set; }
 
-        int speed = 3;
-        int direction = 1;
+        int speed = 2;
+        public int direction = 1;
 
         Rectangle movingTileRectangle;
         List<Rectangle> allGameObjects;
-        List<Rectangle> movingTileObjects;
+        List<HorizontalMovingTiles> movingTileObjects;
 
         public override void Initialize(ContentManager content, Vector2 position)
         {
             Position = new Vector2(position.X, position.Y);
-            texture = content.Load<Texture2D>("Images/Tiles/ground");
-            Rectangle = new Rectangle((int)position.X, (int)position.Y, 32, 32);
-            //movingTileRectangle = new Rectangle((int)position.X, (int)position.Y, 32, 32);
+            texture = content.Load<Texture2D>("Images/Obstacles/movingTile");
+            Rectangle = new Rectangle((int)position.X, (int)position.Y + 32 - 6, 32, 6);
+
         }
 
 
         public override void Update(GameTime gameTime)
         {
-            allGameObjects = GetAllGameObjects<GameObject>().Where(x => x.GetType()!=typeof(HorizontalMovingTiles)).Select(x => x.Rectangle).ToList();
-            movingTileObjects = GetAllGameObjects<GameObject>().Where(x => x.GetType() == typeof(HorizontalMovingTiles)).Select(x => x.Rectangle).ToList();
+
+            allGameObjects = GetAllGameObjects<GameObject>().Where(x => x.GetType() != typeof(HorizontalMovingTiles)).Select(x => x.Rectangle).ToList();
+            movingTileObjects = GetAllGameObjects<GameObject>().Where(x => x.GetType() == typeof(HorizontalMovingTiles)).Select(x => (HorizontalMovingTiles)x).ToList();
+
+            CollisionLogicc(gameTime);
+
             Position.X += speed * direction;
             Rectangle.X = (int)Position.X;
             //movingTileRectangle.X = (int)Position.X;
 
         }
 
-        public override void CollisionLogic()
+        private int prevDirection = 1;
+
+        public void CollisionLogicc(GameTime gameTime)
         {
             LastCollisionDirection = Direction.None;
             bool isOnTopOf = HandleCollision.IsOnTopOf(ref Player.Rectangle, Rectangle, ref Player.Velocity, ref Player.Position);
@@ -54,38 +60,65 @@ namespace GiveUp.Classes.GameObjects.Obstacles
                 Player.Position.X += (int)(speed * direction);
                 Player.CanJump = true;
             }
-            if (HandleCollision.IsRightOf(ref Player.Rectangle, Rectangle, ref Player.Velocity, ref Player.Position))
-            {
-                LastCollisionDirection = Direction.Right;
-            }
-            if (HandleCollision.IsLeftOf(ref Player.Rectangle, Rectangle, ref Player.Velocity, ref Player.Position))
-            {
-                LastCollisionDirection = Direction.Left;
-            }
-            if (HandleCollision.IsBelowOf(ref Player.Rectangle, Rectangle, ref Player.Velocity, ref Player.Position))
-                LastCollisionDirection = Direction.Bottom;
 
             if (allGameObjects.Any(x => x.Intersects(Rectangle)))
             {
                 direction *= -1;
 
-                while (movingTileObjects.Any(x => x.X + 32 == Position.X && x.Y == Position.Y) || movingTileObjects.Any(x => x.X - 32 == Position.X && x.Y == Position.Y))
+                //Find alle moving tiles til højre, og stop while loopet hvis der ikke findes nogen til højre.
+                float currentX = this.InitialPosition.X;
+                while (true)
                 {
-                    
+                    HorizontalMovingTiles rightTile = movingTileObjects.FirstOrDefault(x => x.InitialPosition.X == currentX + 32 && x.InitialPosition.Y == this.InitialPosition.Y);
+                    if (rightTile == null)
+                        break;
+                    else
+                    {
+                        rightTile.direction *= -1;
+
+                    }
+
+                    currentX += 32;
+                }
+
+                //Find alle moving tiles til venstre, og stop while loopet hvis der ikke findes nogen til venstre.
+                currentX = this.InitialPosition.X;
+                while (true)
+                {
+                    HorizontalMovingTiles leftTile = movingTileObjects.FirstOrDefault(x => x.InitialPosition.X == currentX - 32 && x.InitialPosition.Y == this.InitialPosition.Y);
+                    if (leftTile == null)
+                        break;
+                    else
+                    {
+                        leftTile.direction *= -1;
+
+                        if (direction < 0)
+                        {
+                            leftTile.Update(gameTime);
+                            leftTile.Update(gameTime);
+                        }
+                    }
+                    currentX -= 32;
                 }
 
                 if (isOnTopOf)
                 {
+                    if (prevDirection != direction)
+                    {
+                        Player.Position.X += (int)((speed * direction) * 2);
+
+                    }
                     Player.Position.X += (int)((speed * direction) * 2);
                 }
             }
 
+            prevDirection = direction;
 
         }
 
         public override void Draw(SpriteBatch spriteBatch)
         {
-            spriteBatch.Draw(texture, Rectangle, Color.White);
+            spriteBatch.Draw(texture, new Rectangle(Rectangle.X, Rectangle.Y - 32 + 6, Rectangle.Width, 32), Color.White);
         }
     }
 }
