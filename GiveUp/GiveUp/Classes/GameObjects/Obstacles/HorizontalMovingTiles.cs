@@ -118,6 +118,11 @@ namespace GiveUp.Classes.GameObjects.Obstacles
 
         public override void Draw(SpriteBatch spriteBatch)
         {
+            
+            if (Editor.IsEnable)
+            {
+                spriteBatch.Draw(GameLogic.ColorTexture(Color.Aqua * 0.4f, spriteBatch), new Rectangle((int)InitialPosition.X, (int)InitialPosition.Y, 32, 32), Color.White);
+            }
             spriteBatch.Draw(texture, new Rectangle(Rectangle.X, Rectangle.Y - 32 + 6, Rectangle.Width, 32), Color.White);
         }
     }
