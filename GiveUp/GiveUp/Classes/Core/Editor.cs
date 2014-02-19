@@ -16,7 +16,7 @@ namespace GiveUp.Classes.Core
     {
         public static bool IsEnable = true;
 
-        private int selectedTile = 0;
+        private int selectedTile = -1;
         public LevelManagerr LevelManager
         {
             get
@@ -81,7 +81,8 @@ namespace GiveUp.Classes.Core
                         }
                         IsAddOrRemoveDefined = false;
                     }
-                    LevelManager.AddObsticle(obsticles[selectedTile],  new Vector2(grid.X * 32, grid.Y * 32), add);
+                    if (selectedTile != -1)
+                        LevelManager.AddObsticle(obsticles[selectedTile],  new Vector2(grid.X * 32, grid.Y * 32), add);
                 }
 
 
@@ -118,8 +119,8 @@ namespace GiveUp.Classes.Core
 
         public void Draw(SpriteBatch spriteBatch)
         {
-
-            spriteBatch.Draw(GameLogic.ColorTexture(Color.Green, spriteBatch), new Rectangle(selectedTile * 32, 965, 32, 5), Color.White);
+            if (selectedTile != -1)
+                spriteBatch.Draw(GameLogic.ColorTexture(Color.Green, spriteBatch), new Rectangle(selectedTile * 32, 965, 32, 5), Color.White);
 
             foreach (var item in obsticles)
                 item.Value.Draw(spriteBatch);
