@@ -54,10 +54,11 @@ namespace GiveUp.Classes.Core
         {
 
 
+            if (Keyboard.GetState().IsKeyDown(Keys.F) || Keyboard.GetState().IsKeyDown(Keys.R))
+                LevelManager.SaveChanges();
+
             if (Keyboard.GetState().IsKeyDown(Keys.R))
                 LevelManager.RestartLevel();
-            if (Keyboard.GetState().IsKeyDown(Keys.R))
-                LevelManager.SaveChanges();
 
             if (Mouse.GetState().LeftButton == ButtonState.Pressed)
             {
