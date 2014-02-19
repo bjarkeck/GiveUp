@@ -16,7 +16,6 @@ namespace GiveUp.Classes.Screens
     {
         public LevelManagerr LevelManager;
         Player player;
-        SpriteFont font;
 
         int levelId = 1;
         int subLevelId = 1;
@@ -41,7 +40,6 @@ namespace GiveUp.Classes.Screens
                 LevelManager.StartLevel(levelId, subLevelId);
 
             player.LoadContent(Content);
-            font = Content.Load<SpriteFont>("Fonts/font");
 
             if (editor == null)
                 editor = new Editor(Content);
@@ -63,18 +61,15 @@ namespace GiveUp.Classes.Screens
         {
             LevelManager.Draw(spriteBatch);
             player.Draw(spriteBatch);
-            spriteBatch.DrawString(font, "test", new Vector2(200, 200), Color.Black);
             editor.Draw(spriteBatch);
             
         }
-
 
         public override void DrawAdditive(SpriteBatch spriteBatch)
         {
             LevelManager.DrawAdditive(spriteBatch);
             player.DrawAdditive(spriteBatch);
         }
-
 
         public bool practiceRun { get; set; }
     }
