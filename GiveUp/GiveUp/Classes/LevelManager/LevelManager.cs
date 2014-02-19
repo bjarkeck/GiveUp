@@ -299,7 +299,7 @@ namespace GiveUp.Classes.LevelManager
                 lvl += Environment.NewLine;
             }
 
-            Levels[CurrentSubLevel] = lvl;
+            Levels[CurrentSubLevel - 1] = lvl;
 
             try
             {
