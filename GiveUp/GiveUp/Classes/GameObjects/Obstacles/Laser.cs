@@ -38,7 +38,7 @@ namespace GiveUp.Classes.GameObjects.Obstacles
             this.texture = content.Load<Texture2D>("Images/Obstacles/HeatSeeking/body");
 
             timer = r.Next(0, timeBeforeBeem + timeBeamDuration);
-
+            //Sigt til højre
             if (GetAllGameObjects<BoxTile>().Any(x => x.Rectangle.X == position.X - 32 && x.Rectangle.Y == position.Y))
             {
                 this.Rectangle = new Rectangle((int)position.X - 6, (int)position.Y, 19, 32);
@@ -47,7 +47,9 @@ namespace GiveUp.Classes.GameObjects.Obstacles
                 dir = Direction.Right;
                 beamRect = new Rectangle((int)cannonPosition.X, (int)cannonPosition.Y, (int)cannonPosition.X + 1600, 2);
                 GameLogic.IsLineOfSight(cannonPosition, new Vector2(cannonPosition.X + 1600, cannonPosition.Y), ref range);
+                beamRect.Width = (int)range;
             }
+            //Sigt til vinstre
             else if (GetAllGameObjects<BoxTile>().Any(x => x.Rectangle.X == position.X + 32 && x.Rectangle.Y == position.Y))
             {
                 this.Rectangle = new Rectangle((int)position.X + 32 - 13, (int)position.Y, 19, 32);
@@ -57,6 +59,8 @@ namespace GiveUp.Classes.GameObjects.Obstacles
                 dir = Direction.Left;
                 beamRect = new Rectangle((int)cannonPosition.X - 1600, (int)cannonPosition.Y, 1600, 2);
                 GameLogic.IsLineOfSight(cannonPosition, new Vector2(cannonPosition.X - 1600, cannonPosition.Y), ref range);
+                beamRect.Width = (int)range;
+                beamRect.X = (int)cannonPosition.X - (int)range;
             }
             else if (GetAllGameObjects<BoxTile>().Any(x => x.Rectangle.X == position.X && x.Rectangle.Y == position.Y + 32))
             {
@@ -67,6 +71,8 @@ namespace GiveUp.Classes.GameObjects.Obstacles
                 dir = Direction.Top;
                 beamRect = new Rectangle((int)cannonPosition.X, (int)cannonPosition.Y - 900, 2, 900);
                 GameLogic.IsLineOfSight(cannonPosition, new Vector2(cannonPosition.X, cannonPosition.Y - 900), ref range);
+                beamRect.Height = (int)range;
+                beamRect.Y = (int)cannonPosition.Y - (int)range;
             }
             else if (GetAllGameObjects<BoxTile>().Any(x => x.Rectangle.X == position.X && x.Rectangle.Y == position.Y - 32))
             {
@@ -77,12 +83,15 @@ namespace GiveUp.Classes.GameObjects.Obstacles
                 dir = Direction.Bottom;
                 beamRect = new Rectangle((int)cannonPosition.X, (int)cannonPosition.Y, 2, 900);
                 GameLogic.IsLineOfSight(cannonPosition, new Vector2(cannonPosition.X, cannonPosition.Y + 900), ref range);
+                beamRect.Height = (int)range;
+
             }
 
             range -= 15;
 
             if (range < 0)
                 range = 1;
+
 
             addParticles(content);
         }
