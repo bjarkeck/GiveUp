@@ -95,7 +95,11 @@ namespace GiveUp.Classes.LevelManager
             CurrentLevel = level;
             DirectoryInfo dir = new DirectoryInfo("./Content/Levels/" + level);
             foreach (FileInfo file in dir.GetFiles().Where(x => x.Extension.ToLower().Contains("txt")).OrderBy(x => x.Name))
-                Levels.Add(file.OpenText().ReadToEnd());
+            {
+                var asdf = file.OpenText();
+                Levels.Add(asdf.ReadToEnd());
+                asdf.Close();
+            }
 
             StartNextLevel();
         }
@@ -306,8 +310,9 @@ namespace GiveUp.Classes.LevelManager
                 File.WriteAllText("./Content/Levels/" + CurrentLevel + "/" + CurrentSubLevel + ".txt", lvl, Encoding.UTF8);
                 File.WriteAllText("../../../Content/Levels/" + CurrentLevel + "/" + CurrentSubLevel + ".txt", lvl, Encoding.UTF8);
             }
-            catch (Exception)
+            catch (Exception ex)
             {
+
             }
         }
     }
