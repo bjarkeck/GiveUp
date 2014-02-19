@@ -43,11 +43,6 @@ namespace GiveUp.Classes.Core
             }
 
 
-            if (Keyboard.GetState().IsKeyDown(Keys.R))
-                LevelManager.RestartLevel();
-            if (Keyboard.GetState().IsKeyDown(Keys.R))
-                LevelManager.SaveChanges();
-
 
 
         }
@@ -58,6 +53,11 @@ namespace GiveUp.Classes.Core
         public void Update()
         {
 
+
+            if (Keyboard.GetState().IsKeyDown(Keys.R))
+                LevelManager.RestartLevel();
+            if (Keyboard.GetState().IsKeyDown(Keys.R))
+                LevelManager.SaveChanges();
 
             if (Mouse.GetState().LeftButton == ButtonState.Pressed)
             {
