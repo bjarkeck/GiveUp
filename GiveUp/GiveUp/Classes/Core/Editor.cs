@@ -43,6 +43,13 @@ namespace GiveUp.Classes.Core
             }
 
 
+            if (Keyboard.GetState().IsKeyDown(Keys.R))
+                LevelManager.RestartLevel();
+            if (Keyboard.GetState().IsKeyDown(Keys.R))
+                LevelManager.SaveChanges();
+
+
+
         }
         public bool IsAddOrRemoveDefined = false;
         public bool add = false;
