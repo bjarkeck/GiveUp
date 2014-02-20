@@ -22,7 +22,7 @@ G^MGG-------------------G-------------------DG^-MG--------------------
 G-MGG-------------------GGGGGGGGGGGGGGGGGGGGGG^-MG--------------------
 G-SGG--------------------------------------------G--------------------
 G--GG-------------------------------------^------G--------------------
-GGGGG^-----NNN---------^G^--NNN----------^G^---NNG--------------------
+GGGGG^-----NNN---------^G^--NNN----------^G^NN--^G--------------------
 GGGGGLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLG--------------------
 GGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGG--------------------
 GGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGG-------------------
