@@ -15,13 +15,13 @@ G---------------------------G---------^G^---eG--MG--------------------
 G---------------------------GLLLLLLLGLLG^^K^^G---G--------------------
 G----S---------G---B----G---GGGGGGGGGGGGGGGGGGM--G--------------------
 GGGGGG---------G--------G---Ge------^---^---^---MG--------------------
-GGGGGG---------G--K-----G^--G---------^---^-----MG--------------------
-GGGGGG---------G--------G^--^---^GGGGGGGGGGGGGG-GG--------------------
+GGGGGG---------G--K-----G^--^---------^---^-----MG--------------------
+GGGGGG---------G--------G^------^GGGGGGGGGGGGGG-GG--------------------
 GGGGGG---------G--------G^------^G------------G-GG--------------------
 GGGGGG---------G--------G^------^G--^^-----------G--------------------
 GGGGGG---------G--------G^^^^^^^^G--GGGGGG-BMG---G--------------------
 GGGGGG------BGGG--------GGGGGGGGGG---GG-GG-BMG---G--------------------
-GGGGGG-------^^G--------GGGGGGGGGGGG-G---G--MG---G--------------------
+GGGGGG-----^-^^G--------GGGGGGGGGGGG-G---G--MG---G--------------------
 GGGGGG---------G^^^^^^^^Gl-K-----------^----MGLLLG--------------------
 GGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGG--------------------
 GGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGG--------------------
