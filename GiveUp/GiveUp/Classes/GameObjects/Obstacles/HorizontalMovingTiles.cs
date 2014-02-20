@@ -29,7 +29,7 @@ namespace GiveUp.Classes.GameObjects.Obstacles
         {
             Position = new Vector2(position.X, position.Y);
             texture = content.Load<Texture2D>("Images/Obstacles/movingTile");
-            Rectangle = new Rectangle((int)position.X, (int)position.Y + 32 - 6, 32, 6);
+            Rectangle = new Rectangle((int)position.X, (int)position.Y + 32, 32, 6);
 
         }
 
@@ -61,7 +61,7 @@ namespace GiveUp.Classes.GameObjects.Obstacles
                 Player.CanJump = true;
             }
 
-            if (allGameObjects.Any(x => x.Intersects(Rectangle)))
+            if (allGameObjects.Any(x => x.Intersects(new Rectangle(Rectangle.X, Rectangle.Y - 4, Rectangle.Width, Rectangle.Height))))
             {
                 direction *= -1;
 
