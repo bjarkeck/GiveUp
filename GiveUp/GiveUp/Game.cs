@@ -15,9 +15,6 @@ using GiveUp.Classes.Db;
 
 namespace GiveUp
 {
-
-    // Bjarke test
-    
     public class Game1 : Game
     {
         GraphicsDeviceManager graphics;
@@ -40,8 +37,6 @@ namespace GiveUp
         {
             base.Initialize();
         }
-
-        // HEJ
 
         protected override void LoadContent()
         {
@@ -104,10 +99,7 @@ namespace GiveUp
             Game1.ScreenManager.DrawAdditive(spriteBatch);
             spriteBatch.End();
 
-
             base.Draw(gameTime);
         }
-
-
     }
 }
