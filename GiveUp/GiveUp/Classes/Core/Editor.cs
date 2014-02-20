@@ -42,9 +42,6 @@ namespace GiveUp.Classes.Core
                 i++;
             }
 
-
-
-
         }
         public bool IsAddOrRemoveDefined = false;
         public bool add = false;
