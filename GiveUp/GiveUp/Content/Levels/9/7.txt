@@ -22,7 +22,7 @@ GM^GGK------B----------------------^---^---^-G^-MG--------------------
 GM^GGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGG^-MG--------------------
 GM-G---------------------------------------------G--------------------
 GM-GK-----G------G-----^G^----------^G^----------G--------------------
-G--GG^----^NNN---^-----^G^--NNN-----^G^---NNN----G--------------------
+G--GG^----^NNN---^-----^G^--NNN-----^G^-------NNNG--------------------
 GS-GGLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLLG--------------------
 GGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGG--------------------
 GGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGG-------------------
