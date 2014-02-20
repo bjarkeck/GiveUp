@@ -20,7 +20,7 @@ GGGGGG---------G--------G^------^GGGGGGGGGGGGGG-GG--------------------
 GGGGGG---------G--------Gc------^G------------G-GG--------------------
 GGGGGG---------G--------G^------^G--^^-----------G--------------------
 GGGGGG---------G--------G^^^^^^^^G--GGGGGG-BMG---G--------------------
-GGGGGG-------GGG-----B--GGGGGGGGGG---GG-GG-BMG---G--------------------
+GGGGGG-------GGG-----B--GGGGGGGGGG---GGGGG-BMG---G--------------------
 GGGGGG-------^^G--------GGGGGGGGGGGG-G---G--MG---G--------------------
 GGGGGG---------G^^^^^^^^Gl-K-----------^----MGLLLG--------------------
 GGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGG--------------------
