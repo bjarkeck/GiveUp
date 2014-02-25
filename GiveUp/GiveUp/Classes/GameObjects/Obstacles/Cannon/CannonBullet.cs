@@ -26,7 +26,7 @@ namespace GiveUp.Classes.GameObjects.Obstacles.Cannon
 
         public void Update(GameTime gameTime, Player player, LevelManagerr levelManager)
         {
-            this.Position += velocity;
+            this.Position += velocity * gameTime.DeltaTime();
 
             CannonBulletRectangle = new Rectangle((int)Position.X, (int)Position.Y, 2, 2);
 

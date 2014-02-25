@@ -42,7 +42,7 @@ namespace GiveUp.Classes.GameObjects.Obstacles
 
             CollisionLogicc(gameTime);
 
-            Position.X += speed * direction;
+            Position.X += speed * direction * gameTime.DeltaTime();
             Rectangle.X = (int)Position.X;
             //movingTileRectangle.X = (int)Position.X;
 
@@ -57,7 +57,7 @@ namespace GiveUp.Classes.GameObjects.Obstacles
             if (isOnTopOf)
             {
                 LastCollisionDirection = Direction.Top;
-                Player.Position.X += (int)(speed * direction);
+                Player.Position.X += (int)(speed * direction) * gameTime.DeltaTime();
                 Player.CanJump = true;
             }
 
@@ -105,10 +105,10 @@ namespace GiveUp.Classes.GameObjects.Obstacles
                 {
                     if (prevDirection != direction)
                     {
-                        Player.Position.X += (int)((speed * direction) * 2);
+                        Player.Position.X += (int)((speed * direction) * gameTime.DeltaTime() * 2);
 
                     }
-                    Player.Position.X += (int)((speed * direction) * 2);
+                    Player.Position.X += (int)((speed * direction) * gameTime.DeltaTime() * 2);
                 }
             }
 

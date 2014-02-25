@@ -10,6 +10,21 @@ namespace GiveUp.Classes.Core
 {
     public class SpriteAnimation
     {
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
         public Texture2D SpriteSheet { get; set; }
         public double AnimationSpeed { get; set; }
         public Rectangle Rectangle

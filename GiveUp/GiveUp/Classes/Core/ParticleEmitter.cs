@@ -112,7 +112,7 @@ namespace GiveUp.Classes.Core
 
         public void Update(GameTime gameTime, Vector2 position)
         {
-            timer = gameTime.ElapsedGameTime.TotalMilliseconds;
+            timer = gameTime.ElapsedGameTime.TotalMilliseconds * Time.GameSpeed;
             //AddParticles
             if (Particles.Count() < MaxNumberOfParitcles)
             {
@@ -130,7 +130,7 @@ namespace GiveUp.Classes.Core
 
         public void Update(GameTime gameTime, Rectangle position)
         {
-            timer = gameTime.ElapsedGameTime.TotalMilliseconds;
+            timer = gameTime.ElapsedGameTime.TotalMilliseconds * Time.GameSpeed;
             //AddParticles
             if (Particles.Count() < MaxNumberOfParitcles)
             {
@@ -146,7 +146,7 @@ namespace GiveUp.Classes.Core
         }
         public void Update(GameTime gameTime, Vector2 position, int distance, float rotation)
         {
-            timer = gameTime.ElapsedGameTime.TotalMilliseconds;
+            timer = gameTime.ElapsedGameTime.TotalMilliseconds * Time.GameSpeed;
             //AddParticles
             if (Particles.Count() < MaxNumberOfParitcles)
             {
@@ -164,10 +164,6 @@ namespace GiveUp.Classes.Core
 
         public void UpdateParticles(GameTime gameTime)
         {
-
-
-
-
 
             //UpdateParticles
             foreach (Particle particle in Particles.ToList())

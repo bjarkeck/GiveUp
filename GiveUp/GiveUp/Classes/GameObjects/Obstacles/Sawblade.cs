@@ -39,7 +39,7 @@ namespace GiveUp.Classes.GameObjects.Obstacles
         {
             allGameObjects = GetAllGameObjects<GameObject>().Where(x => x.Equals(this) == false).Select(x => x.Rectangle).ToList();
             rotation += 0.2f;
-            Position.X += speed * direction;
+            Position.X += speed * direction * gameTime.DeltaTime();
             Rectangle.X = (int)Position.X;
             sawBladeRectangle.X = (int)Position.X;
 

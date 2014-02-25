@@ -64,7 +64,7 @@ namespace GiveUp.Classes.GameObjects.Obstacles
         public override void Update(GameTime gameTime)
         {
 
-            rotation -= 2f * (float)gameTime.ElapsedGameTime.TotalSeconds;
+            rotation -= 2f * (float)gameTime.ElapsedGameTime.TotalSeconds * Time.GameSpeed;
 
             //rotation = GameLogic.CurveAngle(rotation, (float)position.AngleRadian(MouseHelper.Position), 0.1f);
             float distance = 0;

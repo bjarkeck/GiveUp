@@ -55,7 +55,7 @@ namespace GiveUp.Classes.GameObjects.Obstacles
         {
             spriteBatch.Draw(texture, new Rectangle(Rectangle.X, Rectangle.Y, (int)i, Rectangle.Height), new Rectangle(57 - RealSize(i), 0, 57, 47), Color.White);
             spriteBatch.Draw(texture, new Rectangle(Rectangle.X + (int)i, Rectangle.Y, Rectangle.Width - (int)i, Rectangle.Height), new Rectangle(0, 0, 57 - RealSize(i), 47), Color.White);
-            i += 0.3333f;
+            i += 0.3333f ;
 
             if (i > Rectangle.Width)
                 i = 0;

@@ -236,8 +236,8 @@ namespace GiveUp.Classes.LevelManager
                 item.CollisionLogic();
             }
 
-            LevelTimer += gameTime.ElapsedGameTime.Milliseconds;
-            ChallengeTimer += gameTime.ElapsedGameTime.Milliseconds;
+            LevelTimer += (int)((float)gameTime.ElapsedGameTime.Milliseconds * Time.GameSpeed);
+            ChallengeTimer += (int)((float)gameTime.ElapsedGameTime.Milliseconds * Time.GameSpeed);
 
             if (changeLevel)
             {

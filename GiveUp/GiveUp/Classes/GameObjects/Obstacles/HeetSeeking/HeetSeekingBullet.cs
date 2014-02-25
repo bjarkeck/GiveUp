@@ -44,7 +44,7 @@ namespace GiveUp.Classes.GameObjects.Obstacles
                 speed += 0.05f;
             }
 
-            position += rotV * speed;
+            position += rotV * speed * gameTime.DeltaTime();
 
             Rectangle.X = (int)position.X + (int)(rotV.X * 10);
             Rectangle.Y = (int)position.Y + (int)(rotV.Y * 10);

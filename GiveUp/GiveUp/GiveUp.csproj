@@ -105,6 +105,7 @@
     <Compile Include="Classes\Core\Range.cs" />
     <Compile Include="Classes\Core\SpriteAnimation.cs" />
     <Compile Include="Classes\Core\BaseScreen.cs" />
+    <Compile Include="Classes\Core\Time.cs" />
     <Compile Include="Classes\GameObjects\ButtonActivator.cs" />
     <Compile Include="Classes\GameObjects\GooTile.cs" />
     <Compile Include="Classes\GameObjects\Obstacles\AimingLaser.cs" />

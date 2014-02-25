@@ -33,7 +33,6 @@ namespace GiveUp.Classes.Core
         public float Friction;
         public InputHelper InputHelper = new InputHelper();
 
-
         public Player()
         {
             this.Acceleration = 0.2f;
@@ -79,7 +78,7 @@ namespace GiveUp.Classes.Core
                 )
             );
 
-            List<ParticleTexture> blood = new List<ParticleTexture>();                                                                              //Blod klat størrelse (1 = 100%)
+            List<ParticleTexture> blood = new List<ParticleTexture>();  //Blod klat størrelse (1 = 100%)
             blood.Add(new ParticleTexture(content.Load<Texture2D>("Images/Particles/blood1"), new Color(Color.Red, 1f), new Color(Color.Red, 0.1f), 0.4f, 0.5f));
             blood.Add(new ParticleTexture(content.Load<Texture2D>("Images/Particles/blood2"), new Color(Color.Red, 1f), new Color(Color.Red, 0.4f), 0.2f, 0.2f));
             blood.Add(new ParticleTexture(content.Load<Texture2D>("Images/Particles/blood3"), new Color(Color.Red, 1f), new Color(Color.Red, 0.1f), 0.2f, 0.3f));
@@ -166,7 +165,7 @@ namespace GiveUp.Classes.Core
             }
         }
 
-        public void Jump()
+        public void Jump(GameTime time)
         {
             if (this.CanJump || this.CanDoubleJump)
             {
@@ -184,12 +183,12 @@ namespace GiveUp.Classes.Core
             if (keyState.IsKeyDown(ReverseControls ? Keys.D : Keys.A))
             {
                 Animation.PlayAnimation("run");
-                this.Velocity.X += this.Acceleration * -1 * gameTime.ElapsedGameTime.Milliseconds;
+                this.Velocity.X += this.Acceleration * -1 * gameTime.ElapsedGameTime.Milliseconds * Time.GameSpeed;
             }
             else if (keyState.IsKeyDown(ReverseControls ? Keys.A : Keys.D))
             {
                 Animation.PlayAnimation("run");
-                this.Velocity.X += this.Acceleration * gameTime.ElapsedGameTime.Milliseconds;
+                this.Velocity.X += this.Acceleration * gameTime.ElapsedGameTime.Milliseconds * Time.GameSpeed;
             }
             else
             {
@@ -197,8 +196,13 @@ namespace GiveUp.Classes.Core
             }
             //Jump
             if (InputHelper.IsNewPress(Keys.Space))
-                this.Jump();
+                this.Jump(gameTime);
 
+
+            if (keyState.IsKeyDown(Keys.LeftShift))
+                Time.GameSpeed = 0.4f;
+            else
+                Time.GameSpeed = 1f;
 
             //Friction
             if (Math.Abs(Velocity.X) < Friction)
@@ -208,13 +212,13 @@ namespace GiveUp.Classes.Core
 
 
             //Gravity
-            Velocity += Gravity;
+            Velocity += Gravity * gameTime.DeltaTime();
 
             //Max Speed
             Velocity.X = MathHelper.Clamp(Velocity.X, MaxSpeed * -1, MaxSpeed);
 
             //Add To Position
-            this.Position += this.Velocity;
+            this.Position += this.Velocity * gameTime.DeltaTime();
 
             //Animation Direction
             if (Velocity.X > 0)
