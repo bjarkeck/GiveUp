@@ -31,14 +31,14 @@ namespace GiveUp.Classes.GameObjects.Obstacles
             texture = content.Load<Texture2D>("Images/Obstacles/movingTile");
             Rectangle = new Rectangle((int)position.X, (int)position.Y + 32, 32, 6);
 
+            allGameObjects = GetAllGameObjects<GameObject>().Where(x => x.GetType() != typeof(HorizontalMovingTiles)).Select(x => x.Rectangle).ToList();
+            movingTileObjects = GetAllGameObjects<GameObject>().Where(x => x.GetType() == typeof(HorizontalMovingTiles)).Select(x => (HorizontalMovingTiles)x).ToList();
+
         }
 
 
         public override void Update(GameTime gameTime)
         {
-
-            allGameObjects = GetAllGameObjects<GameObject>().Where(x => x.GetType() != typeof(HorizontalMovingTiles)).Select(x => x.Rectangle).ToList();
-            movingTileObjects = GetAllGameObjects<GameObject>().Where(x => x.GetType() == typeof(HorizontalMovingTiles)).Select(x => (HorizontalMovingTiles)x).ToList();
 
             CollisionLogicc(gameTime);
 

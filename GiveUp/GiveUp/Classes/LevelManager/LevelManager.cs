@@ -291,7 +291,10 @@ namespace GiveUp.Classes.LevelManager
 
             foreach (var item in GameObjects.OrderBy(x => x.InitialPosition.Y))
             {
-                lvlData[(int)(item.InitialPosition.X / 32), (int)(item.InitialPosition.Y / 32)] = (char)(item.GetType().GetField("TileChar").GetValue(item));
+                if (item.InitialPosition.X >= 0 && item.InitialPosition.Y >= 0)
+                {
+                    lvlData[(int)(item.InitialPosition.X / 32), (int)(item.InitialPosition.Y / 32)] = (char)(item.GetType().GetField("TileChar").GetValue(item));
+                }
             }
 
             for (int y = 0; y < lvlData.GetLength(1); y++)
