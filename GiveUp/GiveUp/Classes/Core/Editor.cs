@@ -14,7 +14,7 @@ namespace GiveUp.Classes.Core
 {
     public class Editor
     {
-        public static bool IsEnable = false;
+        public static bool IsEnable = true;
 
         private int selectedTile = -1;
         public LevelManagerr LevelManager

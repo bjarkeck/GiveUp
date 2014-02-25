@@ -69,18 +69,23 @@ namespace GiveUp.Classes.Core
         public static Random r = new Random();
 
 
+        private static string parentLevel = "";
 
+
+        private static List<Rectangle> tiles;
         public static bool IsLineOfSight(Vector2 startPos, Vector2 target, ref float distanceToHit)
         {
             //Distancen fra start til slut...
             distanceToHit = Math.Abs(startPos.Distance(target));
 
-            //Get all se tiles
-            List<Rectangle> tiles = ((GameScreen)(ScreenManager.Current.CurrentScreen))
-                                        .LevelManager
-                                        .GameObjects
-                                        .Where(x => x.GetType().Name == "BoxTile")
-                                        .Select(x => ((BoxTile)x).Rectangle).ToList();
+            var t = ((GameScreen)(ScreenManager.Current.CurrentScreen)).LevelManager;
+
+            if (t.CurrentLevel + "." + t.CurrentSubLevel != parentLevel)
+            {
+                parentLevel = t.CurrentLevel + "." + t.CurrentSubLevel;
+                //Get all se tiles
+                tiles = t.GameObjects.Where(x => x.GetType().Name == "BoxTile").Select(x => ((BoxTile)x).Rectangle).ToList();
+            }
 
             //Da Ray er en 3D ting, foregår det i Vector3, hvor vi bare sætter z axen til 0;
             //Tænk på en Ray, som en stråle den har en start position, og en retning...
