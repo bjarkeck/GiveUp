@@ -98,9 +98,9 @@ namespace GiveUp.Classes.Core
 
         }
 
-        public void Draw(SpriteBatch spriteBatch)
+        public void Draw(SpriteBatch spriteBatch, float opacity = 1)
         {
-            spriteBatch.Draw(SpriteSheet, position, currentFrame, Color.White, 0f, Vector2.Zero, 0.5f, (this.FlipImage ? SpriteEffects.FlipHorizontally : SpriteEffects.None), 0);
+            spriteBatch.Draw(SpriteSheet, position, currentFrame, Color.White * opacity, 0f, Vector2.Zero, 0.5f, (this.FlipImage ? SpriteEffects.FlipHorizontally : SpriteEffects.None), 0);
 
         }
 

@@ -22,8 +22,8 @@ namespace GiveUp.Classes.GameObjects.Obstacles
         public int direction = 1;
 
         Rectangle movingTileRectangle;
-        List<Rectangle> allGameObjects;
-        List<HorizontalMovingTiles> movingTileObjects;
+        IEnumerable<GameObject> allGameObjects;
+        IEnumerable<HorizontalMovingTiles> movingTileObjects;
 
         public override void Initialize(ContentManager content, Vector2 position)
         {
@@ -31,8 +31,8 @@ namespace GiveUp.Classes.GameObjects.Obstacles
             texture = content.Load<Texture2D>("Images/Obstacles/movingTile");
             Rectangle = new Rectangle((int)position.X, (int)position.Y + 32, 32, 6);
 
-            allGameObjects = GetAllGameObjects<GameObject>().Where(x => x.GetType() != typeof(HorizontalMovingTiles)).Select(x => x.Rectangle).ToList();
-            movingTileObjects = GetAllGameObjects<GameObject>().Where(x => x.GetType() == typeof(HorizontalMovingTiles)).Select(x => (HorizontalMovingTiles)x).ToList();
+            allGameObjects = GetAllGameObjects<GameObject>().Where(x => x.GetType() != typeof(HorizontalMovingTiles)).Select(x => x);
+            movingTileObjects = GetAllGameObjects<GameObject>().Where(x => x.GetType() == typeof(HorizontalMovingTiles)).Select(x => (HorizontalMovingTiles)x);
 
         }
 
@@ -61,7 +61,7 @@ namespace GiveUp.Classes.GameObjects.Obstacles
                 Player.CanJump = true;
             }
 
-            if (allGameObjects.Any(x => x.Intersects(new Rectangle(Rectangle.X, Rectangle.Y - 4, Rectangle.Width, Rectangle.Height))))
+            if (allGameObjects.Any(x => x.Rectangle.Intersects(new Rectangle(Rectangle.X, Rectangle.Y - 4, Rectangle.Width, Rectangle.Height))))
             {
                 direction *= -1;
 

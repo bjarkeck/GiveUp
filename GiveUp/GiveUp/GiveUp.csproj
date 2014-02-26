@@ -341,6 +341,9 @@
     <Content Include="Content\Images\Particles\p5.png">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Content>
+    <Content Include="Content\Images\Particles\wind.png">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
     <Content Include="Content\Images\Player\b1.png">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Content>

@@ -1,5 +1,6 @@
 ﻿using GiveUp.Classes.Core;
 using GiveUp.Classes.Db;
+using GiveUp.Classes.GameObjects.Tiles;
 using GiveUp.Classes.Screens;
 using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Content;
@@ -278,6 +279,8 @@ namespace GiveUp.Classes.LevelManager
                     go.Remove(goar.Key);
                 }
             }
+
+            GameLogic.tiles = (((GameScreen)(ScreenManager.Current.CurrentScreen)).LevelManager).GameObjects.Where(x => x.GetType().Name == "BoxTile").Select(x => ((BoxTile)x).Rectangle).ToList();
 
         }
 

@@ -72,7 +72,7 @@ namespace GiveUp.Classes.Core
         private static string parentLevel = "";
 
 
-        private static List<Rectangle> tiles;
+        public static List<Rectangle> tiles;
         public static bool IsLineOfSight(Vector2 startPos, Vector2 target, ref float distanceToHit)
         {
             //Distancen fra start til slut...
