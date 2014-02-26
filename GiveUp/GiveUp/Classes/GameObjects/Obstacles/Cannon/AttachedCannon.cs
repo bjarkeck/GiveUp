@@ -38,7 +38,7 @@ namespace GiveUp.Classes.GameObjects.Obstacles
         float cannonRotation = 10;
         TimeSpan fireRate = TimeSpan.FromMilliseconds(1200);
         TimeSpan timeElapsed;
-        List<Rectangle> boxTiles;
+        IEnumerable<BoxTile> boxTiles;
         List<CannonBullet> cannonBullets = new List<CannonBullet>();
         
         public override void Initialize(ContentManager content, Vector2 position)
@@ -46,27 +46,27 @@ namespace GiveUp.Classes.GameObjects.Obstacles
             bulletTexture = content.Load<Texture2D>("Images/Obstacles/AttachedCannon/bullet1");
             cannonTexture = content.Load<Texture2D>("Images/Obstacles/AttachedCannon/AttatchedCannonCannon");
 
-            boxTiles = GetAllGameObjects<BoxTile>().Select(x => x.Rectangle).ToList();
+            boxTiles = GetAllGameObjects<BoxTile>();
 
-            if (boxTiles.Any(x => x.X == position.X && x.Y == position.Y + 32))
+            if (boxTiles.Any(x => x.Rectangle.X == position.X && x.Rectangle.Y == position.Y + 32))
             {
                 texture = content.Load<Texture2D>("Images/Obstacles/AttachedCannon/AttatchedCannonBodyT");
                 position.Y += 32 - texture.Height;
 
                 cannonPosition = new Vector2(position.X + 16, position.Y + 7);
             }
-            else if (boxTiles.Any(x => x.X == position.X && x.Y == position.Y - 32))
+            else if (boxTiles.Any(x => x.Rectangle.X == position.X && x.Rectangle.Y == position.Y - 32))
             {
                 texture = content.Load<Texture2D>("Images/Obstacles/AttachedCannon/AttatchedCannonBodyB");
                 cannonPosition = new Vector2(position.X + 16, position.Y + 2);
             }
-            else if (boxTiles.Any(x => x.X == position.X - 32 && x.Y == position.Y))
+            else if (boxTiles.Any(x => x.Rectangle.X == position.X - 32 && x.Rectangle.Y == position.Y))
             {
                 texture = content.Load<Texture2D>("Images/Obstacles/AttachedCannon/AttatchedCannonBodyR");
                 cannonPosition = new Vector2(position.X + 4, position.Y + 15);
 
             }
-            else if (boxTiles.Any(x => x.X == position.X + 32 && x.Y == position.Y))
+            else if (boxTiles.Any(x => x.Rectangle.X == position.X + 32 && x.Rectangle.Y == position.Y))
             {
                 texture = content.Load<Texture2D>("Images/Obstacles/AttachedCannon/AttatchedCannonBodyL");
                 position.X += 32 - texture.Width;
@@ -106,9 +106,9 @@ namespace GiveUp.Classes.GameObjects.Obstacles
             {
                 bullet.Update(gameTime, Player, LevelManager);
 
-                foreach (Rectangle tile in boxTiles)
+                foreach (BoxTile tile in boxTiles)
                 {
-                    if (bullet.CannonBulletRectangle.Intersects(tile))
+                    if (bullet.CannonBulletRectangle.Intersects(tile.Rectangle))
                     {
                         cannonBullets.Remove(bullet);
                     }

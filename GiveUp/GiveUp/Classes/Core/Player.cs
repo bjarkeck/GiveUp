@@ -26,13 +26,14 @@ namespace GiveUp.Classes.Core
         public bool ReverseControls = false;
         public bool DragActivated = false;
         public float StartJumpSpeed;
-
+        private ParticleEmitter timeEmitter;
         public Vector2 Gravity;
         public float MaxSpeed;
         public float MaxDrag;
         public float Friction;
         public InputHelper InputHelper = new InputHelper();
 
+        private bool isTimeSlowed = false;
         public Player()
         {
             this.Acceleration = 0.2f;
@@ -101,22 +102,38 @@ namespace GiveUp.Classes.Core
                 )
             );
 
+
+            List<ParticleTexture> l2 = new List<ParticleTexture>();
+            l2.Add(new ParticleTexture(content.Load<Texture2D>("Images/Particles/wind"), new Color(Color.White, 0), new Color(Color.White, 0.2f), 0.4f, 0f));
+
+            timeEmitter = new ParticleEmitter(
+                    l2,
+                    new Range<float>(21, 50),
+                    new Range<float>(0),
+                    new Range<int>(100),
+                    0,
+                    360,
+                    0,
+                    1020,
+                    this.Velocity,
+                    Vector2.Zero
+                );
+
         }
         public void Draw(SpriteBatch spriteBatch)
         {
             ParticleManager.Draw(spriteBatch);
-            Animation.Draw(spriteBatch);
+            Animation.Draw(spriteBatch, (isTimeSlowed ? 2f : 1));
         }
 
         public void DrawAdditive(SpriteBatch spriteBatch)
         {
             ParticleManager.DrawAdditive(spriteBatch);
+            timeEmitter.Draw(spriteBatch); ;
         }
 
         public void Update(GameTime gameTime)
         {
-
-
             if (Mouse.GetState().RightButton == ButtonState.Pressed)
             {
                 this.Position = MouseHelper.Position;
@@ -200,9 +217,18 @@ namespace GiveUp.Classes.Core
 
 
             if (keyState.IsKeyDown(Keys.LeftShift))
+            {
+                timeEmitter.MaxNumberOfParitcles = 2000;
                 Time.GameSpeed = 0.4f;
+                isTimeSlowed = true;
+            }
             else
+            {
+                timeEmitter.MaxNumberOfParitcles = 0;
                 Time.GameSpeed = 1f;
+                isTimeSlowed = false;
+            }
+            timeEmitter.Update(gameTime, this.Rectangle);
 
             //Friction
             if (Math.Abs(Velocity.X) < Friction)
