@@ -115,8 +115,6 @@ namespace GiveUp.Classes.Core
 
         public void Update(GameTime gameTime)
         {
-
-
             if (Mouse.GetState().RightButton == ButtonState.Pressed)
             {
                 this.Position = MouseHelper.Position;
