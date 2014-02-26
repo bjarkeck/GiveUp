@@ -36,8 +36,8 @@ namespace GiveUp.Classes.GameObjects.Obstacles
 
         public Vector2 cannonPosition;
         float cannonRotation = 10;
-        TimeSpan fireRate = TimeSpan.FromMilliseconds(1200);
-        TimeSpan timeElapsed;
+        float fireRate = 1200;
+        float timeElapsed;
         IEnumerable<BoxTile> boxTiles;
         List<CannonBullet> cannonBullets = new List<CannonBullet>();
         
@@ -95,9 +95,10 @@ namespace GiveUp.Classes.GameObjects.Obstacles
             {
                     cannonRotation = rotation;
 
-                if ((timeElapsed += gameTime.ElapsedGameTime) > fireRate)
+                    timeElapsed += gameTime.ElapsedGameTime.Milliseconds * Time.GameSpeed;
+                if (timeElapsed > fireRate)
                 {
-                    timeElapsed = TimeSpan.Zero;
+                    timeElapsed = 0;
                     cannonBullets.Add(new CannonBullet(bulletTexture, new Vector2(cannonPosition.X + (float)(Math.Cos(cannonRotation) * 15), cannonPosition.Y + ((float)Math.Sin(cannonRotation) * 15)), rotation, 5));
                 }
             }
