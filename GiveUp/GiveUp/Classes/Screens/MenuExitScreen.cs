@@ -1,4 +1,5 @@
 ﻿using GiveUp.Classes.Core;
+using GiveUp.Classes.Db;
 using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Graphics;
 using System;
@@ -14,6 +15,7 @@ namespace GiveUp.Classes.Screens
         public MenuExitScreen()
         {
             this.ActiveScreenType = typeof(MenuExitScreen);
+            DataContext.ReCreateLeveldataForEachUser();
         }
         Button btnExit;
         Button btnDontExit;

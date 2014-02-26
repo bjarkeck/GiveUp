@@ -27,7 +27,8 @@ namespace GiveUp.Classes.GameObjects
             Position = position;
             doorLocked = content.Load<Texture2D>("Images/Tiles/buttonActivatorLocked");
             doorUnlocked = content.Load<Texture2D>("Images/Tiles/buttonActivatorUnlocked");
-            rectangle = new Rectangle((int)position.X, (int)position.Y, doorLocked.Width, doorLocked.Height);
+            rectangle = new Rectangle((int)position.X + 7, (int)position.Y + 7, 18, 18);
+            Rectangle = rectangle;
         }
 
         public void Update(GameTime gameTime)
@@ -48,7 +49,7 @@ namespace GiveUp.Classes.GameObjects
 
         public void Draw(SpriteBatch spriteBatch)
         {
-            spriteBatch.Draw(doorLocked, Position, Color.White);
+            spriteBatch.Draw(doorLocked, Rectangle, Color.White);
         }
 
         public Rectangle Rectangle { get; set; }
