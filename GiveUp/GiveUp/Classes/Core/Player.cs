@@ -197,12 +197,12 @@ namespace GiveUp.Classes.Core
 
             KeyboardState keyState = Keyboard.GetState();
 
-            if (keyState.IsKeyDown(ReverseControls ? Keys.D : Keys.A))
+            if (keyState.IsKeyDown(ReverseControls ? Keys.D : Keys.A) || keyState.IsKeyDown(ReverseControls ? Keys.Right : Keys.Left))
             {
                 Animation.PlayAnimation("run");
                 this.Velocity.X += this.Acceleration * -1 * gameTime.ElapsedGameTime.Milliseconds * Time.GameSpeed;
             }
-            else if (keyState.IsKeyDown(ReverseControls ? Keys.A : Keys.D))
+            else if (keyState.IsKeyDown(ReverseControls ? Keys.A : Keys.D) || keyState.IsKeyDown(ReverseControls ? Keys.Left : Keys.Right))
             {
                 Animation.PlayAnimation("run");
                 this.Velocity.X += this.Acceleration * gameTime.ElapsedGameTime.Milliseconds * Time.GameSpeed;
@@ -212,10 +212,11 @@ namespace GiveUp.Classes.Core
                 Animation.PlayAnimation("stand");
             }
             //Jump
-            if (InputHelper.IsNewPress(Keys.Space))
+            if (InputHelper.IsNewPress(Keys.Space) || InputHelper.IsNewPress(Keys.Up) || InputHelper.IsNewPress(Keys.W))
                 this.Jump(gameTime);
 
 
+            //Slow time or not
             if (keyState.IsKeyDown(Keys.LeftShift))
             {
                 timeEmitter.MaxNumberOfParitcles = 2000;
