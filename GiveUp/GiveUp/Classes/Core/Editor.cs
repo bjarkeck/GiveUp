@@ -130,6 +130,7 @@ namespace GiveUp.Classes.Core
             foreach (var item in obsticles)
                 item.Value.Draw(spriteBatch);
 
+
             spriteBatch.Draw(GameLogic.ColorTexture(Color.Green, spriteBatch), saveChanges, Color.White);
 
         }

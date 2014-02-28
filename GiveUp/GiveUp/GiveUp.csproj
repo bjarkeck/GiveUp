@@ -181,6 +181,9 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Content Include="Content\Effects\AlphaMap.fx">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
     <Content Include="Content\Images\Obstacles\movingTile.png">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Content>

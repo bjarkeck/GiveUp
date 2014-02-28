@@ -62,7 +62,7 @@ namespace GiveUp.Classes.Screens
             LevelManager.Draw(spriteBatch);
             player.Draw(spriteBatch);
             editor.Draw(spriteBatch);
-            
+           
         }
 
         public override void DrawAdditive(SpriteBatch spriteBatch)

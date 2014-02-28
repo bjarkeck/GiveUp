@@ -104,13 +104,13 @@ namespace GiveUp.Classes.Core
 
 
             List<ParticleTexture> l2 = new List<ParticleTexture>();
-            l2.Add(new ParticleTexture(content.Load<Texture2D>("Images/Particles/wind"), new Color(Color.White, 0), new Color(Color.White, 0.2f), 0.4f, 0f));
+            l2.Add(new ParticleTexture(content.Load<Texture2D>("Images/Particles/wind"), new Color(Color.Black, 0.04f), new Color(Color.White, 0f), 1f, 1f));
 
             timeEmitter = new ParticleEmitter(
                     l2,
                     new Range<float>(21, 50),
                     new Range<float>(0),
-                    new Range<int>(100),
+                    new Range<int>(0, 500),
                     0,
                     360,
                     0,
@@ -221,13 +221,16 @@ namespace GiveUp.Classes.Core
                 timeEmitter.MaxNumberOfParitcles = 2000;
                 Time.GameSpeed = 0.4f;
                 isTimeSlowed = true;
+                Game1.AlphaMapAlpha = 1;
             }
             else
             {
                 timeEmitter.MaxNumberOfParitcles = 0;
                 Time.GameSpeed = 1f;
                 isTimeSlowed = false;
+                Game1.AlphaMapAlpha = 0.3f;
             }
+            Game1.AlphaMapPosition = this.Position;
             timeEmitter.Update(gameTime, this.Rectangle);
 
             //Friction

@@ -19,9 +19,6 @@ namespace GiveUp.Classes.GameObjects
         public const char TileChar = 'K';
         public bool isLocked = false;
 
-        //Hejsa 2
-
-
         public void Initialize(ContentManager content, Vector2 position)
         {
             Position = position;
