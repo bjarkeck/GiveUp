@@ -66,7 +66,7 @@ namespace GiveUp.Classes.LevelManager
 
             float fontSize = 0.5f;
 
-            string str = "Challenge " + CurrentLevel + " - Level + " + CurrentSubLevel;
+            string str = "Challenge " + CurrentLevel + " - Level " + CurrentSubLevel;
             str = str.ToUpper();
             PrintFont(spriteBatch, str, new Vector2(50, 840), fontSize);
 
@@ -238,6 +238,8 @@ namespace GiveUp.Classes.LevelManager
 
             if (PracticeRun == false && runCompleted)
             {
+                Player.ParticleManager.ParticleEmitters["Blood"].Particles.Clear();
+                Player.ParticleManager.ParticleEmitters["Blood"].MaxNumberOfParitcles = 0;
                 CurrentSubLevel += 1;
                 if (Levels.Count() < CurrentSubLevel)
                 {
@@ -264,8 +266,8 @@ namespace GiveUp.Classes.LevelManager
                 item.CollisionLogic();
             }
 
-            LevelTimer += (int)((float)gameTime.ElapsedGameTime.Milliseconds * Time.GameSpeed);
-            ChallengeTimer += (int)((float)gameTime.ElapsedGameTime.Milliseconds * Time.GameSpeed);
+            LevelTimer += (int)((float)gameTime.ElapsedGameTime.Milliseconds);
+            ChallengeTimer += (int)((float)gameTime.ElapsedGameTime.Milliseconds);
 
             if (changeLevel)
             {

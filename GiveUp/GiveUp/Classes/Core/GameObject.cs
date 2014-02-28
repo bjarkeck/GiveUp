@@ -16,11 +16,15 @@ public class GameObject
 
     public IEnumerable<T> GetAllGameObjects<T>()
     {
-        if (typeof(T) == typeof(IGameObject) )
+        if (LevelManager != null)
         {
-            return LevelManager.GameObjects.Select(c => (T)c).ToList();
+            if (typeof(T) == typeof(IGameObject))
+            {
+                return LevelManager.GameObjects.Select(c => (T)c).ToList();
+            }
+            return LevelManager.GameObjects.Where(x => x.GetType() == typeof(T) || x.GetType().BaseType == typeof(T)).Select(x => ((T)x)).ToList();
         }
-        return LevelManager.GameObjects.Where(x => x.GetType() == typeof(T) || x.GetType().BaseType == typeof(T)).Select(x => ((T)x)).ToList();
+        return new List<T>();
     }
 
 
@@ -30,7 +34,10 @@ public class GameObject
     {
         get
         {
-            return ((GameScreen)ScreenManager.Current.CurrentScreen).LevelManager;
+            if (ScreenManager.Current.CurrentScreen.GetType() == typeof(GameScreen))
+                return ((GameScreen)ScreenManager.Current.CurrentScreen).LevelManager;
+            else
+                return null;
         }
     }
 

@@ -62,7 +62,10 @@ namespace GiveUp
                         string nPath = new DirectoryInfo(Path.Combine(new DirectoryInfo("./").FullName, "../../../Content\\Effects")).FullName;
                         string compiledVersion2 = nPath + "\\" + item.Name.Split('.').First() + ".mgfxo";
 
+<<<<<<< HEAD
+=======
                     System.Diagnostics.Process.Start(programPath, "\"" + fxPath + "\" " + "\"" + compiledVersion + "\" /DEBUG");
+>>>>>>> 0869ee35701d8a395a59decf8087ec64b1d05094
                         if (File.Exists(compiledVersion))
                             File.Delete(compiledVersion);
 

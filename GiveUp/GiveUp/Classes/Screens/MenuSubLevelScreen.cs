@@ -134,10 +134,18 @@ namespace GiveUp.Classes.Screens
                 }
                 if (IsChallangeComplete)
                 {
+                    spriteBatch.DrawString(font, "LEVEL " + item.SubLevelId, new Vector2(challengeScoreboardRectangle.Left + 16, challengeScoreboardRectangle.Y + 51 + ((i > 6 ? 35 : 34) * i)), Color.White, 0, Vector2.Zero, 0.7f, SpriteEffects.None, 1);
                     spriteBatch.DrawString(font, item.BestRunTime.ToTime(), new Vector2((challengeScoreboardRectangle.Right - 30 - 55), challengeScoreboardRectangle.Y + 51 + ((i > 6 ? 35 : 34) * i)), Color.White, 0, Vector2.Zero, 0.7f, SpriteEffects.None, 1);
                 }
                 i++;
             }
+
+            if (IsChallangeComplete)
+            {
+                spriteBatch.DrawString(font, "Total ", new Vector2(challengeScoreboardRectangle.Left + 16, challengeScoreboardRectangle.Bottom - 28), new Color(255, 204, 0), 0, Vector2.Zero, 0.7f, SpriteEffects.None, 1);
+                spriteBatch.DrawString(font, lvlList.Sum(x => x.BestRunTime).ToTime(), new Vector2(challengeScoreboardRectangle.Right - 30 - 55, challengeScoreboardRectangle.Bottom - 28), new Color(255, 204, 0), 0, Vector2.Zero, 0.7f, SpriteEffects.None, 1);
+            }
+
 
             spriteBatch.DrawString(font, "CHALLENGE " + level, new Vector2(MenuScreenBounderies.X + 5, MenuScreenBounderies.Y - 40), Color.White);
 

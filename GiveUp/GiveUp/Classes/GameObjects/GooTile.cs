@@ -50,6 +50,7 @@ namespace GiveUp.Classes.GameObjects
 
         public override void CollisionLogic()
         {
+
             var theTileBox = GetAllGameObjects<BoxTile>().FirstOrDefault(x => x.Position == BoxTilePosition);
 
             
