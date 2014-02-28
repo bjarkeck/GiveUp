@@ -75,8 +75,12 @@ namespace GiveUp.Classes.Core
         public static List<Rectangle> tiles;
         public static bool IsLineOfSight(Vector2 startPos, Vector2 target, ref float distanceToHit)
         {
+            
+            if (ScreenManager.Current.CurrentScreen.GetType() == typeof(GameScreen))
+            {
             //Distancen fra start til slut...
             distanceToHit = Math.Abs(startPos.Distance(target));
+
 
             var t = ((GameScreen)(ScreenManager.Current.CurrentScreen)).LevelManager;
 
@@ -138,6 +142,8 @@ namespace GiveUp.Classes.Core
 
             //Vi har ikke ramt noget, target er i LineOfSight
             return true;
+            }
+            return false;
         }
 
         public static bool IsLineOfSight(Vector2 startPos, Vector2 target)

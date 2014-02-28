@@ -20,6 +20,7 @@ namespace GiveUp.Classes.Screens
         Button btnExit;
         Button btnDontExit;
 
+        SpriteFont font;
         public override void LoadContent()
         {
             base.LoadContent();
@@ -27,8 +28,9 @@ namespace GiveUp.Classes.Screens
             btnExit = new Button(Content, "Images/Menu/Buttons/btnExit", () => { Game1.ExitGame = true; }, ButtonSizeScaleFactor);
             btnExit.ButtonRectangle.X = (1600 / 2) - btnExit.ButtonRectangle.Width;
             btnExit.ButtonRectangle.Y = 500;
+            font = Content.Load<SpriteFont>("Fonts/fontBold");
 
-            btnDontExit = new Button(Content, "Images/Menu/Buttons/btnExit", () => {ScreenManager.Current.LoadScreen(new MenuPlayScreen(), false); }, ButtonSizeScaleFactor);
+            btnDontExit = new Button(Content, "Images/Menu/Buttons/btnKeepPlaying", () => { ScreenManager.Current.LoadScreen(new MenuPlayScreen(), false); }, ButtonSizeScaleFactor);
             btnDontExit.ButtonRectangle.X = (1600 / 2);
             btnDontExit.ButtonRectangle.Y = 500;
         }
@@ -42,7 +44,9 @@ namespace GiveUp.Classes.Screens
         public override void Draw(SpriteBatch spriteBatch)
         {
             base.Draw(spriteBatch);
-            
+
+            string str = "REALLY!?";
+            spriteBatch.DrawString(font, str, new Vector2(1600 / 2 - font.MeasureString(str).X / 2, 400), Color.White);
             btnExit.Draw(spriteBatch);
 
             btnDontExit.Draw(spriteBatch);

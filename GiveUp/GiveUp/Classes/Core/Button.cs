@@ -16,7 +16,6 @@ namespace GiveUp.Classes.Core
         public EventHandler OnClick;
         private Texture2D texture;
         public Rectangle ButtonRectangle = new Rectangle();
-
         private Texture2D textureStatic;
         private Texture2D textureActive;
         private Texture2D textureHover;
@@ -26,6 +25,7 @@ namespace GiveUp.Classes.Core
             textureStatic = content.Load<Texture2D>(imagePath + "Static");
             textureActive = content.Load<Texture2D>(imagePath + "Active");
             textureHover = content.Load<Texture2D>(imagePath + "Hover");
+
 
             ButtonRectangle.Y = 0;
             ButtonRectangle.Height = (int)(textureStatic.Height * buttonSizeScaleFactor);
