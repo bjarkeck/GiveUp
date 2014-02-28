@@ -779,9 +779,6 @@
   </ItemGroup>
   <ItemGroup>
     <None Include="App.config" />
-    <None Include="Content\Effects\AlphaMap.mgfxo">
-      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
-    </None>
     <None Include="Content\Fonts\fontBold.xnb">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </None>
