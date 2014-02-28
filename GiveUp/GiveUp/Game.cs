@@ -61,7 +61,7 @@ namespace GiveUp
                         File.Delete(compiledVersion);
                     }
 
-                    System.Diagnostics.Process.Start(programPath, fxPath + " " + compiledVersion + " /DEBUG");
+                    System.Diagnostics.Process.Start(programPath, "\"" + fxPath + "\" " + "\"" + compiledVersion + "\" /DEBUG");
                 }
             }
         }
