@@ -49,7 +49,6 @@ namespace GiveUp
         {
             try
             {
-
                 var q = new DirectoryInfo("~/");
                 string programPath = Path.Combine(Environment.GetFolderPath(Environment.SpecialFolder.ProgramFilesX86), @"MSBuild\MonoGame\v3.0\2MGFX.exe");
                 DirectoryInfo effectsFolder = new DirectoryInfo(Path.Combine(new DirectoryInfo("./").FullName, "Content\\Effects"));
@@ -77,7 +76,6 @@ namespace GiveUp
             }
             catch (Exception)
             {
-
             }
         }
 

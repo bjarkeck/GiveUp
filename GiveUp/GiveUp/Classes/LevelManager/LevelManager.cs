@@ -29,7 +29,6 @@ namespace GiveUp.Classes.LevelManager
         private SpriteFont font;
         private bool firstRun = true;
 
-
         public ContentManager Content
         {
             get
@@ -45,7 +44,7 @@ namespace GiveUp.Classes.LevelManager
             GridManager = new GridManager(Content, 32, 32);
             GridManager.AddBackground("Images/Bgs/bg1");
 
-            font = Content.Load<SpriteFont>("Fonts/font");
+            font = Content.Load<SpriteFont>("Fonts/fontBold");
 
         }
 
@@ -65,28 +64,56 @@ namespace GiveUp.Classes.LevelManager
                 item.Draw(spriteBatch);
             }
 
-            string str = "Challenge " + CurrentLevel;
-            spriteBatch.DrawString(font, str, new Vector2(50, 847), Color.Black, 0, Vector2.Zero, 0.7f, SpriteEffects.None, 0);
+            float fontSize = 0.5f;
 
-            str = "Level " + CurrentSubLevel;
-            spriteBatch.DrawString(font, str, new Vector2(50, 863), Color.Black, 0, Vector2.Zero, 0.7f, SpriteEffects.None, 0);
+            string str = "Challenge " + CurrentLevel + " - Level + " + CurrentSubLevel;
+            str = str.ToUpper();
+            PrintFont(spriteBatch, str, new Vector2(50, 840), fontSize);
+
+            str = "Deaths: ".ToUpper() + dbLevels.First(x => x.SubLevelId == CurrentSubLevel).Deaths;
+            PrintFont(spriteBatch, str, new Vector2(50, 865), fontSize);
 
             if (PracticeRun == false)
             {
-                str = "Challenge time: " + (ChallengeTimer.ToTime());
-                spriteBatch.DrawString(font, str, new Vector2(1600 - 50 - font.MeasureString(str).X * 0.7f, 57), Color.White, 0, Vector2.Zero, 0.7f, SpriteEffects.None, 0);
+                str = ChallengeTimer.ToTime();
+                PrintFont(spriteBatch, str, new Vector2((1600 / 2 - font.MeasureString(str).X / 2 * 0.8f), 840), 0.8f);
+
+                str = LevelTimer.ToTime();
+                PrintFont(spriteBatch, str, new Vector2((1600 / 2 - font.MeasureString(str).X / 2 * fontSize), 875), fontSize);
             }
             else
             {
-                str = "Previous time: " + dbLevels.First(x => x.SubLevelId == CurrentSubLevel).PreviousRunTime.ToTime();
-                spriteBatch.DrawString(font, str, new Vector2(1600 - 50 - font.MeasureString(str).X * 0.7f, 73), Color.White, 0, Vector2.Zero, 0.7f, SpriteEffects.None, 0);
-
-                str = "Best time: " + dbLevels.First(x => x.SubLevelId == CurrentSubLevel).BestPracticeTime.ToTime();
-                spriteBatch.DrawString(font, str, new Vector2(1600 - 50 - font.MeasureString(str).X * 0.7f, 89), Color.White, 0, Vector2.Zero, 0.7f, SpriteEffects.None, 0);
+                str = LevelTimer.ToTime();
+                PrintFont(spriteBatch, str, new Vector2((1600 / 2 - font.MeasureString(str).X / 2 * 0.8f), 842), 0.8f);
             }
 
-            str = "Time: " + LevelTimer.ToTime();
-            spriteBatch.DrawString(font, str, new Vector2(1600 - 50 - font.MeasureString(str).X * 0.7f, (PracticeRun ? 57 : 73)), Color.White, 0, Vector2.Zero, 0.7f, SpriteEffects.None, 0);
+            if (dbLevels.First(x => x.SubLevelId == CurrentSubLevel).PreviousRunTime > 0)
+            {
+                str = "Previous time: ".ToUpper() + dbLevels.First(x => x.SubLevelId == CurrentSubLevel).PreviousRunTime.ToTime();
+                PrintFont(spriteBatch, str, new Vector2(1600 - 50 - font.MeasureString(str).X * fontSize, 840), fontSize);
+
+                str = "Best time: ".ToUpper() + dbLevels.First(x => x.SubLevelId == CurrentSubLevel).BestPracticeTime.ToTime();
+                PrintFont(spriteBatch, str, new Vector2(1600 - 50 - font.MeasureString(str).X * fontSize, 865), fontSize);
+            }
+
+        }
+
+        private void PrintFont(SpriteBatch spriteBatch, string str, Vector2 a, float b)
+        {
+
+            for (float i = 0.4f; i < 2f; i += 0.4f)
+            {
+                spriteBatch.DrawString(font, str, a + new Vector2(0, -i), Color.Black, 0, Vector2.Zero, b, SpriteEffects.None, 0);
+                spriteBatch.DrawString(font, str, a + new Vector2(i, -i), Color.Black, 0, Vector2.Zero, b, SpriteEffects.None, 0);
+                spriteBatch.DrawString(font, str, a + new Vector2(i, 0), Color.Black, 0, Vector2.Zero, b, SpriteEffects.None, 0);
+                spriteBatch.DrawString(font, str, a + new Vector2(i, i), Color.Black, 0, Vector2.Zero, b, SpriteEffects.None, 0);
+                spriteBatch.DrawString(font, str, a + new Vector2(0, i), Color.Black, 0, Vector2.Zero, b, SpriteEffects.None, 0);
+                spriteBatch.DrawString(font, str, a + new Vector2(-i, i), Color.Black, 0, Vector2.Zero, b, SpriteEffects.None, 0);
+                spriteBatch.DrawString(font, str, a + new Vector2(-i, 0), Color.Black, 0, Vector2.Zero, b, SpriteEffects.None, 0);
+                spriteBatch.DrawString(font, str, a + new Vector2(-i, -i), Color.Black, 0, Vector2.Zero, b, SpriteEffects.None, 0);
+            }
+
+            spriteBatch.DrawString(font, str, a, Color.White, 0, Vector2.Zero, b, SpriteEffects.None, 0);
         }
 
         public void StartLevel(int level, int subLevel = 1)
