@@ -47,22 +47,41 @@ namespace GiveUp
 
         private void CompileFxFiles()
         {
-            var q = new DirectoryInfo("~/");
-            string programPath = Path.Combine(Environment.GetFolderPath(Environment.SpecialFolder.ProgramFilesX86), @"MSBuild\MonoGame\v3.0\2MGFX.exe");
-            DirectoryInfo effectsFolder = new DirectoryInfo(Path.Combine(new DirectoryInfo("./").FullName, "Content\\Effects"));
-            foreach (var item in effectsFolder.GetFiles())
+            try
             {
-                if (item.Extension.Contains("fx"))
-                {
-                    string fxPath = item.FullName;
-                    string compiledVersion = string.Join(".", fxPath.Split('.').Take(fxPath.Split('.').Count() - 1)) + ".mgfxo";
-                    if (File.Exists(compiledVersion))
-                    {
-                        File.Delete(compiledVersion);
-                    }
 
+                var q = new DirectoryInfo("~/");
+                string programPath = Path.Combine(Environment.GetFolderPath(Environment.SpecialFolder.ProgramFilesX86), @"MSBuild\MonoGame\v3.0\2MGFX.exe");
+                DirectoryInfo effectsFolder = new DirectoryInfo(Path.Combine(new DirectoryInfo("./").FullName, "Content\\Effects"));
+                foreach (var item in effectsFolder.GetFiles())
+                {
+                    if (item.Extension.Contains("fx"))
+                    {
+                        string fxPath = item.FullName;
+                        string compiledVersion = string.Join(".", fxPath.Split('.').Take(fxPath.Split('.').Count() - 1)) + ".mgfxo";
+
+                        string nPath = new DirectoryInfo(Path.Combine(new DirectoryInfo("./").FullName, "../../../Content\\Effects")).FullName;
+                        string compiledVersion2 = nPath + "\\" + item.Name.Split('.').First() + ".mgfxo";
+
+<<<<<<< HEAD
                     System.Diagnostics.Process.Start(programPath, "\"" + fxPath + "\" " + "\"" + compiledVersion + "\" /DEBUG");
+=======
+                        if (File.Exists(compiledVersion))
+                            File.Delete(compiledVersion);
+
+                        if (File.Exists(compiledVersion2))
+                            File.Delete(compiledVersion2);
+
+                        System.Diagnostics.Process.Start(programPath, fxPath + " " + compiledVersion + " /DEBUG");
+                        System.Diagnostics.Process.Start(programPath, fxPath + " " + compiledVersion2 + " /DEBUG");
+                    }
+>>>>>>> 3a96fa7be20d65c8b822b4ae0b24e7579db2927a
                 }
+
+            }
+            catch (Exception)
+            {
+
             }
         }
 
@@ -142,7 +161,7 @@ namespace GiveUp
             alphaMap.Parameters["PositionY"].SetValue(900f * (alphaMapPosition.Y / 900f));
             alphaMap.Parameters["Procentage"].SetValue(alphaMapAlpha);
 
-            
+
 
             spriteBatch.Begin(SpriteSortMode.Deferred, BlendState.NonPremultiplied, null, null, null, null, spriteScale);
             Game1.ScreenManager.Draw(spriteBatch);
