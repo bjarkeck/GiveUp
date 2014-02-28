@@ -34,7 +34,7 @@ namespace GiveUp.Classes.GameObjects.Obstacles
 
             if (speed > maxSpeed / 3)
             {
-                currenRotation = MathHelper.WrapAngle(GameLogic.CurveAngle(currenRotation, mewRotation, 0.03f));
+                currenRotation = MathHelper.WrapAngle(GameLogic.CurveAngle(currenRotation, mewRotation, 0.03f * Time.GameSpeed));
             }
 
             Vector2 rotV = new Vector2((float)Math.Cos(currenRotation), (float)Math.Sin(currenRotation));

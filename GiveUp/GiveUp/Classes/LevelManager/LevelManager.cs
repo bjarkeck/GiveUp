@@ -66,7 +66,7 @@ namespace GiveUp.Classes.LevelManager
 
             float fontSize = 0.5f;
 
-            string str = "Challenge " + CurrentLevel + " - Level + " + CurrentSubLevel;
+            string str = "Challenge " + CurrentLevel + " - Level " + CurrentSubLevel;
             str = str.ToUpper();
             PrintFont(spriteBatch, str, new Vector2(50, 840), fontSize);
 
