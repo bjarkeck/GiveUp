@@ -14,7 +14,6 @@ namespace GiveUp.Classes.Core
 {
     public class Editor
     {
-        public static bool IsEnable = true;
         public static bool IsEnable = false;
 
         private int selectedTile = -1;
