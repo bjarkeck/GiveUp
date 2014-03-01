@@ -41,7 +41,7 @@ namespace GiveUp.Classes.GameObjects.Obstacles
 
             if (speed <= maxSpeed)
             {
-                speed += 0.05f;
+                speed += 0.05f * Time.GameSpeed;
             }
 
             position += rotV * speed * gameTime.DeltaTime();
