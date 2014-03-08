@@ -25,7 +25,7 @@ namespace GiveUp.Classes.Screens
         public GameScreen(bool pricticeRun = false, int levelId = 1, int subLevelId = 1)
         {
             this.practiceRun = pricticeRun;
-            this.levelId = levelId;
+            this.levelId = 10;
             this.subLevelId = subLevelId;
             player = new Player();
             LevelManager = new LevelManagerr(player, pricticeRun);
@@ -52,7 +52,7 @@ namespace GiveUp.Classes.Screens
 
             if (player.InputHelper.IsNewPress(Keys.Escape))
             {
-                ScreenManager.Current.LoadScreen(new MenuSubLevelScreen(levelId));
+                ScreenManager.Current.LoadScreen(new DemoScreen());
             }
             editor.Update();
         }

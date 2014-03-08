@@ -155,8 +155,6 @@ namespace GiveUp
             alphaMap.Parameters["PositionY"].SetValue(900f * (alphaMapPosition.Y / 900f));
             alphaMap.Parameters["Procentage"].SetValue(alphaMapAlpha);
 
-
-
             spriteBatch.Begin(SpriteSortMode.Deferred, BlendState.NonPremultiplied, null, null, null, null, spriteScale);
             Game1.ScreenManager.Draw(spriteBatch);
             spriteBatch.End();

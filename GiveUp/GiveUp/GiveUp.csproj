@@ -136,6 +136,8 @@
     <Compile Include="Classes\GameObjects\Tiles\BoxTile.cs" />
     <Compile Include="Classes\LevelManager\LevelManager.cs" />
     <Compile Include="Classes\LevelManager\GridManager.cs" />
+    <Compile Include="Classes\Screens\DemoMenuScreen.cs" />
+    <Compile Include="Classes\Screens\DemoScreen.cs" />
     <Compile Include="Classes\Screens\GameScreen.cs" />
     <Compile Include="Classes\Screens\MenuExitScreen.cs" />
     <Compile Include="Classes\Screens\MenuOnlineScreen.cs" />
