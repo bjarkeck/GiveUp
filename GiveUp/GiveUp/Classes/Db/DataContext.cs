@@ -1,67 +1,66 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.Data.Entity;
 using System.IO;
+using System.IO.IsolatedStorage;
 using System.Linq;
+using System.Runtime.Serialization.Formatters.Binary;
 using System.Text;
-using System.Data.SqlServerCe;
 
 namespace GiveUp.Classes.Db
 {
-    public class DataContext : DbContext
+    public class DataContext
     {
-        public DataContext()
-            : base(@"Data Source=" + new DirectoryInfo("./").FullName + Environment.UserName + @"danuvirkerdetrb.sdf" + "")
+        public void ReCreateLeveldataForEachUser()
         {
-            Database.CreateIfNotExists();
-            this.Configuration.AutoDetectChangesEnabled = true;
-        }
+            var levelDir = new DirectoryInfo("./Content/Levels/");
 
-        [Obsolete("Ik brug den her metode særlig tit!")]
-        public static void ReCreateLeveldataForEachUser()
-        {
-            DataContext db = DataContext.Current;
-
-            foreach (var item in db.Levels.ToList())
+            foreach (DirectoryInfo item in levelDir.GetDirectories())
             {
-                db.Levels.Remove(item);
-            }
+                int levelName = int.Parse(item.Name);
 
-            db.SaveChanges();
-
-            foreach (User user in db.Users)
-            {
-                var levelDir = new DirectoryInfo("./Content/Levels/");
-
-                foreach (DirectoryInfo item in levelDir.GetDirectories())
+                foreach (FileInfo f in item.GetFiles())
                 {
-                    int levelName = int.Parse(item.Name);
-
-                    foreach (FileInfo f in item.GetFiles())
+                    if (f.Extension.ToLower().Contains("txt"))
                     {
-                        if (f.Extension.ToLower().Contains("txt"))
+                        int subLevel = int.Parse(f.Name.ToLower().Replace(".txt", ""));
+                        if (Levels.Any(x => x.LevelId == levelName && x.SubLevelId == subLevel) == false)
                         {
-                            int subLevel = int.Parse(f.Name.ToLower().Replace(".txt", ""));
-                            if (db.Levels.Any(x => x.LevelId == levelName && x.SubLevelId == subLevel && x.User.Username == user.Username) == false)
+                            Level level = new Level()
                             {
-                                Level level = new Level()
-                                {
-                                    LevelId = levelName,
-                                    SubLevelId = subLevel,
-                                    User = user
-                                };
-                                db.Levels.Add(level);
-                            }
+                                LevelId = levelName,
+                                SubLevelId = subLevel
+                            };
+                            Levels.Add(level);
                         }
                     }
                 }
             }
-            db.SaveChanges();
+            SaveChanges();
         }
 
+        public List<Level> Levels = new List<Level>();
+        private const string fileName = "TempusData.bin";
+        IsolatedStorageFile appStorage = IsolatedStorageFile.GetUserStoreForAssembly();
 
-        public DbSet<User> Users { get; set; }
-        public DbSet<Level> Levels { get; set; }
+        public void SaveChanges()
+        {
+            using (var r = appStorage.OpenFile(fileName, FileMode.OpenOrCreate, FileAccess.Write))
+            {
+                var bformatter = new BinaryFormatter();
+                bformatter.Serialize(r, Levels);
+            }
+        }
+
+        public DataContext()
+        {
+            using (var r = appStorage.OpenFile(fileName, FileMode.OpenOrCreate, FileAccess.Read))
+            {
+                var bformatter = new BinaryFormatter();
+                if (r.Length > 0)
+                    Levels = (List<Level>)bformatter.Deserialize(r);
+
+            }
+        }
 
         private static DataContext current;
         public static DataContext Current
@@ -71,16 +70,10 @@ namespace GiveUp.Classes.Db
                 if (current == null)
                 {
                     current = new DataContext();
-                    if (current.Users.Count() == 0)
+
+                    if (current.Levels == null || current.Levels.Count() == 0)
                     {
-                        User u = new User()
-                        {
-                            Password = "test",
-                            Username = "test"
-                        };
-                        current.Users.Add(u);
-                        current.SaveChanges();
-                        DataContext.ReCreateLeveldataForEachUser();
+                        current.ReCreateLeveldataForEachUser();
                     }
                 }
                 return current;

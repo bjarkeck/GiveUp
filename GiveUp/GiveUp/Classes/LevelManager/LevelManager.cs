@@ -28,6 +28,23 @@ namespace GiveUp.Classes.LevelManager
         private List<Level> dbLevels;
         private SpriteFont font;
         private bool firstRun = true;
+        private static Dictionary<char, Type> obsticleTypes = new Dictionary<char, Type>();
+        public static void Initialize()
+        {
+            if (obsticleTypes.Count() == 0)
+            {
+                var gameObject = Assembly.GetExecutingAssembly()
+                        .GetTypes()
+                        .Where(x => x.GetInterfaces()
+                            .Contains(
+                                typeof(IGameObject)) &&
+                                x.GetConstructor(Type.EmptyTypes) != null &&
+                                x.GetField("TileChar") != null);
+
+                foreach (var item in gameObject)
+                    obsticleTypes.Add((char)item.GetField("TileChar").GetValue(null), item);
+            }
+        }
 
         public ContentManager Content
         {
@@ -168,20 +185,13 @@ namespace GiveUp.Classes.LevelManager
 
             foreach (var unassigendTile in GridManager.UnassignedTiles)
             {
-                var gameObject = Assembly.GetExecutingAssembly()
-                    .GetTypes()
-                    .Where(x => x.GetInterfaces()
-                        .Contains(
-                            typeof(IGameObject)) &&
-                            x.GetConstructor(Type.EmptyTypes) != null &&
-                            x.GetField("TileChar") != null &&
-                            (char)x.GetField("TileChar").GetValue(null) == unassigendTile.Key);
-
-                foreach (Vector2 position in unassigendTile.Value)
+                if (obsticleTypes.ContainsKey(unassigendTile.Key))
                 {
-                    if (gameObject != null && gameObject.Count() > 0)
+                    var objstacleType = obsticleTypes[unassigendTile.Key];
+
+                    foreach (Vector2 position in unassigendTile.Value)
                     {
-                        IGameObject obj = (IGameObject)gameObject.Select(x => Activator.CreateInstance(x)).First();
+                        IGameObject obj = (IGameObject)Activator.CreateInstance(objstacleType);
                         GameObjects.Add(obj);
                         obj.Player = Player;
                         obj.InitialPosition = position;
@@ -221,6 +231,8 @@ namespace GiveUp.Classes.LevelManager
                 }
                 else
                 {
+                    Player.ParticleManager.ParticleEmitters["Blood"].Particles.Clear();
+                    Player.ParticleManager.ParticleEmitters["Blood"].MaxNumberOfParitcles = 0;
                     if (LevelTimer > 0)
                     {
                         lvl.PreviousRunTime = LevelTimer;
@@ -243,7 +255,8 @@ namespace GiveUp.Classes.LevelManager
                 CurrentSubLevel += 1;
                 if (Levels.Count() < CurrentSubLevel)
                 {
-                    int bestRunTime = DataContext.Current.Levels.Where(x => x.LevelId == CurrentLevel).Sum(c => c.BestRunTime);
+
+                    int bestRunTime = DataContext.Current.Levels.Where(x => x.LevelId == CurrentLevel).Sum(c => (int)c.BestRunTime);
                     if (bestRunTime == 0 || ChallengeTimer < bestRunTime)
                     {
                         foreach (var item in dbLevels)

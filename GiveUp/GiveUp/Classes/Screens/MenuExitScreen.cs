@@ -15,7 +15,6 @@ namespace GiveUp.Classes.Screens
         public MenuExitScreen()
         {
             this.ActiveScreenType = typeof(MenuExitScreen);
-            DataContext.ReCreateLeveldataForEachUser();
         }
         Button btnExit;
         Button btnDontExit;

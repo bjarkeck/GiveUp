@@ -38,6 +38,7 @@ namespace GiveUp.Classes.Screens
 
             font = Content.Load<SpriteFont>("Fonts/font");
 
+            DataContext.Current = null;
             lvlList = DataContext.Current.Levels.Where(x => x.LevelId == level).ToList();
 
             foreach (Level lvl in lvlList)
@@ -147,7 +148,7 @@ namespace GiveUp.Classes.Screens
             }
 
 
-            spriteBatch.DrawString(font, "CHALLENGE " + level, new Vector2(MenuScreenBounderies.X + 5, MenuScreenBounderies.Y - 40), Color.White);
+            spriteBatch.DrawString(font, "DEMO CHALLENGE", new Vector2(MenuScreenBounderies.X + 5, MenuScreenBounderies.Y - 40), Color.White);
 
             spriteBatch.Draw(startChallengeButton, startChallengeRectangle, Color.White);
             //47

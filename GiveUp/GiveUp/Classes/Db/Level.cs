@@ -2,43 +2,32 @@
 using Microsoft.Xna.Framework.Graphics;
 using System;
 using System.Collections.Generic;
-using System.ComponentModel.DataAnnotations.Schema;
 using System.Linq;
+using System.Runtime.Serialization;
 using System.Text;
 
 namespace GiveUp.Classes.Db
 {
+    [Serializable()]
     public class Level
     {
+        public int LevelId = 0;
+        public int SubLevelId = 0;
+        public int BestPracticeTime = 0;
+        public int BestRunTime = 0;
+        public int PreviousRunTime = 0;
+        public int Deaths = 0;
+
+        [NonSerialized]
+        public Texture2D ImgTexture;
+        [NonSerialized]
+        public Texture2D BoxTexture;
+        [NonSerialized]
+        public Rectangle Rectangle;
 
 
-        public Level()
-        {
-
-        }
-
-
-        public int Id { get; set; }
-        public int LevelId { get; set; }
-        public int SubLevelId { get; set; }
-        public int BestPracticeTime { get; set; }
-        public int BestRunTime { get; set; }
-        public int PreviousRunTime { get; set; }
-        public virtual User User { get; set; }
-        public int Deaths { get; set; }
-
-        [NotMapped]
-        public Texture2D ImgTexture { get; set; }
-        [NotMapped]
-        public Texture2D BoxTexture { get; set; }
-        [NotMapped]
-        public Rectangle Rectangle { get; set; }
-
-
-
-
-        private bool? isUnlocked;
-        [NotMapped]
+        [NonSerialized]
+        private bool? isUnlocked = null;
         public bool IsUnlocked
         {
             get
@@ -56,8 +45,8 @@ namespace GiveUp.Classes.Db
             }
         }
 
+        [NonSerialized]
         private bool? isChallangeComplete;
-        [NotMapped]
         public bool IsChallangeComplete
         {
             get
@@ -69,5 +58,6 @@ namespace GiveUp.Classes.Db
                 return isChallangeComplete == true;
             }
         }
+
     }
 }

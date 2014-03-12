@@ -34,7 +34,7 @@ namespace GiveUp
         public Game1()
             : base()
         {
-            CompileFxFiles();
+            //CompileFxFiles();
             graphics = new GraphicsDeviceManager(this);
             Content.RootDirectory = "Content";
             graphics.IsFullScreen = true;
@@ -81,6 +81,7 @@ namespace GiveUp
 
         protected override void Initialize()
         {
+            GiveUp.Classes.LevelManager.LevelManagerr.Initialize();
             base.Initialize();
         }
 
@@ -101,6 +102,36 @@ namespace GiveUp
 
 
 
+            //preload de fleste textures
+            Content.Load<Texture2D>("Images/Menu/PracticeBoxPassive");
+            Content.Load<Texture2D>("Images/Menu/runTime");
+            Content.Load<Texture2D>("Images/Menu/BackGround/menuBg");
+            Content.Load<Texture2D>("Images/Menu/BackGround/btnBarBg");
+            Content.Load<Texture2D>("Images/Particles/blood1");
+            Content.Load<Texture2D>("Images/Particles/blood2");
+            Content.Load<Texture2D>("Images/Particles/blood3");
+            Content.Load<Texture2D>("Images/Particles/blood4");
+            Content.Load<Texture2D>("Images/Particles/wind");
+            Content.Load<Texture2D>("Images/Player/playerAnimation");
+            Content.Load<Texture2D>("Images/Tiles/Goo.png");
+            Content.Load<Texture2D>("Images/Tiles/ClosedDoor");
+            Content.Load<Texture2D>("Images/Tiles/OpenDoor");
+            Content.Load<Texture2D>("Images/Tiles/ground");
+            Content.Load<Texture2D>("Images/Obstacles/Spikes/SpikeB");
+            Content.Load<Texture2D>("Images/Obstacles/Spikes/SpikeT");
+            Content.Load<Texture2D>("Images/Obstacles/Spikes/SpikeL");
+            Content.Load<Texture2D>("Images/Obstacles/Spikes/SpikeR");
+            Content.Load<Texture2D>("Images/Obstacles/sawblade");
+            Content.Load<Texture2D>("Images/Tiles/Lava");
+            Content.Load<Texture2D>("Images/Obstacles/HeatSeeking/body");
+            Content.Load<Texture2D>("Images/Obstacles/movingTile");
+            Content.Load<Texture2D>("Images/Particles/beamParticleHorisontal");
+            Content.Load<Texture2D>("Images/Particles/smoke_particle");
+            Content.Load<Texture2D>("Images/Obstacles/HeatSeeking/body");
+            Content.Load<Texture2D>("Images/Obstacles/HeatSeeking/cannon");
+            Content.Load<Texture2D>("Images/Obstacles/HeatSeeking/missile");
+
+
         }
 
         protected override void UnloadContent()
@@ -109,9 +140,7 @@ namespace GiveUp
             try
             {
                 DataContext.Current.SaveChanges();
-                DataContext.Current.Dispose();
                 DataContext.Current = null;
-                DataContext.Current.Dispose();
             }
             catch (Exception)
             {
@@ -122,9 +151,7 @@ namespace GiveUp
             try
             {
                 DataContext.Current.SaveChanges();
-                DataContext.Current.Dispose();
                 DataContext.Current = null;
-                DataContext.Current.Dispose();
             }
             catch (Exception)
             {
@@ -148,12 +175,19 @@ namespace GiveUp
         {
             GraphicsDevice.Clear(Color.Black);
 
+            if (ScreenManager != null && ScreenManager.CurrentScreen != null && ScreenManager.CurrentScreen.GetType() != typeof(GiveUp.Classes.Screens.GameScreen))
+            {
+                Game1.AlphaMapAlpha = 0;
+            }
+
             alphaMapPosition = Vector2.Lerp(alphaMapPosition, AlphaMapPosition, 0.3f);
             alphaMapAlpha = MathHelper.Lerp(alphaMapAlpha, AlphaMapAlpha, 0.08f);
 
             alphaMap.Parameters["PositionX"].SetValue(1600f * (alphaMapPosition.X / 1600f));
             alphaMap.Parameters["PositionY"].SetValue(900f * (alphaMapPosition.Y / 900f));
             alphaMap.Parameters["Procentage"].SetValue(alphaMapAlpha);
+
+
 
             spriteBatch.Begin(SpriteSortMode.Deferred, BlendState.NonPremultiplied, null, null, null, null, spriteScale);
             Game1.ScreenManager.Draw(spriteBatch);

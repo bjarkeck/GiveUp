@@ -118,7 +118,6 @@
     <Compile Include="Classes\Core\ScreenManager.cs" />
     <Compile Include="Classes\Db\DataContext.cs" />
     <Compile Include="Classes\Db\Level.cs" />
-    <Compile Include="Classes\Db\User.cs" />
     <Compile Include="Classes\GameObjects\Finish.cs" />
     <Compile Include="Classes\GameObjects\Obstacles\Cannon\AttachedCannon.cs" />
     <Compile Include="Classes\GameObjects\Obstacles\Cannon\CannonBullet.cs" />

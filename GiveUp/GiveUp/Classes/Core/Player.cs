@@ -96,7 +96,7 @@ namespace GiveUp.Classes.Core
                     10000,
                     Velocity * -1 / 1.3f,
                     Gravity / 8,
-                    4000,
+                    700,
                     true,
                     false
                 )
