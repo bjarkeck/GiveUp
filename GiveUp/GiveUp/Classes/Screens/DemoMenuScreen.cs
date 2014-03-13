@@ -1,5 +1,5 @@
-﻿using GiveUp.Classes.Core;
-using GiveUp.Classes.Db;
+﻿using Tempus.Classes.Core;
+using Tempus.Classes.Db;
 using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Content;
 using Microsoft.Xna.Framework.Graphics;
@@ -9,7 +9,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 
-namespace GiveUp.Classes.Screens
+namespace Tempus.Classes.Screens
 {
     public abstract class DemoMenuScreen : BaseScreen
     {

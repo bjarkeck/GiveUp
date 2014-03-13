@@ -6,7 +6,7 @@ using System.Linq;
 using System.Runtime.Serialization.Formatters.Binary;
 using System.Text;
 
-namespace GiveUp.Classes.Db
+namespace Tempus.Classes.Db
 {
     public class DataContext
     {
@@ -39,7 +39,7 @@ namespace GiveUp.Classes.Db
         }
 
         public List<Level> Levels = new List<Level>();
-        private const string fileName = "TempusData.bin";
+        private const string fileName = "TempusSaveData.bin";
         IsolatedStorageFile appStorage = IsolatedStorageFile.GetUserStoreForAssembly();
 
         public void SaveChanges()

@@ -1,4 +1,4 @@
-﻿using GiveUp.Classes.GameObjects.Tiles;
+﻿using Tempus.Classes.GameObjects.Tiles;
 using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Content;
 using Microsoft.Xna.Framework.Graphics;
@@ -6,10 +6,10 @@ using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
-using GiveUp.Classes;
-using GiveUp.Classes.Core;
+using Tempus.Classes;
+using Tempus.Classes.Core;
 
-namespace GiveUp.Classes.GameObjects.Obstacles
+namespace Tempus.Classes.GameObjects.Obstacles
 {
     public class Laser : GameObject, IGameObject
     {
@@ -31,6 +31,7 @@ namespace GiveUp.Classes.GameObjects.Obstacles
         int timeBeforeWarning = 3000;
         int timer;
 
+        public const byte LoadOrder = 50;
         public const char TileChar = 'l';
 
         public override void Initialize(ContentManager content, Vector2 position)

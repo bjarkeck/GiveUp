@@ -6,7 +6,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 
-namespace GiveUp.Classes.GameObjects
+namespace Tempus.Classes.GameObjects
 {
     class ButtonActivator : GameObject, IGameObject
     {

@@ -1,5 +1,5 @@
-﻿using GiveUp.Classes.LevelManager;
-using GiveUp.Classes.Screens;
+﻿using Tempus.Classes.LevelManager;
+using Tempus.Classes.Screens;
 using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Content;
 using Microsoft.Xna.Framework.Graphics;
@@ -10,7 +10,7 @@ using System.Linq;
 using System.Reflection;
 using System.Text;
 
-namespace GiveUp.Classes.Core
+namespace Tempus.Classes.Core
 {
     public class Editor
     {

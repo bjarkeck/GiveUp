@@ -9,9 +9,9 @@ using Microsoft.Xna.Framework.Graphics;
 using Microsoft.Xna.Framework.Input;
 using Microsoft.Xna.Framework.Media;
 using System.IO;
-using GiveUp.Classes.Core;
+using Tempus.Classes.Core;
 
-namespace GiveUp.Classes.LevelManager
+namespace Tempus.Classes.LevelManager
 {
     public class GridManager
     {

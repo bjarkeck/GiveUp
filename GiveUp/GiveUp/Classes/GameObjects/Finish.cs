@@ -1,6 +1,6 @@
-﻿using GiveUp.Classes.Core;
-using GiveUp.Classes.GameObjects;
-using GiveUp.Classes.Screens;
+﻿using Tempus.Classes.Core;
+using Tempus.Classes.GameObjects;
+using Tempus.Classes.Screens;
 using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Content;
 using Microsoft.Xna.Framework.Graphics;

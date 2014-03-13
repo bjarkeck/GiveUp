@@ -1,7 +1,7 @@
-﻿using GiveUp.Classes.Core;
-using GiveUp.Classes.Db;
-using GiveUp.Classes.GameObjects.Tiles;
-using GiveUp.Classes.Screens;
+﻿using Tempus.Classes.Core;
+using Tempus.Classes.Db;
+using Tempus.Classes.GameObjects.Tiles;
+using Tempus.Classes.Screens;
 using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Content;
 using Microsoft.Xna.Framework.Graphics;
@@ -12,7 +12,7 @@ using System.Linq;
 using System.Reflection;
 using System.Text;
 
-namespace GiveUp.Classes.LevelManager
+namespace Tempus.Classes.LevelManager
 {
     public class LevelManagerr
     {
@@ -27,6 +27,7 @@ namespace GiveUp.Classes.LevelManager
         public bool PracticeRun = false;
         private List<Level> dbLevels;
         private SpriteFont font;
+        private bool restartTimer = true;
         private bool firstRun = true;
         private static Dictionary<char, Type> obsticleTypes = new Dictionary<char, Type>();
         public static void Initialize()
@@ -151,7 +152,10 @@ namespace GiveUp.Classes.LevelManager
 
         private void startSubLevel(int subLevel)
         {
-            LevelTimer = 0;
+            if (restartTimer == true)
+            {
+                LevelTimer = 0;
+            }
             if (Levels.Count() < CurrentSubLevel)
             {
                 ScreenManager.Current.LoadScreen(new MenuSubLevelScreen(CurrentLevel), true);
@@ -206,11 +210,13 @@ namespace GiveUp.Classes.LevelManager
                                     100 :
                                 (byte)x.GetType().GetField("LoadOrder").GetValue(null)
                                 ).ToList();
-
+            GameLogic.ResetLevelTiles();
             foreach (IGameObject g in GameObjects)
             {
                 g.Initialize(Content, go[g]);
             }
+            GameLogic.ResetLevelTiles();
+
         }
 
         public void StartNextLevel(bool runCompleted = false)
@@ -246,7 +252,17 @@ namespace GiveUp.Classes.LevelManager
                 Player.Die(Player.Position);
             }
 
-            LevelTimer = 0;
+
+            if (PracticeRun == false && runCompleted == false)
+            {
+                restartTimer = false;
+            }
+            else
+            {
+                restartTimer = true;
+                LevelTimer = 0;
+            }
+
 
             if (PracticeRun == false && runCompleted)
             {

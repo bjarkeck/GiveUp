@@ -5,11 +5,11 @@ using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
-using GiveUp.Classes.Core;
-using GiveUp.Classes.Screens;
-using GiveUp.Classes.GameObjects.Tiles;
+using Tempus.Classes.Core;
+using Tempus.Classes.Screens;
+using Tempus.Classes.GameObjects.Tiles;
 
-namespace GiveUp.Classes.GameObjects.Obstacles
+namespace Tempus.Classes.GameObjects.Obstacles
 {
     class Spike : GameObject, IGameObject
     {

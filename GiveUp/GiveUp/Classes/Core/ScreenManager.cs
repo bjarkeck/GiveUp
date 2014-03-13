@@ -1,5 +1,5 @@
-﻿using GiveUp.Classes.Db;
-using GiveUp.Classes.Screens;
+﻿using Tempus.Classes.Db;
+using Tempus.Classes.Screens;
 using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Content;
 using Microsoft.Xna.Framework.Graphics;
@@ -8,7 +8,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 
-namespace GiveUp.Classes.Core
+namespace Tempus.Classes.Core
 {
     public class ScreenManager
     {

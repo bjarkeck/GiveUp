@@ -1,7 +1,7 @@
-﻿using GiveUp.Classes.Core;
-using GiveUp.Classes.GameObjects.Tiles;
-using GiveUp.Classes.LevelManager;
-using GiveUp.Classes.Screens;
+﻿using Tempus.Classes.Core;
+using Tempus.Classes.GameObjects.Tiles;
+using Tempus.Classes.LevelManager;
+using Tempus.Classes.Screens;
 using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Content;
 using Microsoft.Xna.Framework.Graphics;
@@ -10,7 +10,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 
-namespace GiveUp.Classes.Core
+namespace Tempus.Classes.Core
 {
     public static class GameLogic
     {
@@ -72,7 +72,14 @@ namespace GiveUp.Classes.Core
         private static string parentLevel = "";
 
 
-        public static List<Rectangle> tiles;
+        public static List<Rectangle> tiles = new List<Rectangle>();
+        public static void ResetLevelTiles()
+        {
+            var t = ((GameScreen)(ScreenManager.Current.CurrentScreen)).LevelManager;
+            tiles.Clear();
+            tiles = t.GameObjects.Where(x => x.GetType().Name == "BoxTile").Select(x => ((BoxTile)x).Rectangle).ToList();
+        }
+
         public static bool IsLineOfSight(Vector2 startPos, Vector2 target, ref float distanceToHit)
         {
             
@@ -88,6 +95,7 @@ namespace GiveUp.Classes.Core
             {
                 parentLevel = t.CurrentLevel + "." + t.CurrentSubLevel;
                 //Get all se tiles
+                tiles.Clear();
                 tiles = t.GameObjects.Where(x => x.GetType().Name == "BoxTile").Select(x => ((BoxTile)x).Rectangle).ToList();
             }
 

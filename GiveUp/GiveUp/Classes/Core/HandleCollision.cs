@@ -5,7 +5,7 @@ using System.Text;
 using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Graphics;
 
-namespace GiveUp.Classes.Core
+namespace Tempus.Classes.Core
 {
     public static class HandleCollision
     {

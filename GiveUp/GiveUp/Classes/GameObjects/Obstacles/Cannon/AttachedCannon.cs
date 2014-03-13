@@ -1,19 +1,20 @@
-﻿using GiveUp.Classes.GameObjects.Tiles;
+﻿using Tempus.Classes.GameObjects.Tiles;
 using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Content;
 using Microsoft.Xna.Framework.Graphics;
 using System;
 using System.Collections.Generic;
 using System.Linq;
-using GiveUp.Classes.Core;
+using Tempus.Classes.Core;
 using System.Text;
-using GiveUp.Classes.GameObjects.Obstacles.Cannon;
+using Tempus.Classes.GameObjects.Obstacles.Cannon;
 
-namespace GiveUp.Classes.GameObjects.Obstacles
+namespace Tempus.Classes.GameObjects.Obstacles
 {
     class AttachedCannon : GameObject, IGameObject
     {
         public const char TileChar = 'c';
+        public const byte LoadOrder = 50;
 
         private Vector2 position;
         public Vector2 Position

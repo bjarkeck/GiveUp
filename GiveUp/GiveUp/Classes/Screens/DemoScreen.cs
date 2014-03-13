@@ -1,5 +1,5 @@
-﻿using GiveUp.Classes.Core;
-using GiveUp.Classes.Db;
+﻿using Tempus.Classes.Core;
+using Tempus.Classes.Db;
 using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Graphics;
 using Microsoft.Xna.Framework.Input;
@@ -8,7 +8,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 
-namespace GiveUp.Classes.Screens
+namespace Tempus.Classes.Screens
 {
     public class DemoScreen : DemoMenuScreen
     {
@@ -25,6 +25,7 @@ namespace GiveUp.Classes.Screens
 
         SpriteFont font;
 
+        Button btnExit;
 
 
         public DemoScreen()
@@ -38,6 +39,14 @@ namespace GiveUp.Classes.Screens
 
             font = Content.Load<SpriteFont>("Fonts/font");
 
+            ButtonSizeScaleFactor = 74f / 107;
+
+            btnExit = new Button(Content, "Images/Menu/Buttons/btnExit", () => { Game1.ExitGame = true; }, ButtonSizeScaleFactor);
+            btnExit.ButtonRectangle.X = 1200;
+            btnExit.ButtonRectangle.Y = 750;
+            ButtonSizeScaleFactor =  0;
+
+            DataContext.Current.SaveChanges();
             DataContext.Current = null;
             lvlList = DataContext.Current.Levels.Where(x => x.LevelId == level).ToList();
 
@@ -66,6 +75,7 @@ namespace GiveUp.Classes.Screens
         public override void Update(GameTime gameTime)
         {
             base.Update(gameTime);
+            btnExit.Update(gameTime);
 
             foreach (var item in lvlList)
             {
@@ -152,6 +162,8 @@ namespace GiveUp.Classes.Screens
 
             spriteBatch.Draw(startChallengeButton, startChallengeRectangle, Color.White);
             //47
+            btnExit.Draw(spriteBatch);
+
         }
 
 

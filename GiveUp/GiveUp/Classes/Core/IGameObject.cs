@@ -1,4 +1,4 @@
-﻿using GiveUp.Classes.Core;
+﻿using Tempus.Classes.Core;
 using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Content;
 using Microsoft.Xna.Framework.Graphics;

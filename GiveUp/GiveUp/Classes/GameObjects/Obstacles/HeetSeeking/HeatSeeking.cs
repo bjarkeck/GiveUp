@@ -5,11 +5,11 @@ using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
-using GiveUp.Classes;
-using GiveUp.Classes.Core;
-using GiveUp.Classes.GameObjects.Tiles;
+using Tempus.Classes;
+using Tempus.Classes.Core;
+using Tempus.Classes.GameObjects.Tiles;
 
-namespace GiveUp.Classes.GameObjects.Obstacles
+namespace Tempus.Classes.GameObjects.Obstacles
 {
     public class HeatSeeking : GameObject, IGameObject
     {
@@ -23,6 +23,7 @@ namespace GiveUp.Classes.GameObjects.Obstacles
         double cannonDirection;
         private SpriteEffects spriteEffect;
         float rotation = 0;
+        public const byte LoadOrder = 50;
 
         public override void Initialize(ContentManager content, Vector2 position)
         {

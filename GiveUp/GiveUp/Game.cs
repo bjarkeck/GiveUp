@@ -7,15 +7,15 @@ using Microsoft.Xna.Framework.Graphics;
 using Microsoft.Xna.Framework.Input;
 using Microsoft.Xna.Framework.Storage;
 using Microsoft.Xna.Framework.GamerServices;
-using GiveUp.Classes.LevelManager;
+using Tempus.Classes.LevelManager;
 using System.IO;
-using GiveUp.Classes.Core;
+using Tempus.Classes.Core;
 using System.Linq;
-using GiveUp.Classes.Db;
+using Tempus.Classes.Db;
 using System.Diagnostics;
 #endregion
 
-namespace GiveUp
+namespace Tempus
 {
     public class Game1 : Game
     {
@@ -81,7 +81,7 @@ namespace GiveUp
 
         protected override void Initialize()
         {
-            GiveUp.Classes.LevelManager.LevelManagerr.Initialize();
+            Tempus.Classes.LevelManager.LevelManagerr.Initialize();
             base.Initialize();
         }
 
@@ -175,7 +175,7 @@ namespace GiveUp
         {
             GraphicsDevice.Clear(Color.Black);
 
-            if (ScreenManager != null && ScreenManager.CurrentScreen != null && ScreenManager.CurrentScreen.GetType() != typeof(GiveUp.Classes.Screens.GameScreen))
+            if (ScreenManager != null && ScreenManager.CurrentScreen != null && ScreenManager.CurrentScreen.GetType() != typeof(Tempus.Classes.Screens.GameScreen))
             {
                 Game1.AlphaMapAlpha = 0;
             }

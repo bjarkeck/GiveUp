@@ -1,5 +1,5 @@
-﻿using GiveUp.Classes.Core;
-using GiveUp.Classes.LevelManager;
+﻿using Tempus.Classes.Core;
+using Tempus.Classes.LevelManager;
 using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Content;
 using Microsoft.Xna.Framework.Graphics;
@@ -10,7 +10,7 @@ using System.IO;
 using System.Linq;
 using System.Text;
 
-namespace GiveUp.Classes.Screens
+namespace Tempus.Classes.Screens
 {
     public class GameScreen : BaseScreen
     {
@@ -25,7 +25,7 @@ namespace GiveUp.Classes.Screens
         public GameScreen(bool pricticeRun = false, int levelId = 1, int subLevelId = 1)
         {
             this.practiceRun = pricticeRun;
-            this.levelId = 10;
+            this.levelId = levelId;
             this.subLevelId = subLevelId;
             player = new Player();
             LevelManager = new LevelManagerr(player, pricticeRun);

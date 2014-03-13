@@ -5,10 +5,10 @@ using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
-using GiveUp.Classes.Core;
-using GiveUp.Classes.Screens;
+using Tempus.Classes.Core;
+using Tempus.Classes.Screens;
 
-namespace GiveUp.Classes.GameObjects.Obstacles
+namespace Tempus.Classes.GameObjects.Obstacles
 {
     class Sawblade : GameObject, IGameObject
     {

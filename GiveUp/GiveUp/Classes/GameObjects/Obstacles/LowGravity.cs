@@ -1,11 +1,11 @@
-﻿using GiveUp.Classes.Core;
+﻿using Tempus.Classes.Core;
 using Microsoft.Xna.Framework;
 using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 
-namespace GiveUp.Classes.GameObjects.Obstacles
+namespace Tempus.Classes.GameObjects.Obstacles
 {
     public class LowGravity : GameObject, IGameObject
     {

@@ -1,6 +1,6 @@
-﻿using GiveUp.Classes.GameObjects.Tiles;
-using GiveUp.Classes.LevelManager;
-using GiveUp.Classes.Screens;
+﻿using Tempus.Classes.GameObjects.Tiles;
+using Tempus.Classes.LevelManager;
+using Tempus.Classes.Screens;
 using Microsoft.Xna.Framework;
 using Microsoft.Xna.Framework.Content;
 using Microsoft.Xna.Framework.Graphics;
@@ -10,7 +10,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 
-namespace GiveUp.Classes.Core
+namespace Tempus.Classes.Core
 {
     public class Player
     {
@@ -134,12 +134,12 @@ namespace GiveUp.Classes.Core
 
         public void Update(GameTime gameTime)
         {
-            if (Mouse.GetState().RightButton == ButtonState.Pressed)
-            {
-                this.Position = MouseHelper.Position;
-                this.Rectangle.X = (int)MouseHelper.Position.X;
-                this.Position.Y = (int)MouseHelper.Position.Y;
-            }
+            //if (Mouse.GetState().RightButton == ButtonState.Pressed)
+            //{
+            //    this.Position = MouseHelper.Position;
+            //    this.Rectangle.X = (int)MouseHelper.Position.X;
+            //    this.Position.Y = (int)MouseHelper.Position.Y;
+            //}
 
             Rectangle = Animation.Rectangle;
             Animation.AnimationSpeed = 150 - Math.Abs(Velocity.X * 30);

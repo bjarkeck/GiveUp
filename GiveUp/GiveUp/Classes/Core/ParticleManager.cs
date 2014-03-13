@@ -5,7 +5,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 
-namespace GiveUp.Classes.Core
+namespace Tempus.Classes.Core
 {
     public class ParticleManager
     {

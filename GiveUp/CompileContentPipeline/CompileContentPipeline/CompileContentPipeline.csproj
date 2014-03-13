@@ -47,8 +47,9 @@
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\CompileContentPipelineContent\CompileContentPipelineContent.contentproj">
-      <Name>CompileContentPipelineContent</Name>
+      <Name>CompileContentPipelineContent %28Content%29</Name>
       <XnaReferenceType>Content</XnaReferenceType>
+      <Project>{F8BB612F-5B8A-4D67-A682-DD33649CC04A}</Project>
     </ProjectReference>
   </ItemGroup>
   <Import Project="$(MSBuildBinPath)\Microsoft.CSharp.targets" />

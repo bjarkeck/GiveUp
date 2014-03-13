@@ -4,7 +4,7 @@ using System.Collections.Generic;
 using System.Linq;
 #endregion
 
-namespace GiveUp
+namespace Tempus
 {
 #if WINDOWS || LINUX
     /// <summary>
